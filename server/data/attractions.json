@@ -1,0 +1,449 @@
+{
+    "attractions": [
+      {
+        "city": "Paris",
+        "attractions": [
+          "Eiffel Tower",
+          "Louvre Museum",
+          "Notre-Dame Cathedral",
+          "Sacré-Cœur Basilica",
+          "Champs-Élysées",
+          "Le Bon Marché",
+          "Galeries Lafayette"
+        ]
+      },
+      {
+        "city": "London",
+        "attractions": [
+          "Big Ben",
+          "Tower of London",
+          "London Eye",
+          "Buckingham Palace",
+          "British Museum",
+          "Harrods",
+          "Westfield London"
+        ]
+      },
+      {
+        "city": "New York",
+        "attractions": [
+          "Statue of Liberty",
+          "Central Park",
+          "Empire State Building",
+          "Times Square",
+          "Metropolitan Museum of Art",
+          "The Mall at Short Hills",
+          "Westfield World Trade Center"
+        ]
+      },
+      {
+        "city": "Tokyo",
+        "attractions": [
+          "Tokyo Tower",
+          "Senso-ji Temple",
+          "Shibuya Crossing",
+          "Meiji Shrine",
+          "Tokyo Skytree",
+          "Ginza Six",
+          "Shibuya 109"
+        ]
+      },
+      {
+        "city": "Rome",
+        "attractions": [
+          "Colosseum",
+          "Vatican Museums",
+          "St. Peter's Basilica",
+          "Pantheon",
+          "Roman Forum",
+          "Galleria Alberto Sordi",
+          "Euroma2"
+        ]
+      },
+      {
+        "city": "Los Angeles",
+        "attractions": [
+          "Hollywood Sign",
+          "Griffith Observatory",
+          "The Getty Center",
+          "Santa Monica Pier",
+          "Universal Studios Hollywood",
+          "The Grove",
+          "Rodeo Drive"
+        ]
+      },
+      {
+        "city": "Berlin",
+        "attractions": [
+          "Brandenburg Gate",
+          "Berlin Wall Memorial",
+          "Reichstag Building",
+          "Museum Island",
+          "Berlin Cathedral",
+          "KaDeWe",
+          "Mall of Berlin"
+        ]
+      },
+      {
+        "city": "Barcelona",
+        "attractions": [
+          "Sagrada Familia",
+          "Park Güell",
+          "La Rambla",
+          "Casa Batlló",
+          "Gothic Quarter",
+          "La Maquinista",
+          "Maremagnum"
+        ]
+      },
+      {
+        "city": "Dubai",
+        "attractions": [
+          "Burj Khalifa",
+          "Palm Jumeirah",
+          "Dubai Mall",
+          "Dubai Fountain",
+          "Burj Al Arab",
+          "Ibn Battuta Mall",
+          "Mall of the Emirates"
+        ]
+      },
+      {
+        "city": "Sydney",
+        "attractions": [
+          "Sydney Opera House",
+          "Sydney Harbour Bridge",
+          "Bondi Beach",
+          "Taronga Zoo",
+          "Royal Botanic Garden",
+          "Queen Victoria Building",
+          "Westfield Sydney"
+        ]
+      },
+      {
+        "city": "Moscow",
+        "attractions": [
+          "Red Square",
+          "Kremlin",
+          "Saint Basil's Cathedral",
+          "Bolshoi Theatre",
+          "Moscow State University",
+          "GUM",
+          "Zaryadye Park"
+        ]
+      },
+      {
+        "city": "Istanbul",
+        "attractions": [
+          "Hagia Sophia",
+          "Topkapi Palace",
+          "Blue Mosque",
+          "Basilica Cistern",
+          "Grand Bazaar",
+          "Istinye Park",
+          "Kanyon Shopping Mall"
+        ]
+      },
+      {
+        "city": "Amsterdam",
+        "attractions": [
+          "Rijksmuseum",
+          "Van Gogh Museum",
+          "Anne Frank House",
+          "Vondelpark",
+          "Dam Square",
+          "De Bijenkorf",
+          "Kalvertoren"
+        ]
+      },
+      {
+        "city": "San Francisco",
+        "attractions": [
+          "Golden Gate Bridge",
+          "Alcatraz Island",
+          "Fisherman's Wharf",
+          "Lombard Street",
+          "Golden Gate Park",
+          "Westfield San Francisco Centre",
+          "Union Square"
+        ]
+      },
+      {
+        "city": "Toronto",
+        "attractions": [
+          "CN Tower",
+          "Royal Ontario Museum",
+          "Ripley's Aquarium",
+          "St. Lawrence Market",
+          "Toronto Islands",
+          "Eaton Centre",
+          "Yorkdale Shopping Centre"
+        ]
+      },
+      {
+        "city": "Rio de Janeiro",
+        "attractions": [
+          "Christ the Redeemer",
+          "Sugarloaf Mountain",
+          "Copacabana Beach",
+          "Ipanema Beach",
+          "Selarón Steps",
+          "Shopping Leblon",
+          "RioSul Shopping"
+        ]
+      },
+      {
+        "city": "Singapore",
+        "attractions": [
+          "Marina Bay Sands",
+          "Gardens by the Bay",
+          "Sentosa Island",
+          "Singapore Zoo",
+          "Universal Studios Singapore",
+          "ION Orchard",
+          "VivoCity"
+        ]
+      },
+      {
+        "city": "Madrid",
+        "attractions": [
+          "Royal Palace of Madrid",
+          "Prado Museum",
+          "Retiro Park",
+          "Puerta del Sol",
+          "Santiago Bernabéu Stadium",
+          "El Corte Inglés",
+          "Plaza Norte 2"
+        ]
+      },
+      {
+        "city": "Cairo",
+        "attractions": [
+          "Pyramids of Giza",
+          "Egyptian Museum",
+          "Sphinx",
+          "Khan El Khalili Bazaar",
+          "Coptic Cairo",
+          "Mall of Arabia",
+          "City Stars Mall"
+        ]
+      },
+      {
+        "city": "Bangkok",
+        "attractions": [
+          "Grand Palace",
+          "Wat Arun",
+          "Wat Phra Kaew",
+          "Chao Phraya River",
+          "Chatuchak Market",
+          "Siam Paragon",
+          "CentralWorld"
+        ]
+      },
+      {
+        "city": "Seoul",
+        "attractions": [
+          "Gyeongbokgung Palace",
+          "Bukchon Hanok Village",
+          "N Seoul Tower",
+          "Myeongdong Shopping Street",
+          "Changdeokgung Palace",
+          "COEX Mall",
+          "Lotte Department Store"
+        ]
+      },
+      {
+        "city": "Hong Kong",
+        "attractions": [
+          "Victoria Peak",
+          "Hong Kong Disneyland",
+          "Tsim Sha Tsui Promenade",
+          "Temple Street Night Market",
+          "Ngong Ping 360",
+          "Times Square",
+          "Harbour City"
+        ]
+      },
+      {
+        "city": "Lagos",
+        "attractions": [
+          "Lekki Conservation Centre",
+          "Nike Art Gallery",
+          "National Museum Lagos",
+          "Tarkwa Bay Beach",
+          "Elegushi Beach",
+          "The Palms Shopping Mall",
+          "Ikeja City Mall"
+        ]
+      },
+      {
+        "city": "Buenos Aires",
+        "attractions": [
+          "La Boca",
+          "Recoleta Cemetery",
+          "Plaza de Mayo",
+          "Teatro Colon",
+          "Puerto Madero",
+          "Galerías Pacífico",
+          "Shopping Sur"
+        ]
+      },
+      {
+        "city": "Mexico City",
+        "attractions": [
+          "Zócalo",
+          "Chapultepec Park",
+          "Teotihuacan Pyramids",
+          "Frida Kahlo Museum",
+          "National Museum of Anthropology",
+          "Perisur",
+          "Antara Polanco"
+        ]
+      },
+      {
+        "city": "Mumbai",
+        "attractions": [
+          "Gateway of India",
+          "Marine Drive",
+          "Elephanta Caves",
+          "Chhatrapati Shivaji Maharaj Terminus",
+          "Juhu Beach",
+          "Phoenix Marketcity",
+          "High Street Phoenix"
+        ]
+      },
+      {
+        "city": "Delhi",
+        "attractions": [
+          "Red Fort",
+          "Qutub Minar",
+          "Lotus Temple",
+          "India Gate",
+          "Humayun's Tomb",
+          "Select Citywalk",
+          "DLF Mall of India"
+        ]
+      },
+      {
+        "city": "Shanghai",
+        "attractions": [
+          "The Bund",
+          "Yu Garden",
+          "Shanghai Tower",
+          "Nanjing Road",
+          "Jing'an Temple",
+          "Super Brand Mall",
+          "Kerry Parkside"
+        ]
+      },
+      {
+        "city": "Cape Town",
+        "attractions": [
+          "Table Mountain",
+          "Robben Island",
+          "V&A Waterfront",
+          "Kirstenbosch National Botanical Garden",
+          "Cape Point",
+          "V&A Waterfront",
+          "Canal Walk"
+        ]
+      },
+      {
+        "city": "Kuala Lumpur",
+        "attractions": [
+          "Petronas Towers",
+          "Batu Caves",
+          "Merdeka Square",
+          "Kuala Lumpur Tower",
+          "Aquaria KLCC",
+          "Pavilion KL",
+          "Suria KLCC"
+        ]
+      },
+      {
+        "city": "Jakarta",
+        "attractions": [
+          "National Monument",
+          "Kota Tua",
+          "Taman Mini Indonesia Indah",
+          "Ragunan Zoo",
+          "Istiqlal Mosque",
+          "Grand Indonesia",
+          "Plaza Indonesia"
+        ]
+      },
+      {
+        "city": "São Paulo",
+        "attractions": [
+          "Ibirapuera Park",
+          "São Paulo Museum of Art",
+          "Municipal Market",
+          "Pinacoteca do Estado",
+          "Edifício Copan",
+          "Shopping Iguatemi",
+          "Morumbi Shopping"
+        ]
+      },
+      {
+        "city": "Beijing",
+        "attractions": [
+          "Great Wall of China",
+          "Forbidden City",
+          "Temple of Heaven",
+          "Tiananmen Square",
+          "Summer Palace",
+          "Wangfujing Mall",
+          "The Place Mall"
+        ]
+      },
+      {
+        "city": "Chicago",
+        "attractions": [
+          "Millennium Park",
+          "Willis Tower Skydeck",
+          "Navy Pier",
+          "Art Institute of Chicago",
+          "Lincoln Park Zoo",
+          "Water Tower Place",
+          "North Michigan Avenue"
+        ]
+      },
+      {
+        "city": "Vancouver",
+        "attractions": [
+          "Stanley Park",
+          "Granville Island",
+          "Capilano Suspension Bridge",
+          "Grouse Mountain",
+          "Vancouver Aquarium",
+          "Pacific Centre",
+          "Metropolis at Metrotown"
+        ]
+      },
+      {
+        "city": "Melbourne",
+        "attractions": [
+          "Royal Botanic Gardens",
+          "Federation Square",
+          "Queen Victoria Market",
+          "Melbourne Zoo",
+          "Eureka Skydeck",
+          "Chadstone Shopping Centre",
+          "Emporium Melbourne"
+        ]
+      },
+      {
+        "city": "Lima",
+        "attractions": [
+          "Plaza Mayor",
+          "Huaca Pucllana",
+          "Miraflores",
+          "Museo Larco",
+          "Parque Kennedy",
+          "Jockey Plaza",
+          "Larcomar"
+        ]
+      }
+    ]
+  }
+  

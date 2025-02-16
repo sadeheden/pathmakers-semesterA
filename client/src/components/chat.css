@@ -1,0 +1,204 @@
+/* Global Styles */
+:root {
+  --primary-font: 'Poppins', sans-serif;
+  --text-color: #333;
+  --heading-color: #000;
+  --line-color: #e9e9e9;
+}
+
+/* Chat Container - Matching About Page */
+.containerCh {
+  max-width: 600px;
+  max-height: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+  font-family: var(--primary-font);
+  color: var(--text-color);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+/* Underline Effect for h1 */
+h1::after {
+  content: '';
+  display: block;
+  width: 150px;
+  height: 4px;
+  background: var(--line-color);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Step Content - Adjusted to Fit New Container */
+.step {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Step Headers */
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.step-header svg {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+}
+
+/* Form Elements */
+label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: 4px;
+  background: #fafafa;
+}
+
+/* Buttons */
+button {
+  background-color: #a367d3;
+  font-size: 14px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+}
+
+button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #6c3faf;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--line-color);
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #e69ae7;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between; /* Spread the buttons to opposite sides */
+  margin-top: 20px;
+}
+
+button {
+  background-color: #a367d3;
+  font-size: 14px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+}
+
+button:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #6c3faf;
+}
+
+
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 430px) {
+  .containerCh {
+      margin: 15px 10px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+      font-size: 1.4rem;
+  }
+
+  p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+  }
+
+  .step {
+      padding: 15px;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+  .containerCh {
+      padding: 10px;
+  }
+
+  h1 {
+      font-size: 1.2rem;
+  }
+
+  p {
+      font-size: 0.9rem;
+  }
+}
