@@ -1,0 +1,34 @@
+:root {
+    /* 🎨 Color Variables */
+    --primary-color: #4facfe;
+    --secondary-color: #00f2fe;
+    --text-color: #333;
+    --background-color: #f8f9fa;
+    --button-color: #004e75;
+    --button-hover-color: #003955;
+    --alert-color: #e05454;
+    --alert-hover-color: #a51919;
+
+    /* 🖋 Font Variables */
+    --primary-font: 'Poppins', sans-serif;
+    --secondary-font: 'Roboto', sans-serif;
+
+    /* 🌟 Heading Color */
+    --heading-color: #202020; /* Set all h1 elements to black */
+}
+
+/* ✅ Apply Global Font & Background */
+body {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* ✅ Make All H1 Elements Black */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--heading-color); /* Now all h1 will be black */
+}

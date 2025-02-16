@@ -1,0 +1,136 @@
+/* 🌎 Global Styles - Ensuring Consistency */
+:root {
+    --primary-font: 'Poppins', sans-serif;
+    --text-color: #333;
+    --heading-color: #000; /* All h1, titles */
+    --description-color: #666;
+    --button-text-color: white;
+    --ios-button-bg: linear-gradient(135deg, #4facfe, #00f2fe);
+    --android-button-bg: linear-gradient(135deg, #34e89e, #0f3443);
+}
+
+/* 🌟 General Styles */
+body {
+    font-family: var(--primary-font);
+    color: var(--text-color);
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🎯 Centering the Component */
+.outerContainer {
+    background: white;
+    margin: 100px auto; /* Centers horizontally */
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* 📌 Title Styling */
+.title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--heading-color);
+}
+
+/* 📌 Description Text */
+.description {
+    font-size: 1rem;
+    color: var(--description-color);
+    line-height: 1.5;
+}
+
+/* 📌 Buttons Container */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+/* 🎨 Buttons */
+.button {
+    display: flex;
+    align-items: center;
+
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 250px;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 🎨 iOS Button */
+.ios {
+    background: var(--ios-button-bg);
+}
+
+/* 🎨 Android Button */
+.android {
+    background: var(--android-button-bg);
+}
+
+/* 🎨 Button Icons */
+.buttonIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* 📱 Responsive Design */
+@media only screen and (max-width: 768px) {
+    .outerContainer {
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .outerContainer {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}

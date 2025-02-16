@@ -1,0 +1,61 @@
+.containerVideo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 80vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    padding: 80px;
+    box-sizing: border-box;
+}
+
+.videoContainer {
+    flex: 1;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.video {
+    width: 80%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.textContainer {
+    flex: 1;
+    max-width: 400px;
+    text-align: left;
+}
+
+
+.description {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.buttonContainer {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.nextButton {
+    padding: 12px 24px;
+      margin-left: 120px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nextButton:hover {
+    background: linear-gradient(135deg, #914f4a, #6c3733);
+    transform: translateY(-2px);
+    margin-left: 120px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}

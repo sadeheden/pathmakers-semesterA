@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "username": "may",
+    "password": "1234",
+    "Email": "mayhalaf@gmail.com"
+  },
+  {
+    "id": 3,
+    "username": "newuser",
+    "password": "securepassword",
+    "email": "newuser@example.com"
+  },
+  {
+    "id": 8,
+    "username": "newuser",
+    "password": "securepassword",
+    "email": "newuser@example.com"
+  },
+  {
+    "id": 1738234269312,
+    "username": "eden",
+    "email": "edenk@mail.com",
+    "password": "12345678"
+  },
+  {
+    "id": 1738234436076,
+    "username": "newuser",
+    "email": "yon@gmail.com",
+    "password": "159159"
+  },
+  {
+    "id": 1738234542521,
+    "username": "dg",
+    "email": "sen@gmail.com",
+    "password": "55555555"
+  },
+  {
+    "id": 1738235857935,
+    "username": "ytyt",
+    "email": "en@gmail.com",
+    "password": "159159"
+  },
+  {
+    "id": 1738236823242,
+    "username": "may5454",
+    "email": "yonttt@gmail.com",
+    "password": "15151515"
+  },
+  {
+    "id": 1738237621432,
+    "username": "hoey",
+    "email": "sesrsrgsrgn@gmail.com",
+    "password": "123456"
+  },
+  {
+    "id": 1738240954004,
+    "username": "maytgt",
+    "email": "sgsrgn@gmail.com",
+    "password": "0000000"
+  },
+  {
+    "id": 1738322730362,
+    "username": "dguj",
+    "email": "sahen@gmail.com",
+    "password": "123456"
+  }
+]

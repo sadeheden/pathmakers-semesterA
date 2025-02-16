@@ -1,0 +1,222 @@
+[
+    {
+      "city": "Paris",
+      "airlines": [
+        {
+          "name": "Air France",
+          "price": 600,
+          "duration": "10h 30m"
+        },
+        {
+          "name": "Delta Airlines",
+          "price": 650,
+          "duration": "10h 45m"
+        },
+        {
+          "name": "Emirates",
+          "price": 700,
+          "duration": "11h 00m"
+        }
+      ]
+    },
+    {
+      "city": "London",
+      "airlines": [
+        {
+          "name": "British Airways",
+          "price": 550,
+          "duration": "8h 00m"
+        },
+        {
+          "name": "American Airlines",
+          "price": 600,
+          "duration": "8h 15m"
+        },
+        {
+          "name": "Lufthansa",
+          "price": 650,
+          "duration": "8h 30m"
+        }
+      ]
+    },
+    {
+      "city": "New York",
+      "airlines": [
+        {
+          "name": "American Airlines",
+          "price": 700,
+          "duration": "12h 00m"
+        },
+        {
+          "name": "Delta Airlines",
+          "price": 750,
+          "duration": "12h 30m"
+        },
+        {
+          "name": "United Airlines",
+          "price": 800,
+          "duration": "13h 00m"
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "airlines": [
+        {
+          "name": "Japan Airlines",
+          "price": 800,
+          "duration": "14h 00m"
+        },
+        {
+          "name": "All Nippon Airways",
+          "price": 850,
+          "duration": "14h 15m"
+        },
+        {
+          "name": "United Airlines",
+          "price": 900,
+          "duration": "14h 30m"
+        }
+      ]
+    },
+    {
+      "city": "Rome",
+      "airlines": [
+        {
+          "name": "Alitalia",
+          "price": 600,
+          "duration": "7h 00m"
+        },
+        {
+          "name": "Delta Airlines",
+          "price": 650,
+          "duration": "7h 15m"
+        },
+        {
+          "name": "KLM",
+          "price": 700,
+          "duration": "7h 30m"
+        }
+      ]
+    },
+    {
+      "city": "Los Angeles",
+      "airlines": [
+        {
+          "name": "American Airlines",
+          "price": 650,
+          "duration": "14h 30m"
+        },
+        {
+          "name": "Delta Airlines",
+          "price": 700,
+          "duration": "15h 00m"
+        },
+        {
+          "name": "Lufthansa",
+          "price": 750,
+          "duration": "15h 15m"
+        }
+      ]
+    },
+    {
+      "city": "Berlin",
+      "airlines": [
+        {
+          "name": "Lufthansa",
+          "price": 550,
+          "duration": "9h 00m"
+        },
+        {
+          "name": "Air France",
+          "price": 600,
+          "duration": "9h 15m"
+        },
+        {
+          "name": "United Airlines",
+          "price": 650,
+          "duration": "9h 30m"
+        }
+      ]
+    },
+    {
+      "city": "Barcelona",
+      "airlines": [
+        {
+          "name": "Vueling",
+          "price": 300,
+          "duration": "2h 30m"
+        },
+        {
+          "name": "Iberia",
+          "price": 350,
+          "duration": "2h 45m"
+        },
+        {
+          "name": "Ryanair",
+          "price": 400,
+          "duration": "3h 00m"
+        }
+      ]
+    },
+    {
+      "city": "Dubai",
+      "airlines": [
+        {
+          "name": "Emirates",
+          "price": 800,
+          "duration": "3h 30m"
+        },
+        {
+          "name": "Flydubai",
+          "price": 850,
+          "duration": "3h 45m"
+        },
+        {
+          "name": "Etihad Airways",
+          "price": 900,
+          "duration": "4h 00m"
+        }
+      ]
+    },
+    {
+      "city": "Sydney",
+      "airlines": [
+        {
+          "name": "Qantas",
+          "price": 1200,
+          "duration": "20h 00m"
+        },
+        {
+          "name": "Emirates",
+          "price": 1250,
+          "duration": "20h 30m"
+        },
+        {
+          "name": "Singapore Airlines",
+          "price": 1300,
+          "duration": "21h 00m"
+        }
+      ]
+    },
+    {
+      "city": "Moscow",
+      "airlines": [
+        {
+          "name": "Aeroflot",
+          "price": 500,
+          "duration": "9h 30m"
+        },
+        {
+          "name": "Lufthansa",
+          "price": 550,
+          "duration": "10h 00m"
+        },
+        {
+          "name": "Turkish Airlines",
+          "price": 600,
+          "duration": "10h 30m"
+        }
+      ]
+    }
+  ]

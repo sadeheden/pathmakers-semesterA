@@ -1,0 +1,120 @@
+/* 🏠 Main Container */
+.containerPersonal {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎯 Title - Styled like all h1 elements */
+.page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #004e75; /* Light Blue */
+    margin-top: 20px;
+}
+
+/* 🎯 Tab Buttons */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.tab-buttons button {
+    background-color: #a3d5ff; /* Light Blue */
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.tab-buttons button.active {
+    background-color: #4a90e2; /* Darker Blue */
+    color: white;
+}
+
+.tab-buttons button:hover {
+    background-color: #6baefb;
+    color: white;
+}
+
+/* 📌 Section Headings */
+.heading {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* ℹ️ User Information Box */
+.profileInfo {
+    background-color: #f3e5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.profileInfo p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+/* 🖱️ Light Blue Buttons */
+.button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2; /* Light Blue */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #357ab7;
+    transform: scale(1.05);
+}
+
+/* 📩 Newsletter Input */
+.newsletter-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 🖥️ Responsive Design */
+@media (max-width: 768px) {
+    .containerPersonal {
+        max-width: 90%;
+    }
+
+    .tab-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-buttons button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
