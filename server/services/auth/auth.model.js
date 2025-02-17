@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
 const FILE_PATH = './data/users.json';
 
+
 export async function getUsers() {
     try {
         let users = await readFile(FILE_PATH, 'utf-8');
