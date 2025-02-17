@@ -12,24 +12,25 @@ const Header = () => {
     const location = useLocation();
 
     /* -------------------- ✅ Function to Fetch User Session -------------------- */
-  const fetchUser = async () => {
-    try {
-        const response = await fetch("http://localhost:4000/users", {
-            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-        });
-
-        if (response.ok) {
-            const userData = await response.json();
-            setUser(userData);
-        } else {
-            console.error("⚠️ Failed to fetch user:", response.status);
+    const fetchUser = async () => {
+        try {
+            const response = await fetch("http://localhost:4000/users", {
+                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            });
+    
+            if (response.ok) {
+                const userData = await response.json();
+                setUser(userData);
+            } else {
+                console.error("⚠️ Failed to fetch user:", response.status);
+                setUser(null);
+            }
+        } catch (error) {
+            console.error("⚠️ Error fetching user session:", error);
             setUser(null);
         }
-    } catch (error) {
-        console.error("⚠️ Error fetching user session:", error);
-        setUser(null);
-    }
-};
+    };
+    
 
     
     /* -------------------- ✅ useEffect for Route Changes -------------------- */
@@ -42,7 +43,7 @@ const Header = () => {
     /* -------------------- ✅ Handle Logout -------------------- */
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://localhost:4000/logout", { // ✅ Use the correct logout route
+            const response = await fetch("http://localhost:4000/logout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
             });
@@ -52,12 +53,14 @@ const Header = () => {
             }
     
             console.log("✅ Successfully logged out.");
+            localStorage.removeItem("token"); // 🔹 Clear stored token
             setUser(null);
             navigate("/"); // Redirect to homepage after logout
         } catch (error) {
             console.error("⚠️ Logout error:", error);
         }
     };
+    
     
 
     /* -------------------- ✅ Define Pages to Disable Menu & Logo -------------------- */

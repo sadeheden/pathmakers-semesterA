@@ -1,11 +1,14 @@
-import Router from 'express';
-import { login, register } from './auth.controller.js';
 import { upload } from '../../globals.js';
+import Router from 'express';
+import { getAllUsers, register, login, logout, removeUser } from './auth.controller.js';
 const authRouter = Router();
 
 authRouter
+    .get('/users', getAllUsers)
+    .post('/register', register)
     .post('/login', login)
-    .post('/register', upload.single('file'), register)
+    .post('/logout', logout)
+    .delete('/users/:id', removeUser);
 
 export default authRouter;
 
