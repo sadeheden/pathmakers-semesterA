@@ -1,5 +1,5 @@
 import { getCities, addCity } from './services/cities/cities.model.js';;
-import citiesController from './cities/cities.model.js';
+
 
 export async function getAllCities(req, res) {
     try {
