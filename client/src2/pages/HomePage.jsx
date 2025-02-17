@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../components/HomePage.css";
+import "../assets/styles//HomePage.css";
 import bgVideo from "../assets/81945-577442929_small.mp4"; // Ensure correct path
 
 export default function HomePage() {
