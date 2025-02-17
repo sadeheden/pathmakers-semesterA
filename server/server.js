@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import router from './router.js';
-import citiesRouter from './services/cities/cities.router.js'; 
 const PORT = process.env.PORT || 4000;
 const server = express();
 
