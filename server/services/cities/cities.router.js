@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCities, addCity } from '../cities.controller.js';
+import { getAllCities, createCity } from '../cities.controller.js';
 
 const router = express.Router();
 
