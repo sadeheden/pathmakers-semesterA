@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 
-const FILE_PATH = "data/hotels.json";
+const FILE_PATH = "data/flights.json";
 
 const fileExists = async (filePath) => {
     try {
@@ -24,8 +24,15 @@ const readJsonFile = async (filePath) => {
     }
 };
 
-export const getHotelsByCity = async (city) => {
-    const hotelsData = await readJsonFile(FILE_PATH);
-    const cityHotels = hotelsData.find(cityData => cityData.city.toLowerCase() === city.toLowerCase());
-    return cityHotels ? cityHotels.hotels : [];
+const writeJsonFile = async (filePath, data) => {
+    try {
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+    } catch (error) {
+        throw new Error("Error writing to file");
+    }
+};
+
+export const getFlightsByCity = async (city) => {
+    const flights = await readJsonFile(FILE_PATH);
+    return flights.filter(flight => flight.city.toLowerCase() === city.toLowerCase());
 };
