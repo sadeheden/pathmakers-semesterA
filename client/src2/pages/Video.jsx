@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../components/Video.css';
+import '../assets/styles/Video.css';
 import ph from "../assets/Pathmakers-VEED.mp4"; // Importing video
 
 const VideoExplanation = () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, MapPin, Plane, Hotel, Compass, Car, CreditCard, CheckCircle } from "lucide-react";
-import "../components/chat.css";
+import "../assets/styles/chat.css";
 
 const TravelPlannerApp = () => {
   const [currentStep, setCurrentStep] = useState(0);

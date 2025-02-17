@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/DownloadApp.css';
+import '../assets/styles/DownloadApp.css';
 
 const DownloadApp = () => {
     const handleDownload = (platform) => {

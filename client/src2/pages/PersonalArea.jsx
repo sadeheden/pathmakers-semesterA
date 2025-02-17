@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../components/PersonalArea.css";
+import "../assets/styles/PersonalArea.css";
 
 const PersonalArea = () => {
     const [activeTab, setActiveTab] = useState("userInfo"); // Default tab
