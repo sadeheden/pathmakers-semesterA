@@ -1,9 +1,10 @@
 import express from 'express';
-import { getCities, addCity } from '../controllers/cities.controller.js';
+import { getAllCities, createCity } from './cities.controller.js';  // ייבוא הפונקציות מהמנהל
 
 const router = express.Router();
 
-router.get('/', getCities);   // קבלת כל הערים מה-DB
-router.post('/', addCity);    // הוספת עיר חדשה למסד הנתונים
+// הגדרת נתיבי GET ו-POST עבור הערים
+router.get('/', getAllCities);   // קבלת כל הערים מה-DB
+router.post('/', createCity);    // הוספת עיר חדשה למסד הנתונים
 
 export default router;
