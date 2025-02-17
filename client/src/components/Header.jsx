@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../assets/Image20250119205452.png";
-import profilePlaceholder from "../assets/2151100205.jpg";
-import "./Header.css";
+import logo from "../assets/images/Image20250119205452.png";
+import profilePlaceholder from "../assets/images/2151100205.jpg";
+import "../assets/styles/Header.css";
 
 const Header = () => {
     const [user, setUser] = useState(null);

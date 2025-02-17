@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css"; // Import the CSS file for styling
+import "../assets/styles/Footer.css"; // Import the CSS file for styling
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 

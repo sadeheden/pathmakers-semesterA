@@ -1,63 +1,72 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import "../assets/styles/Login.css";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../assets/styles/Login.css';
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
- 
-    if (response.ok) {
-        localStorage.setItem("token", data.token); // 🔹 Save token after login
-        console.log("✅ Login successful:", data);
-        window.location.href = "/main"; 
-    }
+    const [formData, setFormData] = useState({
+        username: '', // Changed from email to username (matching server)
+        password: ''
+    });
+    const [error, setError] = useState('');
     
-    // Handle form submission
+    const navigate = useNavigate();
+
+    // Handle input change
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [id]: value
+        }));
+    };
+
+    // Handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
     
         try {
-            // ✅ Define response before using it
             const response = await fetch("http://localhost:4000/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify(formData),
             });
     
-            // ✅ Parse JSON response
             const data = await response.json();
     
             if (response.ok) {
-                console.log("✅ Login successful:", data);
-                localStorage.setItem("token", data.token); // Store token
-                window.location.href = "/main"; // Redirect to main page
+                console.log("Login successful:", data);
+                window.location.href = "/main"; // Refresh and navigate
             } else {
-                setError("❌ Invalid username or password.");
+                setError("Invalid username or password.");
             }
         } catch (error) {
-            console.error("🚨 Login error:", error);
+            console.error("Login error:", error);
             setError("An error occurred. Please try again.");
         }
     };
     
+    
+    
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
 
     return (
         <div className="loginContainer">
-            <h2 className="loginTitle">Welcome Back</h2>
-
-            {error && <p className="errorText">{error}</p>} {/* Show errors */}
-
             <form className="loginForm" onSubmit={handleSubmit}>
+                <h2 className="loginTitle">Welcome Back</h2>
+
+                {error && <p className="errorText">{error}</p>} {/* Show errors */}
+
                 <div className="formGroup">
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
                         id="username"
                         placeholder="Enter your username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={formData.username}
+                        onChange={handleChange}
                         required
                     />
                 </div>
@@ -68,8 +77,8 @@ const Login = () => {
                         type="password"
                         id="password"
                         placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={handleChange}
                         required
                     />
                 </div>
@@ -77,12 +86,14 @@ const Login = () => {
                 <button type="submit" className="loginButton">
                     Login
                 </button>
-            </form>
 
-            <p className="signupText">
-                Don't have an account?{" "}
-                <Link to="/register">Sign up</Link>
-            </p>
+                <p className="signupText">
+                    Don't have an account?{' '}
+                    <a href="#" onClick={handleSignUp}>
+                        Sign up
+                    </a>
+                </p>
+            </form>
         </div>
     );
 };
