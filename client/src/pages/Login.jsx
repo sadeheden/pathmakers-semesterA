@@ -4,7 +4,7 @@ import '../assets/styles/Login.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        username: '', // Changed from email to username (matching server)
+        username: '',
         password: ''
     });
     const [error, setError] = useState('');
@@ -26,17 +26,19 @@ const Login = () => {
         setError("");
     
         try {
-            const response = await fetch("http://localhost:4000/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+            const url = `http://localhost:4000/api/auth/login?username=${encodeURIComponent(formData.username)}&password=${encodeURIComponent(formData.password)}`;
+            console.log(`Attempting to login with URL: ${url}`);
+
+            const response = await fetch(url, {
+                method: "GET",  // Shifting to GET
+                headers: { "Content-Type": "application/json" }
             });
     
             const data = await response.json();
     
             if (response.ok) {
                 console.log("Login successful:", data);
-                window.location.href = "/main"; // Refresh and navigate
+                navigate('/main');  // Using navigate for better React routing
             } else {
                 setError("Invalid username or password.");
             }
@@ -45,8 +47,6 @@ const Login = () => {
             setError("An error occurred. Please try again.");
         }
     };
-    
-    
     
     const handleSignUp = () => {
         navigate('/signup');

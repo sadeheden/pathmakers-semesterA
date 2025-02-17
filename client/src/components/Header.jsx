@@ -11,19 +11,28 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    /* -------------------- ✅ Function to Fetch User Session -------------------- */
+    // Fetch User session
     const fetchUser = async () => {
+        const token = localStorage.getItem("token");
+        console.log("Token being sent:", token); // בדיקה אם יש טוקן תקף
+    
+        if (!token) {
+            console.warn("⚠️ No token found, skipping user fetch.");
+            return;
+        }
+    
         try {
-            const response = await fetch("http://localhost:4000/users", {
-                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+            const res = await fetch("http://localhost:4000/api/auth/user", {
+                headers: { "Authorization": `Bearer ${token}` }
             });
     
-            if (response.ok) {
-                const userData = await response.json();
+            if (res.ok) {
+                const userData = await res.json();
                 setUser(userData);
             } else {
-                console.error("⚠️ Failed to fetch user:", response.status);
+                console.error("⚠️ Failed to fetch user:", res.status);
                 setUser(null);
+                localStorage.removeItem("token"); // מחיקת טוקן לא תקף
             }
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
@@ -32,40 +41,38 @@ const Header = () => {
     };
     
 
-    
-    /* -------------------- ✅ useEffect for Route Changes -------------------- */
+    // Trigger user data fetching when route changes
     useEffect(() => {
-        if (!user) {  // Prevents unnecessary API calls
+        if (!user) {
             fetchUser();
         }
     }, [location]);
 
-    /* -------------------- ✅ Handle Logout -------------------- */
+    // Handle logout
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://localhost:4000/logout", {
+            const response = await fetch("http://localhost:4000/api/auth/logout", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" }
             });
-    
+
             if (!response.ok) {
                 throw new Error(`Logout failed: ${response.statusText}`);
             }
-    
+
             console.log("✅ Successfully logged out.");
-            localStorage.removeItem("token"); // 🔹 Clear stored token
+            localStorage.removeItem("token"); // Clear stored token
             setUser(null);
-            navigate("/"); // Redirect to homepage after logout
+            navigate("/"); // Redirect to homepage
         } catch (error) {
             console.error("⚠️ Logout error:", error);
         }
     };
-    
-    
 
-    /* -------------------- ✅ Define Pages to Disable Menu & Logo -------------------- */
+    // Define pages to disable the menu
     const disabledPages = ["/", "/signup", "/login"];
     const isDisabledPage = disabledPages.includes(location.pathname);
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest(".profile-section")) {
@@ -79,14 +86,13 @@ const Header = () => {
 
     return (
         <header className="header">
-            {/* ✅ Logo remains visible but disabled on About, Signup, and Login pages */}
+            {/* Logo and Navbar */}
             <div className="logo">
                 <Link to={isDisabledPage ? "#" : "/main"} className={isDisabledPage ? "disabled-link" : ""}>
                     <img src={logo} alt="Logo" />
                 </Link>
             </div>
 
-            {/* ✅ Navbar: Hidden on About, Signup, and Login pages */}
             {!isDisabledPage && user && (
                 <nav className={`navbar ${isMenuOpen ? "show" : ""}`}>
                     <Link to="/main">Main</Link>
@@ -96,7 +102,6 @@ const Header = () => {
                 </nav>
             )}
 
-            {/* ✅ User Profile Section (Always Visible) */}
             <div className="profile-section">
                 <img
                     src={user?.profileImage || profilePlaceholder}
@@ -124,7 +129,6 @@ const Header = () => {
                 )}
             </div>
 
-            {/* ✅ Hamburger Button for Mocdbile (Hidden before login & on disabled pages) */}
             {!isDisabledPage && user && (
                 <button
                     className={`hamburger ${isMenuOpen ? "active" : ""}`}

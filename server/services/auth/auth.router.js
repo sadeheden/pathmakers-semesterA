@@ -1,18 +1,15 @@
-import { upload } from '../../globals.js';
 import Router from 'express';
-import { getAllUsers, register, login, logout, removeUser } from './auth.controller.js';
+import { getAllUsers, register, login, logout, removeUser, getCurrentUser } from './auth.controller.js';
+
 const authRouter = Router();
 
-
-
-
-// Define routes
 authRouter
     .get('/users', getAllUsers)
-    .post('/register', upload.single('profileImage'), register) // Use upload middleware for profile image
-    .post('/login', login)
+    .post('/register', register)
+    .get('/login', login)  // ודא שהשורה הזו קיימת!
     .post('/logout', logout)
-    .delete('/users/:id', removeUser);
+    .delete('/users/:id', removeUser)
+    .get('/user', getCurrentUser);
 
 export default authRouter;
 
