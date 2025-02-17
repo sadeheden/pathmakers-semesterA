@@ -1,7 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 const FILE_PATH = './data/users.json';
 
-
 export async function getUsers() {
     try {
         let users = await readFile(FILE_PATH, 'utf-8');
@@ -25,14 +24,10 @@ export async function findUserByUsernameOrEmail(username, email) {
     return users.find(user => user.username === username || user.email === email);
 }
 
-export async function findUserByCredentials(username, password) {
-    let users = await getUsers();
-    return users.find(user => user.username === username && user.password === password);
-}
-
 export async function addUser(id, username, email, password, profileImage = null) {
     let users = await getUsers();
     if (await findUserByUsernameOrEmail(username, email)) return false;
+
     let newUser = { id, username, email, password, profileImage };
     users.push(newUser);
     await saveUsers(users);
@@ -41,8 +36,9 @@ export async function addUser(id, username, email, password, profileImage = null
 
 export async function deleteUser(id) {
     let users = await getUsers();
-    let updatedUsers = users.filter(user => user.id !== parseInt(id));
+    let updatedUsers = users.filter(user => user.id !== id);
     if (users.length === updatedUsers.length) return false;
+
     await saveUsers(updatedUsers);
     return true;
 }

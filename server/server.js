@@ -1,30 +1,41 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+
+// ייבוא של ה-Router הראשי
 import router from './router.js';
-import citiesRouter from './services/cities/cities.router.js'; // או הנתיב המתאים לקובץ שלך
-import flightsRouter from './services/flights/flights.router.js';  // או הנתיב המתאים לקובץ שלך
-import hotelsRouter from './services/hotel/hotel.router.js';  // או הנתיב המתאים לקובץ שלך
-import attractionsRouter from './services/attraction/att.router.js';  // או הנתיב המתאים לקובץ שלך
 
-const server = express(); // קודם כל, הגדר את השרת
+// ייבוא ה-Routers של השירותים השונים
+import citiesRouter from './services/cities/cities.router.js';
+import flightsRouter from './services/flights/flights.router.js';
+import hotelsRouter from './services/hotel/hotel.router.js';
+import attractionsRouter from './services/attraction/att.router.js';
+import authRouter from './services/auth/auth.router.js'; // ✅ ודא שהנתיב נכון!
 
+const server = express();
 const PORT = process.env.PORT || 4000;
 
-// לאפשר גישה לשרת מכתובת אחרת (CORS)
-server.use(cors()); 
+// Middleware להגדרת CORS
+server.use(cors());
 
-// לאפשר קליטת נתונים מגוף הבקשה (JSON)
+// Middleware לטיפול בבקשות JSON
 server.use(express.json({ extended: true, limit: '50mb' }));
 
-// הגדרת נתיבים עבור המיקרו-שירותים
-server.use('/api', router); // נתיב עיקרי
-server.use('/api/cities', citiesRouter); // נתיב עבור הערים
-server.use('/api/flights', flightsRouter); // נתיב עבור טיסות
-server.use('/api/hotels', hotelsRouter); // נתיב עבור מלונות
-server.use('/api/attractions', attractionsRouter); // נתיב עבור אטרקציות
 
-// הפעלת השרת על הפורט שנבחר
+// חיבור הנתיבים הראשיים
+server.use('/api', router);
+server.use('/api/cities', citiesRouter);
+server.use('/api/flights', flightsRouter);
+server.use('/api/hotels', hotelsRouter);
+server.use('/api/attractions', attractionsRouter);
+server.use('/api/auth', authRouter); // ✅ חיבור נתיב האימות
+
+// בדיקת תקינות השרת
+server.get('/', (req, res) => {
+    res.send('Server is running!');
+});
+
+// הפעלת השרת
 server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(` Server is running on http://localhost:${PORT}`);
 });

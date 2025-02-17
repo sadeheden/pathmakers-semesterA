@@ -1,82 +1,72 @@
 import { uploadToCloud } from "../upload/upload.model.js";
-import { getUsers, addUser, findUserByCredentials, deleteUser } from './auth.model.js';
-
+import { getUsers, addUser, findUserByUsernameOrEmail, deleteUser } from './auth.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
 import passwordValidator from 'password-validator';
 
 const schema = new passwordValidator();
 schema
-    .is().min(8)  // Minimum 8 characters
-    .is().max(20) // Maximum 20 characters
-    .has().uppercase() // Must have uppercase letters
-    .has().lowercase() // Must have lowercase letters
-    .has().digits() // Must have digits
-    .has().not().spaces(); // No spaces
+    .is().min(8)  // לפחות 8 תווים
+    .is().max(20) // מקסימום 20 תווים
+    .has().uppercase() // לפחות אות גדולה אחת
+    .has().lowercase() // לפחות אות קטנה אחת
+    .has().digits() // לפחות מספר אחד
+    .has().not().spaces(); // ללא רווחים
 
-    
+// **Generate Auth Token**
+const generateAuthToken = (user) => {
+    return jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '1h' });
+};
+
+// **Register New User**
 export async function register(req, res) {
-    let { id, username, email, password, profileImage } = req.body;
+    let { username, email, password, profileImage } = req.body;
 
     // Validate password
     if (!schema.validate(password)) {
         return res.status(400).json({
-            error: 'Password is too weak. It must have at least 8 characters, one uppercase letter, one number, and no spaces.'
+            error: 'Password must be at least 8 characters, contain uppercase, a number, and no spaces.'
         });
     }
 
     try {
-        // Check if the username or email already exists
-        let existingUser = await findUserByCredentials(username, email);
+        // Check if user already exists
+        let existingUser = await findUserByUsernameOrEmail(username, email);
         if (existingUser) return res.status(400).json({ error: 'Username or email already taken' });
 
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
-        let newUser = await addUser(id, username, email, hashedPassword, profileImage);
+
+        // Add new user
+        let newUser = await addUser(username, email, hashedPassword, profileImage);
 
         if (!newUser) return res.status(400).json({ error: 'User registration failed' });
 
+        // Return success response
         res.status(201).json({ message: 'User registered successfully', user: newUser });
     } catch (error) {
         console.error('Error registering user:', error);
-        res.status(500).json({ error: 'Error registering user. Please try again later.' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
 
-export async function getAllUsers(req, res) {
-    try {
-        let users = await getUsers();
-        if (!users || users.length === 0) {
-            return res.status(404).json({ error: 'No users found' });
-        }
-        res.status(200).json(users);
-    } catch (error) {
-        console.error('Error retrieving users:', error);
-        res.status(500).json({ error: 'Error retrieving users. Please try again later.' });
-    }
-}
-
-
-
-const generateAuthToken = (user) => {
-    // Generate a JWT token (use your secret and expiration as needed)
-    return jwt.sign({ id: user.id, username: user.username }, 'your-secret-key', { expiresIn: '1h' });
-};
-
+// **User Login**
 export async function login(req, res) {
     let { username, password } = req.body;
     try {
-        let user = await findUserByCredentials(username);
+        // Retrieve all users
+        let users = await getUsers();
+        let user = users.find(user => user.username === username);
         if (!user) return res.status(401).json({ error: 'Invalid username or password' });
 
-        // Check if the password matches the hashed password in the database
+        // Compare password
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid username or password' });
-        }
+        if (!isPasswordValid) return res.status(401).json({ error: 'Invalid username or password' });
 
-        // Generate and send the token
+        // Generate JWT token
         const token = generateAuthToken(user);
-        
+
+        // Return user details and token
         res.status(200).json({
             message: `Welcome ${user.username}!`,
             user: { id: user.id, username: user.username, email: user.email, profileImage: user.profileImage || null },
@@ -84,36 +74,61 @@ export async function login(req, res) {
         });
     } catch (error) {
         console.error('Server error during login:', error);
-        res.status(500).json({ error: 'Server error during login. Please try again later.' });
+        res.status(500).json({ error: 'Server error during login' });
     }
 }
 
 
-
-export async function logout(req, res) {
+// **Get All Users**
+export async function getAllUsers(req, res) {
     try {
-        res.clearCookie('session');  // Clear session cookie if using session-based authentication
-        res.status(200).json({ message: 'Logged out successfully' });
+        // Retrieve users from the database
+        let users = await getUsers();
+        if (!users.length) {
+            return res.status(404).json({ error: 'No users found' });
+        }
+        res.status(200).json(users);
     } catch (error) {
-        console.error('Logout error:', error);
-        res.status(500).json({ error: 'Error logging out. Please try again later.' });
+        console.error('Error retrieving users:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
+// auth.controller.js
+export const getCurrentUser = (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) return res.status(401).json({ message: "Unauthorized" });
 
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res.json(decoded);
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
 
-
+// Delete User
 export async function removeUser(req, res) {
     let { id } = req.params;
     try {
         if (!id) return res.status(400).json({ error: 'User ID is required' });
-        
+
+        // Delete the user
         let deleted = await deleteUser(id);
         if (!deleted) return res.status(404).json({ error: 'User not found' });
-        
+
         res.status(200).json({ message: `User with ID ${id} deleted successfully.` });
     } catch (error) {
         console.error('Error deleting user:', error);
-        res.status(500).json({ error: 'Error deleting user. Please try again later.' });
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
 
+// Logout
+export async function logout(req, res) {
+    try {
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.status(500).json({ error: 'Error logging out' });
+    }
+}
