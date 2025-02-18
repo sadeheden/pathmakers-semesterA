@@ -26,27 +26,35 @@ const Login = () => {
         setError("");
     
         try {
-            const url = `http://localhost:4000/api/auth/login?username=${encodeURIComponent(formData.username)}&password=${encodeURIComponent(formData.password)}`;
-            console.log(`Attempting to login with URL: ${url}`);
-
+            const url = 'http://localhost:4000/api/auth/login';
+    
             const response = await fetch(url, {
-                method: "GET",  // Shifting to GET
-                headers: { "Content-Type": "application/json" }
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: formData.username,
+                    password: formData.password
+                })
             });
     
             const data = await response.json();
     
             if (response.ok) {
                 console.log("Login successful:", data);
-                navigate('/main');  // Using navigate for better React routing
+                localStorage.setItem('authToken', data.token);
+                navigate('/main');
             } else {
-                setError("Invalid username or password.");
+                setError(data.error || "Invalid username or password.");
             }
         } catch (error) {
             console.error("Login error:", error);
             setError("An error occurred. Please try again.");
         }
     };
+    
+    
     
     const handleSignUp = () => {
         navigate('/signup');

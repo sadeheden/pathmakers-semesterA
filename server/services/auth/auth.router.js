@@ -6,7 +6,7 @@ const authRouter = Router();
 authRouter
     .get('/users', getAllUsers)
     .post('/register', register)
-    .get('/login', login)  // ודא שהשורה הזו קיימת!
+    .post('/login', login)  // ודא שהשורה הזו קיימת!
     .post('/logout', logout)
     .delete('/users/:id', removeUser)
     .get('/user', getCurrentUser);
