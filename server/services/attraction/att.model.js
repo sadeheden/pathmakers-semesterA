@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 
 const FILE_PATH = "data/attractions.json";
-
 const fileExists = async (filePath) => {
     try {
         await fs.access(filePath);
