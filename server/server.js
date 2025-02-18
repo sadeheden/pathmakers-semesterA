@@ -10,8 +10,7 @@ import citiesRouter from './services/cities/cities.router.js';
 import flightsRouter from './services/flights/flights.router.js';
 import hotelsRouter from './services/hotel/hotel.router.js';
 import attractionsRouter from './services/attraction/att.router.js';
-import authRouter from './services/auth/auth.router.js'; // ✅ ודא שהנתיב נכון!
-
+import authRouter from './services/auth/auth.router.js'; 
 const server = express();
 const PORT = process.env.PORT || 4000;
 
