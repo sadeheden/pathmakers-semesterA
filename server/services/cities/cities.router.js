@@ -1,9 +1,9 @@
-import express from "express";
-import { getCitiesList } from "./cities.controller.js";
+import express from 'express';
+import { getCitiesList } from './cities.controller.js';
 
 const router = express.Router();
 
-router.get("/", getCitiesList);
+// קישור לפונקציה שמביאה את הערים
+router.get('/', getCitiesList);
 
 export default router;
-
