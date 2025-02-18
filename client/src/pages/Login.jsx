@@ -21,14 +21,14 @@ const Login = () => {
     };
 
     // Handle form submit
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {  // ✅ Ensure "async" is here!
         e.preventDefault();
         setError("");
     
         try {
             const url = 'http://localhost:4000/api/auth/login';
     
-            const response = await fetch(url, {
+            const response = await fetch(url, {  // ✅ "await" needs an "async" function
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -43,8 +43,17 @@ const Login = () => {
     
             if (response.ok) {
                 console.log("Login successful:", data);
-                localStorage.setItem('authToken', data.token);
-                navigate('/main');
+    
+                if (!data.token) {
+                    console.error("❌ Error: No token received from the backend.");
+                    setError("Authentication failed: No token provided.");
+                    return;
+                }
+    
+                localStorage.setItem("token", data.token);  // ✅ Use "token" instead of "authToken"
+                console.log("✅ Token saved to localStorage:", data.token);
+    
+                navigate("/main");
             } else {
                 setError(data.error || "Invalid username or password.");
             }
@@ -53,6 +62,7 @@ const Login = () => {
             setError("An error occurred. Please try again.");
         }
     };
+    
     
     
     
