@@ -1,6 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 // ייבוא של ה-Router הראשי
 import router from './router.js';

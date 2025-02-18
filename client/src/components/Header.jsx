@@ -13,37 +13,39 @@ const Header = () => {
 
     // Fetch User session
     const fetchUser = async () => {
-        const token = localStorage.getItem("authToken");  // Updated token key
+        const token = localStorage.getItem("token");
         console.log("Token being sent:", token);  // Log the token for debugging
-
+     
         if (!token) {
             console.warn("⚠️ No token found, skipping user fetch.");
             return; // Skip fetching if token is not available
         }
-
+     
         try {
             const res = await fetch("http://localhost:4000/api/auth/user", {
                 headers: { "Authorization": `Bearer ${token}` }
             });
-
+     
             if (res.ok) {
                 const userData = await res.json();
                 setUser(userData);
             } else {
                 console.error("⚠️ Failed to fetch user:", res.status);
                 setUser(null);
-                localStorage.removeItem("authToken");  // Clear invalid token
+                localStorage.removeItem("token"); // Clear invalid token
             }
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
             setUser(null);
         }
     };
+    
+
 
     // Trigger user data fetching when route changes
     useEffect(() => {
         if (!user) {
-            fetchUser();  // Only fetch user if it's not already fetched
+            fetchUser();
         }
     }, [location]);
 
@@ -60,9 +62,9 @@ const Header = () => {
             }
 
             console.log("✅ Successfully logged out.");
-            localStorage.removeItem("authToken");  // Clear stored token
+            localStorage.removeItem("token"); // Clear stored token
             setUser(null);
-            navigate("/");  // Redirect to homepage
+            navigate("/"); // Redirect to homepage
         } catch (error) {
             console.error("⚠️ Logout error:", error);
         }
