@@ -1,4 +1,3 @@
-import { uploadToCloud } from "../upload/upload.model.js";
 import { getUsers, addUser, findUserByUsernameOrEmail, deleteUser } from './auth.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
@@ -52,28 +51,41 @@ export async function register(req, res) {
 
 // **User Login**
 export async function login(req, res) {
-    let { username, password } = req.body;
+    const { username, password } = req.body;
+
     try {
-        // Retrieve all users
-        let users = await getUsers();
-        let user = users.find(user => user.username === username);
-        if (!user) return res.status(401).json({ error: 'Invalid username or password' });
+        console.log('Received request:', { username, password }); // Log incoming request data
 
-        // Compare password
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) return res.status(401).json({ error: 'Invalid username or password' });
+        // Retrieve users (this is where it might fail)
+        const users = await getUsers();
+        console.log('Fetched users:', users); // Log the users to see if they're fetched correctly
 
-        // Generate JWT token
+        // Find the user by username
+        const user = users.find(user => user.username === username);
+        if (!user) {
+            console.log('User not found:', username);
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+
+        // Compare the password (assuming plain text for now)
+        const isPasswordValid = password === user.password;
+
+        if (!isPasswordValid) {
+            console.log('Password mismatch:', username);
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+
+        // Generate token
         const token = generateAuthToken(user);
 
-        // Return user details and token
+        // Respond with success
         res.status(200).json({
             message: `Welcome ${user.username}!`,
-            user: { id: user.id, username: user.username, email: user.email, profileImage: user.profileImage || null },
+            user: { id: user.id, username: user.username, email: user.email },
             token: token
         });
     } catch (error) {
-        console.error('Server error during login:', error);
+        console.error('Login error:', error); // Log the error
         res.status(500).json({ error: 'Server error during login' });
     }
 }

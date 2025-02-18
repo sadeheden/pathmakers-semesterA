@@ -1,44 +1,75 @@
 import { readFile, writeFile } from 'fs/promises';
-const FILE_PATH = './data/users.json';
+import path from 'path';
 
-export async function getUsers() {
+// Use process.cwd() to get the current working directory
+const FILE_PATH = path.join(process.cwd(), '..', 'data', 'users.json');
+
+
+export const getUsers = async () => {
     try {
-        let users = await readFile(FILE_PATH, 'utf-8');
-        return JSON.parse(users);
+        const data = await readFile(FILE_PATH, 'utf-8');
+        const users = JSON.parse(data);  // Parse the JSON data
+        console.log('Users:', users);  // Log users to verify they're fetched
+        return users;
     } catch (error) {
-        console.error('Error reading users file:', error);
-        return [];
+        console.error('Error reading or parsing users.json:', error);
+        throw new Error('Error fetching users from the file');
     }
-}
+};
 
-export async function saveUsers(users) {
+
+
+// Save the updated users list to the users.json file
+export const saveUsers = async (users) => {
     try {
-        await writeFile(FILE_PATH, JSON.stringify(users, null, 2));
+        await writeFile(FILE_PATH, JSON.stringify(users, null, 2));  // Pretty print the JSON with 2 spaces
+        console.log('Users saved successfully');
     } catch (error) {
         console.error('Error saving users file:', error);
+        throw new Error('Error saving users to the file');
     }
-}
+};
 
-export async function findUserByUsernameOrEmail(username, email) {
-    let users = await getUsers();
-    return users.find(user => user.username === username || user.email === email);
-}
+// Function to find a user by username or email
+export const findUserByUsernameOrEmail = async (username, email) => {
+    try {
+        let users = await getUsers();
+        return users.find(user => user.username === username || user.email === email);
+    } catch (error) {
+        console.error('Error finding user:', error);
+        throw new Error('Error searching for user');
+    }
+};
 
-export async function addUser(id, username, email, password, profileImage = null) {
-    let users = await getUsers();
-    if (await findUserByUsernameOrEmail(username, email)) return false;
+// Function to add a new user
+export const addUser = async (id, username, email, password, profileImage = null) => {
+    try {
+        let users = await getUsers();
+        if (await findUserByUsernameOrEmail(username, email)) return false;  // Prevent duplicates
 
-    let newUser = { id, username, email, password, profileImage };
-    users.push(newUser);
-    await saveUsers(users);
-    return newUser;
-}
+        const newUser = { id, username, email, password, profileImage };
+        users.push(newUser);
+        await saveUsers(users);
+        console.log('New user added:', newUser);  // Log the new user added
+        return newUser;
+    } catch (error) {
+        console.error('Error adding new user:', error);
+        throw new Error('Error adding user');
+    }
+};
 
-export async function deleteUser(id) {
-    let users = await getUsers();
-    let updatedUsers = users.filter(user => user.id !== id);
-    if (users.length === updatedUsers.length) return false;
+// Function to delete a user by id
+export const deleteUser = async (id) => {
+    try {
+        let users = await getUsers();
+        const updatedUsers = users.filter(user => user.id !== id);
+        if (users.length === updatedUsers.length) return false;  // If no user was deleted
 
-    await saveUsers(updatedUsers);
-    return true;
-}
+        await saveUsers(updatedUsers);
+        console.log(`User with ID ${id} deleted successfully`);
+        return true;
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        throw new Error('Error deleting user');
+    }
+};
