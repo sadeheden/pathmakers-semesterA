@@ -1,6 +1,8 @@
 import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
+
 
 // Use process.cwd() to get the current working directory
 const FILE_PATH = path.join(process.cwd(),  'data', 'users.json');
@@ -42,22 +44,23 @@ export const findUserByUsernameOrEmail = async (username, email) => {
     }
 };
 
-// Function to add a new user
-export const addUser = async (id, username, email, password, profileImage = null) => {
+
+export const addUser = async (username, email, password, profileImage = null) => {
     try {
         let users = await getUsers();
-        if (await findUserByUsernameOrEmail(username, email)) return false;  // Prevent duplicates
+        if (await findUserByUsernameOrEmail(username, email)) return false;
 
-        const newUser = { id, username, email, password, profileImage };
+        const newUser = { id: uuidv4(), username, email, password, profileImage }; // ✅ Generate unique ID
         users.push(newUser);
         await saveUsers(users);
-        console.log('New user added:', newUser);  // Log the new user added
+        console.log('New user added:', newUser);
         return newUser;
     } catch (error) {
         console.error('Error adding new user:', error);
         throw new Error('Error adding user');
     }
 };
+
 
 // Function to delete a user by id
 export const deleteUser = async (id) => {
@@ -74,7 +77,6 @@ export const deleteUser = async (id) => {
         throw new Error('Error deleting user');
     }
 };
-import jwt from "jsonwebtoken";
 
 export const getCurrentUser = (req, res) => {
     try {
