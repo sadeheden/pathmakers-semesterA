@@ -54,13 +54,11 @@ export async function login(req, res) {
     const { username, password } = req.body;
 
     try {
-        console.log('Received request:', { username, password }); // Log incoming request data
+        console.log('Received login request:', { username, password });
 
-        // Retrieve users (this is where it might fail)
         const users = await getUsers();
-        console.log('Fetched users:', users); // Log the users to see if they're fetched correctly
+        console.log('Fetched users:', users);  // Log the users to see if they're fetched correctly
 
-        // Find the user by username
         const user = users.find(user => user.username === username);
         if (!user) {
             console.log('User not found:', username);
@@ -75,20 +73,21 @@ export async function login(req, res) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        // Generate token
+        // Generate token if valid
         const token = generateAuthToken(user);
 
-        // Respond with success
         res.status(200).json({
             message: `Welcome ${user.username}!`,
             user: { id: user.id, username: user.username, email: user.email },
             token: token
         });
+
     } catch (error) {
         console.error('Login error:', error); // Log the error
         res.status(500).json({ error: 'Server error during login' });
     }
 }
+
 
 
 // **Get All Users**
