@@ -2,7 +2,7 @@ import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 
 // Use process.cwd() to get the current working directory
-const FILE_PATH = path.join(process.cwd(), '..', 'data', 'users.json');
+const FILE_PATH = path.join(process.cwd(),  'data', 'users.json');
 
 
 export const getUsers = async () => {
