@@ -41,6 +41,7 @@ export async function register(req, res) {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+
         // Add new user
         let newUser = await addUser(username, email, hashedPassword, profileImage);
 
@@ -59,27 +60,38 @@ export async function login(req, res) {
     const { username, password } = req.body;
 
     try {
-        console.log('Received login request:', { username, password });
+        console.log("🔹 Login request received:", { username, password });
 
         const users = await getUsers();
-        console.log('Fetched users:', users);  // Log the users to see if they're fetched correctly
+        console.log("🔹 Users found:", users);
 
         const user = users.find(user => user.username === username);
         if (!user) {
-            console.log('User not found:', username);
-            return res.status(401).json({ error: 'Invalid username or password' });
+            console.log("❌ User not found:", username);
+            return res.status(401).json({ error: "Invalid username or password" });
         }
 
-        // Compare the password (assuming plain text for now)
-        const isPasswordValid = password === user.password;
+        console.log("🔹 User found:", user);
+
+        // Compare the password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log("🔹 Password comparison result:", isPasswordValid);
 
         if (!isPasswordValid) {
-            console.log('Password mismatch:', username);
-            return res.status(401).json({ error: 'Invalid username or password' });
+            console.log("❌ Password mismatch for user:", username);
+            return res.status(401).json({ error: "Invalid username or password" });
         }
 
-        // Generate token if valid
-        const token = generateAuthToken(user);
+        console.log("✅ Password verified for user:", username);
+
+        // Generate JWT Token
+        const token = jwt.sign(
+            { id: user.id, username: user.username }, 
+            process.env.JWT_SECRET_KEY, 
+            { expiresIn: "24h" }
+        );
+
+        console.log("✅ Token generated for user:", token);
 
         res.status(200).json({
             message: `Welcome ${user.username}!`,
@@ -88,12 +100,10 @@ export async function login(req, res) {
         });
 
     } catch (error) {
-        console.error('Login error:', error); // Log the error
-        res.status(500).json({ error: 'Server error during login' });
+        console.error("❌ Login error:", error);
+        res.status(500).json({ error: "Server error during login" });
     }
 }
-
-
 
 // **Get All Users**
 export async function getAllUsers(req, res) {
@@ -115,7 +125,7 @@ export const getCurrentUser = (req, res) => {
         const token = req.headers.authorization?.split(" ")[1];
         if (!token) return res.status(401).json({ message: "Unauthorized" });
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         res.json(decoded);
     } catch (error) {
         res.status(401).json({ message: "Invalid token" });
