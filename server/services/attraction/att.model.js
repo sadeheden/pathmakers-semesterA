@@ -20,11 +20,26 @@ const readJsonFile = async (filePath) => {
         const data = await fs.readFile(filePath, "utf8");
         return JSON.parse(data);
     } catch (error) {
+        console.error("Error reading file:", error);
         return {};
     }
 };
-
 export const getAttractionsByCity = async (city) => {
     const attractionsData = await readJsonFile(FILE_PATH);
-    return attractionsData[city.toLowerCase()] || [];
+    console.log("Loaded attractions data:", attractionsData);
+
+    const cityLowerCase = city.toLowerCase();
+
+    // Look for the city inside the attractions array
+    const cityAttractions = attractionsData.attractions.find(
+        (entry) => entry.city.toLowerCase() === cityLowerCase
+    );
+
+    console.log("City attractions found:", cityAttractions);
+
+    if (cityAttractions) {
+        return cityAttractions.attractions;
+    }
+
+    return [];
 };
