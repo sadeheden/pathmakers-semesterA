@@ -14,8 +14,13 @@ schema
 
 // **Generate Auth Token**
 const generateAuthToken = (user) => {
-    return jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET || 'your-secret-key', { expiresIn: '1h' });
+    return jwt.sign(
+        { id: user.id, username: user.username }, 
+        process.env.JWT_SECRET_KEY,  // ✅ Correctly use the env variable
+        { expiresIn: '1h' }
+    );
 };
+
 
 // **Register New User**
 export async function register(req, res) {

@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
+import jwt from "jsonwebtoken";
 
 // Use process.cwd() to get the current working directory
 const FILE_PATH = path.join(process.cwd(),  'data', 'users.json');
@@ -73,3 +74,33 @@ export const deleteUser = async (id) => {
         throw new Error('Error deleting user');
     }
 };
+import jwt from "jsonwebtoken";
+
+export const getCurrentUser = (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        console.log("Received Authorization Header:", authHeader); // ✅ Log header
+        
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            console.log("❌ No valid Authorization header received");
+            return res.status(401).json({ message: "Unauthorized: No token provided" });
+        }
+
+        const token = authHeader.split(" ")[1]; // ✅ Extract token correctly
+        console.log("Extracted Token:", token); // ✅ Log extracted token
+
+        // Attempt to verify the token
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            console.log("✅ Decoded Token Data:", decoded); // ✅ Log decoded token
+            res.json(decoded);
+        } catch (error) {
+            console.error("❌ JWT Verification Failed:", error.message);
+            return res.status(401).json({ message: "Invalid token", error: error.message });
+        }
+    } catch (error) {
+        console.error("❌ Unexpected Error in Token Verification:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
