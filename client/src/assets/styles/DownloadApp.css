@@ -55,37 +55,15 @@ body {
 }
 
 
-.buttonsD {
-    display: flex;
-    align-items: center;
-
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--button-text-color);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 250px;
-}
 
 .button:hover {
+    background-color: #13394c; /* Darker blue on hover */
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
-/* 🎨 iOS Button */
-.ios {
-    background: var(--ios-button-bg);
-}
-
-/* 🎨 Android Button */
-.android {
-    background: var(--android-button-bg);
+.ios, .android {
+    background-color: #004e75; /* Both buttons blue */
 }
 
 /* 🎨 Button Icons */
