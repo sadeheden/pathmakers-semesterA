@@ -47,7 +47,7 @@ const AuthForm = ({ isLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-
+    
         if (!isLogin) {
             const validationErrors = validateForm();
             if (Object.keys(validationErrors).length > 0) {
@@ -55,33 +55,34 @@ const AuthForm = ({ isLogin }) => {
                 return;
             }
         }
-
+    
         try {
             const url = isLogin
                 ? "http://localhost:4000/api/auth/login"
                 : "http://localhost:4000/api/auth/register";
-
+    
             const requestBody = isLogin
                 ? { username: formData.username, password: formData.password }
                 : { username: formData.username, email: formData.email, password: formData.password };
-
+    
             const response = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(requestBody),
             });
-
+    
             const data = await response.json();
             console.log("🔹 Response received:", response.status, data);
-
+    
             if (response.ok) {
                 console.log("✅ Auth successful:", data);
-                if (isLogin) {
-                    localStorage.setItem("authToken", data.token);
-                    navigate("/main");
-                } else {
-                    navigate("/login"); // Redirect to login after signup
-                }
+    
+                // ✅ Store token in localStorage
+                localStorage.setItem("authToken", data.token);
+    
+                // ✅ Navigate directly to main page after signup or login
+                navigate("/main");
+    
             } else {
                 setErrors({ submit: data.error || "An error occurred. Try again." });
             }
@@ -90,6 +91,7 @@ const AuthForm = ({ isLogin }) => {
             setErrors({ submit: "An error occurred. Please try again." });
         }
     };
+    
 
     return (
         <div className={`authContainer ${isLogin ? "login" : "signup"}`}>
