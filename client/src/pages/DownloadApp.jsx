@@ -1,9 +1,15 @@
 import React from 'react';
 import '../assets/styles/DownloadApp.css';
+import appleImg from '../assets/images/apple.png';
+import androidImg from '../assets/images/android.png';
 
 const DownloadApp = () => {
     const handleDownload = (platform) => {
-        console.log(`Downloading for ${platform}`);
+        if (platform === 'ios') {
+            window.location.href = 'https://www.apple.com/store'; // קישור לדף החנות של אפל
+        } else if (platform === 'android') {
+            window.location.href = 'https://play.google.com/store'; // קישור לחנות של אנדרואיד
+        }
     };
 
     return (
@@ -17,7 +23,7 @@ const DownloadApp = () => {
                 
                 <div className="buttonsD">
                     <a 
-                        href="#" 
+                        href="#"
                         className="button ios"
                         onClick={(e) => {
                             e.preventDefault();
@@ -25,7 +31,7 @@ const DownloadApp = () => {
                         }}
                     >
                         <img 
-                            src="https://www.gett.com/il/wp-content/uploads/sites/5/2023/02/app-download-il.png"
+                            src={appleImg} 
                             alt="iOS Logo" 
                             className="buttonIcon"
                         />
@@ -33,7 +39,7 @@ const DownloadApp = () => {
                     </a>
                     
                     <a 
-                        href="#" 
+                        href="#"
                         className="button android"
                         onClick={(e) => {
                             e.preventDefault();
@@ -41,7 +47,7 @@ const DownloadApp = () => {
                         }}
                     >
                         <img 
-                            src="https://images.gringo.co.il/texts/707/mainimage/900x500_abz8bwawkoh8cbx6qvn2.jpg"
+                            src={androidImg} 
                             alt="Android Logo" 
                             className="buttonIcon"
                         />

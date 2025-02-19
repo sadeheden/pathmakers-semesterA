@@ -57,13 +57,13 @@ body {
 
 
 .button:hover {
-    background-color: #13394c; /* Darker blue on hover */
+    background-color: #4993b9; /* Darker blue on hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 .ios, .android {
-    background-color: #004e75; /* Both buttons blue */
+    background-color: #4298c2; /* Both buttons blue */
 }
 
 /* 🎨 Button Icons */
