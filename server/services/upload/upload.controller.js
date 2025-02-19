@@ -1,7 +1,11 @@
 import { v2 as cloudinary } from 'cloudinary';
 
+console.log("✅ Loading Cloudinary ENV Variables:", {
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET ? "Exists ✅" : "❌ MISSING"
+});
+
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
 });
@@ -16,16 +20,21 @@ export async function uploadToCloudinary(req, res) {
             return res.status(400).json({ error: "No file uploaded" });
         }
 
-        // Check if Cloudinary credentials are set
+        console.log("📂 File Details:", {
+            originalname: req.file.originalname,
+            mimetype: req.file.mimetype,
+            size: req.file.size
+        });
+
         console.log("✅ Cloudinary Credentials:", {
             cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
             api_key: process.env.CLOUDINARY_API_KEY,
-            api_secret: process.env.CLOUDINARY_SECRET
+            api_secret: process.env.CLOUDINARY_SECRET ? "Exists ✅" : "❌ MISSING"
         });
 
         // Upload to Cloudinary
         cloudinary.uploader.upload_stream(
-            { folder: "user_profiles" },
+            { folder: "user_profiles", resource_type: "auto" },
             (error, result) => {
                 if (error) {
                     console.error("🚨 Cloudinary Upload Error:", error);
@@ -36,8 +45,9 @@ export async function uploadToCloudinary(req, res) {
                 res.status(200).json({ success: true, url: result.secure_url });
             }
         ).end(req.file.buffer);
+
     } catch (error) {
         console.error("🚨 Server Error:", error);
-        res.status(500).json({ error: "Failed to upload image" });
+        res.status(500).json({ error: "Failed to upload image", details: error.message });
     }
 }
