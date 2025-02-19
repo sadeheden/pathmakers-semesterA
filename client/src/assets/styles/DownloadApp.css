@@ -45,8 +45,8 @@ body {
     line-height: 1.5;
 }
 
-/* 📌 Buttons Container */
-.buttons {
+
+.buttonsD {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -54,8 +54,8 @@ body {
     align-items: center;
 }
 
-/* 🎨 Buttons */
-.button {
+
+.buttonsD {
     display: flex;
     align-items: center;
 
