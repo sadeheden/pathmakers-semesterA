@@ -176,6 +176,30 @@
   .profile-popup {
       right: -30px;
   }
+  @media (max-width: 768px) {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+  
+    .profile-section {
+      order: 2; /* Ensures it's after the logo and navbar */
+      margin-left: auto; /* Pushes it to the right */
+      margin-right: 10px; /* Adds spacing before the edge */
+    }
+  
+    .profile-image {
+      width: 34px; /* Adjust size for mobile */
+      height: 34px;
+    }
+  
+    .hamburger {
+      order: 3; /* Ensures it's always to the right */
+      margin-left: 10px;
+    }
+  }
   
 }
 
