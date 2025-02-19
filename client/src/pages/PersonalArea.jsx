@@ -58,7 +58,7 @@ const PersonalArea = () => {
 
     return (
         <div>
-            <h1 className="page-title">Welcome to Your Personal Area</h1>
+            <h1 className="page-title">Personal Area</h1>
 
             {/* Tab Navigation */}
             <div className="tab-buttons">
