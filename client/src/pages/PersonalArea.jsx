@@ -37,8 +37,6 @@ const PersonalArea = () => {
         navigate("/login"); // Redirect to login
     };
     
-    
-    
     return (
         <div>
             {/* Main Title */}
