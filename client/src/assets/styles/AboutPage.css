@@ -25,7 +25,7 @@ h1 {
     position: relative;
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--heading-color); /* Now all h1 elements are black */
+   
 }
 
 /* Underline Effect for h1 */
@@ -34,7 +34,6 @@ h1::after {
     display: block;
     width: 150px;
     height: 4px;
-    background: var(--line-color);
     margin: 10px auto 0;
     border-radius: 2px;
 }

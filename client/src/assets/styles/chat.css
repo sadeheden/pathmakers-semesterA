@@ -38,9 +38,9 @@ h1 {
 h1::after {
   content: '';
   display: block;
-  width: 120px;
-  height: 4px;
-  background: var(--accent-color);
+  width: 150px;
+  height: 3px;
+  background: var(--primary-bg, #ffffff);
   margin: 10px auto 0;
   border-radius: 2px;
 }
@@ -236,4 +236,4 @@ select:focus {
   .custom-btn {
       padding: 8px 18px;
   }
-} */
+} 
