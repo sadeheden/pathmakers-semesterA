@@ -3,6 +3,17 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'; 
 import passwordValidator from 'password-validator';
 
+
+const users = [
+    { username: "may", password: "1234" },
+    { username: "eden", password: "12345678" }
+];
+
+users.forEach(async (user) => {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    console.log(`"${user.username}" hashed password:`, hashedPassword);
+});
+
 const schema = new passwordValidator();
 schema
     .is().min(8)  // לפחות 8 תווים
@@ -60,10 +71,10 @@ export async function login(req, res) {
     const { username, password } = req.body;
 
     try {
-        console.log("🔹 Login request received:", { username, password });
+        console.log("📡 Login attempt received:", { username, password });
 
-        const users = await getUsers();
-        console.log("🔹 Users found:", users);
+        const users = await getUsers();  // ✅ Fetch all users
+        console.log("📡 Users loaded from DB:", users);
 
         const user = users.find(user => user.username === username);
         if (!user) {
@@ -71,11 +82,11 @@ export async function login(req, res) {
             return res.status(401).json({ error: "Invalid username or password" });
         }
 
-        console.log("🔹 User found:", user);
+        console.log("✅ User found:", user);
 
-        // Compare the password
+        // ✅ Compare password using bcrypt
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log("🔹 Password comparison result:", isPasswordValid);
+        console.log("🔑 Password comparison result:", isPasswordValid);
 
         if (!isPasswordValid) {
             console.log("❌ Password mismatch for user:", username);
@@ -84,14 +95,14 @@ export async function login(req, res) {
 
         console.log("✅ Password verified for user:", username);
 
-        // Generate JWT Token
+        // ✅ Generate JWT Token
         const token = jwt.sign(
-            { id: user.id, username: user.username }, 
-            process.env.JWT_SECRET_KEY, 
+            { id: user.id, username: user.username },
+            process.env.JWT_SECRET_KEY,
             { expiresIn: "24h" }
         );
 
-        console.log("✅ Token generated for user:", token);
+        console.log("✅ Token generated:", token);
 
         res.status(200).json({
             message: `Welcome ${user.username}!`,
@@ -104,6 +115,7 @@ export async function login(req, res) {
         res.status(500).json({ error: "Server error during login" });
     }
 }
+
 
 // **Get All Users**
 export async function getAllUsers(req, res) {

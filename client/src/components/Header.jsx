@@ -14,18 +14,17 @@ const Header = () => {
     // Fetch User session
     const fetchUser = async () => {
         const token = localStorage.getItem("token");
-        console.log("Token being sent:", token);
     
         if (!token) {
             console.warn("⚠️ No token found, skipping user fetch.");
-            return; // Skip fetching if token is not available
+            return; 
         }
     
         try {
             const res = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${token}`, // ✅ Ensure "Bearer" prefix
+                    "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
             });
@@ -34,16 +33,16 @@ const Header = () => {
                 const userData = await res.json();
                 setUser(userData);
             } else {
-                const errorData = await res.json();
-                console.error(`⚠️ Failed to fetch user: ${res.status}`, errorData);
+                console.error(`⚠️ Failed to fetch user: ${res.status}`);
                 setUser(null);
-                localStorage.removeItem("token"); // Clear invalid token
+                localStorage.removeItem("token");
             }
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
             setUser(null);
         }
     };
+    
     
     
 

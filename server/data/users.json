@@ -2,67 +2,67 @@
   {
     "id": 1,
     "username": "may",
-    "password": "1234",
+    "password": "$2b$10$3lIGlgUS/CS1D.Sqcxt7Res1Z6d5JpzLkJO35iJfnmvxDLW4my.z2",
     "Email": "mayhalaf@gmail.com"
   },
   {
     "id": 3,
     "username": "newuser",
-    "password": "securepassword",
+    "password": "$2b$10$RS7AMSAm5AFugjYGO7fWpeNUqv/G9L8OjMMEaasflsIA5lCtnjkb6",
     "email": "newuser@example.com"
   },
   {
     "id": 8,
     "username": "newuser",
-    "password": "securepassword",
+    "password": "$2b$10$pMM61Xi1vPvAEFiH92A7OOaj34GMEWNN5ezpvMGR3RZNL.a.i6kJO",
     "email": "newuser@example.com"
   },
   {
     "id": 1738234269312,
     "username": "eden",
     "email": "edenk@mail.com",
-    "password": "12345678"
+    "password": "$2b$10$C.jLfACLEXLxup/BohI8i.S44jmfvlTf0By7kHy0BfoqHqljjAfb."
   },
   {
     "id": 1738234436076,
     "username": "newuser",
     "email": "yon@gmail.com",
-    "password": "159159"
+    "password": "$2b$10$KhB3oRKVSs8qVq/K741LQuaXca1RO/SSgF4L3rxZHSEaZ9ima/V.."
   },
   {
     "id": 1738234542521,
     "username": "dg",
     "email": "sen@gmail.com",
-    "password": "55555555"
+    "password": "$2b$10$IRJ.Nb2knHmdU2I777vuPeZUH.HK18cWsmXkoEvkla16k96kApj7u"
   },
   {
     "id": 1738235857935,
     "username": "ytyt",
     "email": "en@gmail.com",
-    "password": "159159"
+    "password": "$2b$10$FfHYmhe/lvlxjVgcNlOLPuNaMwrOWyp02LG3W4ZgQ0a87ZxGq93UC"
   },
   {
     "id": 1738236823242,
     "username": "may5454",
     "email": "yonttt@gmail.com",
-    "password": "15151515"
+    "password": "$2b$10$uNex9r7IsLpKLLzYY3553O3pGey2e1YMPTPJYuDgnYqAWXE6.9u12"
   },
   {
     "id": 1738237621432,
     "username": "hoey",
     "email": "sesrsrgsrgn@gmail.com",
-    "password": "123456"
+    "password": "$2b$10$DnsNCYpibSxkr.oGbWZKhu6pHnlu0w5UIsWngXxJ/L.NNb6wKan4e"
   },
   {
     "id": 1738240954004,
     "username": "maytgt",
     "email": "sgsrgn@gmail.com",
-    "password": "0000000"
+    "password": "$2b$10$tlq/uZbWZtHZmohv4yRMg./SYvUy1Y/EDf6Fz3z4XMGR4NFpwMi8."
   },
   {
     "id": 1738322730362,
     "username": "dguj",
     "email": "sahen@gmail.com",
-    "password": "123456"
+    "password": "$2b$10$bxqxqRmpyTWdJIN6VAYaGeCd8AQQK2waw2r93vA4Xka4mYEmyz.S."
   }
 ]

@@ -56,61 +56,34 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        const validationErrors = validateForm();
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-            return;
-        }
+        setErrors({});
     
         try {
-            const signupResponse = await fetch("http://localhost:4000/users", {
+            const url = "http://localhost:4000/register"; // ✅ Corrected URL
+    
+            const response = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    id: Date.now(),
                     username: formData.username,
                     email: formData.email,
                     password: formData.password
                 })
             });
     
-            const signupData = await signupResponse.json();
-    
-            if (signupResponse.ok && signupData.user) {
-                console.log("Signup successful:", signupData);
-    
-                // Automatically log in the user
-                const loginResponse = await fetch("http://localhost:4000/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        username: formData.username,
-                        password: formData.password
-                    })
-                });
-    
-                const loginData = await loginResponse.json();
-    
-                if (loginResponse.ok && loginData.user) {
-                    console.log("Login successful:", loginData);
-    
-                    // Store user session in localStorage
-                    localStorage.setItem("user", JSON.stringify(loginData.user));
-    
-                    // Redirect to /video after signup
-                    navigate("/main");
-                } else {
-                    setErrors({ submit: loginData.error || "Login failed after signup. Try logging in manually." });
-                }
-            } else {
-                setErrors({ submit: signupData.error || "Signup failed. Try again." });
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
             }
+    
+            const data = await response.json();
+            console.log("✅ Signup successful:", data);
+            navigate("/login");
         } catch (error) {
-            console.error("Signup/Login error:", error);
+            console.error("❌ Signup error:", error);
             setErrors({ submit: "An error occurred. Please try again." });
         }
     };
+    
     
 
 
