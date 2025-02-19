@@ -15,7 +15,7 @@ const DownloadApp = () => {
                     Stay connected and enjoy exclusive features on the go!
                 </p>
                 
-                <div className="buttons">
+                <div className="buttonsD">
                     <a 
                         href="#" 
                         className="button ios"
