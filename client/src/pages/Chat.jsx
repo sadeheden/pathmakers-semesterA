@@ -59,11 +59,13 @@ const TravelPlannerApp = () => {
           throw new Error(`Failed to fetch attractions for ${city}, status: ${response.status}`);
         }
         const data = await response.json();
+        console.log("Fetched attractions:", data); // <-- Debugging log
         setLoadedAttractions(data);
       } catch (error) {
         console.error("Error fetching attractions:", error);
       }
     }
+    
     
 
     async function fetchData() {
@@ -76,7 +78,7 @@ const TravelPlannerApp = () => {
     }
 
     fetchData();
-  }, [userResponses]);
+  }, [userResponses["What is your destination city?"]]);
 
   const steps = [
     {
