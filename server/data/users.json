@@ -64,5 +64,19 @@
     "username": "dguj",
     "email": "sahen@gmail.com",
     "password": "$2b$10$bxqxqRmpyTWdJIN6VAYaGeCd8AQQK2waw2r93vA4Xka4mYEmyz.S."
+  },
+  {
+    "id": "def25a83-b0de-4a40-9b96-098a2857ca2e",
+    "username": "gfL11555555",
+    "email": "dgzsfes@hisg.com",
+    "password": "$2b$10$7bjwowP3EYs7HVB0hDC50eeU61v/PSAGJvp1ZnBuC07/DIpPhEI4S",
+    "profileImage": null
+  },
+  {
+    "id": "d25a0a94-8ed9-4adc-9de3-1dfed6a85287",
+    "username": "gfL155",
+    "email": "dgzsf@hisg.com",
+    "password": "$2b$10$tcgE7YlifLlvbpR4B4fOO.i7b.3NzirtnM5cCYyEtFsq29.BK5kyC",
+    "profileImage": null
   }
 ]
