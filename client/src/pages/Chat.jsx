@@ -53,17 +53,22 @@ const TravelPlannerApp = () => {
     async function fetchAttractions(city) {
       if (!city) return;
       try {
-        const response = await fetch(`http://localhost:4000/api/attractions/${city}`);
+        console.log(`Fetching attractions for: ${city}`);
+        const response = await fetch(`http://localhost:4000/api/attractions/${city.toLowerCase()}`);
+        
         if (!response.ok) {
           throw new Error(`Failed to fetch attractions for ${city}, status: ${response.status}`);
         }
+    
         const data = await response.json();
-        console.log("Fetched attractions:", data); // <-- Debugging log
-        setLoadedAttractions(data);
+        console.log("Fetched attractions data:", data); // Debugging
+    
+        setLoadedAttractions(data.attractions || []);
       } catch (error) {
         console.error("Error fetching attractions:", error);
       }
     }
+    
     
     
 
@@ -127,10 +132,8 @@ const TravelPlannerApp = () => {
         {
           prompt: "Select attractions to visit",
           options: loadedAttractions.length
-            ? loadedAttractions
-                .find((attraction) => attraction.city === userResponses["What is your destination city?"])
-                ?.attractions || []
-            : ["Loading..."],
+          ? loadedAttractions // Directly use the array
+          : ["No attractions available"],
         },
         { prompt: "Budget for daily activities?", type: "text" },
         { prompt: "Interest areas?", options: ["History", "Food", "Nightlife", "Nature", "Culture"] },
