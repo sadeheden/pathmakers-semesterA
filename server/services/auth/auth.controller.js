@@ -50,7 +50,7 @@ export async function register(req, res) {
         // ✅ Generate JWT token immediately after registration
         const token = jwt.sign(
             { id: newUser.id, username: newUser.username },
-            process.env.JWT_SECRET_KEY,
+            process.env2.JWT_SECRET_KEY,
             { expiresIn: "24h" }
         );
 
@@ -87,7 +87,7 @@ export async function login(req, res) {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET_KEY, { expiresIn: "24h" });
+        const token = jwt.sign({ id: user.id, username: user.username }, process.env2.JWT_SECRET_KEY, { expiresIn: "24h" });
 
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {
@@ -104,7 +104,7 @@ export async function getCurrentUser(req, res) {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, process.env2.JWT_SECRET_KEY);
         res.json(decoded);
     } catch (error) {
         res.status(401).json({ message: "Invalid token" });
