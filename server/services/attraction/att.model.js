@@ -27,17 +27,15 @@ const readJsonFile = async (filePath) => {
 
 export const getAttractionsByCity = async (city) => {
   const attractionsData = await readJsonFile(FILE_PATH);
-
-  // סינון אטרקציות לפי העיר
   const cityLowerCase = city.toLowerCase();
 
-  const cityAttractions = attractionsData.attractions.filter(
+  const cityAttractionEntry = attractionsData.attractions.find(
     (entry) => entry.city.toLowerCase() === cityLowerCase
   );
 
-  if (!cityAttractions || cityAttractions.length === 0) {
+  if (!cityAttractionEntry) {
     return [];
   }
 
-  return cityAttractions.map(attraction => attraction.attractions).flat();
+  return cityAttractionEntry.attractions; // Return the direct array of attractions
 };
