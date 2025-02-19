@@ -99,5 +99,19 @@
     "email": "dg5z@hisg.com",
     "password": "$2b$10$UBBuO9lnjMwswVy0ryBGKul7jmEYz7HbWgHyqyvo5jM7SjRkNYprO",
     "profileImage": null
+  },
+  {
+    "id": "c5847c4c-8b3e-409d-993e-0e7cf56532ed",
+    "username": "yuyuhu",
+    "email": "yuyuhu@fohi.com",
+    "password": "$2b$10$6x6AXNydcMe4yh3iKok33eJEs7uvx5c5J2dKxTAkRmc2rOPrOOmWu",
+    "profileImage": "https://res.cloudinary.com/shaykos/image/upload/v1700000000/default_profile.jpg"
+  },
+  {
+    "id": "4667ca65-6a39-40c2-b9a1-ee76c4f3ef5c",
+    "username": "yuyu",
+    "email": "uyuhu@fohi.com",
+    "password": "$2b$10$Lif6/xeZlYQcoYmNHBjkVuTZjWSdCLOUe9j9WseE8r6qvF4yOm7Km",
+    "profileImage": "https://res.cloudinary.com/shaykos/image/upload/v1700000000/default_profile.jpg"
   }
 ]
