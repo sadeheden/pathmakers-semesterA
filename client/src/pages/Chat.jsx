@@ -50,7 +50,6 @@ const TravelPlannerApp = () => {
         console.error("Error fetching hotels:", error);
       }
     }
-
     async function fetchAttractions(city) {
       if (!city) return;
       try {
