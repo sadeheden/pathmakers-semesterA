@@ -1,11 +1,13 @@
-import { Router } from 'express';
-import { upload } from '../../globals.js';
-import { uploadToCloudinary } from './upload.controller.js';
+import express from "express";
+import multer from "multer";
+import { uploadToCloudinary } from "./upload.controller.js";
 
-const uploadRouter = Router();
+const router = express.Router();
 
-uploadRouter
-    .post('/single', upload.single('file'), uploadToCloudinary)
-    //.post('/multiple', upload.array('files'), uploadToCloudinary)
+// ✅ Use memory storage (No need to save files locally)
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-export default uploadRouter;
+router.post("/single", upload.single("file"), uploadToCloudinary);
+
+export default router;

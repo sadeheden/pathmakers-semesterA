@@ -6,7 +6,7 @@ import { __dirname } from '../../globals.js';
 function setCloud() {
     // מגדירים את הענן
     cloudinary.config({
-        cloud_name: 'shaykos',
+        cloud_name: 'dnnmhrsja',
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_SECRET
     });
