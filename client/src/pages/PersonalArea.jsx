@@ -102,7 +102,7 @@ const PersonalArea = () => {
                             <p>Get the latest updates and travel deals straight to your inbox!</p>
                         </div>
                         <input type="email" placeholder="Enter your email" className="newsletter-input" />
-                        <button className="button">Subscribe</button>
+                        <button className="buttonP">Subscribe</button>
                     </>
                 )}
             </div>
