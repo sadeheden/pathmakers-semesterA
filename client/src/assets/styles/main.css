@@ -69,21 +69,18 @@
   
   .main-btn{
     padding: 20px 30px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
-    width: 80%;
-    max-width: 300px;
+    width: 45%;
     text-align: center;
     border-radius: 25px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-  }
-
-  .main-Chat{
     background-color: #bf281c;
     color: white;
   }
+
   
   .main-Chat:hover {
     background-color: #a14545;
