@@ -2,6 +2,7 @@ import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
+import bcrypt from "bcrypt";
 
 
 // Use process.cwd() to get the current working directory
@@ -33,16 +34,6 @@ export const saveUsers = async (users) => {
     }
 };
 
-// Function to find a user by username or email
-export const findUserByUsernameOrEmail = async (username, email) => {
-    try {
-        let users = await getUsers();
-        return users.find(user => user.username === username || user.email === email);
-    } catch (error) {
-        console.error('Error finding user:', error);
-        throw new Error('Error searching for user');
-    }
-};
 
 
 export const addUser = async (username, email, password, profileImage = null) => {
@@ -50,13 +41,16 @@ export const addUser = async (username, email, password, profileImage = null) =>
         let users = await getUsers();
         if (await findUserByUsernameOrEmail(username, email)) return false;
 
-        const newUser = { id: uuidv4(), username, email, password, profileImage }; // ✅ Generate unique ID
+        // ✅ Hash password before storing
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = { id: uuidv4(), username, email, password: hashedPassword, profileImage };
         users.push(newUser);
         await saveUsers(users);
-        console.log('New user added:', newUser);
+        console.log('✅ New user added:', newUser);
         return newUser;
     } catch (error) {
-        console.error('Error adding new user:', error);
+        console.error('❌ Error adding new user:', error);
         throw new Error('Error adding user');
     }
 };
@@ -106,3 +100,39 @@ export const getCurrentUser = (req, res) => {
     }
 };
 
+const hashExistingPasswords = async () => {
+    try {
+        let users = await getUsers();
+
+        for (let user of users) {
+            if (!user.password.startsWith("$2b$")) { // ✅ Skip already hashed passwords
+                user.password = await bcrypt.hash(user.password, 10);
+                console.log(`🔑 Password hashed for ${user.username}`);
+            }
+        }
+
+        await saveUsers(users);
+        console.log("✅ All passwords hashed successfully!");
+    } catch (error) {
+        console.error("❌ Error hashing passwords:", error);
+    }
+};
+
+hashExistingPasswords();
+export const findUserByUsernameOrEmail = async (username, email) => {
+    try {
+        let users = await getUsers();
+        console.log("🔍 Searching for:", { username, email });
+
+        const user = users.find(user =>
+            user.username.toLowerCase() === username.toLowerCase() ||
+            user.email.toLowerCase() === email.toLowerCase()
+        );
+
+        if (!user) console.log("❌ User not found:", username);
+        return user;
+    } catch (error) {
+        console.error("❌ Error finding user:", error);
+        throw new Error("Error searching for user");
+    }
+};
