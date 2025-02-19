@@ -50,32 +50,26 @@ const TravelPlannerApp = () => {
         console.error("Error fetching hotels:", error);
       }
     }
+
     async function fetchAttractions(city) {
       if (!city) return;
       try {
-        console.log(`Fetching attractions for: ${city}`);
         const response = await fetch(`http://localhost:4000/api/attractions/${city.toLowerCase()}`);
-        
         if (!response.ok) {
           throw new Error(`Failed to fetch attractions for ${city}, status: ${response.status}`);
         }
-    
         const data = await response.json();
-        console.log("Fetched attractions data:", data); // Debugging
-    
         setLoadedAttractions(data.attractions || []);
       } catch (error) {
         console.error("Error fetching attractions:", error);
       }
     }
-    
-    
-    
 
     async function fetchData() {
       await Promise.all([
         fetchCities(),
-        userResponses["What is your destination city?"] && fetchFlights(userResponses["What is your destination city?"]),
+        userResponses["What is your destination city?"] &&
+          fetchFlights(userResponses["What is your destination city?"]),
         userResponses["What is your destination city?"] && fetchHotels(userResponses["What is your destination city?"]),
         userResponses["What is your destination city?"] && fetchAttractions(userResponses["What is your destination city?"]),
       ]);
@@ -83,6 +77,40 @@ const TravelPlannerApp = () => {
 
     fetchData();
   }, [userResponses["What is your destination city?"]]);
+
+  const calculateTotalPrice = () => {
+    let total = 0;
+
+    // חישוב מחיר טיסה
+    const selectedFlight = userResponses["Select your flight"];
+    if (selectedFlight) {
+      const flightPrice = parseInt(selectedFlight.split("$")[1]?.split(" ")[0]);
+      total += flightPrice || 0;
+    }
+
+    // חישוב מחיר מלון
+    const selectedHotel = userResponses["Select your hotel"];
+    if (selectedHotel) {
+      const hotelPrice = parseInt(selectedHotel.split("$")[1]?.split("/")[0]);
+      total += hotelPrice || 0;
+    }
+
+    // חישוב עלות אטרקציות
+    const selectedAttractions = userResponses["Select attractions to visit"];
+    if (selectedAttractions) {
+      const attractionPrice = 20 * selectedAttractions.split(",").length; // דוגמה למחיר אטרקציות
+      total += attractionPrice || 0;
+    }
+
+    // חישוב תחבורה
+    const selectedTransportation = userResponses["Select your mode of transportation"];
+    if (selectedTransportation) {
+      const transportationPrice = selectedTransportation === "Car" ? 50 : 10; // דוגמה למחיר תחבורה
+      total += transportationPrice || 0;
+    }
+
+    return total;
+  };
 
   const steps = [
     {
@@ -101,11 +129,12 @@ const TravelPlannerApp = () => {
         { prompt: "Travel dates (return)?", type: "date" },
         {
           prompt: "Select your flight",
-          options: loadedFlights.length
-            ? loadedFlights
-                .find((flight) => flight.city === userResponses["What is your destination city?"])
-                ?.airlines.map((airline) => `${airline.name} - $${airline.price} (${airline.duration})`) || []
-            : ["Loading..."],
+          options:
+            loadedFlights.length
+              ? loadedFlights
+                  .find((flight) => flight.city === userResponses["What is your destination city?"])
+                  ?.airlines.map((airline) => `${airline.name} - $${airline.price} (${airline.duration})`) || []
+              : ["Loading..."],
         },
         { prompt: "Class preference", options: ["Economy", "Business", "First"] },
       ],
@@ -116,9 +145,10 @@ const TravelPlannerApp = () => {
       questions: [
         {
           prompt: "Select your hotel",
-          options: loadedHotels.length
-            ? loadedHotels.map((hotel) => `${hotel.name} - $${hotel.price}/night`)
-            : ["No hotels available"],
+          options:
+            loadedHotels.length
+              ? loadedHotels.map((hotel) => `${hotel.name} - $${hotel.price}/night`)
+              : ["No hotels available"],
         },
         { prompt: "Budget range per night?", type: "text" },
         { prompt: "Accessibility requirements?", options: ["None", "Wheelchair Access", "Ground Floor", "Special Assistance"] },
@@ -131,9 +161,7 @@ const TravelPlannerApp = () => {
       questions: [
         {
           prompt: "Select attractions to visit",
-          options: loadedAttractions.length
-          ? loadedAttractions // Directly use the array
-          : ["No attractions available"],
+          options: loadedAttractions.length ? loadedAttractions : ["No attractions available"],
         },
         { prompt: "Budget for daily activities?", type: "text" },
         { prompt: "Interest areas?", options: ["History", "Food", "Nightlife", "Nature", "Culture"] },
@@ -145,10 +173,7 @@ const TravelPlannerApp = () => {
       label: "Payment",
       icon: CreditCard,
       questions: [
-        {
-          prompt: "Select payment method",
-          options: ["Credit Card", "PayPal", "Bank Transfer", "Crypto"],
-        },
+        { prompt: "Select payment method", options: ["Credit Card", "PayPal", "Bank Transfer", "Crypto"] },
         { prompt: "Do you have a promo code?", type: "text" },
       ],
     },
@@ -156,10 +181,7 @@ const TravelPlannerApp = () => {
       label: "Transportation",
       icon: Car,
       questions: [
-        {
-          prompt: "Select your mode of transportation",
-          options: ["Car", "Public Transport", "Bike", "Walk"],
-        },
+        { prompt: "Select your mode of transportation", options: ["Car", "Public Transport", "Bike", "Walk"] },
         { prompt: "Do you need an airport transfer?", options: ["Yes", "No"] },
       ],
     },
@@ -174,6 +196,7 @@ const TravelPlannerApp = () => {
         { prompt: "Attractions", value: userResponses["Select attractions to visit"] },
         { prompt: "Transportation", value: userResponses["Select your mode of transportation"] },
         { prompt: "Payment method", value: userResponses["Select payment method"] },
+        { prompt: "Total Price", value: `$${calculateTotalPrice()}` },
       ],
     },
   ];
@@ -186,6 +209,32 @@ const TravelPlannerApp = () => {
 
   const renderStepContent = () => {
     const step = steps[currentStep];
+
+    if (step.label === "Trip Summary") {
+      const totalPrice = calculateTotalPrice();
+      return (
+        <div className="summary-step">
+          <h2>{step.label}</h2>
+          <ul>
+            {step.questions.map((q, index) => (
+              <li key={index}>
+                <strong>{q.prompt}:</strong> {userResponses[q.prompt] || q.value || "Not provided"}
+              </li>
+            ))}
+            <li>
+              <strong>Total Price:</strong> ${totalPrice}
+            </li>
+          </ul>
+          <button
+            onClick={() => setCurrentStep((prev) => prev + 1)}
+            disabled={currentStep === steps.length - 1}
+            className="custom-btn"
+          >
+            Finish <ChevronRight />
+          </button>
+        </div>
+      );
+    }
 
     return (
       <div className="step">
@@ -201,36 +250,45 @@ const TravelPlannerApp = () => {
                 <input
                   type={q.type}
                   value={userResponses[q.prompt] || ""}
-                  min={q.prompt === "Travel dates (return)?" ? userResponses["Travel dates (departure)?"] : undefined}
-                  onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
+                  onChange={(e) =>
+                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value })
+                  }
                 />
               ) : (
                 <select
                   value={userResponses[q.prompt] || ""}
-                  onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
+                  onChange={(e) =>
+                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value })
+                  }
                 >
                   <option value="" disabled>Select an option</option>
-                  {q.options && q.options.length > 0 ? (
+                  {q.options &&
+                    q.options.length > 0 &&
                     q.options.map((option, i) => (
                       <option key={i} value={option}>
                         {option}
                       </option>
-                    ))
-                  ) : (
-                    <option value="" disabled>No options available</option>
-                  )}
+                    ))}
                 </select>
               )}
             </div>
           ))}
         </div>
-        <button
-          onClick={() => setCurrentStep((prev) => prev + 1)}
-          disabled={currentStep === steps.length - 1 || !userResponses[steps[currentStep].questions[0]?.prompt]}
-        >
-          Next <ChevronRight />
-        </button>
-      </div>
+          <button
+            onClick={() => setCurrentStep((prev) => prev - 1)}
+            disabled={currentStep === 0}
+            className="custom-btn1"
+          >
+            Back
+          </button>
+          <button
+            onClick={() => setCurrentStep((prev) => prev + 1)}
+            disabled={currentStep === steps.length - 1 || !userResponses[steps[currentStep].questions[0]?.prompt]}
+            className="custom-btn2"
+          >
+            Next <ChevronRight />
+          </button>
+        </div>
     );
   };
 
@@ -251,6 +309,10 @@ export default TravelPlannerApp;
 
 
 
+
+
+
+
 // import React, { useState, useEffect } from "react";
 // import { ChevronRight, MapPin, Plane, Hotel, Compass, Car, CreditCard, CheckCircle } from "lucide-react";
 // import "../assets/styles/chat.css";
@@ -262,8 +324,6 @@ export default TravelPlannerApp;
 //   const [loadedFlights, setLoadedFlights] = useState([]);
 //   const [loadedHotels, setLoadedHotels] = useState([]);
 //   const [loadedAttractions, setLoadedAttractions] = useState([]);
-//   const [loadedTransportation, setLoadedTransportation] = useState([]);
-//   const [loadedPaymentOptions, setLoadedPaymentOptions] = useState([]);
 
 //   useEffect(() => {
 //     async function fetchCities() {
@@ -278,7 +338,6 @@ export default TravelPlannerApp;
 //         console.error("Error fetching cities:", error);
 //       }
 //     }
-  
 
 //     async function fetchFlights(city) {
 //       try {
@@ -293,74 +352,40 @@ export default TravelPlannerApp;
 //       }
 //     }
 
-    
-//   async function fetchHotels(city) {
-//     if (!city) return; // ✅ Prevents fetching if no city is selected
-//     try {
-//         console.log(`Fetching hotels for city: ${city}`); // Debugging log
+//     async function fetchHotels(city) {
+//       if (!city) return;
+//       try {
 //         const response = await fetch(`http://localhost:4000/api/hotels/${city}`);
 //         if (!response.ok) {
-//             throw new Error(`Failed to fetch hotels, status: ${response.status}`);
+//           throw new Error(`Failed to fetch hotels, status: ${response.status}`);
 //         }
 //         const data = await response.json();
-//         console.log("Fetched hotels:", data); // ✅ Logs fetched data
 //         setLoadedHotels(data);
-//     } catch (error) {
+//       } catch (error) {
 //         console.error("Error fetching hotels:", error);
-//     }
-// }
-// async function fetchData() {
-//   await Promise.all([
-//       fetchCities(),
-//       userResponses["What is your destination city?"] ? fetchFlights(userResponses["What is your destination city?"]) : null,
-//       userResponses["What is your destination city?"] ? fetchHotels(userResponses["What is your destination city?"]) : null,
-//       userResponses["What is your destination city?"] ? fetchAttractions(userResponses["What is your destination city?"]) : null,
-//       fetchTransportation(),
-//       fetchPaymentOptions(),
-//   ]);
-// }
-
-
-// async function fetchAttractions(city) {
-//   if (!city) return; // Early return if no city selected
-  
-//   try {
-//     const response = await fetch(`http://localhost:4000/api/attractions/${city}`);
-//     if (!response.ok) {
-//       throw new Error(`Failed to fetch attractions, status: ${response.status}`);
-//     }
-//     const data = await response.json();
-//     setLoadedAttractions(data);
-//   } catch (error) {
-//     console.error("Error fetching attractions:", error);
-//   }
-// }
-
-//     async function fetchTransportation() {
-//       try {
-//         const response = await fetch("http://localhost:4000/transportation");
-//         if (!response.ok) {
-//           throw new Error(`Failed to fetch transportation, status: ${response.status}`);
-//         }
-//         const data = await response.json();
-//         setLoadedTransportation(data);
-//       } catch (error) {
-//         console.error("Error fetching transportation:", error);
 //       }
 //     }
-
-//     async function fetchPaymentOptions() {
+//     async function fetchAttractions(city) {
+//       if (!city) return;
 //       try {
-//         const response = await fetch("http://localhost:4000/payment-options");
+//         console.log(`Fetching attractions for: ${city}`);
+//         const response = await fetch(`http://localhost:4000/api/attractions/${city.toLowerCase()}`);
+        
 //         if (!response.ok) {
-//           throw new Error(`Failed to fetch payment options, status: ${response.status}`);
+//           throw new Error(`Failed to fetch attractions for ${city}, status: ${response.status}`);
 //         }
+    
 //         const data = await response.json();
-//         setLoadedPaymentOptions(data);
+//         console.log("Fetched attractions data:", data); // Debugging
+    
+//         setLoadedAttractions(data.attractions || []);
 //       } catch (error) {
-//         console.error("Error fetching payment options:", error);
+//         console.error("Error fetching attractions:", error);
 //       }
 //     }
+    
+    
+    
 
 //     async function fetchData() {
 //       await Promise.all([
@@ -368,24 +393,19 @@ export default TravelPlannerApp;
 //         userResponses["What is your destination city?"] && fetchFlights(userResponses["What is your destination city?"]),
 //         userResponses["What is your destination city?"] && fetchHotels(userResponses["What is your destination city?"]),
 //         userResponses["What is your destination city?"] && fetchAttractions(userResponses["What is your destination city?"]),
-//         fetchTransportation(),
-//         fetchPaymentOptions(),
 //       ]);
 //     }
 
 //     fetchData();
-//   }, [userResponses]);
+//   }, [userResponses["What is your destination city?"]]);
 
 //   const steps = [
 //     {
 //       label: "Destination",
 //       icon: MapPin,
 //       questions: [
-//         { prompt: "What is your departure city?", options: loadedCities.length ? loadedCities : ["Loading..."], },
-//         {
-//           prompt: "What is your destination city?",
-//           options: loadedCities.length ? loadedCities : ["Loading..."],
-//         },
+//         { prompt: "What is your departure city?", options: loadedCities.length ? loadedCities : ["Loading..."] },
+//         { prompt: "What is your destination city?", options: loadedCities.length ? loadedCities : ["Loading..."] },
 //       ],
 //     },
 //     {
@@ -413,14 +433,13 @@ export default TravelPlannerApp;
 //           prompt: "Select your hotel",
 //           options: loadedHotels.length
 //             ? loadedHotels.map((hotel) => `${hotel.name} - $${hotel.price}/night`)
-//             : ["No hotels available"], // ✅ Changed from "Loading..."
+//             : ["No hotels available"],
 //         },
 //         { prompt: "Budget range per night?", type: "text" },
 //         { prompt: "Accessibility requirements?", options: ["None", "Wheelchair Access", "Ground Floor", "Special Assistance"] },
 //         { prompt: "Pet-friendly options?", options: ["Yes", "No"] },
 //       ],
-//     }
-// ,    
+//     },
 //     {
 //       label: "Attractions",
 //       icon: Compass,
@@ -428,10 +447,8 @@ export default TravelPlannerApp;
 //         {
 //           prompt: "Select attractions to visit",
 //           options: loadedAttractions.length
-//             ? loadedAttractions
-//                 .find((attraction) => attraction.city === userResponses["What is your destination city?"])
-//                 ?.attractions || []
-//             : ["Loading..."],
+//           ? loadedAttractions // Directly use the array
+//           : ["No attractions available"],
 //         },
 //         { prompt: "Budget for daily activities?", type: "text" },
 //         { prompt: "Interest areas?", options: ["History", "Food", "Nightlife", "Nature", "Culture"] },
@@ -440,29 +457,25 @@ export default TravelPlannerApp;
 //       ],
 //     },
 //     {
-//       label: "Transportation",
-//       icon: Car,
-//       questions: [
-//         {
-//           prompt: "Select your mode of transportation",
-//           options: loadedTransportation.length
-//             ? loadedTransportation.map((transport) => `${transport.type} - $${transport.price}`)
-//             : ["Loading..."],
-//         },
-//         { prompt: "Do you need airport transfer?", options: ["Yes", "No"] },
-//       ],
-//     },
-//     {
 //       label: "Payment",
 //       icon: CreditCard,
 //       questions: [
 //         {
 //           prompt: "Select payment method",
-//           options: loadedPaymentOptions.length
-//             ? loadedPaymentOptions.map((payment) => payment.method)
-//             : ["Loading..."],
+//           options: ["Credit Card", "PayPal", "Bank Transfer", "Crypto"],
 //         },
 //         { prompt: "Do you have a promo code?", type: "text" },
+//       ],
+//     },
+//     {
+//       label: "Transportation",
+//       icon: Car,
+//       questions: [
+//         {
+//           prompt: "Select your mode of transportation",
+//           options: ["Car", "Public Transport", "Bike", "Walk"],
+//         },
+//         { prompt: "Do you need an airport transfer?", options: ["Yes", "No"] },
 //       ],
 //     },
 //     {
@@ -500,24 +513,27 @@ export default TravelPlannerApp;
 //             <div key={index}>
 //               <label>{q.prompt}</label>
 //               {q.type === "text" || q.type === "date" ? (
-//          <input
-//          type={q.type}
-//          value={userResponses[q.prompt] || ""}
-//          min={q.prompt === "Travel dates (return)?" ? userResponses["Travel dates (departure)?"] : undefined}
-//          onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
-//        />
-       
+//                 <input
+//                   type={q.type}
+//                   value={userResponses[q.prompt] || ""}
+//                   min={q.prompt === "Travel dates (return)?" ? userResponses["Travel dates (departure)?"] : undefined}
+//                   onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
+//                 />
 //               ) : (
 //                 <select
 //                   value={userResponses[q.prompt] || ""}
 //                   onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
 //                 >
 //                   <option value="" disabled>Select an option</option>
-//                   {q.options.map((option, i) => (
-//                     <option key={i} value={option}>
-//                       {option}
-//                     </option>
-//                   ))}
+//                   {q.options && q.options.length > 0 ? (
+//                     q.options.map((option, i) => (
+//                       <option key={i} value={option}>
+//                         {option}
+//                       </option>
+//                     ))
+//                   ) : (
+//                     <option value="" disabled>No options available</option>
+//                   )}
 //                 </select>
 //               )}
 //             </div>
@@ -545,3 +561,5 @@ export default TravelPlannerApp;
 // };
 
 // export default TravelPlannerApp;
+
+

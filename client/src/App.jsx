@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/personal-area" element={<PersonalArea />} />
+          <Route path="/personalaArea" element={<PersonalArea />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/downloadApp" element={<DownloadApp />} />
           <Route path="/video" element={<Video />} />
