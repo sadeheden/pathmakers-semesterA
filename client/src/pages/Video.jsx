@@ -7,7 +7,7 @@ const VideoExplanation = () => {
     const navigate = useNavigate();
 
     const handleContinue = () => {
-        navigate('/next-page');
+        navigate('/chat');
     };
 
     return (
