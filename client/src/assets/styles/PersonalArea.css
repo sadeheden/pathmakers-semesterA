@@ -67,7 +67,7 @@
 }
 
 /* 🖱️ Light Blue Buttons */
-.buttonP {
+.button {
     display: block;
     width: 100%;
     padding: 12px;
@@ -83,7 +83,7 @@
     cursor: pointer;
 }
 
-.buttonP:hover {
+.button:hover {
     background-color: #357ab7;
     transform: scale(1.05);
 }
