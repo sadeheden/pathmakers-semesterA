@@ -76,13 +76,14 @@ const AuthForm = ({ isLogin }) => {
     
             if (response.ok) {
                 console.log("✅ Auth successful:", data);
-    
-                // ✅ Store token in localStorage
                 localStorage.setItem("authToken", data.token);
     
-                // ✅ Navigate directly to main page after signup or login
-                navigate("/main");
-    
+                // Auto-login after signup
+                if (!isLogin) {
+                    navigate("/main");
+                } else {
+                    navigate("/main");
+                }
             } else {
                 setErrors({ submit: data.error || "An error occurred. Try again." });
             }

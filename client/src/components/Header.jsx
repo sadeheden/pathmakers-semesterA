@@ -11,15 +11,16 @@ const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Fetch User session
+    // Fetch user session from backend using token stored in localStorage
     const fetchUser = async () => {
-        const token = localStorage.getItem("token");
-    
+        const token = localStorage.getItem("authToken");
+
         if (!token) {
-            console.warn("⚠️ No token found, skipping user fetch.");
-            return; 
+            console.warn("⚠️ No token found, user is not logged in.");
+            setUser(null);
+            return;
         }
-    
+
         try {
             const res = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
@@ -28,30 +29,25 @@ const Header = () => {
                     "Content-Type": "application/json"
                 }
             });
-    
+
             if (res.ok) {
                 const userData = await res.json();
                 setUser(userData);
             } else {
                 console.error(`⚠️ Failed to fetch user: ${res.status}`);
+                localStorage.removeItem("authToken");
                 setUser(null);
-                localStorage.removeItem("token");
             }
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
+            localStorage.removeItem("authToken");
             setUser(null);
         }
     };
-    
-    
-    
 
-
-    // Trigger user data fetching when route changes
+    // Ensure the user is fetched on page load
     useEffect(() => {
-        if (!user) {
-            fetchUser();
-        }
+        fetchUser();
     }, [location]);
 
     // Handle logout
@@ -67,7 +63,7 @@ const Header = () => {
             }
 
             console.log("✅ Successfully logged out.");
-            localStorage.removeItem("token"); // Clear stored token
+            localStorage.removeItem("authToken");
             setUser(null);
             navigate("/"); // Redirect to homepage
         } catch (error) {
@@ -78,17 +74,6 @@ const Header = () => {
     // Define pages to disable the menu
     const disabledPages = ["/", "/signup", "/login"];
     const isDisabledPage = disabledPages.includes(location.pathname);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (!event.target.closest(".profile-section")) {
-                setIsProfileOpen(false);
-            }
-        };
-
-        document.addEventListener("click", handleClickOutside);
-        return () => document.removeEventListener("click", handleClickOutside);
-    }, []);
 
     return (
         <header className="header">
@@ -109,29 +94,26 @@ const Header = () => {
             )}
 
             <div className="profile-section">
-                <img
-                    src={user?.profileImage || profilePlaceholder}
-                    alt="User"
-                    className="profile-image"
-                    onClick={() => setIsProfileOpen(!isProfileOpen)}
-                />
-                {isProfileOpen && (
-                    <div className="profile-popup">
-                        {user ? (
-                            <>
+                {user ? (
+                    <>
+                        <img
+                            src={user?.profileImage || profilePlaceholder}
+                            alt="User"
+                            className="profile-image"
+                            onClick={() => setIsProfileOpen(!isProfileOpen)}
+                        />
+                        {isProfileOpen && (
+                            <div className="profile-popup">
                                 <p>Hello, {user.username}!</p>
                                 <Link to="/personal-area">Go to Profile</Link>
                                 <button onClick={handleLogout} className="logoutButton">
                                     Log Out
                                 </button>
-                            </>
-                        ) : (
-                            <>
-                                <p>Hello, Friend!</p>
-                                <Link to="/login">Log in</Link>
-                            </>
+                            </div>
                         )}
-                    </div>
+                    </>
+                ) : (
+                    <Link to="/login" className="loginLink">Log in</Link>
                 )}
             </div>
 
