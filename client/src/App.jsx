@@ -4,12 +4,11 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import Login from "./pages/Login";
 import PersonalArea from "./pages/PersonalArea";
 import Chat from "./pages/Chat";
 import DownloadApp from "./pages/DownloadApp";
 import Video from "./pages/Video";
-import Signup from "./pages/Signup";
+import AuthForm from "./pages/AuthForm";
 import Main from "./pages/Main";
 function App() {
   return (
@@ -20,12 +19,12 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<AuthForm isLogin={true} />} />
+          <Route path="/signup" element={<AuthForm isLogin={false} />} />
           <Route path="/personal-area" element={<PersonalArea />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/downloadApp" element={<DownloadApp />} />
           <Route path="/video" element={<Video />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/main" element={<Main />} />
         </Routes>
       </div>

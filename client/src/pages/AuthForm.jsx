@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../assets/styles/AuthForm.css"; // Shared styles for both forms
+import "../assets/styles/AuthForm.css"; // Shared styles for both login & signup
 
 const AuthForm = ({ isLogin }) => {
     const navigate = useNavigate();
@@ -9,7 +9,7 @@ const AuthForm = ({ isLogin }) => {
             ? { username: "", password: "" }
             : { username: "", email: "", password: "", confirmPassword: "" }
     );
-    const [errors, setErrors] = useState("");
+    const [errors, setErrors] = useState({});
 
     // Handle input changes
     const handleChange = (e) => {
@@ -23,7 +23,7 @@ const AuthForm = ({ isLogin }) => {
 
     // Validate signup form
     const validateForm = () => {
-        if (isLogin) return {};
+        if (isLogin) return {}; // No validation needed for login
 
         const newErrors = {};
         if (!formData.username.trim()) newErrors.username = "Username is required";
@@ -46,39 +46,50 @@ const AuthForm = ({ isLogin }) => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
-    
+        setErrors({});
+
+        if (!isLogin) {
+            const validationErrors = validateForm();
+            if (Object.keys(validationErrors).length > 0) {
+                setErrors(validationErrors);
+                return;
+            }
+        }
+
         try {
-            const url = "http://localhost:4000/api/auth/login";
-    
+            const url = isLogin
+                ? "http://localhost:4000/api/auth/login"
+                : "http://localhost:4000/api/auth/register";
+
+            const requestBody = isLogin
+                ? { username: formData.username, password: formData.password }
+                : { username: formData.username, email: formData.email, password: formData.password };
+
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username: formData.username,
-                    password: formData.password
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody),
             });
-    
+
             const data = await response.json();
             console.log("🔹 Response received:", response.status, data);
-    
+
             if (response.ok) {
-                console.log("✅ Login successful:", data);
-                localStorage.setItem("authToken", data.token);
-                navigate("/main");
+                console.log("✅ Auth successful:", data);
+                if (isLogin) {
+                    localStorage.setItem("authToken", data.token);
+                    navigate("/main");
+                } else {
+                    navigate("/login"); // Redirect to login after signup
+                }
             } else {
-                console.error("❌ Login failed:", data);
-                setError(data.error || "Invalid username or password.");
+                setErrors({ submit: data.error || "An error occurred. Try again." });
             }
         } catch (error) {
-            console.error("❌ Login error:", error);
-            setError("An error occurred. Please try again.");
+            console.error("❌ Auth error:", error);
+            setErrors({ submit: "An error occurred. Please try again." });
         }
     };
-    
 
     return (
         <div className={`authContainer ${isLogin ? "login" : "signup"}`}>
