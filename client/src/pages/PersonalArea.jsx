@@ -10,36 +10,54 @@ const PersonalArea = () => {
     // Fetch logged-in user from backend
     useEffect(() => {
         const fetchUser = async () => {
+            const token = localStorage.getItem("authToken"); // Get token from storage
+
+            if (!token) {
+                console.warn("⚠️ No token found, redirecting to login.");
+                navigate("/login");
+                return;
+            }
+
             try {
-                const response = await fetch("http://localhost:4000/user"); // Fetch from backend
+                const response = await fetch("http://localhost:4000/api/auth/user", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`, // Include authentication token
+                        "Content-Type": "application/json"
+                    }
+                });
+
                 const data = await response.json();
                 if (response.ok) {
                     setUser(data); // Set user data from backend
                 } else {
-                    setUser(null); // If no user found, reset state
+                    console.error("⚠️ Failed to fetch user:", response.status);
+                    setUser(null);
+                    navigate("/login"); // Redirect if not authenticated
                 }
             } catch (error) {
-                console.error("Error fetching user data:", error);
-                setUser(null); // Handle errors by resetting user state
+                console.error("⚠️ Error fetching user data:", error);
+                setUser(null);
+                navigate("/login");
             }
         };
 
         fetchUser(); // Load user data when component mounts
-    }, []);
+    }, [navigate]);
 
     const handleEditProfile = () => {
         console.log("Edit profile clicked");
+        // Implement profile editing logic
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("user"); // Remove user session
+        localStorage.removeItem("authToken"); // Remove token from storage
         setUser(null); // Reset React state
         navigate("/login"); // Redirect to login
     };
-    
+
     return (
         <div>
-            {/* Main Title */}
             <h1 className="page-title">Welcome to Your Personal Area</h1>
 
             {/* Tab Navigation */}
