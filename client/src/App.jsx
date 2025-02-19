@@ -8,8 +8,9 @@ import PersonalArea from "./pages/PersonalArea";
 import Chat from "./pages/Chat";
 import DownloadApp from "./pages/DownloadApp";
 import Video from "./pages/Video";
-import AuthForm from "./pages/AuthForm";
+import AuthForm from "./pages/AuthForm"; // ✅ Use AuthForm for both login & signup
 import Main from "./pages/Main";
+
 function App() {
   return (
     <Router>
@@ -19,7 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<AuthForm isLogin={true} />} />  {/* ✅ Fix here */}
+          <Route path="/signup" element={<AuthForm isLogin={false} />} /> {/* ✅ Add signup route */}
           <Route path="/personalaArea" element={<PersonalArea />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/downloadApp" element={<DownloadApp />} />
@@ -32,13 +34,5 @@ function App() {
     </Router>
   );
 }
-
-// Global styles to ensure layout fits
-const styles = {
-  content: {
-    padding: "20px",
-    textAlign: "center",
-  },
-};
 
 export default App;
