@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();  // טוען את משתני הסביבה
+dotenv.config();  // Load environment variables
 
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -9,7 +9,7 @@ console.log("✅ Loading Cloudinary ENV Variables:", {
     CLOUDINARY_SECRET: process.env.CLOUDINARY_SECRET ? "Exists ✅" : "❌ MISSING"
 });
 
-// הגדרת Cloudinary עם שם הענן
+// Configure Cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -43,16 +43,21 @@ export async function uploadToCloudinary(req, res) {
             (error, result) => {
                 if (error) {
                     console.error("🚨 Cloudinary Upload Error:", error);
-                    return res.status(500).json({ error: "Cloudinary upload failed", details: error });
+                    return res.status(500).json({ error: "Cloudinary upload failed", details: error.message });
+                }
+
+                if (!result || !result.secure_url) {
+                    console.error("🚨 No secure_url received from Cloudinary", result);
+                    return res.status(500).json({ error: "No secure_url received from Cloudinary" });
                 }
 
                 console.log("✅ Cloudinary Upload Success:", result);
-                res.status(200).json({ success: true, url: result.secure_url });
+                return res.status(200).json({ success: true, url: result.secure_url });
             }
         ).end(req.file.buffer);
 
     } catch (error) {
         console.error("🚨 Server Error:", error);
-        res.status(500).json({ error: "Failed to upload image", details: error.message });
+        return res.status(500).json({ error: "Failed to upload image", details: error.message });
     }
 }

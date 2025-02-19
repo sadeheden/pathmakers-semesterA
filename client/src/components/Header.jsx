@@ -52,16 +52,18 @@ const Header = () => {
 
     // Handle logout
     const handleLogout = async () => {
+        const token = localStorage.getItem("authToken");
         try {
             const response = await fetch("http://localhost:4000/api/auth/logout", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" }
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`  // ✅ Include token
+                }
             });
-
-            if (!response.ok) {
-                throw new Error(`Logout failed: ${response.statusText}`);
-            }
-
+    
+            if (!response.ok) throw new Error(`Logout failed: ${response.statusText}`);
+    
             console.log("✅ Successfully logged out.");
             localStorage.removeItem("authToken");
             setUser(null);
@@ -70,6 +72,7 @@ const Header = () => {
             console.error("⚠️ Logout error:", error);
         }
     };
+    
 
     // Define pages to disable the menu
     const disabledPages = ["/", "/signup", "/login"];
