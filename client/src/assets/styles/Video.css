@@ -40,22 +40,27 @@
 }
 
 .nextButton {
-    padding: 12px 24px;
-      margin-left: 120px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    padding: 16px 30px; /* Increased padding for consistency */
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--button-text-color);
+    background-color: #004e75; /* Same blue as global buttons */
     border: none;
-    border-radius: 50px;
+    border-radius: 25px; /* Rounded corners */
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 300px; /* Ensures it doesn’t stretch too wide */
+    text-align: center;
+    margin: 0 auto; /* Centers the button */
+    display: block;
 }
 
+/* Hover effect */
 .nextButton:hover {
-    background: linear-gradient(135deg, #914f4a, #6c3733);
+    background-color: #13394c; /* Darker blue */
     transform: translateY(-2px);
-    margin-left: 120px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
