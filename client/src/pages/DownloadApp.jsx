@@ -25,7 +25,7 @@ const DownloadApp = () => {
                         }}
                     >
                         <img 
-                            src="https://www.gett.com/il/wp-content/uploads/sites/5/2023/02/app-download-il.png"
+                            src="https://www.pc.co.il/wp-content/uploads/2015/12/Apple-logo.600-600x416.jpg"
                             alt="iOS Logo" 
                             className="buttonIcon"
                         />
