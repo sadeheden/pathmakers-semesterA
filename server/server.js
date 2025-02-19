@@ -14,6 +14,8 @@ import flightsRouter from './services/flights/flights.router.js';
 import hotelsRouter from './services/hotel/hotel.router.js';
 import attractionsRouter from './services/attraction/att.router.js';
 import authRouter from './services/auth/auth.router.js'; 
+import uploadRouter from './services/upload/upload.router.js';
+
 const server = express();
 const PORT = process.env.PORT || 4000;
 
@@ -31,6 +33,8 @@ server.use('/api/flights', flightsRouter);
 server.use('/api/hotels', hotelsRouter);
 server.use('/api/attractions', attractionsRouter);
 server.use('/api/auth', authRouter); // ✅ חיבור נתיב האימות
+server.use('/api/upload', uploadRouter);
+
 
 // בדיקת תקינות השרת
 server.get('/', (req, res) => {
