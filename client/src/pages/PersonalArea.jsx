@@ -57,24 +57,21 @@ const PersonalArea = () => {
     };
 
     const handleSubscribe = async () => {
-        const token = localStorage.getItem("authToken");
-
         if (!email.trim()) {
             alert("⚠️ Please enter a valid email.");
             return;
         }
+    
         try {
-            const response = await fetch("http://localhost:4000/api/newsletter", {
+            const response = await fetch("http://localhost:4000/api/newsletter", {  
                 method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }) 
             });
+    
             if (response.ok) {
                 alert("✅ Subscription successful, check your inbox!");
-                setEmail("");
+                setEmail(""); // Clear input after success
             } else {
                 const errorData = await response.json();
                 console.error("⚠️ Failed to subscribe:", errorData.message || response.status);
@@ -85,6 +82,8 @@ const PersonalArea = () => {
             alert("⚠️ An error occurred. Please try again later.");
         }
     };
+    
+    
 
     return (
         <div>
