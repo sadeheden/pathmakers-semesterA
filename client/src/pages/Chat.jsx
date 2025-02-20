@@ -10,6 +10,11 @@ const TravelPlannerApp = () => {
   const [loadedFlights, setLoadedFlights] = useState([]);
   const [loadedHotels, setLoadedHotels] = useState([]);
   const [loadedAttractions, setLoadedAttractions] = useState([]);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+const [paymentCompleted, setPaymentCompleted] = useState(false);
+
+  
+
 
   useEffect(() => {
     async function fetchCities() {
@@ -215,35 +220,168 @@ const TravelPlannerApp = () => {
     </div>
   );
 
+  // Define PaymentModal first// Define PaymentModal first
+const PaymentModal = ({ isOpen, onClose, totalAmount, onPaymentSuccess, userResponses }) => {
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handlePayment = () => {
+    const departureDateStr = userResponses["Travel dates (departure)?"];
+    const returnDateStr = userResponses["Travel dates (return)?"];
+    const cardNumber = document.getElementById("cardNumber")?.value;
+    const fullName = document.getElementById("fullName")?.value;
+    const expiryDate = document.getElementById("expiryDate")?.value;
+    const cvv = document.getElementById("cvv")?.value;
+  
+    // Validate Dates
+    if (!departureDateStr || !returnDateStr) {
+      setError("Please select both departure and return dates.");
+      return;
+    }
+  
+    const departureDate = new Date(departureDateStr);
+    const returnDate = new Date(returnDateStr);
+  
+    if (departureDate >= returnDate) {
+      setError("Return date must be after departure date.");
+      return;
+    }
+  
+    // Validate Payment Details
+    if (!cardNumber || cardNumber.length !== 16 || isNaN(cardNumber)) {
+      setError("Invalid Card Number. It should be 16 digits.");
+      return;
+    }
+  
+    if (!fullName || fullName.trim().length < 3) {
+      setError("Invalid Name. Please enter a valid full name.");
+      return;
+    }
+  
+    if (!expiryDate || !expiryDate.match(/^(0[1-9]|1[0-2])\/\d{4}$/)) {
+      setError("Invalid Expiry Date. Format should be MM/YYYY.");
+      return;
+    }
+  
+    if (!cvv || cvv.length !== 3 || isNaN(cvv)) {
+      setError("Invalid CVV. It should be 3 digits.");
+      return;
+    }
+  
+    // If everything is valid
+    setPaymentSuccess(true);
+    setError("");
+  
+    setTimeout(() => {
+      setPaymentSuccess(false);
+      onClose();
+      onPaymentSuccess();
+    }, 2000);
+  };
+  
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        {paymentSuccess ? (
+          <>
+            <h2>🎉 Payment Successful! 🎉</h2>
+            <p>Your payment of <strong>${totalAmount}</strong> has been processed.</p>
+          </>
+        ) : (
+          <>
+            <h2>Credit Card Payment</h2>
+            {error && <p className="error-message">{error}</p>}
+            
+            <label>Card Number</label>
+            <input type="text" placeholder="1234 5678 9012 3456" />
+
+            <label>Full Name</label>
+            <input type="text" placeholder="John Doe" />
+
+            <div className="expiry-cvv">
+              <div>
+                <label>Expiry Date</label>
+                <input type="text" placeholder="MM/YYYY" />
+              </div>
+              <div>
+                <label>CVV</label>
+                <input type="text" placeholder="123" />
+              </div>
+            </div>
+
+            <button className="pay-button" onClick={handlePayment} disabled={paymentSuccess}>
+              {paymentSuccess ? "Processing..." : `Pay $${totalAmount}`}
+            </button>
+            <button className="change-payment" onClick={onClose}>Change payment method</button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+  
+  
+  
   const renderStepContent = () => {
     const step = steps[currentStep];
 
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
+    
+      // Function to handle downloading the summary as a text file
+      const handleDownloadSummary = () => {
+        const summaryText = `
+        === Trip Summary ===
+        Departure City: ${userResponses["What is your departure city?"] || "N/A"}
+        Destination City: ${userResponses["What is your destination city?"] || "N/A"}
+        Flight: ${userResponses["Select your flight"] || "N/A"}
+        Hotel: ${userResponses["Select your hotel"] || "N/A"}
+        Attractions: ${userResponses["Select attractions to visit"] || "N/A"}
+        Transportation: ${userResponses["Select your mode of transportation"] || "N/A"}
+        Payment Method: ${userResponses["Select payment method"] || "N/A"}
+        Total Price: $${totalPrice}
+        ===================
+        `;
+        
+        const blob = new Blob([summaryText], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "trip_summary.txt";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+    
       return (
-        <div className="summary-step">
-          <h2>{step.label}</h2>
-          <ul>
-            {step.questions.map((q, index) => (
-              <li key={index}>
-                <strong>{q.prompt}:</strong> {userResponses[q.prompt] || q.value || "Not provided"}
-              </li>
-            ))}
-            <li>
-              <strong>Total Price:</strong> ${totalPrice}
-            </li>
-          </ul>
-          <button
-            onClick={() => setCurrentStep((prev) => prev + 1)}
-            disabled={currentStep === steps.length - 1}
-            className="custom-btn"
-          >
-            Finish <ChevronRight />
-          </button>
+        <div className="trip-summary-container">
+          <div className="summary-box">
+            <h2>Trip Summary</h2>
+            <div className="summary-details">
+              <p><strong>Departure City:</strong> {userResponses["What is your departure city?"] || "N/A"}</p>
+              <p><strong>Destination City:</strong> {userResponses["What is your destination city?"] || "N/A"}</p>
+              <p><strong>Flight:</strong> {userResponses["Select your flight"] || "N/A"}</p>
+              <p><strong>Hotel:</strong> {userResponses["Select your hotel"] || "N/A"}</p>
+              <p><strong>Attractions:</strong> {userResponses["Select attractions to visit"] || "N/A"}</p>
+              <p><strong>Transportation:</strong> {userResponses["Select your mode of transportation"] || "N/A"}</p>
+              <p><strong>Payment Method:</strong> {userResponses["Select payment method"] || "N/A"}</p>
+              <h3>Total Price: ${totalPrice}</h3>
+            </div>
+    
+            {/* Buttons */}
+            <div className="summary-buttons">
+              <button className="download-btn" onClick={handleDownloadSummary}>Download Summary</button>
+              <button className="personal-area-btn" onClick={() => window.location.href = "/personal-area"}>
+                Go to Personal Area
+              </button>
+            </div>
+          </div>
         </div>
       );
     }
-
+    
     return (
       <div className="step">
         <div className="step-header">
@@ -267,12 +405,13 @@ const TravelPlannerApp = () => {
                 value={userResponses[q.prompt] || ""}
                 onChange={(e) => {
                   setUserResponses({ ...userResponses, [q.prompt]: e.target.value });
-                  
-                  if (q.prompt === "Select payment method") {
-                    alert(`Simulating ${e.target.value} payment process...`);
+              
+                  if (q.prompt === "Select payment method" && !paymentCompleted) {
+                    setIsPaymentModalOpen(true); // Open payment modal only if not paid
                   }
                 }}
-              >
+              >              
+
               
                   <option value="" disabled>Select an option</option>
                   {q.options &&
@@ -315,26 +454,37 @@ const TravelPlannerApp = () => {
         {renderProgressBar()}
       </header>
       {renderStepContent()}
+      <PaymentModal 
+      isOpen={isPaymentModalOpen} 
+      onClose={() => setIsPaymentModalOpen(false)} 
+      onPaymentSuccess={() => {
+        setPaymentCompleted(true);
+        setCurrentStep((prev) => prev + 1); // Move to Transportation step
+      }}
+      totalAmount={calculateTotalPrice()} 
+      userResponses={userResponses}
+    />
 
-      {/* <div className="action-buttons">
-        <button
-          onClick={() => {
-            if (currentStep < steps.length - 1) {
-              setCurrentStep(currentStep + 1);
-            } else {
-              alert("Thank you for booking!");
-              handleSaveOrder({
-                id: new Date().getTime(),
-                details: JSON.stringify(userResponses),
-                status: "Confirmed",
-              });
-            }
-          }}
-        >
-          {currentStep === steps.length - 1 ? "Confirm & Book" : "Next Step"}
-        </button>
-      </div> 
-      */}
+
+{/* <div className="action-buttons">
+  <button
+    onClick={() => {
+      if (currentStep < steps.length - 1) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        alert("Thank you for booking!");
+        handleSaveOrder({
+          id: new Date().getTime(),
+          details: JSON.stringify(userResponses),
+          status: "Confirmed",
+        });
+      }
+    }}
+  >
+    {currentStep === steps.length - 1 ? "Confirm & Book" : "Next Step"}
+  </button>
+</div> */}
+
     </div>
 
   );

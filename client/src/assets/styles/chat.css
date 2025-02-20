@@ -269,3 +269,136 @@ select:focus {
       padding: 8px 18px;
   }
 } 
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+}
+
+.modal-content label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.expiry-cvv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.expiry-cvv div {
+  width: 48%;
+}
+
+.pay-button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.change-payment {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.modal-content h2 {
+  color: #4CAF50;
+  font-size: 22px;
+}
+
+.modal-content p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.trip-summary-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.summary-box {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  text-align: center;
+}
+
+.summary-details {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.summary-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.summary-details h3 {
+  color: green;
+}
+
+.summary-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.download-btn, .personal-area-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.download-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.personal-area-btn {
+  background-color: #28a745;
+  color: white;
+}

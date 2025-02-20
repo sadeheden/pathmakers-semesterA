@@ -132,16 +132,32 @@ const PersonalArea = () => {
                 )}
 
                 {/* User Orders */}
-                {activeTab === "orders" && (
-                    <>
-                        <h2 className="heading">Previous Orders</h2>
-                        <div className="profileInfo">
-                            <p>Order #12345 - Paris Flight - Completed</p>
-                            <p>Order #67890 - Hotel Reservation - Pending</p>
+                                {activeTab === "orders" && (
+                <>
+                    <h2 className="heading">Previous Orders</h2>
+                    {user && user.orders && user.orders.length > 0 ? (
+                    user.orders.map((order, index) => (
+                        <div key={index} className="order-summary">
+                        <h3>Trip Order #{index + 1}</h3>
+                        <p><strong>Departure City:</strong> {order.departureCity}</p>
+                        <p><strong>Destination City:</strong> {order.destinationCity}</p>
+                        <p><strong>Flight:</strong> {order.flight}</p>
+                        <p><strong>Hotel:</strong> {order.hotel}</p>
+                        <p><strong>Attractions:</strong> {order.attractions}</p>
+                        <p><strong>Transportation:</strong> {order.transportation}</p>
+                        <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
+                        <h3>Total Price: ${order.totalPrice}</h3>
+                        <button className="download-btn" onClick={() => handleDownloadOrder(order)}>
+                            Download Order
+                        </button>
                         </div>
-                        <a href="#" className="button">Download Receipt</a>
-                    </>
+                    ))
+                    ) : (
+                    <p>No previous orders found.</p>
+                    )}
+                </>
                 )}
+
 
                 {/* Newsletter Subscription */}
                 {activeTab === "newsletter" && (
