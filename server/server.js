@@ -15,6 +15,7 @@ import hotelsRouter from './services/hotel/hotel.router.js';
 import attractionsRouter from './services/attraction/att.router.js';
 import authRouter from './services/auth/auth.router.js'; 
 import uploadRouter from './services/upload/upload.router.js';
+import sendNewsletterRouter from './newsletterRouter.js';
 
 const server = express();
 const PORT = process.env.PORT || 4000;
@@ -25,7 +26,6 @@ server.use(cors());
 // Middleware לטיפול בבקשות JSON
 server.use(express.json({ extended: true, limit: '50mb' }));
 
-
 // חיבור הנתיבים הראשיים
 server.use('/api', router);
 server.use('/api/cities', citiesRouter);
@@ -34,7 +34,7 @@ server.use('/api/hotels', hotelsRouter);
 server.use('/api/attractions', attractionsRouter);
 server.use('/api/auth', authRouter); // ✅ חיבור נתיב האימות
 server.use('/api/upload', uploadRouter);
-
+server.use('/api/newsletterRouter', sendNewsletterRouter); // חיבור לנתיב של שליחת הניווזלטר
 
 // בדיקת תקינות השרת
 server.get('/', (req, res) => {
@@ -43,5 +43,5 @@ server.get('/', (req, res) => {
 
 // הפעלת השרת
 server.listen(PORT, () => {
-    console.log(` Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -127,5 +127,12 @@
     "email": "uy575@fohi.com",
     "password": "$2b$10$VA2lXMZU7c46NgIe3ruDN.AzjfMWDFrDEHY/kKLfCcBWKL.sgax16",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
+  },
+  {
+    "id": "cbb927ac-9e6c-461f-996d-45e32cc1e9f4",
+    "username": "mayH",
+    "email": "mayhalaf8@gmail.com",
+    "password": "$2b$10$GhzvmC3MlW2QXg2kAKvN5O33qPZ4g38hcwlcl4.bNf6z8H/IUGZaG",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
   }
 ]
