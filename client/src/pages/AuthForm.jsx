@@ -59,13 +59,14 @@ const AuthForm = ({ isLogin }) => {
         }
 
         try {
-            let profileImageUrl = "https://res.cloudinary.com/shaykos/image/upload/v1700000000/default_profile.jpg"; // Default image
+            let profileImageUrl = "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"; // Default image
 
             if (formData.profileImage) {
                 const imageData = new FormData();
                 imageData.append("file", formData.profileImage);
 
-                const imageResponse = await fetch("http://localhost:4000/api/upload/single", {
+                const imageResponse = await fetch("http://localhost:4000/api/upload/single", {  // ✅ CORRECT URL
+
                     method: "POST",
                     body: imageData,
                 });

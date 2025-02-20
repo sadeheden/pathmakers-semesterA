@@ -3,18 +3,34 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // **Get All Users**
-export async function getAllUsers(req, res) {
+export async function getCurrentUser(req, res) {
     try {
-        const users = await getUsers();
-        if (!users.length) {
-            return res.status(404).json({ error: "No users found" });
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            console.warn("⚠️ No Authorization header received");
+            return res.status(401).json({ message: "Unauthorized, no token provided" });
         }
-        res.status(200).json(users);
+
+        const token = authHeader.split(" ")[1];
+        if (!token) {
+            console.warn("⚠️ Token missing from Authorization header");
+            return res.status(401).json({ message: "Unauthorized, token missing" });
+        }
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            console.log("✅ Token verified, user:", decoded);
+            res.json(decoded);
+        } catch (error) {
+            console.error("❌ JWT Verification Failed:", error.message);
+            return res.status(401).json({ message: "Unauthorized, invalid token" });
+        }
     } catch (error) {
-        console.error("❌ Error retrieving users:", error);
-        res.status(500).json({ error: "Internal server error" });
+        console.error("⚠️ Unexpected error in getCurrentUser:", error);
+        res.status(500).json({ message: "Server error" });
     }
 }
+
 
 // **Register New User**
 export async function register(req, res) {
@@ -50,7 +66,7 @@ export async function register(req, res) {
         // ✅ Generate JWT token immediately after registration
         const token = jwt.sign(
             { id: newUser.id, username: newUser.username },
-            process.env2.JWT_SECRET_KEY,
+            process.env.JWT_SECRET_KEY,
             { expiresIn: "24h" }
         );
 
@@ -87,7 +103,7 @@ export async function login(req, res) {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user.id, username: user.username }, process.env2.JWT_SECRET_KEY, { expiresIn: "24h" });
+        const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET_KEY, { expiresIn: "24h" });
 
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {
@@ -99,17 +115,32 @@ export async function login(req, res) {
 // **Get Current User**
 export async function getCurrentUser(req, res) {
     try {
-        const token = req.headers.authorization?.split(" ")[1];
-        if (!token) {
-            return res.status(401).json({ message: "Unauthorized" });
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            console.warn("⚠️ No Authorization header received");
+            return res.status(401).json({ message: "Unauthorized, no token provided" });
         }
 
-        const decoded = jwt.verify(token, process.env2.JWT_SECRET_KEY);
-        res.json(decoded);
+        const token = authHeader.split(" ")[1];
+        if (!token) {
+            console.warn("⚠️ Token missing from Authorization header");
+            return res.status(401).json({ message: "Unauthorized, token missing" });
+        }
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            console.log("✅ Token verified, user:", decoded);
+            res.json(decoded);
+        } catch (error) {
+            console.error("❌ JWT Verification Failed:", error.message);
+            return res.status(401).json({ message: "Unauthorized, invalid token" });
+        }
     } catch (error) {
-        res.status(401).json({ message: "Invalid token" });
+        console.error("⚠️ Unexpected error in getCurrentUser:", error);
+        res.status(500).json({ message: "Server error" });
     }
 }
+
 
 // **Logout**
 export async function logout(req, res) {

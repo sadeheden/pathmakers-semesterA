@@ -9,12 +9,18 @@ const FILE_PATH = path.join(process.cwd(), 'data', 'users.json');
 export const getUsers = async () => {
     try {
         const data = await readFile(FILE_PATH, 'utf-8');
-        return JSON.parse(data);  // Parse JSON file
+        return JSON.parse(data);
     } catch (error) {
+        if (error.code === 'ENOENT') {  // If file is missing, create it
+            console.warn("⚠️ users.json file not found, creating a new one...");
+            await saveUsers([]); // Create an empty users file
+            return [];
+        }
         console.error("❌ Error reading users file:", error);
-        return []; // Return empty array if file is missing
+        return [];
     }
 };
+
 
 // **Save Users to File**
 export const saveUsers = async (users) => {
