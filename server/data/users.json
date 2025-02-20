@@ -113,5 +113,12 @@
     "email": "uyuhu@fohi.com",
     "password": "$2b$10$Lif6/xeZlYQcoYmNHBjkVuTZjWSdCLOUe9j9WseE8r6qvF4yOm7Km",
     "profileImage": "https://res.cloudinary.com/shaykos/image/upload/v1700000000/default_profile.jpg"
+  },
+  {
+    "id": "a6b9c1d2-feb4-440a-94d6-ee3f6b089d32",
+    "username": "u7hRtttt",
+    "email": "uy55@fohi.com",
+    "password": "$2b$10$AbvwOAYhPO1dDX3MeCWCQe3YfeSBJaMgIIpDkL0mI4k9l33lt0nmG",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
   }
 ]

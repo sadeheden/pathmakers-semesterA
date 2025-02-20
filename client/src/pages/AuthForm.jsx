@@ -72,9 +72,12 @@ const AuthForm = ({ isLogin }) => {
                 });
 
                 const imageResult = await imageResponse.json();
-                if (imageResponse.ok) {
-                    profileImageUrl = imageResult.result.secure_url;
+                if (imageResponse.ok && imageResult.secure_url) {
+                    profileImageUrl = imageResult.secure_url;
+                } else {
+                    console.error("🚨 Cloudinary upload failed:", imageResult);
                 }
+                
             }
 
             const requestBody = isLogin
