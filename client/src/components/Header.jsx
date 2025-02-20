@@ -14,13 +14,26 @@ const Header = () => {
     // Fetch user session from backend using token stored in localStorage
     const fetchUser = async () => {
         const token = localStorage.getItem("authToken");
-
+    
         if (!token) {
             console.warn("⚠️ No token found, user is not logged in.");
             setUser(null);
             return;
         }
-
+    
+        // ✅ Check token expiration BEFORE making request
+        const decodedToken = JSON.parse(atob(token.split(".")[1]));  // Decode payload
+        const currentTime = Math.floor(Date.now() / 1000);  // Get current UNIX timestamp
+    
+        if (decodedToken.exp < currentTime) {
+            console.warn("⚠️ Token expired, logging out user.");
+            localStorage.removeItem("authToken");
+            setUser(null);
+            return;
+        }
+    
+        console.log("🔍 Sending request with token:", token);  // ✅ Debugging
+    
         try {
             const res = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
@@ -29,9 +42,10 @@ const Header = () => {
                     "Content-Type": "application/json"
                 }
             });
-
+    
             if (res.ok) {
                 const userData = await res.json();
+                console.log("✅ User fetched successfully:", userData);
                 setUser(userData);
             } else {
                 console.error(`⚠️ Failed to fetch user: ${res.status}`);
@@ -44,6 +58,7 @@ const Header = () => {
             setUser(null);
         }
     };
+    
 
     // Ensure the user is fetched on page load
     useEffect(() => {
@@ -53,26 +68,26 @@ const Header = () => {
     // Handle logout
     const handleLogout = async () => {
         const token = localStorage.getItem("authToken");
+
         try {
             const response = await fetch("http://localhost:4000/api/auth/logout", {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`  // ✅ Include token
+                    "Authorization": `Bearer ${token}`
                 }
             });
-    
+
             if (!response.ok) throw new Error(`Logout failed: ${response.statusText}`);
-    
+
             console.log("✅ Successfully logged out.");
             localStorage.removeItem("authToken");
             setUser(null);
-            navigate("/"); // Redirect to homepage
+            navigate("/");
         } catch (error) {
             console.error("⚠️ Logout error:", error);
         }
     };
-    
 
     // Define pages to disable the menu
     const disabledPages = ["/", "/signup", "/login"];
@@ -117,9 +132,8 @@ const Header = () => {
                     </>
                 ) : (
                     <Link to="/login" className="login-button">
-                    <span className="icon">🙈</span> 
-                </Link>
-                
+                        <span className="icon">🙈</span> 
+                    </Link>
                 )}
             </div>
 
