@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "../assets/styles/PersonalArea.css";
 
 const PersonalArea = () => {
-    const [activeTab, setActiveTab] = useState("userInfo"); // Default tab
-    const [user, setUser] = useState(null); // Stores logged-in user data
-    const [email, setEmail] = useState(""); // Store email input for newsletter
+    const [activeTab, setActiveTab] = useState("userInfo");
+    const [user, setUser] = useState(null);
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
 
     // Fetch logged-in user from backend
     useEffect(() => {
         const fetchUser = async () => {
-            const token = localStorage.getItem("authToken"); // Get token from storage
+            const token = localStorage.getItem("authToken");
 
             if (!token) {
                 console.warn("⚠️ No token found, redirecting to login.");
@@ -23,18 +23,18 @@ const PersonalArea = () => {
                 const response = await fetch("http://localhost:4000/api/auth/user", {
                     method: "GET",
                     headers: {
-                        "Authorization": `Bearer ${token}`, // Include authentication token
+                        "Authorization": `Bearer ${token}`,
                         "Content-Type": "application/json"
                     }
                 });
 
                 const data = await response.json();
                 if (response.ok) {
-                    setUser(data); // Set user data from backend
+                    setUser(data);
                 } else {
                     console.error("⚠️ Failed to fetch user:", response.status);
                     setUser(null);
-                    navigate("/login"); // Redirect if not authenticated
+                    navigate("/login");
                 }
             } catch (error) {
                 console.error("⚠️ Error fetching user data:", error);
@@ -43,41 +43,38 @@ const PersonalArea = () => {
             }
         };
 
-        fetchUser(); // Load user data when component mounts
+        fetchUser();
     }, [navigate]);
 
     const handleEditProfile = () => {
         console.log("Edit profile clicked");
-        // Implement profile editing logic
     };
 
     const handleLogout = () => {
-        localStorage.removeItem("authToken"); // Remove token from storage
-        setUser(null); // Reset React state
-        navigate("/login"); // Redirect to login
+        localStorage.removeItem("authToken");
+        setUser(null);
+        navigate("/login");
     };
 
     const handleSubscribe = async () => {
-        const token = localStorage.getItem("authToken"); 
+        const token = localStorage.getItem("authToken");
 
         if (!email.trim()) {
             alert("⚠️ Please enter a valid email.");
             return;
         }
-
         try {
-            const response = await fetch("http://localhost:4000/api/newsletterRouter", {
+            const response = await fetch("http://localhost:4000/api/newsletter", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ email }) // Send the entered email
+                body: JSON.stringify({ email })
             });
-
             if (response.ok) {
                 alert("✅ Subscription successful, check your inbox!");
-                setEmail(""); // Clear input field after successful submission
+                setEmail("");
             } else {
                 const errorData = await response.json();
                 console.error("⚠️ Failed to subscribe:", errorData.message || response.status);
@@ -92,8 +89,6 @@ const PersonalArea = () => {
     return (
         <div>
             <h1 className="page-title">Personal Area</h1>
-
-            {/* Tab Navigation */}
             <div className="tab-buttons">
                 <button onClick={() => setActiveTab("userInfo")} className={activeTab === "userInfo" ? "active" : ""}>
                     User Info

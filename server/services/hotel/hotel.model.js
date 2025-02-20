@@ -29,3 +29,7 @@ export const getHotelsByCity = async (city) => {
     const cityHotels = hotelsData.find(cityData => cityData.city.toLowerCase() === city.toLowerCase());
     return cityHotels ? cityHotels.hotels : [];
 };
+
+
+
+
