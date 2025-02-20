@@ -1,57 +1,123 @@
 [
   {
-    "city": "Paris",
+    "city": "Istanbul",
     "hotels": [
-      { "name": "Le Meurice", "price": 950 },
-      { "name": "The Ritz Paris", "price": 1300 },
-      { "name": "Shangri-La Hotel", "price": 1200 },
-      { "name": "Hotel de Crillon", "price": 1600 },
-      { "name": "Four Seasons Hotel George V", "price": 2000 },
-      { "name": "Mandarin Oriental Paris", "price": 1500 }
+      { "name": "Four Seasons Hotel Istanbul at Sultanahmet", "price": 1800 },
+      { "name": "The Ritz-Carlton, Istanbul", "price": 2200 },
+      { "name": "Swissotel The Bosphorus", "price": 1600 },
+      { "name": "The St. Regis Istanbul", "price": 2100 },
+      { "name": "Mandarin Oriental Bosphorus", "price": 2500 },
+      { "name": "Shangri-La Bosphorus", "price": 2400 }
     ]
   },
   {
-    "city": "London",
+    "city": "Amsterdam",
     "hotels": [
-      { "name": "Langham", "price": 850 },
-      { "name": "The Savoy", "price": 1500 },
-      { "name": "Claridge's", "price": 1300 },
-      { "name": "The Dorchester", "price": 1800 },
-      { "name": "The Langham London", "price": 1400 },
-      { "name": "Bulgari Hotel London", "price": 2000 }
+      { "name": "The Dylan Amsterdam", "price": 1200 },
+      { "name": "Hotel Okura Amsterdam", "price": 1600 },
+      { "name": "W Amsterdam", "price": 1500 },
+      { "name": "InterContinental Amstel Amsterdam", "price": 2000 },
+      { "name": "Conservatorium Hotel", "price": 2200 },
+      { "name": "Pulitzer Amsterdam", "price": 1800 }
     ]
   },
   {
-    "city": "New York",
+    "city": "San Francisco",
     "hotels": [
-      { "name": "The Plaza Hotel", "price": 2000 },
-      { "name": "The St. Regis", "price": 1800 },
-      { "name": "Waldorf Astoria", "price": 1600 },
-      { "name": "Four Seasons Hotel New York Downtown", "price": 2500 },
-      { "name": "The Greenwich Hotel", "price": 2000 },
-      { "name": "Conrad New York Downtown", "price": 2200 }
+      { "name": "The Fairmont", "price": 1500 },
+      { "name": "Palace Hotel", "price": 1800 },
+      { "name": "Hotel Nikko San Francisco", "price": 1300 },
+      { "name": "St. Regis San Francisco", "price": 2200 },
+      { "name": "Four Seasons Hotel San Francisco", "price": 2000 },
+      { "name": "Mandarin Oriental San Francisco", "price": 2300 }
     ]
   },
   {
-    "city": "Tokyo",
+    "city": "Toronto",
     "hotels": [
-      { "name": "The Peninsula Tokyo", "price": 1000 },
-      { "name": "Park Hyatt Tokyo", "price": 1200 },
-      { "name": "Shangri-La Hotel", "price": 1100 },
-      { "name": "Mandarin Oriental Tokyo", "price": 1300 },
-      { "name": "Aman Tokyo", "price": 1500 },
-      { "name": "Grand Hyatt Tokyo", "price": 1400 }
+      { "name": "The Ritz-Carlton, Toronto", "price": 2200 },
+      { "name": "Four Seasons Hotel Toronto", "price": 1800 },
+      { "name": "Shangri-La Hotel Toronto", "price": 2000 },
+      { "name": "The St. Regis Toronto", "price": 2400 },
+      { "name": "The Hazelton Hotel Toronto", "price": 1600 },
+      { "name": "Royal York Hotel", "price": 1500 }
     ]
   },
   {
-    "city": "Rome",
+    "city": "Rio de Janeiro",
     "hotels": [
-      { "name": "Hotel de Russie", "price": 950 },
-      { "name": "The St. Regis Rome", "price": 1250 },
-      { "name": "Rome Cavalieri", "price": 1400 },
-      { "name": "Hotel Eden", "price": 1600 },
-      { "name": "Palazzo Dama", "price": 1800 },
-      { "name": "Hotel Artemide", "price": 1300 }
+      { "name": "Copacabana Palace", "price": 2500 },
+      { "name": "Hotel Fasano Rio de Janeiro", "price": 2000 },
+      { "name": "The Grand Hyatt Rio de Janeiro", "price": 1800 },
+      { "name": "Belmond Copacabana Palace", "price": 2300 },
+      { "name": "Windsor Atlantica Hotel", "price": 1700 },
+      { "name": "Emiliano Rio", "price": 2200 }
+    ]
+  },
+  {
+    "city": "Singapore",
+    "hotels": [
+      { "name": "Marina Bay Sands", "price": 2500 },
+      { "name": "Raffles Singapore", "price": 3000 },
+      { "name": "The Fullerton Hotel Singapore", "price": 2200 },
+      { "name": "Mandarin Oriental Singapore", "price": 2000 },
+      { "name": "The Ritz-Carlton, Millenia Singapore", "price": 2400 },
+      { "name": "Shangri-La Hotel Singapore", "price": 1800 }
+    ]
+  },
+  {
+    "city": "Madrid",
+    "hotels": [
+      { "name": "The Ritz Madrid", "price": 2200 },
+      { "name": "Hotel Villa Magna", "price": 2000 },
+      { "name": "Four Seasons Hotel Madrid", "price": 2400 },
+      { "name": "Mandarin Oriental Ritz Madrid", "price": 2700 },
+      { "name": "Hotel de las Letras", "price": 1500 },
+      { "name": "Gran Melia Fenix", "price": 1800 }
+    ]
+  },
+  {
+    "city": "Cairo",
+    "hotels": [
+      { "name": "The Nile Ritz-Carlton", "price": 2200 },
+      { "name": "Four Seasons Hotel Cairo at Nile Plaza", "price": 2500 },
+      { "name": "Semiramis InterContinental Cairo", "price": 1800 },
+      { "name": "Shangri-La Hotel Cairo", "price": 2000 },
+      { "name": "The St. Regis Cairo", "price": 2700 },
+      { "name": "JW Marriott Hotel Cairo", "price": 1700 }
+    ]
+  },
+  {
+    "city": "Bangkok",
+    "hotels": [
+      { "name": "Mandarin Oriental Bangkok", "price": 2400 },
+      { "name": "The Siam Hotel", "price": 2100 },
+      { "name": "The Peninsula Bangkok", "price": 2000 },
+      { "name": "Shangri-La Hotel Bangkok", "price": 2200 },
+      { "name": "Lebua at State Tower", "price": 1700 },
+      { "name": "Four Seasons Hotel Bangkok", "price": 2500 }
+    ]
+  },
+  {
+    "city": "Seoul",
+    "hotels": [
+      { "name": "The Shilla Seoul", "price": 2000 },
+      { "name": "Four Seasons Hotel Seoul", "price": 2200 },
+      { "name": "Park Hyatt Seoul", "price": 1800 },
+      { "name": "Lotte Hotel Seoul", "price": 1600 },
+      { "name": "JW Marriott Hotel Seoul", "price": 1900 },
+      { "name": "The Westin Chosun Seoul", "price": 1700 }
+    ]
+  },
+  {
+    "city": "Hong Kong",
+    "hotels": [
+      { "name": "The Peninsula Hong Kong", "price": 3000 },
+      { "name": "Four Seasons Hotel Hong Kong", "price": 2500 },
+      { "name": "The Ritz-Carlton Hong Kong", "price": 2800 },
+      { "name": "Mandarin Oriental Hong Kong", "price": 2700 },
+      { "name": "InterContinental Hong Kong", "price": 2200 },
+      { "name": "The Langham Hong Kong", "price": 2400 }
     ]
   },
   {
@@ -66,25 +132,36 @@
     ]
   },
   {
-    "city": "Berlin",
+    "city": "Lagos",
     "hotels": [
-      { "name": "Hotel Adlon Kempinski", "price": 950 },
-      { "name": "The Ritz-Carlton Berlin", "price": 1100 },
-      { "name": "Grand Hyatt Berlin", "price": 1200 },
-      { "name": "Hotel Zoo Berlin", "price": 1000 },
-      { "name": "The Westin Grand Berlin", "price": 1300 },
-      { "name": "Sofitel Berlin Kurfürstendamm", "price": 1400 }
+      { "name": "Eko Hotel & Suites", "price": 1200 },
+      { "name": "The Wheatbaker", "price": 1500 },
+      { "name": "Radisson Blu Anchorage Hotel", "price": 1700 },
+      { "name": "Victoria Crown Plaza Hotel", "price": 1100 },
+      { "name": "The Lagos Continental Hotel", "price": 1300 },
+      { "name": "InterContinental Lagos", "price": 1600 }
     ]
   },
   {
-    "city": "Barcelona",
+    "city": "Buenos Aires",
     "hotels": [
-      { "name": "Hotel Arts Barcelona", "price": 900 },
-      { "name": "Majestic Hotel & Spa", "price": 1100 },
-      { "name": "W Barcelona", "price": 1200 },
-      { "name": "The Serras", "price": 1300 },
-      { "name": "Hotel Omm", "price": 1500 },
-      { "name": "El Palace Hotel", "price": 1400 }
+      { "name": "Alvear Palace Hotel", "price": 2200 },
+      { "name": "Four Seasons Hotel Buenos Aires", "price": 2000 },
+      { "name": "Palacio Duhau - Park Hyatt Buenos Aires", "price": 2400 },
+      { "name": "The Ritz-Carlton Buenos Aires", "price": 2500 },
+      { "name": "Sheraton Buenos Aires Hotel & Convention Center", "price": 1800 },
+      { "name": "Hotel Madero", "price": 1500 }
+    ]
+  },
+  {
+    "city": "Mexico City",
+    "hotels": [
+      { "name": "Four Seasons Hotel Mexico City", "price": 2300 },
+      { "name": "The St. Regis Mexico City", "price": 2500 },
+      { "name": "Mandarin Oriental Mexico City", "price": 2400 },
+      { "name": "W Mexico City", "price": 2200 },
+      { "name": "Hotel Maria Cristina", "price": 2000 },
+      { "name": "JW Marriott Hotel Mexico City", "price": 2100 }
     ]
   },
   {
@@ -99,25 +176,80 @@
     ]
   },
   {
-    "city": "Sydney",
+    "city": "Mumbai",
     "hotels": [
-      { "name": "The Darling", "price": 1000 },
-      { "name": "Park Hyatt Sydney", "price": 1300 },
-      { "name": "The Langham Sydney", "price": 1100 },
-      { "name": "Shangri-La Sydney", "price": 1200 },
-      { "name": "Four Seasons Hotel Sydney", "price": 1500 },
-      { "name": "The Westin Sydney", "price": 1400 }
+      { "name": "The Taj Mahal Palace", "price": 2500 },
+      { "name": "The Oberoi Mumbai", "price": 2200 },
+      { "name": "The St. Regis Mumbai", "price": 2300 },
+      { "name": "Trident Nariman Point", "price": 2100 },
+      { "name": "JW Marriott Mumbai", "price": 2000 },
+      { "name": "Hotel Marine Plaza", "price": 1800 }
     ]
   },
   {
-    "city": "Moscow",
+    "city": "Delhi",
     "hotels": [
-      { "name": "The Ritz-Carlton Moscow", "price": 1100 },
-      { "name": "Four Seasons Hotel Moscow", "price": 1400 },
-      { "name": "Ararat Park Hyatt Moscow", "price": 1300 },
-      { "name": "Hotel National Moscow", "price": 1600 },
-      { "name": "Lotte Hotel Moscow", "price": 1800 },
-      { "name": "Hotel Baltschug Kempinski Moscow", "price": 1700 }
+      { "name": "The Leela Palace New Delhi", "price": 2500 },
+      { "name": "The Oberoi", "price": 2300 },
+      { "name": "Taj Palace Hotel", "price": 2200 },
+      { "name": "Shangri-La's - Eros Hotel", "price": 2100 },
+      { "name": "The Imperial New Delhi", "price": 2000 },
+      { "name": "ITC Maurya", "price": 1900 }
+    ]
+  },
+  {
+    "city": "Shanghai",
+    "hotels": [
+      { "name": "The Peninsula Shanghai", "price": 2800 },
+      { "name": "Waldorf Astoria Shanghai", "price": 2700 },
+      { "name": "Four Seasons Hotel Shanghai", "price": 2600 },
+      { "name": "Mandarin Oriental Pudong", "price": 2400 },
+      { "name": "The Ritz-Carlton Shanghai", "price": 2500 },
+      { "name": "Fairmont Peace Hotel", "price": 2200 }
+    ]
+  },
+  {
+    "city": "Cape Town",
+    "hotels": [
+      { "name": "One&Only Cape Town", "price": 3000 },
+      { "name": "The Silo Hotel", "price": 2500 },
+      { "name": "The Twelve Apostles Hotel and Spa", "price": 2200 },
+      { "name": "Taj Cape Town", "price": 2000 },
+      { "name": "Mount Nelson, A Belmond Hotel", "price": 2300 },
+      { "name": "Radisson Blu Hotel Waterfront", "price": 2100 }
+    ]
+  },
+  {
+    "city": "Kuala Lumpur",
+    "hotels": [
+      { "name": "Mandarin Oriental Kuala Lumpur", "price": 2200 },
+      { "name": "The St. Regis Kuala Lumpur", "price": 2400 },
+      { "name": "Grand Hyatt Kuala Lumpur", "price": 2300 },
+      { "name": "Four Seasons Hotel Kuala Lumpur", "price": 2500 },
+      { "name": "Shangri-La Hotel Kuala Lumpur", "price": 2100 },
+      { "name": "The Ritz-Carlton Kuala Lumpur", "price": 2200 }
+    ]
+  },
+  {
+    "city": "Jakarta",
+    "hotels": [
+      { "name": "The Ritz-Carlton Jakarta", "price": 2000 },
+      { "name": "Grand Hyatt Jakarta", "price": 2200 },
+      { "name": "Mandarin Oriental Jakarta", "price": 2400 },
+      { "name": "Shangri-La Hotel Jakarta", "price": 2300 },
+      { "name": "The Dharmawangsa Jakarta", "price": 2500 },
+      { "name": "Hotel Indonesia Kempinski", "price": 2100 }
+    ]
+  },
+  {
+    "city": "São Paulo",
+    "hotels": [
+      { "name": "Hotel Unique", "price": 2200 },
+      { "name": "Renaissance São Paulo Hotel", "price": 2000 },
+      { "name": "The Palácio Tangará", "price": 2500 },
+      { "name": "Hotel Fasano São Paulo", "price": 2700 },
+      { "name": "Grand Hyatt São Paulo", "price": 2400 },
+      { "name": "Hilton São Paulo Morumbi", "price": 2200 }
     ]
   }
 ]
