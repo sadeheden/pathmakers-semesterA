@@ -1,25 +1,27 @@
-import jwt from 'jsonwebtoken';
 import { sendNewsletterEmail } from './newsletter.model.js';
 
 // פונקציה לשליחת ניוזלטר למשתמש
 export const handleNewsletterSubscription = async (req, res) => {
-    const token = req.headers["authorization"]?.split(" ")[1]; // קבלת הטוקן
+    console.log("📩 Received request body:", req.body); // Debugging log
 
-    if (!token) {
-        return res.status(401).send("Unauthorized: No token provided");
+    const userEmail = req.body.email;
+    console.log("📩 Extracted email:", userEmail); // Debugging log
+
+    if (!userEmail) {
+        console.error("❌ Error: No email provided");
+        return res.status(400).json({ message: "Error: No email provided" });
     }
 
     try {
-        // פענוח הטוקן כדי לקבל את פרטי המשתמש
-        const decoded = jwt.verify(token, 'your-jwt-secret'); // חשוב להחליף ב-secret שלך
-        const userEmail = decoded.email;
-
-        // שליחת המייל
+        // Attempt to send an email
+        console.log("📨 Attempting to send email...");
         await sendNewsletterEmail(userEmail);
+        console.log("✅ Email successfully sent to:", userEmail); // Debugging log
 
-        res.status(200).send("Email sent successfully");
+        res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
-        console.error("Error verifying token:", error);
-        res.status(401).send("Unauthorized: Invalid token");
+        console.error("❌ Error sending email:", error.message); // Log error details
+        res.status(500).json({ message: "Error sending email", error: error.message });
     }
 };
+

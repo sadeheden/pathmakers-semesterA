@@ -1,22 +1,26 @@
 import nodemailer from 'nodemailer';
 
-// Nodemailer transporter configuration
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'youremail@gmail.com', // כתובת המייל שלך
-        pass: 'yourpassword' // הסיסמה שלך
-    }
-});
+import nodemailer from 'nodemailer';
 
-// שליחת המייל
-export const sendNewsletterEmail = async (userEmail) => {
+export const sendNewsletterEmail = async (email) => {
+    console.log("🚀 Preparing email transport...");
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail', // Or use SMTP settings if not Gmail
+        auth: {
+            user: process.env.EMAIL_USER, // Ensure this is set
+            pass: process.env.EMAIL_PASS, // Ensure this is set
+        }
+    });
+
     const mailOptions = {
-        from: 'youremail@gmail.com', // כתובת המייל שלך
-        to: userEmail, // כתובת המייל של המשתמש
-        subject: 'Newsletter Subscription',
-        text: 'You have successfully subscribed to our newsletter. Stay tuned for updates!'
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: "Newsletter Subscription",
+        text: "Thank you for subscribing to our newsletter!"
     };
 
-    return transporter.sendMail(mailOptions);
+    console.log("📨 Sending email to:", email);
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent successfully!");
 };
