@@ -40,8 +40,12 @@ const Header = () => {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
+                    
                 }
+                
             });
+            console.log("🔍 Token Sent:", token);
+
     
             if (res.ok) {
                 const userData = await res.json();

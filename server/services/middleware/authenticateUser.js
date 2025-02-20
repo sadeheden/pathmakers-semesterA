@@ -10,7 +10,7 @@ const authenticateUser = (req, res, next) => {
     const token = authHeader.split(" ")[1]; // ✅ Extract token
 
     try {
-        const decoded = jwt.verify(token, process.env2.JWT_SECRET_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         req.user = decoded; // ✅ Attach user data to request
         next();
     } catch (error) {

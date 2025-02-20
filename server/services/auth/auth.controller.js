@@ -18,8 +18,9 @@ export async function getCurrentUser(req, res) {
         }
 
         try {
+            console.log("🔍 Verifying Token:", token);
             const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-            console.log("✅ Token verified, user:", decoded);
+            console.log("✅ Token verified:", decoded);
             res.json(decoded);
         } catch (error) {
             console.error("❌ JWT Verification Failed:", error.message);
@@ -30,6 +31,7 @@ export async function getCurrentUser(req, res) {
         res.status(500).json({ message: "Server error" });
     }
 }
+
 
 
 // **Register New User**
@@ -83,24 +85,43 @@ export async function register(req, res) {
     }
 }
 
+export async function getAllUsers(req, res) {
+    try {
+        const users = await getUsers();
+        res.status(200).json(users);
+    } catch (error) {
+        console.error("❌ Error fetching users:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 
 // **Login User**
 export async function login(req, res) {
     try {
         const { username, password } = req.body;
+        console.log("🔍 Login Attempt:", username, password);
+
         const users = await getUsers();
+        console.log("📂 Loaded Users:", users);
 
         // Find user by username
         const user = users.find(user => user.username === username);
         if (!user) {
+            console.warn("⚠️ User not found:", username);
             return res.status(401).json({ error: "Invalid username or password" });
         }
+
+        console.log("✅ User Found:", user);
 
         // Compare hashed passwords
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
+            console.warn("⚠️ Incorrect Password for:", username);
             return res.status(401).json({ error: "Invalid username or password" });
         }
+
+        console.log("🔑 Password Matched!");
 
         // Generate JWT token
         const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET_KEY, { expiresIn: "24h" });
@@ -112,35 +133,9 @@ export async function login(req, res) {
     }
 }
 
+console.log(process.env.JWT_SECRET_KEY);
+
 // **Get Current User**
-export async function getCurrentUser(req, res) {
-    try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
-            console.warn("⚠️ No Authorization header received");
-            return res.status(401).json({ message: "Unauthorized, no token provided" });
-        }
-
-        const token = authHeader.split(" ")[1];
-        if (!token) {
-            console.warn("⚠️ Token missing from Authorization header");
-            return res.status(401).json({ message: "Unauthorized, token missing" });
-        }
-
-        try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-            console.log("✅ Token verified, user:", decoded);
-            res.json(decoded);
-        } catch (error) {
-            console.error("❌ JWT Verification Failed:", error.message);
-            return res.status(401).json({ message: "Unauthorized, invalid token" });
-        }
-    } catch (error) {
-        console.error("⚠️ Unexpected error in getCurrentUser:", error);
-        res.status(500).json({ message: "Server error" });
-    }
-}
-
 
 // **Logout**
 export async function logout(req, res) {

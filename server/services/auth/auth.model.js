@@ -21,7 +21,6 @@ export const getUsers = async () => {
     }
 };
 
-
 // **Save Users to File**
 export const saveUsers = async (users) => {
     try {
