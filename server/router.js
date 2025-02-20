@@ -2,7 +2,7 @@ import Router from 'express';
 import authRouter from './services/auth/auth.router.js';
 import uploadRouter from './services/upload/upload.router.js';
 import citiesRouter from './services/cities/cities.router.js';
-
+import sendNewsletterRouter from './newsletterRouter.js';
 
 const router = Router();
 
@@ -14,6 +14,5 @@ router.get('/', (req, res) => {
 router.use('/auth', authRouter);
 router.use('/upload', uploadRouter);
 router.use('/cities', citiesRouter); 
-
+router.use('/api/newsletterRouter', sendNewsletterRouter);
 export default router;
-
