@@ -15,29 +15,28 @@ const VideoExplanation = () => {
             <div className="videoContainer">
                 <video 
                     className="video" 
-                    autoPlay  // ✅ Enables autoplay
-                 
-                    loop      // ✅ Loops the video
-                    playsInline // ✅ Ensures it works properly on mobile
-                    controls  // ✅ Still allows users to control playback
+                    autoPlay  
+                    loop      
+                    playsInline 
+                    controls  
                 >
                     <source src={ph} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div className="textContainer">
-                <h1 className="title">How to Use the Website</h1>
+                <h1 className="title">🎬 How to Use the Website 🌍</h1>
                 <p className="description">
-                    This video explains how to navigate and use the website efficiently. 
-                    Watch the video to understand the features, and learn how to get 
-                    the most out of your experience.
+                    Watch the video below to explore all the features of our platform! 
+                    You'll learn how to navigate through the website efficiently and 
+                    get the most out of your experience. 🌟✨
                 </p>
                 <div className="buttonContainer">
                     <button 
                         className="nextButton"
                         onClick={handleContinue}
                     >
-                        Continue
+                        Continue 🚀
                     </button>
                 </div>
             </div>
