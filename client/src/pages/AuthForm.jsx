@@ -103,22 +103,6 @@ const AuthForm = ({ isLogin }) => {
             console.error("❌ Auth error:", error);
             setErrors({ submit: "An error occurred. Please try again." });
         }
-        try {
-            const response = await fetch("/upload/single", {
-                method: "POST",
-                body: formData,
-            });
-        
-            const data = await response.json();
-            
-            if (!response.ok || !data.url) {
-                throw new Error(data.error || "Upload failed");
-            }
-        
-            console.log("✅ File uploaded successfully:", data.url);
-        } catch (error) {
-            console.error("❌ Upload Error:", error);
-        }
         
     };
 
