@@ -174,10 +174,17 @@ const TravelPlannerApp = () => {
       label: "Payment",
       icon: CreditCard,
       questions: [
-        { prompt: "Select payment method", options: ["Credit Card", "PayPal", "Bank Transfer", "Crypto"] },
-        { prompt: "Do you have a promo code?", type: "text" },
+        {
+          prompt: "Select payment method",
+          options: ["Credit Card", "PayPal", "Bank Transfer", "Crypto"],
+        },
+        {
+          prompt: "Do you have a promo code?",
+          type: "text",
+        },
       ],
-    },
+    }
+    ,
     {
       label: "Transportation",
       icon: Car,
@@ -257,11 +264,16 @@ const TravelPlannerApp = () => {
                 />
               ) : (
                 <select
-                  value={userResponses[q.prompt] || ""}
-                  onChange={(e) =>
-                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value })
+                value={userResponses[q.prompt] || ""}
+                onChange={(e) => {
+                  setUserResponses({ ...userResponses, [q.prompt]: e.target.value });
+                  
+                  if (q.prompt === "Select payment method") {
+                    alert(`Simulating ${e.target.value} payment process...`);
                   }
-                >
+                }}
+              >
+              
                   <option value="" disabled>Select an option</option>
                   {q.options &&
                     q.options.length > 0 &&
@@ -275,20 +287,23 @@ const TravelPlannerApp = () => {
             </div>
           ))}
         </div>
-          <button
-            onClick={() => setCurrentStep((prev) => prev - 1)}
-            disabled={currentStep === 0}
-            className="custom-btn1"
-          >
-            Back
-          </button>
-          <button
-            onClick={() => setCurrentStep((prev) => prev + 1)}
-            disabled={currentStep === steps.length - 1 || !userResponses[steps[currentStep].questions[0]?.prompt]}
-            className="custom-btn2"
-          >
-            Next <ChevronRight />
-          </button>
+        <div className="navigation-buttons">
+  <button
+    onClick={() => setCurrentStep((prev) => prev - 1)}
+    disabled={currentStep === 0}
+    className="custom-btn1"
+  >
+    Back
+  </button>
+  <button
+    onClick={() => setCurrentStep((prev) => prev + 1)}
+    disabled={currentStep === steps.length - 1 || !userResponses[steps[currentStep].questions[0]?.prompt]}
+    className="custom-btn2"
+  >
+    Next <ChevronRight />
+  </button>
+</div>
+
         </div>
     );
   };

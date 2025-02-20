@@ -44,7 +44,7 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--button-text-color);
-    background-color: #004e75; /* Same blue as global buttons */
+    background-color: #4298c2; /* Same blue as global buttons */
     border: none;
     border-radius: 25px; /* Rounded corners */
     cursor: pointer;
@@ -60,7 +60,7 @@
 
 /* Hover effect */
 .nextButton:hover {
-    background-color: #13394c; /* Darker blue */
+    background-color: #3c85a9; /* Darker blue */
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
