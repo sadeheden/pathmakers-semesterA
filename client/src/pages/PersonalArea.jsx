@@ -5,6 +5,7 @@ import "../assets/styles/PersonalArea.css";
 const PersonalArea = () => {
     const [activeTab, setActiveTab] = useState("userInfo"); // Default tab
     const [user, setUser] = useState(null); // Stores logged-in user data
+    const [email, setEmail] = useState(""); // Store email input for newsletter
     const navigate = useNavigate();
 
     // Fetch logged-in user from backend
@@ -57,11 +58,10 @@ const PersonalArea = () => {
     };
 
     const handleSubscribe = async () => {
-        const token = localStorage.getItem("authToken"); // Get token from storage
+        const token = localStorage.getItem("authToken"); 
 
-        if (!token) {
-            console.warn("⚠️ No token found, please log in first.");
-            navigate("/login");
+        if (!email.trim()) {
+            alert("⚠️ Please enter a valid email.");
             return;
         }
 
@@ -71,16 +71,21 @@ const PersonalArea = () => {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
-                }
+                },
+                body: JSON.stringify({ email }) // Send the entered email
             });
 
             if (response.ok) {
-                alert("Subscription successful, check your inbox!");
+                alert("✅ Subscription successful, check your inbox!");
+                setEmail(""); // Clear input field after successful submission
             } else {
-                console.error("⚠️ Failed to subscribe:", response.status);
+                const errorData = await response.json();
+                console.error("⚠️ Failed to subscribe:", errorData.message || response.status);
+                alert("⚠️ Failed to subscribe. " + (errorData.message || "Please try again."));
             }
         } catch (error) {
             console.error("⚠️ Error during subscription:", error);
+            alert("⚠️ An error occurred. Please try again later.");
         }
     };
 
@@ -145,6 +150,13 @@ const PersonalArea = () => {
                         <div className="profileInfo">
                             <p>Get the latest updates and travel deals straight to your inbox!</p>
                         </div>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="newsletter-input"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                         <button onClick={handleSubscribe} className="buttonP">Subscribe</button>
                     </>
                 )}
@@ -154,6 +166,7 @@ const PersonalArea = () => {
 };
 
 export default PersonalArea;
+
 
 
 
