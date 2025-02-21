@@ -8,80 +8,104 @@ const PersonalArea = () => {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false); // State for loading
     const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
-    const [editedUser, setEditedUser] = useState({ username: "", email: "" });
+    const [editedUser, setEditedUser] = useState({
+        username: "",
+        address: "",
+        city: "",
+        country: "",
+        phone: "",
+        gender: "Other", // Default to avoid undefined
+        membership: "No", // Default No
+    });
+    
+    
     const navigate = useNavigate();
 
     // Fetch logged-in user from backend
-    useEffect(() => {
-        const fetchUser = async () => {
-            const token = localStorage.getItem("authToken");
+   // Fetch logged-in user from new info storage
+   useEffect(() => {
+    const fetchUser = async () => {
+        const token = localStorage.getItem("authToken");
 
-            if (!token) {
-                console.warn("⚠️ No token found, redirecting to login.");
-                navigate("/login");
-                return;
-            }
+        if (!token) {
+            console.warn("⚠️ No token found, redirecting to login.");
+            navigate("/login");
+            return;
+        }
 
-            try {
-                const response = await fetch("http://localhost:4000/api/auth/user", {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    }
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    setUser(data);
-                    setEditedUser({ username: data.username, email: data.email });
-                } else {
-                    console.error("⚠️ Failed to fetch user:", response.status);
-                    setUser(null);
-                    navigate("/login");
+        try {
+            const response = await fetch("http://localhost:4000/api/info/user", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,  // ✅ Added token
+                    "Content-Type": "application/json"
                 }
-            } catch (error) {
-                console.error("⚠️ Error fetching user data:", error);
-                setUser(null);
-                navigate("/login");
-            }
-        };
+            });
 
-        fetchUser();
-    }, [navigate]);
+            const data = await response.json();
+            if (response.ok) {
+                console.log("✅ User fetched successfully:", data);
+                setUser(data);
+                setEditedUser({
+                    username: data.username || "",
+                    address: data.address || "",
+                    city: data.city || "",
+                    country: data.country || "",
+                    phone: data.phone || "",
+                    gender: data.gender || "Other",
+                    membership: data.membership || "No",
+                });
+            } else {
+                console.error("⚠️ Failed to fetch user:", response.status);
+            }
+        } catch (error) {
+            console.error("⚠️ Error fetching user data:", error);
+        }
+    };
+
+    fetchUser();
+}, []);
+
 
     const handleEditProfile = () => {
         setIsEditing(true);
     };
 
     const handleSaveProfile = async () => {
-        if (!editedUser.username || !editedUser.email) {
-            alert("⚠️ All fields are required!");
-            return;
-        }
-
         setLoading(true);
-
         const token = localStorage.getItem("authToken");
-
+    
+        // ✅ Only send fields that have changed
+        const updatedData = {};
+        for (const key in editedUser) {
+            if (editedUser[key] !== user[key]) {
+                updatedData[key] = editedUser[key]; // ✅ Only add changed fields
+            }
+        }
+    
+        console.log("🔍 Sending update:", updatedData); // ✅ Debugging
+    
         try {
-            const response = await fetch("http://localhost:4000/api/auth/user", {
+            const response = await fetch("http://localhost:4000/api/info/user", {
                 method: "PUT",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(editedUser)
+                body: JSON.stringify(updatedData) // ✅ Now sends only changed fields
             });
-
+    
+            const result = await response.json();
+            console.log("🔍 Server response:", result); // ✅ Debugging
+    
             if (response.ok) {
-                // עדכון בשרת הצליח - נקבל את המידע המעודכן
-                const updatedUser = await response.json();
-                setUser(updatedUser); // עדכון ה-user עם המידע החדש
-                setEditedUser({ username: updatedUser.username, email: updatedUser.email }); // עדכון גם בערכים המעודכנים
-                setIsEditing(false); // יציאה ממצב עריכה
+                setUser(result);
+                setEditedUser(result);
+                setIsEditing(false);
+                console.log("✅ Profile updated successfully.");
             } else {
-                alert("⚠️ Failed to update profile. Please try again.");
+                console.error("⚠️ Failed to update profile:", result);
+                alert("⚠️ Error updating profile: " + (result.message || "Please try again."));
             }
         } catch (error) {
             console.error("⚠️ Error updating profile:", error);
@@ -90,6 +114,8 @@ const PersonalArea = () => {
             setLoading(false);
         }
     };
+    
+    
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
@@ -151,34 +177,118 @@ const PersonalArea = () => {
                         <div className="profileInfo">
                             {user ? (
                                 <>
-                                    {isEditing ? (
-                                        <>
-                                            <input
-                                                type="text"
-                                                value={editedUser.username}
-                                                onChange={(e) =>
-                                                    setEditedUser({ ...editedUser, username: e.target.value })
-                                                }
-                                                placeholder="Username"
-                                            />
-                                            <input
-                                                type="email"
-                                                value={editedUser.email}
-                                                onChange={(e) =>
-                                                    setEditedUser({ ...editedUser, email: e.target.value })
-                                                }
-                                                placeholder="Email"
-                                            />
-                                            <button onClick={handleSaveProfile} className="button">Save</button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <p><strong>Username:</strong> {user.username}</p>
-                                            <p><strong>Email:</strong> {user.email}</p>
-                                            <p><strong>Status:</strong> Logged in</p>
-                                            <button onClick={handleEditProfile} className="button">Edit Profile</button>
-                                        </>
-                                    )}
+                                {isEditing ? (
+    <>
+        <label>Username</label>
+        <input
+    type="text"
+    value={editedUser.username || ""}
+    onChange={(e) =>
+        setEditedUser({ ...editedUser, username: e.target.value })
+    }
+    placeholder="Enter username"
+/>
+
+
+        <label>Address</label>
+        <input
+    type="text"
+    value={editedUser.address || ""}
+    onChange={(e) =>
+        setEditedUser({ ...editedUser, address: e.target.value })
+    }
+/>
+
+        <label>City</label>
+        <input
+            type="text"
+            value={editedUser.city}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, city: e.target.value })
+            }
+            placeholder="Enter your city"
+        />
+
+        <label>Country</label>
+        <input
+            type="text"
+            value={editedUser.country}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, country: e.target.value })
+            }
+            placeholder="Enter your country"
+        />
+
+        <label>Phone Number</label>
+        <input
+            type="tel"
+            value={editedUser.phone}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, phone: e.target.value })
+            }
+            placeholder="Enter phone number"
+        />
+
+        <label>Gender</label>
+        <select
+            value={editedUser.gender}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, gender: e.target.value })
+            }
+        >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <label>Membership</label>
+<div className="membership-options" style={{ display: "flex", flexDirection: "column" }}>
+    <label style={{ fontSize: "12px", marginBottom: "5px" }}>
+        <input
+            type="radio"
+            name="membership"
+            value="Yes"
+            checked={editedUser.membership === "Yes"}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, membership: e.target.value })
+            }
+            style={{ transform: "scale(0.8)", marginRight: "5px" }} // ✅ Smaller
+        />
+        Yes
+    </label>
+    <label style={{ fontSize: "12px", marginBottom: "5px" }}>
+        <input
+            type="radio"
+            name="membership"
+            value="No"
+            checked={editedUser.membership === "No"}
+            onChange={(e) =>
+                setEditedUser({ ...editedUser, membership: e.target.value })
+            }
+            style={{ transform: "scale(0.8)", marginRight: "5px" }} // ✅ Smaller
+        />
+        No
+    </label>
+</div>
+
+
+
+        <button onClick={handleSaveProfile} className="button">Save</button>
+    </>
+) : (
+    <>
+        <p><strong>Username:</strong> {user.username}</p>
+        <p><strong>Address:</strong> {user.address || "Not provided"}</p>
+        <p><strong>City:</strong> {user.city || "Not provided"}</p>
+        <p><strong>Country:</strong> {user.country || "Not provided"}</p>
+        <p><strong>Phone Number:</strong> {user.phone || "Not provided"}</p>
+        <p><strong>Gender:</strong> {user.gender || "Not provided"}</p>
+        <p><strong>Membership:</strong> {user.membership === "Yes" ? "✅ Yes" : "❌ No"}</p>
+        
+        <button onClick={handleEditProfile} className="button">Edit Profile</button>
+    </>
+)}
+
                                 </>
                             ) : (
                                 <p>Please log in to see your details.</p>
