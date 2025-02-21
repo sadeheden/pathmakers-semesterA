@@ -7,10 +7,25 @@ import html2canvas from "html2canvas";
 
 
 const TravelPlannerApp = () => {
+  useEffect(() => {
+    const hasLoggedIn = sessionStorage.getItem("hasLoggedIn");
+
+    if (!hasLoggedIn) {
+      // Reset progress only if it's a new login session
+      setCurrentStep(0);
+      setUserResponses({});
+      localStorage.removeItem("currentStep");
+      localStorage.removeItem("userResponses");
+
+      // Mark session as logged in
+      sessionStorage.setItem("hasLoggedIn", "true");
+    }
+  }, []); 
   const [currentStep, setCurrentStep] = useState(() => {
     const savedStep = localStorage.getItem("currentStep");
     return savedStep !== null ? parseInt(savedStep) : 0; // Ensure it doesn't return NaN
   });
+  
   
   // Save currentStep to localStorage when it changes
   useEffect(() => {
@@ -445,7 +460,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               <p><strong>Hotel:</strong> {userResponses["Select your hotel"] || "N/A"}</p>
               <p><strong>Attractions:</strong> {userResponses["Select attractions to visit"] || "N/A"}</p>
               <p><strong>Transportation:</strong> {userResponses["Select your mode of transportation"] || "N/A"}</p>
-              <p><strong>Payment Method:</strong> {userResponses["Select payment method"] || "N/A"}</p>
+              <p><savedStep strong>Payment Method:</savedStep> {userResponses["Select payment method"] || "N/A"}</p>
               <h3>Total Price: ${totalPrice}</h3>
             </div>
     

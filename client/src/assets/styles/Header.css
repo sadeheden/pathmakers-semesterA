@@ -187,6 +187,36 @@
 .hamburger.active .line:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
+.logoutButton {
+  background-color: #004e75; /* Blue color to match header */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+  display: block;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effect */
+.logoutButton:hover {
+  background-color: #13394c; /* Darker blue */
+  transform: scale(1.05); /* Slightly bigger on hover */
+}
+
+  
+  /* Login Icon */
+.login-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
