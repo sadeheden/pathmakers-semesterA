@@ -324,25 +324,26 @@ const PersonalArea = () => {
                     </>
                 )}
 
-                {/* Newsletter Subscription */}
-                {activeTab === "newsletter" && (
-                    <>
-                        <h2 className="heading">Sign Up for Newsletter</h2>
-                        <div className="profileInfo">
-                            <p>Get the latest updates and travel deals straight to your inbox!</p>
-                        </div>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            className="newsletter-input"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <button onClick={handleSubscribe} className="buttonP" disabled={loading}>
-                            {loading ? "Subscribing..." : "Subscribe"}
-                        </button>
-                    </>
-                )}
+              {/* Newsletter Subscription */}
+{activeTab === "newsletter" && (
+    <>
+        <h2 className="heading">Sign Up for Newsletter</h2>
+        <div className="profileInfo">
+            <p>Get the latest updates and travel deals straight to your inbox!</p>
+        </div>
+        <input
+            type="email"
+            placeholder="Enter your email"
+            className="newsletter-input"  // ✅ Apply new styling
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+        />
+        <button onClick={handleSubscribe} className="newsletter-button" disabled={loading}>
+            {loading ? "Subscribing..." : "Subscribe"}
+        </button>
+    </>
+)}
+
             </div>
         </div>
     );
