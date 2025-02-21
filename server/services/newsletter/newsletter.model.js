@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
 
-import nodemailer from 'nodemailer';
 
 export const sendNewsletterEmail = async (email) => {
     console.log("🚀 Preparing email transport...");
