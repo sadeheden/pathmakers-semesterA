@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, MapPin, Plane, Hotel, Compass, Car, CreditCard, CheckCircle } from "lucide-react";
 import "../assets/styles/chat.css";
+import { jsPDF } from "jspdf"; 
+import html2canvas from "html2canvas";
+
 
 const TravelPlannerApp = () => {
   const [currentStep, setCurrentStep] = useState(() => {
@@ -365,29 +368,65 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
     
-      const handleDownloadSummary = () => {
-        const summaryText = `
-        === Trip Summary ===
-        Departure City: ${userResponses["What is your departure city?"] || "N/A"}
-        Destination City: ${userResponses["What is your destination city?"] || "N/A"}
-        Flight: ${userResponses["Select your flight"] || "N/A"}
-        Hotel: ${userResponses["Select your hotel"] || "N/A"}
-        Attractions: ${userResponses["Select attractions to visit"] || "N/A"}
-        Transportation: ${userResponses["Select your mode of transportation"] || "N/A"}
-        Payment Method: ${userResponses["Select payment method"] || "N/A"}
-        Total Price: $${totalPrice}
-        ===================
-        `;
-    
-        const blob = new Blob([summaryText], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "trip_summary.txt";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+
+      const handleDownloadSummary = async () => {
+        try {
+          const doc = new jsPDF("p", "mm", "a4");
+          const currentDate = new Date().toLocaleDateString(); // Get current date
+      
+          // Title: "Pathmakers" in Bold
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(20);
+          doc.text("Pathmakers", 10, 20); 
+      
+          // Subtitle: Invoice and Date
+          doc.setFontSize(14);
+          doc.setFont("helvetica", "normal");
+          doc.text(`Invoice`, 10, 30);
+          doc.text(`Date: ${currentDate}`, 10, 40);
+      
+          // Table Headers
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(12);
+          doc.text("Description", 10, 60);
+          doc.text("Price ($)", 130, 60);
+          doc.text("Qty", 160, 60);
+          doc.text("Total ($)", 180, 60);
+      
+          // Table Data
+          doc.setFont("helvetica", "normal");
+          let yPosition = 70;
+          const tripDetails = [
+            { label: "Flight", value: userResponses["Select your flight"], price: 200 },
+            { label: "Hotel", value: userResponses["Select your hotel"], price: 100 },
+            { label: "Attractions", value: userResponses["Select attractions to visit"], price: 50 },
+            { label: "Transportation", value: userResponses["Select your mode of transportation"], price: 30 },
+            { label: "Payment Method", value: userResponses["Select payment method"], price: 0 },
+          ];
+      
+          tripDetails.forEach((detail) => {
+            doc.text(detail.label, 10, yPosition);
+            doc.text(detail.value || "N/A", 40, yPosition);
+            doc.text(detail.price.toString(), 130, yPosition);
+            doc.text("1", 160, yPosition);
+            doc.text(detail.price.toString(), 180, yPosition);
+            yPosition += 10;
+          });
+      
+          // Total Price
+          doc.setFont("helvetica", "bold");
+          doc.text(`Total Price: $${calculateTotalPrice()}`, 10, yPosition + 10);
+      
+          // Save PDF
+          doc.save("Invoice_Pathmakers.pdf");
+        } catch (error) {
+          console.error("Error generating invoice PDF:", error);
+        }
       };
-    
+      
+      
+      
+      
       const handleRestartTrip = () => {
         setUserResponses({});
         setCurrentStep(0);
@@ -411,7 +450,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             </div>
     
             <div className="summary-buttons">
-              <button className="download-btn" onClick={handleDownloadSummary}>Download Summary</button>
+              <button className="download-btn" onClick={handleDownloadSummary}>Download receipt</button>
               <button className="personal-area-btn" onClick={() => window.location.href = "/personal-area"}>
                 Go to Personal Area
               </button>
