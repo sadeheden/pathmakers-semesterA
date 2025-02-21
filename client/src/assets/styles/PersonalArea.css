@@ -88,15 +88,40 @@
     transform: scale(1.05);
 }
 
-/* 📩 Newsletter Input */
+/* 📩 Newsletter Input - Smaller */
 .newsletter-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
+    width: 80%;  /* Reduce width */
+    padding: 8px;  /* Reduce padding */
+    font-size: 0.9rem;  /* Reduce font size */
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 10px;
+    display: block;
+    margin: 0 auto;  /* Center input */
 }
+
+/* 📩 Newsletter Button - Match Other Buttons */
+.newsletter-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2; /* Match profile button */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.newsletter-button:hover {
+    background-color: #357ab7;
+    transform: scale(1.05);
+}
+
 
 /* 🖥️ Responsive Design */
 @media (max-width: 768px) {
