@@ -221,106 +221,129 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
   );
 
   // Define PaymentModal first// Define PaymentModal first
-const PaymentModal = ({ isOpen, onClose, totalAmount, onPaymentSuccess, userResponses }) => {
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [error, setError] = useState("");
-
-  const handlePayment = () => {
-    const departureDateStr = userResponses["Travel dates (departure)?"];
-    const returnDateStr = userResponses["Travel dates (return)?"];
-    const cardNumber = document.getElementById("cardNumber")?.value;
-    const fullName = document.getElementById("fullName")?.value;
-    const expiryDate = document.getElementById("expiryDate")?.value;
-    const cvv = document.getElementById("cvv")?.value;
+  const PaymentModal = ({ isOpen, onClose, totalAmount, onPaymentSuccess, userResponses }) => {
+    const [cardNumber, setCardNumber] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [expiryDate, setExpiryDate] = useState("");
+    const [cvv, setCvv] = useState("");
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [error, setError] = useState("");
   
-    // Validate Dates
-    if (!departureDateStr || !returnDateStr) {
-      setError("Please select both departure and return dates.");
-      return;
-    }
+    const handlePayment = () => {
+      const departureDateStr = userResponses["Travel dates (departure)?"];
+      const returnDateStr = userResponses["Travel dates (return)?"];
   
-    const departureDate = new Date(departureDateStr);
-    const returnDate = new Date(returnDateStr);
+      // Validate Dates
+      if (!departureDateStr || !returnDateStr) {
+        setError("Please select both departure and return dates.");
+        return;
+      }
   
-    if (departureDate >= returnDate) {
-      setError("Return date must be after departure date.");
-      return;
-    }
+      const departureDate = new Date(departureDateStr);
+      const returnDate = new Date(returnDateStr);
   
-    // Validate Payment Details
-    if (!cardNumber || cardNumber.length !== 16 || isNaN(cardNumber)) {
-      setError("Invalid Card Number. It should be 16 digits.");
-      return;
-    }
+      if (departureDate >= returnDate) {
+        setError("Return date must be after departure date.");
+        return;
+      }
   
-    if (!fullName || fullName.trim().length < 3) {
-      setError("Invalid Name. Please enter a valid full name.");
-      return;
-    }
+      // Validate Payment Details
+      if (!/^\d{16}$/.test(cardNumber)) {
+        setError("Invalid Card Number. It should be exactly 16 digits.");
+        return;
+      }
   
-    if (!expiryDate || !expiryDate.match(/^(0[1-9]|1[0-2])\/\d{4}$/)) {
-      setError("Invalid Expiry Date. Format should be MM/YYYY.");
-      return;
-    }
+      if (!fullName.trim() || fullName.trim().length < 3) {
+        setError("Invalid Name. Please enter a valid full name.");
+        return;
+      }
   
-    if (!cvv || cvv.length !== 3 || isNaN(cvv)) {
-      setError("Invalid CVV. It should be 3 digits.");
-      return;
-    }
+      if (!/^(0[1-9]|1[0-2])\/\d{4}$/.test(expiryDate)) {
+        setError("Invalid Expiry Date. Format should be MM/YYYY.");
+        return;
+      }
   
-    // If everything is valid
-    setPaymentSuccess(true);
-    setError("");
+      if (!/^\d{3}$/.test(cvv)) {
+        setError("Invalid CVV. It should be exactly 3 digits.");
+        return;
+      }
   
-    setTimeout(() => {
-      setPaymentSuccess(false);
-      onClose();
-      onPaymentSuccess();
-    }, 2000);
+      // If everything is valid
+      setPaymentSuccess(true);
+      setError("");
+  
+      setTimeout(() => {
+        setPaymentSuccess(false);
+        onClose();
+        onPaymentSuccess();
+      }, 2000);
+    };
+  
+    if (!isOpen) return null;
+  
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          {paymentSuccess ? (
+            <>
+              <h2>🎉 Payment Successful! 🎉</h2>
+              <p>Your payment of <strong>${totalAmount}</strong> has been processed.</p>
+            </>
+          ) : (
+            <>
+              <h2>Credit Card Payment</h2>
+              {error && <p className="error-message">{error}</p>}
+              
+              <label>Card Number</label>
+              <input 
+                type="text" 
+                placeholder="1234 5678 9012 3456"
+                maxLength="16"
+                value={cardNumber}
+                onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, ""))} // Only allow numbers
+              />
+  
+              <label>Full Name</label>
+              <input 
+                type="text" 
+                placeholder="John Doe"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+  
+              <div className="expiry-cvv">
+                <div>
+                  <label>Expiry Date</label>
+                  <input 
+                    type="text" 
+                    placeholder="MM/YYYY" 
+                    value={expiryDate}
+                    onChange={(e) => setExpiryDate(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label>CVV</label>
+                  <input 
+                    type="text" 
+                    placeholder="123"
+                    maxLength="3"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))} // Only allow numbers
+                  />
+                </div>
+              </div>
+  
+              <button className="pay-button" onClick={handlePayment} disabled={paymentSuccess}>
+                {paymentSuccess ? "Processing..." : `Pay $${totalAmount}`}
+              </button>
+              <button className="change-payment" onClick={onClose}>Change payment method</button>
+            </>
+          )}
+        </div>
+      </div>
+    );
   };
   
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        {paymentSuccess ? (
-          <>
-            <h2>🎉 Payment Successful! 🎉</h2>
-            <p>Your payment of <strong>${totalAmount}</strong> has been processed.</p>
-          </>
-        ) : (
-          <>
-            <h2>Credit Card Payment</h2>
-            {error && <p className="error-message">{error}</p>}
-            
-            <label>Card Number</label>
-            <input type="text" placeholder="1234 5678 9012 3456" />
-
-            <label>Full Name</label>
-            <input type="text" placeholder="John Doe" />
-
-            <div className="expiry-cvv">
-              <div>
-                <label>Expiry Date</label>
-                <input type="text" placeholder="MM/YYYY" />
-              </div>
-              <div>
-                <label>CVV</label>
-                <input type="text" placeholder="123" />
-              </div>
-            </div>
-
-            <button className="pay-button" onClick={handlePayment} disabled={paymentSuccess}>
-              {paymentSuccess ? "Processing..." : `Pay $${totalAmount}`}
-            </button>
-            <button className="change-payment" onClick={onClose}>Change payment method</button>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
 
   
   
