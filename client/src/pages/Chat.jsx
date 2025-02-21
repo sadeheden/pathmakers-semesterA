@@ -4,16 +4,32 @@ import { ChevronRight, MapPin, Plane, Hotel, Compass, Car, CreditCard, CheckCirc
 import "../assets/styles/chat.css";
 
 const TravelPlannerApp = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [userResponses, setUserResponses] = useState({});
+  const [currentStep, setCurrentStep] = useState(() => {
+    const savedStep = localStorage.getItem("currentStep");
+    return savedStep !== null ? parseInt(savedStep) : 0; // Ensure it doesn't return NaN
+  });
+  
+  // Save currentStep to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("currentStep", currentStep);
+  }, [currentStep]);
+  
+  const [userResponses, setUserResponses] = useState(() => {
+    const savedResponses = localStorage.getItem("userResponses");
+    return savedResponses ? JSON.parse(savedResponses) : {};
+  });
+  
+  // Save responses to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("userResponses", JSON.stringify(userResponses));
+  }, [userResponses]);
+  
   const [loadedCities, setLoadedCities] = useState([]);
   const [loadedFlights, setLoadedFlights] = useState([]);
   const [loadedHotels, setLoadedHotels] = useState([]);
   const [loadedAttractions, setLoadedAttractions] = useState([]);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 const [paymentCompleted, setPaymentCompleted] = useState(false);
-
-  
 
 
   useEffect(() => {
@@ -350,11 +366,10 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
   
   const renderStepContent = () => {
     const step = steps[currentStep];
-
+  
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
-    
-      // Function to handle downloading the summary as a text file
+  
       const handleDownloadSummary = () => {
         const summaryText = `
         === Trip Summary ===
@@ -368,7 +383,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         Total Price: $${totalPrice}
         ===================
         `;
-        
+  
         const blob = new Blob([summaryText], { type: "text/plain" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
@@ -377,7 +392,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         link.click();
         document.body.removeChild(link);
       };
-    
+  
       return (
         <div className="trip-summary-container">
           <div className="summary-box">
@@ -392,8 +407,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               <p><strong>Payment Method:</strong> {userResponses["Select payment method"] || "N/A"}</p>
               <h3>Total Price: ${totalPrice}</h3>
             </div>
-    
-            {/* Buttons */}
+  
             <div className="summary-buttons">
               <button className="download-btn" onClick={handleDownloadSummary}>Download Summary</button>
               <button className="personal-area-btn" onClick={() => window.location.href = "/personal-area"}>
@@ -404,7 +418,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         </div>
       );
     }
-    
+  
     return (
       <div className="step">
         <div className="step-header">
@@ -416,26 +430,56 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             <div key={index}>
               <label>{q.prompt}</label>
               {q.type === "text" || q.type === "date" ? (
+                <>
+                  {/* Handle Departure Date */}
+                  {q.prompt.includes("departure") && (
+                    <input
+                      type="date"
+                      min={new Date().toISOString().split("T")[0]} // Disable past dates
+                      value={userResponses[q.prompt] || ""}
+                      onChange={(e) => {
+                        setUserResponses({
+                          ...userResponses,
+                          [q.prompt]: e.target.value,
+                        });
+                      }}
+                    />
+                  )}
+  
+                  {/* Handle Return Date */}
+                  {q.prompt.includes("return") && (
                 <input
-                  type={q.type}
-                  value={userResponses[q.prompt] || ""}
-                  onChange={(e) =>
-                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value })
-                  }
-                />
+                type="date"
+                min={userResponses["Travel dates (departure)?"] || new Date().toISOString().split("T")[0]}
+                value={userResponses[q.prompt] || ""}
+                onChange={(e) => setUserResponses({ ...userResponses, [q.prompt]: e.target.value })}
+                disabled={!userResponses["Travel dates (departure)?"]}
+              />
+              
+                  )}
+  
+                  {/* Handle Other Inputs */}
+                  {!q.prompt.includes("departure") && !q.prompt.includes("return") && (
+                    <input
+                      type={q.type}
+                      value={userResponses[q.prompt] || ""}
+                      onChange={(e) =>
+                        setUserResponses({ ...userResponses, [q.prompt]: e.target.value })
+                      }
+                    />
+                  )}
+                </>
               ) : (
                 <select
-                value={userResponses[q.prompt] || ""}
-                onChange={(e) => {
-                  setUserResponses({ ...userResponses, [q.prompt]: e.target.value });
-              
-                  if (q.prompt === "Select payment method" && !paymentCompleted) {
-                    setIsPaymentModalOpen(true); // Open payment modal only if not paid
-                  }
-                }}
-              >              
-
-              
+                  value={userResponses[q.prompt] || ""}
+                  onChange={(e) => {
+                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value });
+  
+                    if (q.prompt === "Select payment method" && !paymentCompleted) {
+                      setIsPaymentModalOpen(true); // Open payment modal only if not paid
+                    }
+                  }}
+                >
                   <option value="" disabled>Select an option</option>
                   {q.options &&
                     q.options.length > 0 &&
@@ -450,26 +494,30 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
           ))}
         </div>
         <div className="navigation-buttons">
-  <button
-    onClick={() => setCurrentStep((prev) => prev - 1)}
-    disabled={currentStep === 0}
-    className="custom-btn1"
-  >
-    Back
-  </button>
-  <button
-    onClick={() => setCurrentStep((prev) => prev + 1)}
-    disabled={currentStep === steps.length - 1 || !userResponses[steps[currentStep].questions[0]?.prompt]}
-    className="custom-btn2"
-  >
-    Next <ChevronRight />
-  </button>
-</div>
-
+          <button
+            onClick={() => setCurrentStep((prev) => prev - 1)}
+            disabled={currentStep === 0}
+            className="custom-btn1"
+          >
+            Back
+          </button>
+          <button
+            onClick={() => setCurrentStep((prev) => prev + 1)}
+            disabled={
+              currentStep === steps.length - 1 ||
+              (steps[currentStep]?.questions?.length > 0 && !userResponses[steps[currentStep].questions[0]?.prompt]) ||
+              (step.label === "Flight" && (!userResponses["Travel dates (departure)?"] || !userResponses["Travel dates (return)?"]))
+            }
+            
+            className="custom-btn2"
+          >
+            Next <ChevronRight />
+          </button>
         </div>
+      </div>
     );
   };
-
+  
   return (
     <div className="containerCh">
       <header>
