@@ -134,5 +134,12 @@
     "email": "mayhalaf8@gmail.com",
     "password": "$2b$10$GhzvmC3MlW2QXg2kAKvN5O33qPZ4g38hcwlcl4.bNf6z8H/IUGZaG",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
+  },
+  {
+    "id": "49b727f2-eab4-4fc5-9168-020f7220dad4",
+    "username": "sally",
+    "email": "sally@gmail.com",
+    "password": "$2b$10$EwuKkTrGCZypv79amgmiG.TB3c4K1Hs00mnjqEF3yfxIB.pRyq1A2",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
   }
 ]

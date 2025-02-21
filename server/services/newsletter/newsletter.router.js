@@ -1,8 +1,8 @@
 import express from 'express';
-import { handleNewsletterSubscription } from './newsletter.controller.js'; // Adjust path if needed
+import { handleNewsletterSubscription } from './newsletter.controller.js';
 
 const router = express.Router();
 
-router.post("/", handleNewsletterSubscription); // Keep it clean
+router.post('/', handleNewsletterSubscription);
 
 export default router;

@@ -2,30 +2,21 @@
 :root {
     --primary-font: 'Poppins', sans-serif;
     --text-color: #333;
-    --heading-color: #000; /* Ensures all h1 text is black */
+    --heading-color: #ff7b00; /* Orange heading */
     --line-color: #e9e9e9;
+    --highlight-color: #ff4d4d; /* Red */
+    --bold-color: #0088cc; /* Blue */
+    --special-color: #8e44ad; /* Purple */
 }
-
-
-/* .img {
-    background-image: url('https://www.picshare.co.il/m_pictures/img150375.jpg');
-    background-size: cover; 
-    background-position: center; 
-    background-attachment: fixed; 
-    font-family: var(--primary-font);
-    margin: 0;
-    padding: 0;
-    color: var(--text-color);
-}  */
 
 /* About Container */
 .about-container {
-    max-width: 300px;
-    margin: 90px auto; /* Centers horizontally */
+    max-width: 400px;
+    margin: 90px auto;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.8); /* Adds a transparent white background */
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -33,8 +24,8 @@
 h1 {
     text-align: center;
     position: relative;
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--heading-color);
 }
 
@@ -42,10 +33,44 @@ h1 {
 h1::after {
     content: '';
     display: block;
-    width: 150px;
+    width: 120px;
     height: 4px;
+    background: var(--heading-color);
     margin: 10px auto 0;
     border-radius: 2px;
+}
+
+/* Paragraphs */
+p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Highlighted Words */
+.highlight {
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+.bold-text {
+    color: var(--bold-color);
+    font-weight: bold;
+}
+
+.special-text {
+    color: var(--special-color);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.important {
+    background: linear-gradient(120deg, #ffafbd, #ffc3a0);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
 /* Animation */
@@ -60,37 +85,31 @@ h1::after {
     }
 }
 
-/* Responsive Design for iPhones */
+/* Responsive Design */
 @media (max-width: 430px) {
     .about-container {
-        margin: 15px 10px;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px 10px;
+        padding: 20px;
+        border-radius: 12px;
     }
 
     h1 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     p {
         font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    body {
-        line-height: 1.4;
     }
 }
 
-/* Extra Small Screens (e.g., iPhone SE) */
+/* Extra Small Screens */
 @media (max-width: 360px) {
     .about-container {
-        padding: 10px;
+        padding: 15px;
     }
 
     h1 {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     p {

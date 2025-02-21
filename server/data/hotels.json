@@ -11,6 +11,28 @@
     ]
   },
   {
+    "city": "Paris",
+    "hotels": [
+      { "name": "Le Meurice", "price": 2800 },
+      { "name": "The Ritz Paris", "price": 3200 },
+      { "name": "Shangri-La Hotel Paris", "price": 2900 },
+      { "name": "Four Seasons Hotel George V", "price": 3100 },
+      { "name": "Hôtel Plaza Athénée", "price": 3000 },
+      { "name": "Mandarin Oriental Paris", "price": 2700 }
+    ]
+  },
+  {
+    "city": "London",
+    "hotels": [
+      { "name": "The Ritz London", "price": 3000 },
+      { "name": "Claridge's", "price": 2800 },
+      { "name": "The Savoy", "price": 2900 },
+      { "name": "Four Seasons Hotel London at Park Lane", "price": 3100 },
+      { "name": "The Langham, London", "price": 2700 },
+      { "name": "Mandarin Oriental Hyde Park", "price": 3200 }
+    ]
+  },  
+  {
     "city": "Amsterdam",
     "hotels": [
       { "name": "The Dylan Amsterdam", "price": 1200 },
