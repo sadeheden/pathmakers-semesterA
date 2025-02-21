@@ -16,7 +16,8 @@
 .containerCh {
   max-width: 650px;
   margin: 50px auto;
-  padding: 30px;
+  margin-top: 10px;;
+  padding: 10px;
   background: var(--card-bg);
   border-radius: 20px;
   box-shadow: 0 8px 20px var(--shadow-color);
@@ -48,7 +49,7 @@ h1::after {
 /* Step Content */
 .step {
   background: var(--card-bg);
-  padding: 25px;
+  padding: 15px;
   border-radius: 15px;
   box-shadow: 0 4px 12px var(--shadow-color);
   text-align: center;
@@ -59,7 +60,7 @@ h1::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .step-header svg {
@@ -350,7 +351,7 @@ select:focus {
   text-align: center;
 }
 .trip-summary-container {
-  display: flex;
+  display: contents;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -376,7 +377,8 @@ select:focus {
 }
 
 .summary-details h3 {
-  color: green;
+  color: #9466d1;
+  text-align: center;
 }
 
 .summary-buttons {
@@ -389,16 +391,16 @@ select:focus {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
 .download-btn {
-  background-color: #007bff;
+  background-color: #357ab7;
   color: white;
 }
 
 .personal-area-btn {
-  background-color: #28a745;
+  background-color: #355ab7;
   color: white;
 }
