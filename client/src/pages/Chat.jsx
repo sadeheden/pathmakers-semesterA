@@ -238,60 +238,56 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
 
   // Define PaymentModal first// Define PaymentModal first
   const PaymentModal = ({ isOpen, onClose, totalAmount, onPaymentSuccess, userResponses }) => {
-    const [cardNumber, setCardNumber] = useState("");
     const [fullName, setFullName] = useState("");
+    const [paymentDetails, setPaymentDetails] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [cvv, setCvv] = useState("");
     const [paymentSuccess, setPaymentSuccess] = useState(false);
     const [error, setError] = useState("");
   
+    // Get the current year for expiry date validation
+    const currentYear = new Date().getFullYear();
+    const maxYear = currentYear + 10; // Expiry date limit (10 years in the future)
+  
     const handlePayment = () => {
-      const departureDateStr = userResponses["Travel dates (departure)?"];
-      const returnDateStr = userResponses["Travel dates (return)?"];
+      let errors = [];
   
-      // Validate Dates
-      if (!departureDateStr || !returnDateStr) {
-        setError("Please select both departure and return dates.");
-        return;
-      }
-  
-      const departureDate = new Date(departureDateStr);
-      const returnDate = new Date(returnDateStr);
-  
-      if (departureDate >= returnDate) {
-        setError("Return date must be after departure date.");
-        return;
-      }
-  
-      // Validate Payment Details
-      if (!/^\d{16}$/.test(cardNumber)) {
-        setError("Invalid Card Number. It should be exactly 16 digits.");
-        return;
-      }
-  
+      // Validate Full Name (Required for all payments)
       if (!fullName.trim() || fullName.trim().length < 3) {
-        setError("Invalid Name. Please enter a valid full name.");
-        return;
+        errors.push("❌ Invalid Full Name. Enter at least 3 characters.");
       }
   
-      if (!/^(0[1-9]|1[0-2])\/\d{4}$/.test(expiryDate)) {
-        setError("Invalid Expiry Date. Format should be MM/YYYY.");
-        return;
+      // Validate Payment Details (16-digit for Credit Card, or a required field for others)
+      if (!/^\d{16}$/.test(paymentDetails)) {
+        errors.push("❌ Invalid Payment Number. Must be 16 digits.");
       }
   
+      // Validate Expiry Date (Only future dates, in MM/YYYY format)
+      const expiryMatch = expiryDate.match(/^(0[1-9]|1[0-2])\/(\d{4})$/);
+      if (!expiryMatch || parseInt(expiryMatch[2]) < currentYear || parseInt(expiryMatch[2]) > maxYear) {
+        errors.push(`❌ Invalid Expiry Date. Must be MM/YYYY between ${currentYear}-${maxYear}.`);
+      }
+  
+      // Validate CVV (3 digits)
       if (!/^\d{3}$/.test(cvv)) {
-        setError("Invalid CVV. It should be exactly 3 digits.");
+        errors.push("❌ Invalid CVV. Must be exactly 3 digits.");
+      }
+  
+      // If there are errors, display them and prevent submission
+      if (errors.length > 0) {
+        setError(errors.join("\n"));
         return;
       }
   
-      // If everything is valid
+      // ✅ If no errors, process payment
       setPaymentSuccess(true);
       setError("");
   
       setTimeout(() => {
         setPaymentSuccess(false);
-        onClose();
-        onPaymentSuccess();
+        setIsPaymentModalOpen(false);
+        setPaymentCompleted(true); // ✅ Enables "Next" button
+        onPaymentSuccess(); // ✅ Move to the next step
       }, 2000);
     };
   
@@ -307,17 +303,8 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             </>
           ) : (
             <>
-              <h2>Credit Card Payment</h2>
+              <h2>{userResponses["Select payment method"]} Payment</h2>
               {error && <p className="error-message">{error}</p>}
-              
-              <label>Card Number</label>
-              <input 
-                type="text" 
-                placeholder="1234 5678 9012 3456"
-                maxLength="16"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, ""))} // Only allow numbers
-              />
   
               <label>Full Name</label>
               <input 
@@ -325,6 +312,16 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
                 placeholder="John Doe"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
+              />
+  
+              {/* Payment Number (Same format for all methods) */}
+              <label>Payment Number</label>
+              <input 
+                type="text" 
+                placeholder="1234 5678 9012 3456"
+                maxLength="16"
+                value={paymentDetails}
+                onChange={(e) => setPaymentDetails(e.target.value.replace(/\D/g, ""))} // Only allow numbers
               />
   
               <div className="expiry-cvv">
@@ -360,8 +357,6 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     );
   };
   
-
-  
   
   
   const renderStepContent = () => {
@@ -369,7 +364,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
   
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
-  
+    
       const handleDownloadSummary = () => {
         const summaryText = `
         === Trip Summary ===
@@ -383,7 +378,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         Total Price: $${totalPrice}
         ===================
         `;
-  
+    
         const blob = new Blob([summaryText], { type: "text/plain" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
@@ -392,7 +387,14 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         link.click();
         document.body.removeChild(link);
       };
-  
+    
+      const handleRestartTrip = () => {
+        setUserResponses({});
+        setCurrentStep(0);
+        localStorage.removeItem("userResponses");
+        localStorage.setItem("currentStep", "0");
+      };
+    
       return (
         <div className="trip-summary-container">
           <div className="summary-box">
@@ -407,16 +409,20 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               <p><strong>Payment Method:</strong> {userResponses["Select payment method"] || "N/A"}</p>
               <h3>Total Price: ${totalPrice}</h3>
             </div>
-  
+    
             <div className="summary-buttons">
               <button className="download-btn" onClick={handleDownloadSummary}>Download Summary</button>
               <button className="personal-area-btn" onClick={() => window.location.href = "/personal-area"}>
                 Go to Personal Area
               </button>
+              <button className="personal-area-btn" onClick={handleRestartTrip}>
+                Plan Another Trip
+              </button>
             </div>
           </div>
         </div>
       );
+    
     }
   
     return (
@@ -471,49 +477,76 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
                 </>
               ) : (
                 <select
-                  value={userResponses[q.prompt] || ""}
-                  onChange={(e) => {
-                    setUserResponses({ ...userResponses, [q.prompt]: e.target.value });
-  
-                    if (q.prompt === "Select payment method" && !paymentCompleted) {
-                      setIsPaymentModalOpen(true); // Open payment modal only if not paid
+                value={userResponses[q.prompt] || ""}
+                onChange={(e) => {
+                  const selectedValue = e.target.value;
+              
+                  // ✅ Update user response
+                  setUserResponses((prevResponses) => ({
+                    ...prevResponses,
+                    [q.prompt]: selectedValue,
+                  }));
+              
+                  // ✅ Define payment methods that require confirmation
+                  const methodsRequiringModal = ["Credit Card", "PayPal", "Bank Transfer", "Crypto"];
+              
+                  // ✅ Force modal to open when a payment method is selected
+                  if (q.prompt === "Select payment method") {
+                    if (methodsRequiringModal.includes(selectedValue)) {
+                      console.log(`Reopening payment modal for ${selectedValue}...`);
+                      setIsPaymentModalOpen(false); // Close first
+                      setTimeout(() => setIsPaymentModalOpen(true), 10); // Reopen after a slight delay
+                      setPaymentCompleted(false); // ✅ Reset payment status until payment is successful
+                    } else {
+                      setPaymentCompleted(true); // ✅ Other methods allow instant progress
                     }
-                  }}
-                >
-                  <option value="" disabled>Select an option</option>
-                  {q.options &&
-                    q.options.length > 0 &&
-                    q.options.map((option, i) => (
-                      <option key={i} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                </select>
+                  }
+                }}
+              >
+                <option value="" disabled>Select an option</option>
+                {q.options &&
+                  q.options.length > 0 &&
+                  q.options.map((option, i) => (
+                    <option key={i} value={option}>
+                      {option}
+                    </option>
+                  ))}
+              </select>
+              
+              
               )}
             </div>
           ))}
         </div>
         <div className="navigation-buttons">
-          <button
-            onClick={() => setCurrentStep((prev) => prev - 1)}
-            disabled={currentStep === 0}
-            className="custom-btn1"
-          >
-            Back
-          </button>
-          <button
-            onClick={() => setCurrentStep((prev) => prev + 1)}
-            disabled={
-              currentStep === steps.length - 1 ||
-              (steps[currentStep]?.questions?.length > 0 && !userResponses[steps[currentStep].questions[0]?.prompt]) ||
-              (step.label === "Flight" && (!userResponses["Travel dates (departure)?"] || !userResponses["Travel dates (return)?"]))
-            }
-            
-            className="custom-btn2"
-          >
-            Next <ChevronRight />
-          </button>
-        </div>
+  <button
+    onClick={() => setCurrentStep((prev) => prev - 1)}
+    disabled={currentStep === 0}
+    className="custom-btn1"
+  >
+    Back
+  </button>
+  <button
+  onClick={() => setCurrentStep((prev) => prev + 1)}
+  disabled={
+    currentStep === steps.length - 1 ||
+    (steps[currentStep]?.questions?.length > 0 &&
+      !userResponses[steps[currentStep].questions[0]?.prompt]) ||
+    (step.label === "Flight" &&
+      (!userResponses["Travel dates (departure)?"] ||
+        !userResponses["Travel dates (return)?"])) ||
+    (step.label === "Payment" &&
+      ["Credit Card", "PayPal", "Bank Transfer", "Crypto"].includes(userResponses["Select payment method"]) &&
+      !paymentCompleted) // ✅ Prevents skipping any required payment confirmation
+  }
+  className="custom-btn2"
+>
+  Next <ChevronRight />
+</button>
+
+
+</div>
+
       </div>
     );
   };
@@ -526,15 +559,20 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
       </header>
       {renderStepContent()}
       <PaymentModal 
-      isOpen={isPaymentModalOpen} 
-      onClose={() => setIsPaymentModalOpen(false)} 
-      onPaymentSuccess={() => {
-        setPaymentCompleted(true);
-        setCurrentStep((prev) => prev + 1); // Move to Transportation step
-      }}
-      totalAmount={calculateTotalPrice()} 
-      userResponses={userResponses}
-    />
+  isOpen={isPaymentModalOpen} 
+  onClose={() => {
+    console.log("Closing payment modal...");
+    setIsPaymentModalOpen(false);
+  }} 
+  onPaymentSuccess={() => {
+    console.log("Payment successful, proceeding...");
+    setPaymentCompleted(true);
+    setCurrentStep((prev) => prev + 1); // ✅ Move to the next step
+  }}
+  totalAmount={calculateTotalPrice()} 
+  userResponses={userResponses}
+/>
+
 
 
 {/* <div className="action-buttons">
