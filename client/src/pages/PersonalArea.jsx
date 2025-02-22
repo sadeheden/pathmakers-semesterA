@@ -18,14 +18,60 @@ const PersonalArea = () => {
         membership: "No", // Default No
     });
     
+    const [orders, setOrders] = useState([]);
+
+useEffect(() => {
+    const fetchData = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.warn("⚠️ No token found, redirecting to login.");
+            navigate("/login");
+            return;
+        }
+        await fetchUser();
+        fetchOrders();
+    };
+    fetchData();
+}, []);
+
+
+    const fetchOrders = async () => {
+        try {
+            const token = localStorage.getItem("token"); // Ensure token is retrieved correctly
+            if (!token) {
+                console.error("No token found, please log in again.");
+                return;
+            }
     
+            const response = await fetch("http://localhost:4000/api/order", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`, // Send token in headers
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log("Orders:", data);
+            setOrders(data); // ✅ Update orders state
+        } catch (error) {
+            console.error("Failed to fetch orders:", error.message);
+        }
+    };
+    
+
     const navigate = useNavigate();
 
     // Fetch logged-in user from backend
    // Fetch logged-in user from new info storage
    useEffect(() => {
     const fetchUser = async () => {
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("token");
+
 
         if (!token) {
             console.warn("⚠️ No token found, redirecting to login.");
@@ -73,7 +119,8 @@ const PersonalArea = () => {
 
     const handleSaveProfile = async () => {
         setLoading(true);
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("token");
+
     
         // ✅ Only send fields that have changed
         const updatedData = {};
@@ -118,7 +165,7 @@ const PersonalArea = () => {
     
 
     const handleLogout = () => {
-        localStorage.removeItem("authToken");
+        localStorage.removeItem("token");
         setUser(null);
         navigate("/login");
     };
@@ -299,30 +346,36 @@ const PersonalArea = () => {
                         )}
                     </>
                 )}
+{/* User Orders */}
+{activeTab === "orders" && (
+    <>
+        <h2 className="heading">Previous Orders</h2>
+        {orders.length > 0 ? (
+            <ul className="orders-list">
+                {orders.map((order) => (
+                    <li key={order._id} className="order-item">
+                        <span>
+                            <strong>Order #{order._id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                        </span>
+                        <a
+                            href={`http://localhost:4000/api/order/${order._id}/pdf`}
+                            className="download-pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            📄 Download PDF
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <p>No previous orders found.</p>
+        )}
+    </>
+)}
 
-                {/* User Orders */}
-                {activeTab === "orders" && (
-                    <>
-                        <h2 className="heading">Previous Orders</h2>
-                        {user && user.orders && user.orders.length > 0 ? (
-                            user.orders.map((order, index) => (
-                                <div key={index} className="order-summary">
-                                    <h3>Trip Order #{index + 1}</h3>
-                                    <p><strong>Departure City:</strong> {order.departureCity}</p>
-                                    <p><strong>Destination City:</strong> {order.destinationCity}</p>
-                                    <p><strong>Flight:</strong> {order.flight}</p>
-                                    <p><strong>Hotel:</strong> {order.hotel}</p>
-                                    <p><strong>Attractions:</strong> {order.attractions}</p>
-                                    <p><strong>Transportation:</strong> {order.transportation}</p>
-                                    <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
-                                    <h3>Total Price: ${order.totalPrice}</h3>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No previous orders found.</p>
-                        )}
-                    </>
-                )}
+
+
 
               {/* Newsletter Subscription */}
 {activeTab === "newsletter" && (

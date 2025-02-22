@@ -116,6 +116,59 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
 }
+.orders-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f3e5f5;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.download-pdf {
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+.download-pdf:hover {
+    text-decoration: underline;
+}
+
+/* 📜 Order Summary - Single Line */
+.order-summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f3e5f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+/* 📄 PDF Button */
+.pdf-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pdf-button:hover {
+    background-color: #357ab7;
+    transform: scale(1.05);
+}
+
 
 .newsletter-button:hover {
     background-color: #357ab7;

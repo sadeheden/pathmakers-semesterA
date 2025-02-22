@@ -1,0 +1,15 @@
+[
+    {
+       "id": 1,
+       "userId": "may",
+       "departureCity": "New York",
+       "destinationCity": "Paris",
+       "flight": "Air France - $500",
+       "hotel": "Paris Marriott - $150/night",
+       "attractions": ["Eiffel Tower", "Louvre Museum"],
+       "transportation": "Car",
+       "paymentMethod": "Credit Card",
+       "totalPrice": 1000
+    }
+ ]
+ 
