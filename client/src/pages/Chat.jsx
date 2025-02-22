@@ -383,7 +383,42 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
     
+      const handleSaveOrder = async () => {
+        const token = localStorage.getItem("token");
 
+        const orderData = {
+            departureCity: userResponses["What is your departure city?"],
+            destinationCity: userResponses["What is your destination city?"],
+            flight: userResponses["Select your flight"],
+            hotel: userResponses["Select your hotel"],
+            attractions: userResponses["Select attractions to visit"]?.split(", "),
+            transportation: userResponses["Select your mode of transportation"],
+            paymentMethod: userResponses["Select payment method"],
+            totalPrice: calculateTotalPrice(),
+        };
+    
+        try {
+            const response = await fetch("http://localhost:4000/api/order", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(orderData)
+            });
+    
+            if (!response.ok) {
+                console.error("Failed to save order:", response.status);
+                return;
+            }
+    
+            console.log("✅ Order saved successfully!");
+        } catch (error) {
+            console.error("⚠️ Error saving order:", error);
+        }
+    };
+    
+    
       const handleDownloadSummary = async () => {
         try {
           const doc = new jsPDF("p", "mm", "a4");
@@ -437,6 +472,8 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         } catch (error) {
           console.error("Error generating invoice PDF:", error);
         }
+        await handleSaveOrder(); // ✅ Save order to database
+        generatePDF(); // ✅ Generate invoice
       };
       
       
@@ -460,7 +497,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               <p><strong>Hotel:</strong> {userResponses["Select your hotel"] || "N/A"}</p>
               <p><strong>Attractions:</strong> {userResponses["Select attractions to visit"] || "N/A"}</p>
               <p><strong>Transportation:</strong> {userResponses["Select your mode of transportation"] || "N/A"}</p>
-              <p><savedStep strong>Payment Method:</savedStep> {userResponses["Select payment method"] || "N/A"}</p>
+              <p><strong>Payment Method:</strong> {userResponses["Select payment method"] || "N/A"}</p>
               <h3>Total Price: ${totalPrice}</h3>
             </div>
     
