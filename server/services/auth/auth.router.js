@@ -14,4 +14,3 @@ authRouter.get("/user", authenticateUser, getCurrentUser); // ✅ Protect this r
 
 
 export default authRouter; // ✅ Use ES Module export
-
