@@ -1,15 +1,213 @@
 [
-    {
-       "id": 1,
-       "userId": "may",
-       "departureCity": "New York",
-       "destinationCity": "Paris",
-       "flight": "Air France - $500",
-       "hotel": "Paris Marriott - $150/night",
-       "attractions": ["Eiffel Tower", "Louvre Museum"],
-       "transportation": "Car",
-       "paymentMethod": "Credit Card",
-       "totalPrice": 1000
-    }
- ]
- 
+  {
+    "id": 1,
+    "userId": "may",
+    "departureCity": "New York",
+    "destinationCity": "Paris",
+    "flight": "Air France - $500",
+    "hotel": "Paris Marriott - $150/night",
+    "attractions": [
+      "Eiffel Tower",
+      "Louvre Museum"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1000
+  },
+  {
+    "id": "86861862-1b4a-4856-a751-621de4094990",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:27:00.606Z"
+  },
+  {
+    "id": "476b1949-c95d-4046-b879-ad01fc5792dc",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:31:44.632Z"
+  },
+  {
+    "id": "5f22749c-e92b-4b49-a8c9-3534b5ed9c40",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:35:20.218Z"
+  },
+  {
+    "id": "bf63f69e-5d84-4acc-857d-79e7994a4979",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:36:08.618Z"
+  },
+  {
+    "id": "0c178a87-6005-4cbe-ab3a-7bd6f6220807",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:49:31.430Z"
+  },
+  {
+    "id": "a7b3123b-773e-4fe4-9410-899c5b1d6a76",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:49:32.753Z"
+  },
+  {
+    "id": "a3665aa5-6938-4202-befd-25ac3a21de45",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:49:51.818Z"
+  },
+  {
+    "id": "a966d260-8d54-43f8-8da1-f8ff649200ae",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:52:51.319Z"
+  },
+  {
+    "id": "be03cb32-8c88-4d4f-8011-d169e8f06aa7",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:53:42.133Z"
+  },
+  {
+    "id": "055589d1-613c-49a0-b28a-5c6dad7ee71c",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:54:00.760Z"
+  },
+  {
+    "id": "304f0d72-d618-4e37-9697-ba5bf00c1809",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:54:32.892Z"
+  },
+  {
+    "id": "f6a80297-9d8b-4221-bbe7-a3b61493b0b7",
+    "userId": 1,
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:57:25.939Z"
+  },
+  {
+    "id": "23ec2efb-8d36-4aa9-aaf8-3c8873c93ede",
+    "userId": 1,
+    "username": "may",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Hilton - $200/night",
+    "attractions": [
+      "Statue of Liberty"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 980,
+    "createdAt": "2025-02-23T11:58:56.464Z"
+  }
+]

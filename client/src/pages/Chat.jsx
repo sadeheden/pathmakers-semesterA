@@ -384,8 +384,9 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
       const totalPrice = calculateTotalPrice();
     
       const handleSaveOrder = async () => {
-        const token = localStorage.getItem("token");
-        console.log("🔍 Token before sending request:", token); // ✅ Log token for debugging
+        const token = localStorage.getItem("authToken"); // ✅ Use correct token key
+    
+        console.log("🔍 Token before sending request:", token); // ✅ Debugging
     
         if (!token) {
             console.error("❌ No token found. User might not be logged in.");
@@ -408,7 +409,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             const response = await fetch("http://localhost:4000/api/order", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${token}`, // ✅ Ensure proper format
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(orderData)
@@ -430,9 +431,16 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     };
     
     
+    
     const handleDownloadSummary = async () => {
       try {
-          const token = localStorage.getItem("token");
+          const token = localStorage.getItem("authToken"); // ✅ Ensure correct token key
+  
+          if (!token) {
+              console.error("❌ No token found. User might not be logged in.");
+              alert("⚠️ You must be logged in to save an order.");
+              return;
+          }
   
           const orderData = {
               departureCity: userResponses["What is your departure city?"],
@@ -445,32 +453,47 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               totalPrice: calculateTotalPrice(),
           };
   
+          // ✅ First, save the order and get the order ID
           const response = await fetch("http://localhost:4000/api/order", {
               method: "POST",
               headers: {
-                  "Authorization": `Bearer ${token}`,
+                  "Authorization": `Bearer ${token}`, // ✅ Include the token
                   "Content-Type": "application/json"
               },
               body: JSON.stringify(orderData)
           });
   
           if (!response.ok) {
-              console.error("Failed to save order:", response.status);
+              console.error("❌ Failed to save order:", response.status);
               return;
           }
   
           const savedOrder = await response.json();
-          console.log("✅ Order saved successfully!");
+          console.log("✅ Order saved successfully:", savedOrder);
   
-          // ✅ Trigger PDF download
-          window.open(`http://localhost:4000/api/order/${savedOrder.id}/pdf`, "_blank");
+          // ✅ Now, fetch the PDF using the correct Authorization header
+          const pdfResponse = await fetch(`http://localhost:4000/api/order/${savedOrder.id}/pdf`, {
+              method: "GET",
+              headers: {
+                  "Authorization": `Bearer ${token}` // ✅ Ensure token is included
+              }
+          });
+  
+          if (!pdfResponse.ok) {
+              console.error("❌ Failed to fetch PDF:", pdfResponse.status);
+              return;
+          }
+  
+          // ✅ Convert response to a blob and open the PDF
+          const pdfBlob = await pdfResponse.blob();
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          window.open(pdfUrl, "_blank"); // ✅ Open in a new tab
   
       } catch (error) {
-          console.error("⚠️ Error saving order:", error);
+          console.error("⚠️ Error saving order or fetching PDF:", error);
       }
   };
   
-      
       
       const handleRestartTrip = () => {
         setUserResponses({});

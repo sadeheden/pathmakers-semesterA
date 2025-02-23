@@ -6,18 +6,27 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const FILE_PATH = path.join(process.cwd(), 'data', 'orders.json');
+const FILE_PATH = path.join(__dirname, "../../data/orders.json");
 
 // ✅ Load orders from JSON file
 export const loadOrders = () => {
-    if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, "utf-8");
-        return JSON.parse(data);
+    if (fs.existsSync(FILE_PATH)) {
+        try {
+            const data = fs.readFileSync(FILE_PATH, "utf-8");
+            return JSON.parse(data) || [];
+        } catch (error) {
+            console.error("⚠️ Error reading orders.json:", error);
+            return [];
+        }
     }
-    return []; // Default to an empty array if no data exists
+    return []; // Default to an empty array if no file exists
 };
 
 // ✅ Save orders to JSON file
 export const saveOrders = (orders) => {
-    fs.writeFileSync(filePath, JSON.stringify(orders, null, 2));
+    try {
+        fs.writeFileSync(FILE_PATH, JSON.stringify(orders, null, 2));
+    } catch (error) {
+        console.error("⚠️ Error saving orders.json:", error);
+    }
 };
