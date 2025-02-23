@@ -19,7 +19,7 @@ import './commands'
 import { mount } from '@cypress/react';
 
 Cypress.Commands.add('mount', mount)
-
+export { mount };
 
 // Example use:
 // cy.mount(<MyComponent />)
