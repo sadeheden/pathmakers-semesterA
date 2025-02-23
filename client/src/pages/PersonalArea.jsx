@@ -69,45 +69,43 @@ useEffect(() => {
    useEffect(() => {
     const fetchUser = async () => {
         const token = localStorage.getItem("authToken");
-
-
         if (!token) {
-            console.warn("⚠️ No token found, redirecting to login.");
-            navigate("/login");
+            console.warn("⚠️ No token found. Redirecting to login...");
+            setTimeout(() => navigate("/login"), 1000); // Delay to prevent UI flicker
             return;
         }
 
         try {
-            const response = await fetch("http://localhost:4000/api/info/user", {
+            const response = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${token}`,  // ✅ Added token
+                    "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
             });
 
-            const data = await response.json();
-            if (response.ok) {
-                console.log("✅ User fetched successfully:", data);
-                setUser(data);
-                setEditedUser({
-                    username: data.username || "",
-                    address: data.address || "",
-                    city: data.city || "",
-                    country: data.country || "",
-                    phone: data.phone || "",
-                    gender: data.gender || "Other",
-                    membership: data.membership || "No",
-                });
-            } else {
-                console.error("⚠️ Failed to fetch user:", response.status);
+            if (!response.ok) {
+                console.error("⚠️ Failed to fetch user, status:", response.status);
+                return;
             }
+
+            const userData = await response.json();
+            console.log("✅ User fetched successfully:", userData);
+            setUser(userData);
         } catch (error) {
-            console.error("⚠️ Error fetching user data:", error);
+            console.error("⚠️ Error fetching user session:", error);
         }
     };
 
-    fetchUser();
+    const fetchData = async () => {
+        const token = localStorage.getItem("authToken");
+        if (!token) return;
+        
+        await fetchUser(); // ✅ Ensure fetchUser is called
+        fetchOrders(); // ✅ Ensure fetchOrders is called after user is fetched
+    };
+
+    fetchData();
 }, []);
 
 
