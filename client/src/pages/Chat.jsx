@@ -419,64 +419,46 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     };
     
     
-      const handleDownloadSummary = async () => {
-        try {
-          const doc = new jsPDF("p", "mm", "a4");
-          const currentDate = new Date().toLocaleDateString(); // Get current date
-      
-          // Title: "Pathmakers" in Bold
-          doc.setFont("helvetica", "bold");
-          doc.setFontSize(20);
-          doc.text("Pathmakers", 10, 20); 
-      
-          // Subtitle: Invoice and Date
-          doc.setFontSize(14);
-          doc.setFont("helvetica", "normal");
-          doc.text(`Invoice`, 10, 30);
-          doc.text(`Date: ${currentDate}`, 10, 40);
-      
-          // Table Headers
-          doc.setFont("helvetica", "bold");
-          doc.setFontSize(12);
-          doc.text("Description", 10, 60);
-          doc.text("Price ($)", 130, 60);
-          doc.text("Qty", 160, 60);
-          doc.text("Total ($)", 180, 60);
-      
-          // Table Data
-          doc.setFont("helvetica", "normal");
-          let yPosition = 70;
-          const tripDetails = [
-            { label: "Flight", value: userResponses["Select your flight"], price: 200 },
-            { label: "Hotel", value: userResponses["Select your hotel"], price: 100 },
-            { label: "Attractions", value: userResponses["Select attractions to visit"], price: 50 },
-            { label: "Transportation", value: userResponses["Select your mode of transportation"], price: 30 },
-            { label: "Payment Method", value: userResponses["Select payment method"], price: 0 },
-          ];
-      
-          tripDetails.forEach((detail) => {
-            doc.text(detail.label, 10, yPosition);
-            doc.text(detail.value || "N/A", 40, yPosition);
-            doc.text(detail.price.toString(), 130, yPosition);
-            doc.text("1", 160, yPosition);
-            doc.text(detail.price.toString(), 180, yPosition);
-            yPosition += 10;
+    const handleDownloadSummary = async () => {
+      try {
+          const token = localStorage.getItem("token");
+  
+          const orderData = {
+              departureCity: userResponses["What is your departure city?"],
+              destinationCity: userResponses["What is your destination city?"],
+              flight: userResponses["Select your flight"],
+              hotel: userResponses["Select your hotel"],
+              attractions: userResponses["Select attractions to visit"]?.split(", "),
+              transportation: userResponses["Select your mode of transportation"],
+              paymentMethod: userResponses["Select payment method"],
+              totalPrice: calculateTotalPrice(),
+          };
+  
+          const response = await fetch("http://localhost:4000/api/order", {
+              method: "POST",
+              headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(orderData)
           });
-      
-          // Total Price
-          doc.setFont("helvetica", "bold");
-          doc.text(`Total Price: $${calculateTotalPrice()}`, 10, yPosition + 10);
-      
-          // Save PDF
-          doc.save("Invoice_Pathmakers.pdf");
-        } catch (error) {
-          console.error("Error generating invoice PDF:", error);
-        }
-        await handleSaveOrder(); // ✅ Save order to database
-        generatePDF(); // ✅ Generate invoice
-      };
-      
-      
+  
+          if (!response.ok) {
+              console.error("Failed to save order:", response.status);
+              return;
+          }
+  
+          const savedOrder = await response.json();
+          console.log("✅ Order saved successfully!");
+  
+          // ✅ Trigger PDF download
+          window.open(`http://localhost:4000/api/order/${savedOrder.id}/pdf`, "_blank");
+  
+      } catch (error) {
+          console.error("⚠️ Error saving order:", error);
+      }
+  };
+  
       
       
       const handleRestartTrip = () => {

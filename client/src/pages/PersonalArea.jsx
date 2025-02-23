@@ -353,12 +353,12 @@ useEffect(() => {
         {orders.length > 0 ? (
             <ul className="orders-list">
                 {orders.map((order) => (
-                    <li key={order._id} className="order-item">
+                    <li key={order.id} className="order-item">
                         <span>
-                            <strong>Order #{order._id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                            <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
                         </span>
                         <a
-                            href={`http://localhost:4000/api/order/${order._id}/pdf`}
+                            href={`http://localhost:4000/api/order/${order.id}/pdf`}
                             className="download-pdf"
                             target="_blank"
                             rel="noopener noreferrer"
