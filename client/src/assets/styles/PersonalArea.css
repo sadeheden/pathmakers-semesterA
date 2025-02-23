@@ -116,100 +116,73 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
 }
+/* 📜 Orders List - Better Spacing & Styling */
 .orders-list {
     list-style-type: none;
     padding: 0;
+    margin-top: 20px;
 }
 
+/* 🎟️ Single Order Item */
 .order-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f3e5f5;
-    padding: 10px 15px;
-    border-radius: 5px;
-    margin-bottom: 8px;
+    background: #ece5ff;  /* Light Purple */
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #7a5fd9;  /* Accent border */
 }
 
+/* 🔹 Hover Effect */
+.order-item:hover {
+    background-color: #ded3f7; /* Slightly darker */
+    transform: scale(1.02);
+}
+
+/* 📝 Order Text */
+.order-item span {
+    flex-grow: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 📂 PDF Download Button */
 .download-pdf {
     text-decoration: none;
-    color: #4a90e2;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #4a90e2; /* Pathmakers Blue */
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .download-pdf:hover {
-    text-decoration: underline;
+    color: #357ab7;
+    transform: scale(1.1);
 }
 
-/* 📜 Order Summary - Single Line */
-.order-summary-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f3e5f5;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
+/* 📂 PDF Icon Styling */
+.download-pdf::before {
+    content: "📄 ";
+    font-size: 1.2rem;
 }
-
-/* 📄 PDF Button */
-.pdf-button {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.pdf-button:hover {
-    background-color: #357ab7;
-    transform: scale(1.05);
-}
-
-
-.newsletter-button:hover {
-    background-color: #357ab7;
-    transform: scale(1.05);
-}
-
 
 /* 🖥️ Responsive Design */
 @media (max-width: 768px) {
-    .containerPersonal {
-        max-width: 90%;
-    }
-
-    .tab-buttons {
+    .order-item {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
-
-    .tab-buttons button {
-        width: 100%;
-        text-align: center;
+    
+    .download-pdf {
+        margin-top: 8px;
     }
-
-    .button {
-        width: 100%;
-    }
-
-.order-summary {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .order-summary h3 {
-    color: #333;
-  }
-  
-  .order-summary p {
-    font-size: 16px;
-    margin: 5px 0;
-  }
 }
