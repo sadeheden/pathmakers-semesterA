@@ -1,17 +1,15 @@
-import { getHotelsByCity } from "./hotel.model.js";
+import { loadHotels } from "./hotel.model.js"; // ✅ Ensure it loads data
 
-export const getHotels = async (req, res) => {
-    try {
-        const { city } = req.params;
-        const hotels = await getHotelsByCity(city);
+export const getHotels = (req, res) => {
+    const { city } = req.params;
+    console.log("🔍 Fetching hotels for city:", city);
 
-        if (!hotels.length) {
-            return res.status(404).json({ error: `No hotels found for city: ${city}` });
-        }
+    const hotels = loadHotels(); // ✅ Load from database or JSON file
+    const cityHotels = hotels.filter(hotel => hotel.city.toLowerCase() === city.toLowerCase());
 
-        res.json(hotels);
-    } catch (error) {
-        console.error("Error fetching hotels:", error);
-        res.status(500).json({ error: "Server error" });
+    if (cityHotels.length === 0) {
+        return res.status(404).json({ message: "No hotels found for this city." });
     }
+
+    res.json(cityHotels);
 };
