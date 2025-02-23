@@ -12,5 +12,4 @@ authRouter.post("/logout", logout);
 authRouter.delete("/users/:id", removeUser);
 authRouter.get("/user", authenticateUser, getCurrentUser); // ✅ Protect this route
 
-
 export default authRouter; // ✅ Use ES Module export
