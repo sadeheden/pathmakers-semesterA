@@ -4,7 +4,6 @@ import uploadRouter from './services/upload/upload.router.js';
 import citiesRouter from './services/cities/cities.router.js';
 
 const router = Router();
-
 router.get('/', (req, res) => {
     res.json({ message: 'API is working!' });
 });
