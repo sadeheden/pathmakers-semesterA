@@ -23,7 +23,7 @@ const PersonalArea = () => {
     const [orders, setOrders] = useState([]);
     const fetchOrders = async () => {
         try {
-            const token = localStorage.getItem("authToken"); // ✅ Use `authToken` for consistency
+            const token = localStorage.getItem("authToken"); // ✅ Use stored token
             if (!token) {
                 console.error("⚠️ No token found, please log in again.");
                 return;
@@ -32,7 +32,7 @@ const PersonalArea = () => {
             const response = await fetch("http://localhost:4000/api/order", {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+                    "Authorization": `Bearer ${token}`, // ✅ Ensure token is included
                     "Content-Type": "application/json"
                 }
             });
@@ -48,6 +48,7 @@ const PersonalArea = () => {
             console.error("⚠️ Failed to fetch orders:", error.message);
         }
     };
+    
     
 
 useEffect(() => {
@@ -66,49 +67,66 @@ useEffect(() => {
 
     const navigate = useNavigate();
 
-    // Fetch logged-in user from backend
+
    // Fetch logged-in user from new info storage
-   useEffect(() => {
-    const fetchUser = async () => {
+// ✅ Move `fetchUser` outside of useEffect
+const fetchUser = async () => {
+    try {
         const token = localStorage.getItem("authToken");
         if (!token) {
             console.warn("⚠️ No token found. Redirecting to login...");
-            setTimeout(() => navigate("/login"), 1000); // Delay to prevent UI flicker
+            setTimeout(() => navigate("/login"), 1000);
             return;
         }
 
-        try {
-            const response = await fetch("http://localhost:4000/api/auth/user", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            });
-
-            if (!response.ok) {
-                console.error("⚠️ Failed to fetch user, status:", response.status);
-                return;
+        const response = await fetch("http://localhost:4000/api/auth/user", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
+        });
 
-            const userData = await response.json();
-            console.log("✅ User fetched successfully:", userData);
-            setUser(userData);
-        } catch (error) {
-            console.error("⚠️ Error fetching user session:", error);
+        if (!response.ok) {
+            throw new Error(`⚠️ Failed to fetch user, status: ${response.status}`);
         }
-    };
 
+        const userData = await response.json();
+        console.log("✅ User fetched successfully:", userData);
+        setUser(userData);
+    } catch (error) {
+        console.error("⚠️ Error fetching user session:", error);
+    }
+};
+
+useEffect(() => {
     const fetchData = async () => {
         const token = localStorage.getItem("authToken");
-        if (!token) return;
-        
-        await fetchUser(); // ✅ Ensure fetchUser is called
-        fetchOrders(); // ✅ Ensure fetchOrders is called after user is fetched
+        if (!token) {
+            console.warn("⚠️ No token found, redirecting to login.");
+            navigate("/login");
+            return;
+        }
+        await fetchUser(); // ✅ Now fetchUser is properly defined
+        await fetchOrders();
     };
-
     fetchData();
 }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                console.warn("⚠️ No token found, redirecting to login.");
+                navigate("/login");
+                return;
+            }
+            await fetchUser();  // ❌ ERROR: fetchUser is not defined yet
+            fetchOrders();
+        };
+        fetchData();
+    }, []);
+    
 
 
     const handleEditProfile = () => {
@@ -368,23 +386,23 @@ useEffect(() => {
     <>
         <h2 className="heading">Previous Orders</h2>
         {orders.length > 0 ? (
-            <ul className="orders-list">
-                {orders.map((order) => (
-                    <li key={order.id} className="order-item">
-                        <span>
-                            <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
-                        </span>
-                        <a
-                            href={`http://localhost:4000/api/order/${order.id}/pdf`}
-                            className="download-pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+         <ul className="orders-list">
+         {orders.map((order) => {
+             const pdfUrl = `http://localhost:4000/api/order/${order.id}/pdf?token=${localStorage.getItem("authToken")}`;
+             
+             return (
+                 <li key={order.id} className="order-item">
+                     <span>
+                         <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                     </span>
+                     <a href={pdfUrl} className="download-pdf" target="_blank" rel="noopener noreferrer">
                          Download PDF
-                        </a>
-                    </li>
-                ))}
-            </ul>
+                     </a>
+                 </li>
+             );
+         })}
+     </ul>
+     
         ) : (
             <p>No previous orders found.</p>
         )}
