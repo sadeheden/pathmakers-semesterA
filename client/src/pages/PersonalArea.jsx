@@ -62,54 +62,13 @@ useEffect(() => {
     fetchData();
 }, []);
 
-
-const fetchUser = async () => {
-    const token = localStorage.getItem("authToken");
-
-    console.log("🔍 Retrieved token from localStorage:", token); // ✅ Debugging
-
-    if (!token) {
-        console.warn("⚠️ No token found, user is not logged in.");
-        setUser(null);
-        return;
-    }
-
-    try {
-        const response = await fetch("http://localhost:4000/api/auth/user", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
-
-        console.log("🔍 Request Headers:", {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-        });
-
-        if (!response.ok) {
-            console.error("⚠️ Failed to fetch user, status:", response.status);
-            return;
-        }
-
-        const userData = await response.json();
-        console.log("✅ User fetched successfully:", userData);
-        setUser(userData);
-    } catch (error) {
-        console.error("⚠️ Error fetching user session:", error);
-    }
-};
-
-
-
     const navigate = useNavigate();
 
     // Fetch logged-in user from backend
    // Fetch logged-in user from new info storage
    useEffect(() => {
     const fetchUser = async () => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("authToken");
 
 
         if (!token) {
