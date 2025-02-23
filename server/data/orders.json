@@ -209,5 +209,20 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 980,
     "createdAt": "2025-02-23T11:58:56.464Z"
+  },
+  {
+    "id": "02fe3010-aa1c-43ab-abec-3a3afd1f46f3",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "London",
+    "destinationCity": "Amsterdam",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 70,
+    "createdAt": "2025-02-23T12:49:13.303Z"
   }
 ]
