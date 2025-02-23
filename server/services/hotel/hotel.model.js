@@ -10,11 +10,20 @@ const fileExists = async (filePath) => {
         return false;
     }
 };
-export const loadHotels = () => {
-    return [
-        { id: 1, name: "Hilton", city: "New York", price: 200 },
-        { id: 2, name: "Marriott", city: "Los Angeles", price: 180 }
-    ];
+export const loadHotels = async () => {
+    try {
+        if (!(await fileExists(FILE_PATH))) {
+            console.warn("⚠️ Hotels data file does not exist. Creating a new one.");
+            await fs.writeFile(FILE_PATH, JSON.stringify([], null, 2)); // Create an empty file if missing
+            return [];
+        }
+
+        const data = await fs.readFile(FILE_PATH, "utf8");
+        return JSON.parse(data);
+    } catch (error) {
+        console.error("❌ Error reading hotels data:", error);
+        return [];
+    }
 };
 
 
@@ -32,11 +41,33 @@ const readJsonFile = async (filePath) => {
 };
 
 export const getHotelsByCity = async (city) => {
-    const hotelsData = await readJsonFile(FILE_PATH);
-    const cityHotels = hotelsData.find(cityData => cityData.city.toLowerCase() === city.toLowerCase());
-    return cityHotels ? cityHotels.hotels : [];
-};
+    try {
+        const hotelsData = await loadHotels(); // ✅ Now reading from JSON file
 
+        if (!hotelsData || hotelsData.length === 0) {
+            console.warn("⚠️ No hotel data found!");
+            return [];
+        }
+
+        console.log("🔍 Searching for city:", city);
+
+        // Ensure case-insensitive search
+        const cityHotels = hotelsData.find(
+            (cityData) => cityData.city.toLowerCase() === city.toLowerCase()
+        );
+
+        if (!cityHotels) {
+            console.warn(`🚨 No hotels found for city: ${city}`);
+            return [];
+        }
+
+        console.log(`✅ Found ${cityHotels.hotels.length} hotels for ${city}`);
+        return cityHotels.hotels;
+    } catch (error) {
+        console.error("❌ Error fetching hotels:", error);
+        return [];
+    }
+};
 
 
 
