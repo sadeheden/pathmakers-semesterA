@@ -24,7 +24,7 @@ const DownloadApp = () => {
                 <div className="buttonsD">
                     <a 
                         href="#"
-                        className="button ios"
+                        className="button-ios"
                         onClick={(e) => {
                             e.preventDefault();
                             handleDownload('ios');
@@ -40,7 +40,7 @@ const DownloadApp = () => {
                     
                     <a 
                         href="#"
-                        className="button android"
+                        className="button-android"
                         onClick={(e) => {
                             e.preventDefault();
                             handleDownload('android');

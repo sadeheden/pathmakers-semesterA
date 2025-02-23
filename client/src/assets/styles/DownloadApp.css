@@ -46,14 +46,38 @@ body {
 }
 
 
-.buttonsD {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    align-items: center;
+.button-ios{
+    background-color: #4a90e2; /* Light Blue */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    display: block;
+    margin-left: 100px;
+    width: 50%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.button-android{
+    background-color: #4a90e2; /* Light Blue */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    display: block;
+    margin-left: 100px;
+    margin-top: 40px;
+    width: 50%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 
 .button:hover {
