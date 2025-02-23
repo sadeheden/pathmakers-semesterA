@@ -21,48 +21,32 @@ const Header = () => {
             return;
         }
     
-        // ✅ Check token expiration BEFORE making request
-        const decodedToken = JSON.parse(atob(token.split(".")[1]));  // Decode payload
-        const currentTime = Math.floor(Date.now() / 1000);  // Get current UNIX timestamp
-    
-        if (decodedToken.exp < currentTime) {
-            console.warn("⚠️ Token expired, logging out user.");
-            localStorage.removeItem("authToken");
-            setUser(null);
-            return;
-        }
-    
-        console.log("🔍 Sending request with token:", token);  // ✅ Debugging
-    
         try {
-            const res = await fetch("http://localhost:4000/api/auth/user", {
+            const response = await fetch("http://localhost:4000/api/auth/user", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
-                    
                 }
-                
             });
-            console.log("🔍 Token Sent:", token);
-
     
-            if (res.ok) {
-                const userData = await res.json();
-                console.log("✅ User fetched successfully:", userData);
-                setUser(userData);
-            } else {
-                console.error(`⚠️ Failed to fetch user: ${res.status}`);
-                localStorage.removeItem("authToken");
-                setUser(null);
+            if (!response.ok) {
+                if (response.status === 401) {
+                    console.warn("⚠️ Unauthorized: Invalid token. Logging out user.");
+                    localStorage.removeItem("authToken"); // Remove only if truly invalid
+                    setUser(null);
+                }
+                return;
             }
+    
+            const userData = await response.json();
+            console.log("✅ User fetched successfully:", userData);
+            setUser(userData);
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
-            localStorage.removeItem("authToken");
-            setUser(null);
         }
     };
-    
+      
 
     // Ensure the user is fetched on page load
     useEffect(() => {

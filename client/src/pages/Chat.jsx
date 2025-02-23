@@ -385,7 +385,14 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     
       const handleSaveOrder = async () => {
         const token = localStorage.getItem("token");
-
+        console.log("🔍 Token before sending request:", token); // ✅ Log token for debugging
+    
+        if (!token) {
+            console.error("❌ No token found. User might not be logged in.");
+            alert("⚠️ You must be logged in to save an order.");
+            return;
+        }
+    
         const orderData = {
             departureCity: userResponses["What is your departure city?"],
             destinationCity: userResponses["What is your destination city?"],
@@ -407,8 +414,12 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
                 body: JSON.stringify(orderData)
             });
     
+            console.log("🔍 Response Status:", response.status);
+    
             if (!response.ok) {
-                console.error("Failed to save order:", response.status);
+                const errorMessage = await response.text();
+                console.error("❌ Failed to save order:", response.status, errorMessage);
+                alert(`Error: ${errorMessage}`);
                 return;
             }
     
