@@ -455,6 +455,47 @@
         "Barranco",
         "Palacio de Gobierno"
       ]
-    }
+    },
+    {
+      "attractions": [
+          {
+              "city": "Rome",
+              "attractions": [
+                  "Colosseum",
+                  "Pantheon",
+                  "Trevi Fountain",
+                  "Vatican Museums",
+                  "St. Peter's Basilica",
+                  "Piazza Navona",
+                  "Spanish Steps"
+              ]
+          },
+          {
+              "city": "San Francisco",
+              "attractions": [
+                  "Golden Gate Bridge",
+                  "Alcatraz Island",
+                  "Fisherman's Wharf",
+                  "Pier 39",
+                  "Lombard Street",
+                  "Chinatown",
+                  "Palace of Fine Arts"
+              ]
+          },
+          {
+              "city": "Seoul",
+              "attractions": [
+                  "Gyeongbokgung Palace",
+                  "N Seoul Tower",
+                  "Bukchon Hanok Village",
+                  "Myeongdong Shopping Street",
+                  "Dongdaemun Design Plaza",
+                  "Lotte World",
+                  "Insadong"
+              ]
+          }
+      ]
+  }
+  
   ]
 }
