@@ -53,7 +53,7 @@ export const createOrder = async (req, res) => {
             transportation,
             paymentMethod,
             totalPrice,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(),
         };
 
         // ✅ Save order to JSON storage
@@ -152,6 +152,11 @@ export const createOrder = async (req, res) => {
 // ✅ Serve the PDF file
 export const getOrderPDF = async (req, res) => {
     try {
+        const token = req.headers.authorization || req.query.token; // ✅ Check for token in query
+        if (!token) {
+            return res.status(401).json({ message: "Unauthorized: No token provided" });
+        }
+
         const { orderId } = req.params;
         const pdfPath = path.join(pdfDir, `${orderId}.pdf`);
 
@@ -162,10 +167,8 @@ export const getOrderPDF = async (req, res) => {
 
         console.log("✅ Sending PDF file:", pdfPath);
 
-        // ✅ Set correct headers for PDF preview
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader("Content-Disposition", "inline; filename=receipt.pdf");
-
         res.sendFile(pdfPath);
     } catch (error) {
         console.error("⚠️ Error serving PDF:", error);
