@@ -16,7 +16,6 @@ const VideoExplanation = () => {
                 <video 
                     className="video" 
                     autoPlay  
-                    loop      
                     playsInline 
                     controls  
                 >
