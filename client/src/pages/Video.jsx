@@ -27,7 +27,7 @@ const VideoExplanation = () => {
             <div className="textContainer">
                 <h1 className="title">🎬 How to Use the Website 🌍</h1>
                 <p className="description">
-                    Watch the video below to explore all the features of our platform! 
+                    Watch the video to explore all the features of our platform! 
                     You'll learn how to navigate through the website efficiently and 
                     get the most out of your experience. 🌟✨
                 </p>
