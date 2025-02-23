@@ -32,11 +32,10 @@ const Header = () => {
     
             if (!response.ok) {
                 if (response.status === 401) {
-                    console.warn("⚠️ Unauthorized: Invalid token. Logging out user.");
-                    localStorage.removeItem("authToken"); // Remove only if truly invalid
+                    console.warn("⚠️ Unauthorized: Invalid token.");
                     setUser(null);
                 }
-                return;
+                
             }
     
             const userData = await response.json();
