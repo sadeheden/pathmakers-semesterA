@@ -19,10 +19,38 @@ const PersonalArea = () => {
     });
     
     const [orders, setOrders] = useState([]);
+    const fetchOrders = async () => {
+        try {
+            const token = localStorage.getItem("authToken"); // ✅ Use `authToken` for consistency
+            if (!token) {
+                console.error("⚠️ No token found, please log in again.");
+                return;
+            }
+    
+            const response = await fetch("http://localhost:4000/api/order", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`, // ✅ Ensure token is sent
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log("✅ Orders fetched:", data);
+            setOrders(data); // ✅ Update orders state
+        } catch (error) {
+            console.error("⚠️ Failed to fetch orders:", error.message);
+        }
+    };
+    
 
 useEffect(() => {
     const fetchData = async () => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("authToken");
         if (!token) {
             console.warn("⚠️ No token found, redirecting to login.");
             navigate("/login");
@@ -35,34 +63,45 @@ useEffect(() => {
 }, []);
 
 
-    const fetchOrders = async () => {
-        try {
-            const token = localStorage.getItem("token"); // Ensure token is retrieved correctly
-            if (!token) {
-                console.error("No token found, please log in again.");
-                return;
+const fetchUser = async () => {
+    const token = localStorage.getItem("authToken");
+
+    console.log("🔍 Retrieved token from localStorage:", token); // ✅ Debugging
+
+    if (!token) {
+        console.warn("⚠️ No token found, user is not logged in.");
+        setUser(null);
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:4000/api/auth/user", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
-    
-            const response = await fetch("http://localhost:4000/api/order", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`, // Send token in headers
-                    "Content-Type": "application/json"
-                }
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const data = await response.json();
-            console.log("Orders:", data);
-            setOrders(data); // ✅ Update orders state
-        } catch (error) {
-            console.error("Failed to fetch orders:", error.message);
+        });
+
+        console.log("🔍 Request Headers:", {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        });
+
+        if (!response.ok) {
+            console.error("⚠️ Failed to fetch user, status:", response.status);
+            return;
         }
-    };
-    
+
+        const userData = await response.json();
+        console.log("✅ User fetched successfully:", userData);
+        setUser(userData);
+    } catch (error) {
+        console.error("⚠️ Error fetching user session:", error);
+    }
+};
+
+
 
     const navigate = useNavigate();
 
@@ -119,7 +158,8 @@ useEffect(() => {
 
     const handleSaveProfile = async () => {
         setLoading(true);
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("authToken");
+
 
     
         // ✅ Only send fields that have changed

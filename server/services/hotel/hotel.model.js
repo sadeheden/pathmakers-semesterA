@@ -10,6 +10,13 @@ const fileExists = async (filePath) => {
         return false;
     }
 };
+export const loadHotels = () => {
+    return [
+        { id: 1, name: "Hilton", city: "New York", price: 200 },
+        { id: 2, name: "Marriott", city: "Los Angeles", price: 180 }
+    ];
+};
+
 
 const readJsonFile = async (filePath) => {
     try {

@@ -6,20 +6,18 @@ import { v4 as uuidv4 } from "uuid";
 import pdf from "html-pdf";
 
 // ✅ Get all orders for a user
-export const getUserOrders = (req, res) => {
+export const getUserOrders = async (req, res) => {
     try {
-        const userId = req.user.id; // ✅ Extract user ID from token
-        const orders = loadOrders(); // ✅ Load all orders from JSON file
+        const userId = req.user.id; // ✅ Get user ID from token
+        console.log("🔍 Fetching orders for user:", userId);
 
-        console.log("🔍 All Orders:", orders); // Debugging
+        const orders = await Order.findAll({ where: { userId } });
 
-        const userOrders = orders.filter(order => order.userId === userId);
-        
-        if (!userOrders.length) {
-            return res.status(404).json({ message: "No orders found" });
+        if (!orders || orders.length === 0) {
+            return res.status(404).json({ message: "No orders found for this user." });
         }
 
-        res.status(200).json(userOrders);
+        res.json(orders);
     } catch (error) {
         console.error("⚠️ Error fetching orders:", error);
         res.status(500).json({ message: "Internal Server Error" });
@@ -57,10 +55,13 @@ export const createOrder = async (req, res) => {
             createdAt: new Date(),
         };
 
-        const orders = loadOrders();
-        orders.push(newOrder);
-        saveOrders(orders);
-
+        const orders = loadOrders(); // Load existing orders
+        orders.push(newOrder); // Add new order
+        saveOrders(orders); // Save updated list
+        
+        console.log("✅ Order saved to JSON file:", newOrder);
+        res.status(201).json(newOrder);
+        
         // ✅ Generate and save PDF
         const pdfPath = path.join(pdfDir, `${orderId}.pdf`);
         const pdfContent = `
