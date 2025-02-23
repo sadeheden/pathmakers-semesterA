@@ -6,6 +6,8 @@ const PersonalArea = () => {
     const [activeTab, setActiveTab] = useState("userInfo");
     const [user, setUser] = useState(null);
     const [email, setEmail] = useState("");
+    const [pdfUrl, setPdfUrl] = useState(null);
+const [showPdfModal, setShowPdfModal] = useState(false);
     const [loading, setLoading] = useState(false); // State for loading
     const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
     const [editedUser, setEditedUser] = useState({
@@ -176,6 +178,43 @@ useEffect(() => {
         }
     };
     
+    
+    const handleViewPdf = async (orderId) => {
+        try {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                alert("⚠️ No token found. Please log in.");
+                return;
+            }
+    
+            console.log(`🔍 Fetching PDF for order: ${orderId}`); // Debugging
+            console.log(`🔍 Using token: ${token}`); // Debugging
+    
+            const response = await fetch(`http://localhost:4000/api/order/${orderId}/pdf`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+    
+            console.log("🔍 Response status:", response.status); // Debugging
+    
+            if (!response.ok) {
+                const errorText = await response.text(); // Get error response
+                console.error("❌ Failed to fetch PDF:", errorText);
+                alert(`⚠️ Error fetching PDF: ${errorText}`);
+                return;
+            }
+    
+            const pdfBlob = await response.blob();
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            setPdfUrl(pdfUrl);
+            setShowPdfModal(true);
+        } catch (error) {
+            console.error("⚠️ Error fetching PDF:", error);
+            alert("⚠️ An error occurred while fetching the PDF.");
+        }
+    };
     
     
     const calculateAge = (birthdate) => {
@@ -386,28 +425,34 @@ useEffect(() => {
     <>
         <h2 className="heading">Previous Orders</h2>
         {orders.length > 0 ? (
-         <ul className="orders-list">
-         {orders.map((order) => {
-             const pdfUrl = `http://localhost:4000/api/order/${order.id}/pdf?token=${localStorage.getItem("authToken")}`;
-             
-             return (
-                 <li key={order.id} className="order-item">
-                     <span>
-                         <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
-                     </span>
-                     <a href={pdfUrl} className="download-pdf" target="_blank" rel="noopener noreferrer">
-                         Download PDF
-                     </a>
-                 </li>
-             );
-         })}
-     </ul>
-     
+            <ul className="orders-list">
+                {orders.map((order) => (
+                    <li key={order.id} className="order-item">
+                        <span>
+                            <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                        </span>
+                        <button className="view-pdf-button" onClick={() => handleViewPdf(order.id)}>
+                            View PDF
+                        </button>
+                    </li>
+                ))}
+            </ul>
         ) : (
             <p>No previous orders found.</p>
         )}
+
+        {/* PDF Modal - Added below the orders list */}
+        {showPdfModal && (
+            <div className="pdf-modal">
+                <div className="pdf-modal-content">
+                    <button className="close-modal" onClick={() => setShowPdfModal(false)}>✖</button>
+                    <iframe src={pdfUrl} width="100%" height="500px" title="Order PDF"></iframe>
+                </div>
+            </div>
+        )}
     </>
 )}
+
 
 
 

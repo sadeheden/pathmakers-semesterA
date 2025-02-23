@@ -30,6 +30,11 @@ const authenticateUser = (req, res, next) => {
             console.warn("⚠️ Token expired. Logging out user.");
             return res.status(401).json({ message: "Token expired. Please log in again." });
         }
+        if (decoded.exp < currentTime) {
+            console.warn("⚠️ Token expired. Logging out user.");
+            return res.status(401).json({ message: "Token expired. Please log in again." });
+        }
+        
 
         req.user = decoded;
         next();
