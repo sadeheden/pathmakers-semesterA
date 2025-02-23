@@ -34,18 +34,25 @@ const Header = () => {
                 if (response.status === 401) {
                     console.warn("⚠️ Unauthorized: Invalid token.");
                     setUser(null);
+                    localStorage.removeItem("authToken"); // Remove invalid token
                 }
-                
+                return;
             }
     
             const userData = await response.json();
             console.log("✅ User fetched successfully:", userData);
+            
+            // Store token if login was successful (optional but good practice)
+            if (userData.token) {
+                localStorage.setItem("authToken", userData.token);
+            }
+    
             setUser(userData);
         } catch (error) {
             console.error("⚠️ Error fetching user session:", error);
         }
     };
-      
+          
 
     // Ensure the user is fetched on page load
     useEffect(() => {
