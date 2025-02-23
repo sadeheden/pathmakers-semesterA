@@ -141,5 +141,12 @@
     "email": "sally@gmail.com",
     "password": "$2b$10$EwuKkTrGCZypv79amgmiG.TB3c4K1Hs00mnjqEF3yfxIB.pRyq1A2",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"
+  },
+  {
+    "id": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "email": "eden@mail.com",
+    "password": "$2b$10$p6zNuCRr7y20Df74bw0M4eT7NOkKzjIOfA90xkMb5FgWb8zAYj6Mq",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740312959/user_profiles/uqfbo3hvhvembynidcqn.png"
   }
 ]

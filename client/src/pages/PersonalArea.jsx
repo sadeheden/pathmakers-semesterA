@@ -10,6 +10,8 @@ const PersonalArea = () => {
     const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
     const [editedUser, setEditedUser] = useState({
         username: "",
+        birthdate: "", // Store birthdate
+        age: "", // Store calculated age
         address: "",
         city: "",
         country: "",
@@ -116,10 +118,7 @@ useEffect(() => {
     const handleSaveProfile = async () => {
         setLoading(true);
         const token = localStorage.getItem("authToken");
-
-
     
-        // ✅ Only send fields that have changed
         const updatedData = {};
         for (const key in editedUser) {
             if (editedUser[key] !== user[key]) {
@@ -136,11 +135,11 @@ useEffect(() => {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(updatedData) // ✅ Now sends only changed fields
+                body: JSON.stringify(updatedData)
             });
     
             const result = await response.json();
-            console.log("🔍 Server response:", result); // ✅ Debugging
+            console.log("🔍 Server response:", result);
     
             if (response.ok) {
                 setUser(result);
@@ -160,7 +159,23 @@ useEffect(() => {
     };
     
     
-
+    
+    const calculateAge = (birthdate) => {
+        if (!birthdate) return "";
+    
+        const birthDateObj = new Date(birthdate);
+        const today = new Date();
+        let age = today.getFullYear() - birthDateObj.getFullYear();
+        const monthDiff = today.getMonth() - birthDateObj.getMonth();
+    
+        // If birth month & day are in the future, subtract 1 year
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+            age--;
+        }
+    
+        return age;
+    };
+    
     const handleLogout = () => {
         localStorage.removeItem("token");
         setUser(null);
@@ -223,15 +238,20 @@ useEffect(() => {
                                 <>
                                 {isEditing ? (
     <>
-        <label>Username</label>
-        <input
-    type="text"
-    value={editedUser.username || ""}
-    onChange={(e) =>
-        setEditedUser({ ...editedUser, username: e.target.value })
-    }
-    placeholder="Enter username"
+<label>Date of Birth</label>
+<input
+    type="date"
+    value={editedUser.birthdate || ""}
+    max={new Date().toISOString().split("T")[0]} // Prevents future dates
+    onChange={(e) => {
+        const birthdate = e.target.value;
+        const age = calculateAge(birthdate); // Calculate age automatically
+        setEditedUser({ ...editedUser, birthdate, age });
+    }}
 />
+
+{/* Display calculated age */}
+<p><strong>Age:</strong> {editedUser.age || "Not provided"}</p>
 
 
         <label>Address</label>

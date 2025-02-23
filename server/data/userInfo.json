@@ -1,9 +1,11 @@
 {
-  "username": "may",
+  "username": "",
   "address": "",
-  "city": "8uhui",
-  "country": "Israel",
-  "phone": "4353535656",
-  "gender": "Female",
-  "membership": "Yes"
+  "city": "",
+  "country": "",
+  "phone": "",
+  "gender": "Other",
+  "membership": "Yes",
+  "birthdate": "",
+  "age": ""
 }
