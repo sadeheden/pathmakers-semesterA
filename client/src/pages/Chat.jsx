@@ -15,7 +15,7 @@ const TravelPlannerApp = () => {
       setUserResponses({});
       localStorage.removeItem("currentStep");
       localStorage.removeItem("userResponses");
-
+      sessionStorage.removeItem("orderSaved");
       // Mark session as logged in
       sessionStorage.setItem("hasLoggedIn", "true");
     }
@@ -398,80 +398,61 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
     
-    const handleSaveOrder = async () => {
-    const token = localStorage.getItem("authToken");
-
-    if (!token) {
-        console.error("❌ No token found. User might not be logged in.");
-        alert("⚠️ You must be logged in to save an order.");
-        return;
-    }
-
-    try {
-        // ✅ Fetch user details first to get userId
-        const userResponse = await fetch("http://localhost:4000/api/auth/user", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (!userResponse.ok) {
-            throw new Error("❌ Failed to fetch user details.");
-        }
-
-        const userData = await userResponse.json();
-        console.log("✅ Fetched User:", userData);
-
-        const orderData = {
-            userId: userData.id, // ✅ Attach the logged-in user's ID
-            username: userData.username,
-            departureCity: userResponses["What is your departure city?"],
-            destinationCity: userResponses["What is your destination city?"],
-            flight: userResponses["Select your flight"],
-            hotel: userResponses["Select your hotel"],
-            attractions: userResponses["Select attractions to visit"]?.split(", "),
-            transportation: userResponses["Select your mode of transportation"],
-            paymentMethod: userResponses["Select payment method"],
-            totalPrice: calculateTotalPrice(),
-        };
-
-        console.log("🔍 Sending Order Data:", orderData);
-
-        const response = await fetch("http://localhost:4000/api/order", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(orderData)
-        });
-
-        if (!response.ok) {
-            const errorMessage = await response.text();
-            console.error("❌ Failed to save order:", response.status, errorMessage);
-            alert(`Error: ${errorMessage}`);
+      const handleSaveOrder = async () => {
+        const token = localStorage.getItem("authToken");
+    
+        if (!token) {
+            console.error("❌ No token found. User might not be logged in.");
+            alert("⚠️ You must be logged in to save an order.");
             return;
         }
-
-        console.log("✅ Order saved successfully!");
-    } catch (error) {
-        console.error("⚠️ Error saving order:", error);
     
-        };
+        // ✅ Check if order was already saved in this session
+        if (sessionStorage.getItem("orderSaved") === "true") {
+            console.log("🔹 Order already saved in this session. Skipping save.");
+            return;
+        }
     
         try {
+            // ✅ Fetch user details first to get userId
+            const userResponse = await fetch("http://localhost:4000/api/auth/user", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (!userResponse.ok) {
+                throw new Error("❌ Failed to fetch user details.");
+            }
+    
+            const userData = await userResponse.json();
+            console.log("✅ Fetched User:", userData);
+    
+            const orderData = {
+                userId: userData.id, // ✅ Attach the logged-in user's ID
+                username: userData.username,
+                departureCity: userResponses["What is your departure city?"],
+                destinationCity: userResponses["What is your destination city?"],
+                flight: userResponses["Select your flight"],
+                hotel: userResponses["Select your hotel"],
+                attractions: userResponses["Select attractions to visit"]?.split(", "),
+                transportation: userResponses["Select your mode of transportation"],
+                paymentMethod: userResponses["Select payment method"],
+                totalPrice: calculateTotalPrice(),
+            };
+    
+            console.log("🔍 Sending Order Data:", orderData);
+    
             const response = await fetch("http://localhost:4000/api/order", {
                 method: "POST",
                 headers: {
-                    "Authorization": `Bearer ${token}`, // ✅ Ensure proper format
+                    "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(orderData)
             });
-    
-            console.log("🔍 Response Status:", response.status);
     
             if (!response.ok) {
                 const errorMessage = await response.text();
@@ -481,6 +462,9 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             }
     
             console.log("✅ Order saved successfully!");
+    
+            // ✅ Mark order as saved in sessionStorage
+            sessionStorage.setItem("orderSaved", "true");
         } catch (error) {
             console.error("⚠️ Error saving order:", error);
         }
@@ -604,7 +588,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               <button
   className="personal-area-btn"
   onClick={async () => {
-    await handleSaveOrder(); // ✅ Save the order before redirecting
+    await handleSaveOrder(); // ✅ Save the order only once per session
     window.location.href = "/personal-area"; // ✅ Redirect after saving
   }}
 >

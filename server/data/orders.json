@@ -592,5 +592,53 @@
     "paymentMethod": "Crypto",
     "totalPrice": 680,
     "createdAt": "2025-02-24T19:26:00.036Z"
+  },
+  {
+    "id": "4894d6bc-c287-4d60-bf1e-f46ee5358cf3",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:32:47.831Z"
+  },
+  {
+    "id": "27fafaf6-501c-4da7-96a7-f9c581d28d20",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:32:55.203Z"
+  },
+  {
+    "id": "d476356f-9890-4487-a478-76f9f28ccad4",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "New York",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:34:14.748Z"
   }
 ]
