@@ -22,7 +22,7 @@ const DownloadApp = () => {
 
             {/* Content (Right Side) */}
             <div className="text-content">
-                <h1 className="title">Credit Rating at Captain Credit</h1>
+                <h1 className="title">Enjoy our app </h1>
 
                 {/* Download Buttons */}
                 <div className="download-buttons">
