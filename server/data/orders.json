@@ -400,5 +400,53 @@
     "paymentMethod": "PayPal",
     "totalPrice": 3330,
     "createdAt": "2025-02-23T16:31:14.526Z"
+  },
+  {
+    "id": "b4eea211-e55d-4ae0-a9a2-453d46aec7c5",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Central Park"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 820,
+    "createdAt": "2025-02-24T09:45:58.356Z"
+  },
+  {
+    "id": "23531c62-cfaf-4ed8-95da-d137b37c97d4",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Central Park"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 820,
+    "createdAt": "2025-02-24T09:46:06.806Z"
+  },
+  {
+    "id": "03261c7f-6f20-449a-b500-1450e1b76fc2",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Central Park"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 820,
+    "createdAt": "2025-02-24T09:46:06.830Z"
   }
 ]
