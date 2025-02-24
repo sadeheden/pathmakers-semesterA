@@ -67,17 +67,19 @@
   }
   
   .main-btn{
-    padding: 20px 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    width: 45%;
-    text-align: center;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    background-color: #bf281c;
     color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    display: block;
+    width: 40%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #bf281c;
   }
 
   
