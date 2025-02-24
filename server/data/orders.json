@@ -656,5 +656,21 @@
     "paymentMethod": "PayPal",
     "totalPrice": 680,
     "createdAt": "2025-02-24T19:37:05.072Z"
+  },
+  {
+    "id": "b7f09e0c-6a78-485a-8d41-20f13cab871b",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Los Angeles",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "Hôtel Plaza Athénée - $3000/night",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3720,
+    "createdAt": "2025-02-24T21:01:01.458Z"
   }
 ]
