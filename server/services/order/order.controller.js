@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { loadOrders, saveOrders } from "./order.model.js"; // ✅ Correct import
 import { v4 as uuidv4 } from "uuid";
-import pdf from "html-pdf";
+import pdfkit from "pdfkit";
 
 // ✅ Fix __dirname for ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -62,51 +62,72 @@ export const createOrder = async (req, res) => {
             createdAt: new Date().toISOString(),
         };
 
-        console.log("🔍 New order to be saved:", newOrder); // Log the new order before saving
+        console.log("🔍 New order to be saved:", newOrder);
 
         // Save the order to JSON storage
         const orders = loadOrders();
         orders.push(newOrder);
         saveOrders(orders);
 
-        console.log("✅ Order saved successfully!");
+        console.log("✅ Order saved successfully! Now generating PDF...");
 
-        return res.status(201).json(newOrder);
+        // ✅ Generate PDF
+        const pdfPath = path.join(pdfDir, `${orderId}.pdf`);
+        const doc = new pdfkit();
+        const stream = fs.createWriteStream(pdfPath);
+
+        doc.pipe(stream);
+        doc.fontSize(20).text("Pathmskers- recept", { align: "center" });
+        doc.moveDown();
+        doc.fontSize(14).text(`Order ID: ${newOrder.id}`);
+        doc.text(`Username: ${newOrder.username}`);
+        doc.text(`Departure City: ${newOrder.departureCity}`);
+        doc.text(`Destination City: ${newOrder.destinationCity}`);
+        doc.text(`Flight: ${newOrder.flight}`);
+        doc.text(`Hotel: ${newOrder.hotel}`);
+        doc.text(`Attractions: ${newOrder.attractions ? newOrder.attractions.join(", ") : "None"}`);
+        doc.text(`Transportation: ${newOrder.transportation}`);
+        doc.text(`Payment Method: ${newOrder.paymentMethod}`);
+        doc.text(`Total Price: $${newOrder.totalPrice}`);
+        doc.text(`Created At: ${newOrder.createdAt}`);
+        doc.end();
+
+        stream.on("finish", () => {
+            console.log("✅ PDF generated successfully:", pdfPath);
+            return res.status(201).json(newOrder);
+        });
+
+        stream.on("error", (error) => {
+            console.error("❌ Error generating PDF:", error);
+            return res.status(500).json({ message: "Failed to generate PDF" });
+        });
+
     } catch (error) {
         console.error("⚠️ Error creating order:", error);
-        res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
-
 
 
 // ✅ Serve the PDF file
 export const getOrderPDF = async (req, res) => {
     try {
-        const token = req.headers.authorization?.split(" ")[1]; // ✅ Fix extracting Bearer token
-        console.log("🔍 Token received:", token); // Debugging
-        
-        if (!token) {
-            console.warn("⚠️ No token provided.");
-            return res.status(401).json({ message: "Unauthorized: No token provided" });
-        }
-
         const { orderId } = req.params;
         const pdfPath = path.join(pdfDir, `${orderId}.pdf`);
 
-        console.log(`🔍 Looking for PDF at: ${pdfPath}`); // Debugging
+        console.log(`🔍 Looking for PDF at: ${pdfPath}`);
 
         if (!fs.existsSync(pdfPath)) {
             console.error("⚠️ PDF not found:", pdfPath);
-            return res.status(404).json({ message: "PDF not found" });
+            return res.status(404).json({ message: "PDF not found. Please try generating a new order." });
         }
 
+        console.log("✅ PDF found, sending file...");
         res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", "inline; filename=receipt.pdf");
+        res.setHeader("Content-Disposition", `inline; filename=receipt-${orderId}.pdf`);
         res.sendFile(pdfPath);
     } catch (error) {
         console.error("⚠️ Error serving PDF:", error);
-        res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
-

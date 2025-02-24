@@ -498,7 +498,26 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               return;
           }
   
+          // ✅ Step 1: Fetch user details
+          const userResponse = await fetch("http://localhost:4000/api/auth/user", {
+              method: "GET",
+              headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json"
+              }
+          });
+  
+          if (!userResponse.ok) {
+              throw new Error("❌ Failed to fetch user details.");
+          }
+  
+          const userData = await userResponse.json();
+          console.log("✅ Fetched User:", userData);
+  
+          // ✅ Step 2: Prepare order data
           const orderData = {
+              userId: userData.id, // ✅ Attach the logged-in user's ID
+              username: userData.username,
               departureCity: userResponses["What is your departure city?"],
               destinationCity: userResponses["What is your destination city?"],
               flight: userResponses["Select your flight"],
@@ -509,7 +528,9 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
               totalPrice: calculateTotalPrice(),
           };
   
-          // ✅ First, save the order and get the order ID
+          console.log("🔍 Sending Order Data:", orderData);
+  
+          // ✅ Step 3: Save the order and get the order ID
           const response = await fetch("http://localhost:4000/api/order", {
               method: "POST",
               headers: {
@@ -527,7 +548,10 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
           const savedOrder = await response.json();
           console.log("✅ Order saved successfully:", savedOrder);
   
-          // ✅ Now, fetch the PDF using the correct Authorization header
+          // ✅ Step 4: Wait 1 second before fetching the PDF to allow backend processing
+          await new Promise(resolve => setTimeout(resolve, 1000));
+  
+          // ✅ Step 5: Fetch the PDF using the correct Authorization header
           const pdfResponse = await fetch(`http://localhost:4000/api/order/${savedOrder.id}/pdf`, {
               method: "GET",
               headers: {
@@ -537,16 +561,18 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
   
           if (!pdfResponse.ok) {
               console.error("❌ Failed to fetch PDF:", pdfResponse.status);
+              alert("❌ Failed to generate PDF receipt. Try again.");
               return;
           }
   
-          // ✅ Convert response to a blob and open the PDF
+          // ✅ Step 6: Convert response to a blob and open the PDF
           const pdfBlob = await pdfResponse.blob();
           const pdfUrl = URL.createObjectURL(pdfBlob);
           window.open(pdfUrl, "_blank"); // ✅ Open in a new tab
   
       } catch (error) {
           console.error("⚠️ Error saving order or fetching PDF:", error);
+          alert("⚠️ An error occurred. Please try again.");
       }
   };
   
