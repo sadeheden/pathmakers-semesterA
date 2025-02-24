@@ -44,11 +44,11 @@ const PersonalArea = () => {
             }
     
             const data = await response.json();
-            console.log("✅ All orders fetched:", data);
+            console.log("✅ All orders fetched from API:", data);
     
-            // ✅ Filter orders based on logged-in user's username
-            if (user) {
-                const userOrders = data.filter(order => order.username === user.username);
+            // ✅ Wait for user to be set before filtering
+            if (user && user.id) {
+                const userOrders = data.filter(order => String(order.userId) === String(user.id)); 
                 console.log("✅ Filtered Orders for User:", userOrders);
                 setOrders(userOrders);
             }
@@ -56,6 +56,22 @@ const PersonalArea = () => {
             console.error("⚠️ Failed to fetch orders:", error.message);
         }
     };
+    
+    // ✅ Ensure fetchOrders runs **only after** the user is set
+    useEffect(() => {
+        if (user && user.id) {
+            console.log("🔍 Fetching orders for user:", user.id);
+            fetchOrders();
+        }
+    }, [user]); // ✅ Runs only when `user` is updated
+    
+    
+    useEffect(() => {
+        if (user && user.id) {
+            console.log("🔍 Fetching orders for user:", user.id);
+            fetchOrders();
+        }
+    }, [user]); // ✅ Ensures fetchOrders runs **only after** user is set
     
     useEffect(() => {
         const fetchData = async () => {
@@ -65,12 +81,18 @@ const PersonalArea = () => {
                 navigate("/login");
                 return;
             }
-    
             await fetchUser(); // ✅ Fetch user first
         };
-    
         fetchData();
     }, []);
+    
+    useEffect(() => {
+        if (user && user.id) {
+            console.log("🔍 Fetching orders for user:", user.id);
+            fetchOrders();
+        }
+    }, [user]); // ✅ Fetch orders only **after** user is set
+    
     
     useEffect(() => {
         if (user) {

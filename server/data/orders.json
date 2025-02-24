@@ -464,5 +464,85 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 780,
     "createdAt": "2025-02-24T12:32:27.999Z"
+  },
+  {
+    "id": "76aba8c6-98a5-4675-8215-9ac477ae0154",
+    "userId": "6bc79780-c677-480a-935e-17d5c75a1159",
+    "username": "jona",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "Delta Airlines - $700 (15h 00m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Griffith Observatory"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 770,
+    "createdAt": "2025-02-24T19:04:25.562Z"
+  },
+  {
+    "id": "adef9ca1-e73c-4dd3-bf65-af557ad68e37",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:11:36.242Z"
+  },
+  {
+    "id": "5d4d66f2-1372-4527-bfaf-ca6b07df2685",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:11:47.063Z"
+  },
+  {
+    "id": "0bc7c684-17ac-401c-86f7-91d4496a1d48",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:11:48.897Z"
+  },
+  {
+    "id": "e43cfa18-cb3d-4e69-be19-80502eaa5dd0",
+    "userId": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "departureCity": "New York",
+    "destinationCity": "Los Angeles",
+    "flight": "American Airlines - $650 (14h 30m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Universal Studios Hollywood"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:12:22.468Z"
   }
 ]
