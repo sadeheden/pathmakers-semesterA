@@ -609,6 +609,35 @@
       ]
   },
   {
+    "city": "New York",
+    "hotels": [
+        {
+            "name": "The Plaza Hotel",
+            "price": 3500
+        },
+        {
+            "name": "The St. Regis New York",
+            "price": 4000
+        },
+        {
+            "name": "The Ritz-Carlton New York, Central Park",
+            "price": 3800
+        },
+        {
+            "name": "Park Hyatt New York",
+            "price": 3600
+        },
+        {
+            "name": "Mandarin Oriental New York",
+            "price": 3700
+        },
+        {
+            "name": "Four Seasons Hotel New York",
+            "price": 4200
+        }
+    ]
+},
+  {
       "city": "Cape Town",
       "hotels": [
           {

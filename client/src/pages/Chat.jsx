@@ -25,11 +25,20 @@ const TravelPlannerApp = () => {
     return savedStep ? parseInt(savedStep, 10) : 0;
   });
   
+  useEffect(() => {
+    localStorage.setItem("currentStep", currentStep);
+  }, [currentStep]);
+  
+  
+  // Save currentStep to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("currentStep", currentStep);
+  }, [currentStep]);
+  
   const [userResponses, setUserResponses] = useState(() => {
     const savedResponses = localStorage.getItem("userResponses");
     return savedResponses ? JSON.parse(savedResponses) : {};
   });
-  
   
   // Save responses to localStorage whenever they change
   useEffect(() => {
@@ -70,21 +79,28 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         console.error("Error fetching flights:", error);
       }
     }
-
+    const handleNextStep = () => {
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+      localStorage.setItem("currentStep", nextStep);
+    };
+    
 
     async function fetchHotels(city) {
       if (!city) return;
       try {
-        const response = await fetch(`http://localhost:4000/api/hotels/${city}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch hotels, status: ${response.status}`);
-        }
-        const data = await response.json();
-        setLoadedHotels(data);
+          const url = `http://localhost:4000/api/hotels/${encodeURIComponent(city)}`;
+          const response = await fetch(url);
+          if (!response.ok) {
+              throw new Error(`Failed to fetch hotels, status: ${response.status}`);
+          }
+          const data = await response.json();
+          setLoadedHotels(data);
       } catch (error) {
-        console.error("Error fetching hotels:", error);
+          console.error("Error fetching hotels:", error);
       }
-    }
+  }
+  
 
     async function fetchAttractions(city) {
       if (!city) return;

@@ -7,13 +7,13 @@ const PersonalArea = () => {
     const [user, setUser] = useState(null);
     const [email, setEmail] = useState("");
     const [pdfUrl, setPdfUrl] = useState(null);
-const [showPdfModal, setShowPdfModal] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+
     const [loading, setLoading] = useState(false); // State for loading
     const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
     const [editedUser, setEditedUser] = useState({
         username: "",
         birthdate: "", // Store birthdate
-        age: "", // Store calculated age
         address: "",
         city: "",
         country: "",
@@ -25,7 +25,7 @@ const [showPdfModal, setShowPdfModal] = useState(false);
     const [orders, setOrders] = useState([]);
     const fetchOrders = async () => {
         try {
-            const token = localStorage.getItem("authToken"); // ✅ Use stored token
+            const token = localStorage.getItem("authToken");
             if (!token) {
                 console.error("⚠️ No token found, please log in again.");
                 return;
@@ -34,7 +34,7 @@ const [showPdfModal, setShowPdfModal] = useState(false);
             const response = await fetch("http://localhost:4000/api/order", {
                 method: "GET",
                 headers: {
-                    "Authorization": `Bearer ${token}`, // ✅ Ensure token is included
+                    "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
             });
@@ -44,33 +44,40 @@ const [showPdfModal, setShowPdfModal] = useState(false);
             }
     
             const data = await response.json();
-            console.log("✅ Orders fetched:", data);
-            setOrders(data); // ✅ Update orders state
+            console.log("✅ All orders fetched:", data);
+    
+            // ✅ Filter orders based on logged-in user's username
+            if (user) {
+                const userOrders = data.filter(order => order.username === user.username);
+                console.log("✅ Filtered Orders for User:", userOrders);
+                setOrders(userOrders);
+            }
         } catch (error) {
             console.error("⚠️ Failed to fetch orders:", error.message);
         }
     };
     
+    useEffect(() => {
+        const fetchData = async () => {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                console.warn("⚠️ No token found, redirecting to login.");
+                navigate("/login");
+                return;
+            }
     
-
-useEffect(() => {
-    const fetchData = async () => {
-        const token = localStorage.getItem("authToken");
-        if (!token) {
-            console.warn("⚠️ No token found, redirecting to login.");
-            navigate("/login");
-            return;
+            await fetchUser(); // ✅ Fetch user first
+        };
+    
+        fetchData();
+    }, []);
+    
+    useEffect(() => {
+        if (user) {
+            fetchOrders(); // ✅ Now fetch orders AFTER user is set
         }
-        await fetchUser();
-        fetchOrders();
-    };
-    fetchData();
-}, []);
-
-    const navigate = useNavigate();
-
-
-   // Fetch logged-in user from new info storage
+    }, [user]); // ✅ Runs only when `user` is updated
+    
 // ✅ Move `fetchUser` outside of useEffect
 const fetchUser = async () => {
     try {
@@ -95,11 +102,27 @@ const fetchUser = async () => {
 
         const userData = await response.json();
         console.log("✅ User fetched successfully:", userData);
+
         setUser(userData);
+
+        // ✅ Set initial edit state with fetched data
+        setEditedUser({
+            username: userData.username || "", // ✅ Ensure username is correctly set
+            birthdate: userData.birthdate || "",
+            address: userData.address || "",
+            city: userData.city || "",
+            country: userData.country || "",
+            phone: userData.phone || "",
+            gender: userData.gender || "Other",
+            membership: userData.membership || "No",
+            age: userData.birthdate ? calculateAge(userData.birthdate) : "Not provided", // ✅ Auto-calculate age
+        });
+
     } catch (error) {
         console.error("⚠️ Error fetching user session:", error);
     }
 };
+
 
 useEffect(() => {
     const fetchData = async () => {
@@ -139,11 +162,11 @@ useEffect(() => {
         setLoading(true);
         const token = localStorage.getItem("authToken");
     
-        const updatedData = {};
-        for (const key in editedUser) {
-            if (editedUser[key] !== user[key]) {
-                updatedData[key] = editedUser[key]; // ✅ Only add changed fields
-            }
+        // Ensure age is calculated before saving
+        const updatedData = { ...editedUser };
+    
+        if (editedUser.birthdate) {
+            updatedData.age = calculateAge(editedUser.birthdate); // ✅ Save calculated age
         }
     
         console.log("🔍 Sending update:", updatedData); // ✅ Debugging
@@ -162,7 +185,7 @@ useEffect(() => {
             console.log("🔍 Server response:", result);
     
             if (response.ok) {
-                setUser(result);
+                setUser(result); // ✅ Update user state
                 setEditedUser(result);
                 setIsEditing(false);
                 console.log("✅ Profile updated successfully.");
@@ -179,59 +202,28 @@ useEffect(() => {
     };
     
     
-    const handleViewPdf = async (orderId) => {
-        try {
-            const token = localStorage.getItem("authToken");
-            if (!token) {
-                alert("⚠️ No token found. Please log in.");
-                return;
-            }
-    
-            console.log(`🔍 Fetching PDF for order: ${orderId}`); // Debugging
-            console.log(`🔍 Using token: ${token}`); // Debugging
-    
-            const response = await fetch(`http://localhost:4000/api/order/${orderId}/pdf`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                }
-            });
-    
-            console.log("🔍 Response status:", response.status); // Debugging
-    
-            if (!response.ok) {
-                const errorText = await response.text(); // Get error response
-                console.error("❌ Failed to fetch PDF:", errorText);
-                alert(`⚠️ Error fetching PDF: ${errorText}`);
-                return;
-            }
-    
-            const pdfBlob = await response.blob();
-            const pdfUrl = URL.createObjectURL(pdfBlob);
-            setPdfUrl(pdfUrl);
-            setShowPdfModal(true);
-        } catch (error) {
-            console.error("⚠️ Error fetching PDF:", error);
-            alert("⚠️ An error occurred while fetching the PDF.");
-        }
+    const handleViewOrderDetails = (order) => {
+        setSelectedOrder(order);
     };
     
     
+    
     const calculateAge = (birthdate) => {
-        if (!birthdate) return "";
+        if (!birthdate) return "Not provided"; // ✅ Ensures no invalid value
     
         const birthDateObj = new Date(birthdate);
         const today = new Date();
         let age = today.getFullYear() - birthDateObj.getFullYear();
         const monthDiff = today.getMonth() - birthDateObj.getMonth();
     
-        // If birth month & day are in the future, subtract 1 year
+        // Adjust for cases where the birthday hasn't occurred this year yet
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
             age--;
         }
     
         return age;
     };
+    
     
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -284,7 +276,7 @@ useEffect(() => {
                     Sign Up for Newsletter
                 </button>
             </div>
-
+    
             <div className="containerPersonal">
                 {/* User Information */}
                 {activeTab === "userInfo" && (
@@ -293,193 +285,189 @@ useEffect(() => {
                         <div className="profileInfo">
                             {user ? (
                                 <>
-                                {isEditing ? (
-    <>
-<label>Date of Birth</label>
+                                    {isEditing ? (
+                                        <>
+                                            <label>Username</label>
+                                            <input type="text" value={user.username} disabled /> {/* ❌ Username is now non-editable */}
+    
+                                            <label>Date of Birth</label>
 <input
     type="date"
     value={editedUser.birthdate || ""}
-    max={new Date().toISOString().split("T")[0]} // Prevents future dates
+    max={new Date().toISOString().split("T")[0]} 
     onChange={(e) => {
         const birthdate = e.target.value;
-        const age = calculateAge(birthdate); // Calculate age automatically
+        const age = calculateAge(birthdate); // ✅ Automatically update age
         setEditedUser({ ...editedUser, birthdate, age });
     }}
 />
 
-{/* Display calculated age */}
-<p><strong>Age:</strong> {editedUser.age || "Not provided"}</p>
+<p><strong>Age:</strong> {editedUser.age || "Not provided"}</p> {/* ✅ Now displays calculated age */}
 
-
-        <label>Address</label>
-        <input
-    type="text"
-    value={editedUser.address || ""}
-    onChange={(e) =>
-        setEditedUser({ ...editedUser, address: e.target.value })
-    }
-/>
-
-        <label>City</label>
-        <input
-            type="text"
-            value={editedUser.city}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, city: e.target.value })
-            }
-            placeholder="Enter your city"
-        />
-
-        <label>Country</label>
-        <input
-            type="text"
-            value={editedUser.country}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, country: e.target.value })
-            }
-            placeholder="Enter your country"
-        />
-
-        <label>Phone Number</label>
-        <input
-            type="tel"
-            value={editedUser.phone}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, phone: e.target.value })
-            }
-            placeholder="Enter phone number"
-        />
-
-        <label>Gender</label>
-        <select
-            value={editedUser.gender}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, gender: e.target.value })
-            }
-        >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
-        <label>Membership</label>
-<div className="membership-options" style={{ display: "flex", flexDirection: "column" }}>
-    <label style={{ fontSize: "12px", marginBottom: "5px" }}>
-        <input
-            type="radio"
-            name="membership"
-            value="Yes"
-            checked={editedUser.membership === "Yes"}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, membership: e.target.value })
-            }
-            style={{ transform: "scale(0.8)", marginRight: "5px" }} // ✅ Smaller
-        />
-        Yes
-    </label>
-    <label style={{ fontSize: "12px", marginBottom: "5px" }}>
-        <input
-            type="radio"
-            name="membership"
-            value="No"
-            checked={editedUser.membership === "No"}
-            onChange={(e) =>
-                setEditedUser({ ...editedUser, membership: e.target.value })
-            }
-            style={{ transform: "scale(0.8)", marginRight: "5px" }} // ✅ Smaller
-        />
-        No
-    </label>
-</div>
-
-
-
-        <button onClick={handleSaveProfile} className="button">Save</button>
-    </>
-) : (
-    <>
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>Address:</strong> {user.address || "Not provided"}</p>
-        <p><strong>City:</strong> {user.city || "Not provided"}</p>
-        <p><strong>Country:</strong> {user.country || "Not provided"}</p>
-        <p><strong>Phone Number:</strong> {user.phone || "Not provided"}</p>
-        <p><strong>Gender:</strong> {user.gender || "Not provided"}</p>
-        <p><strong>Membership:</strong> {user.membership === "Yes" ? "✅ Yes" : "❌ No"}</p>
-        
-        <button onClick={handleEditProfile} className="button">Edit Profile</button>
-    </>
-)}
-
+    
+                                            <label>Address</label>
+                                            <input
+                                                type="text"
+                                                value={editedUser.address || ""}
+                                                onChange={(e) => setEditedUser({ ...editedUser, address: e.target.value })}
+                                            />
+    
+                                            <label>City</label>
+                                            <input
+                                                type="text"
+                                                value={editedUser.city}
+                                                onChange={(e) => setEditedUser({ ...editedUser, city: e.target.value })}
+                                                placeholder="Enter your city"
+                                            />
+    
+                                            <label>Country</label>
+                                            <input
+                                                type="text"
+                                                value={editedUser.country}
+                                                onChange={(e) => setEditedUser({ ...editedUser, country: e.target.value })}
+                                                placeholder="Enter your country"
+                                            />
+    
+                                            <label>Phone Number</label>
+                                            <input
+                                                type="tel"
+                                                value={editedUser.phone}
+                                                onChange={(e) => setEditedUser({ ...editedUser, phone: e.target.value })}
+                                                placeholder="Enter phone number"
+                                            />
+    
+                                            <label>Gender</label>
+                                            <select
+                                                value={editedUser.gender}
+                                                onChange={(e) => setEditedUser({ ...editedUser, gender: e.target.value })}
+                                            >
+                                                <option value="">Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+    
+                                            <label>Membership</label>
+                                            <div className="membership-options">
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="membership"
+                                                        value="Yes"
+                                                        checked={editedUser.membership === "Yes"}
+                                                        onChange={(e) =>
+                                                            setEditedUser({ ...editedUser, membership: e.target.value })
+                                                        }
+                                                    />
+                                                    Yes
+                                                </label>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="membership"
+                                                        value="No"
+                                                        checked={editedUser.membership === "No"}
+                                                        onChange={(e) =>
+                                                            setEditedUser({ ...editedUser, membership: e.target.value })
+                                                        }
+                                                    />
+                                                    No
+                                                </label>
+                                            </div>
+    
+                                            {/* ✅ Centered Save Button */}
+                                            <button onClick={handleSaveProfile} className="button">Save</button>
+                                        </>
+                                    ) : (
+                                        <>
+                                        <p><strong>Username:</strong> {user.username} </p> 
+                                        <p><strong>Date of Birth:</strong> {user.birthdate ? user.birthdate : "Not provided"}</p> 
+                                        <p><strong>Age:</strong> {user.age ? user.age : calculateAge(user.birthdate)}</p> {/* ✅ Always calculate if missing */}
+                                        <p><strong>Address:</strong> {user.address || "Not provided"}</p>
+                                        <p><strong>City:</strong> {user.city || "Not provided"}</p>
+                                        <p><strong>Country:</strong> {user.country || "Not provided"}</p>
+                                        <p><strong>Phone Number:</strong> {user.phone || "Not provided"}</p>
+                                        <p><strong>Gender:</strong> {user.gender || "Not provided"}</p>
+                                        <p><strong>Membership:</strong> {user.membership === "Yes" ? "✅ Yes" : "❌ No"}</p>
+                                    
+                                        <button onClick={handleEditProfile} className="button">Edit Profile</button>
+                                    </>
+                                    
+                                    )}
                                 </>
                             ) : (
                                 <p>Please log in to see your details.</p>
                             )}
                         </div>
+    
+                        {/* ✅ Centered Logout Button */}
                         {user && (
-                            <button onClick={handleLogout} className="button">Logout</button>
+                            <button onClick={handleLogout} className="button logout-button">Logout</button>
                         )}
                     </>
                 )}
-{/* User Orders */}
-{activeTab === "orders" && (
-    <>
-        <h2 className="heading">Previous Orders</h2>
-        {orders.length > 0 ? (
-            <ul className="orders-list">
-                {orders.map((order) => (
-                    <li key={order.id} className="order-item">
-                        <span>
-                            <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
-                        </span>
-                        <button className="view-pdf-button" onClick={() => handleViewPdf(order.id)}>
-                            View PDF
-                        </button>
-                    </li>
-                ))}
-            </ul>
-        ) : (
-            <p>No previous orders found.</p>
-        )}
-
-        {/* PDF Modal - Added below the orders list */}
-        {showPdfModal && (
-            <div className="pdf-modal">
-                <div className="pdf-modal-content">
-                    <button className="close-modal" onClick={() => setShowPdfModal(false)}>✖</button>
-                    <iframe src={pdfUrl} width="100%" height="500px" title="Order PDF"></iframe>
-                </div>
-            </div>
-        )}
-    </>
-)}
-
-
-
-
-
-              {/* Newsletter Subscription */}
-{activeTab === "newsletter" && (
-    <>
-        <h2 className="heading">Sign Up for Newsletter</h2>
-        <div className="profileInfo">
-            <p>Get the latest updates and travel deals straight to your inbox!</p>
+    
+                {/* User Orders */}
+                {selectedOrder && (
+    <div className="order-modal">
+        <div className="order-modal-content">
+            <button className="close-modal" onClick={() => setSelectedOrder(null)}>✖</button>
+            <h2>Order Details</h2>
+            <p><strong>Order ID:</strong> {selectedOrder.id}</p>
+            <p><strong>Departure:</strong> {selectedOrder.departureCity}</p>
+            <p><strong>Destination:</strong> {selectedOrder.destinationCity}</p>
+            <p><strong>Total Price:</strong> ${selectedOrder.totalPrice}</p>
         </div>
-        <input
-            type="email"
-            placeholder="Enter your email"
-            className="newsletter-input"  // ✅ Apply new styling
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-        />
-        <button onClick={handleSubscribe} className="newsletter-button" disabled={loading}>
-            {loading ? "Subscribing..." : "Subscribe"}
-        </button>
-    </>
+    </div>
 )}
 
+    
+                {activeTab === "orders" && (
+                    <>
+                        <h2 className="heading">Your Previous Orders</h2>
+                        {orders.length > 0 ? (
+                            <ul className="orders-list">
+                                {orders.map((order) => (
+                                    <li key={order.id} className="order-item">
+                                        <span>
+                                            <strong>Order #{order.id}:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                                        </span>
+                                        <button className="view-details-button" onClick={() => handleViewOrderDetails(order)}>
+                                            View Details
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No previous orders found.</p>
+                        )}
+                    </>
+                )}
+    
+                {/* Newsletter Subscription */}
+                {activeTab === "newsletter" && (
+                    <>
+                        <h2 className="heading">Sign Up for Newsletter</h2>
+                        <div className="profileInfo">
+                            <p>Get the latest updates and travel deals straight to your inbox!</p>
+                        </div>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="newsletter-input"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <button onClick={handleSubscribe} className="newsletter-button" disabled={loading}>
+                            {loading ? "Subscribing..." : "Subscribe"}
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
+    
 };
+    
 
 export default PersonalArea;
