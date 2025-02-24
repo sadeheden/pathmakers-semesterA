@@ -34,8 +34,13 @@ server.use('/api/newsletter', sendNewsletter);
 server.use('/api/order', orderRoutes); // ✅ Added this to fix your 404 error
 
 // ✅ Check if the server is running
-server.get('/', (req, res) => {
-    res.send('Server is running!');
+server.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+server.use((req, res, next) => {
+    console.log('Time:', Date.now(), 'Request Type:', req.method, 'Path:', req.originalUrl);
+    next();
 });
 
 server.listen(PORT, () => {

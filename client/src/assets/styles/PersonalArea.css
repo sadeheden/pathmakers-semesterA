@@ -65,6 +65,144 @@
     font-size: 1.1em;
     margin: 5px 0;
 }
+.order-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+/* 📌 Order Modal Styling */
+.order-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.order-modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative; /* Ensure proper positioning of close button */
+}
+
+/* ❌ Close Button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.close-modal:hover {
+    color: darkred;
+}
+
+/* 📜 Order List Styling */
+.orders-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* 🎟️ Order Item */
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ece5ff; /* Light Purple */
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #7a5fd9; /* Accent border */
+}
+
+/* 🔹 Hover Effect */
+.order-item:hover {
+    background-color: #ded3f7; /* Slightly darker */
+    transform: scale(1.02);
+}
+
+/* 🖱️ "View Details" Button */
+.view-details-button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.view-details-button:hover {
+    background-color: #357ab7;
+    transform: scale(1.05);
+}
+
+/* ℹ️ User Information Box - Center Content */
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    background-color: #f3e5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center; /* Center text */
+}
+
+/* 🖱️ Center Buttons */
+.button, .logout-button {
+    display: block;
+    width: 60%; /* Set consistent width */
+    max-width: 250px; /* Prevents from being too wide */
+    text-align: center;
+    margin: 10px auto; /* Centers horizontally */
+}
+
 
 /* 🖱️ Light Blue Buttons */
 .button {  
@@ -122,114 +260,4 @@
     margin-top: 20px;
 }
 
-/* 🎟️ Single Order Item */
-.order-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ece5ff;  /* Light Purple */
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #7a5fd9;  /* Accent border */
-}
 
-/* 🔹 Hover Effect */
-.order-item:hover {
-    background-color: #ded3f7; /* Slightly darker */
-    transform: scale(1.02);
-}
-
-/* 📝 Order Text */
-.order-item span {
-    flex-grow: 1;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #333;
-}
-
-/* 📂 PDF Download Button */
-.download-pdf {
-    text-decoration: none;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #4a90e2; /* Pathmakers Blue */
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.download-pdf:hover {
-    color: #357ab7;
-    transform: scale(1.1);
-}
-
-/* 📂 PDF Icon Styling */
-.download-pdf::before {
-    content: "📄 ";
-    font-size: 1.2rem;
-}
-
-/* 🖥️ Responsive Design */
-@media (max-width: 768px) {
-    .order-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .download-pdf {
-        margin-top: 8px;
-    }
-}
-.pdf-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.pdf-modal-content {
-    background: white;
-    padding: 20px;
-    width: 60%;
-    max-width: 800px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: red;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-.view-pdf-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.view-pdf-button:hover {
-    background-color: #0056b3;
-}
