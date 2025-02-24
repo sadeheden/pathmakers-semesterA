@@ -640,5 +640,21 @@
     "paymentMethod": "PayPal",
     "totalPrice": 680,
     "createdAt": "2025-02-24T19:34:14.748Z"
+  },
+  {
+    "id": "79a3c684-0d2b-4879-b62a-19f8fe8a272f",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "New York",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "No hotels available",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 680,
+    "createdAt": "2025-02-24T19:37:05.072Z"
   }
 ]

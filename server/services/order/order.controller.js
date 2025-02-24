@@ -43,7 +43,7 @@ export const createOrder = async (req, res) => {
             return res.status(401).json({ message: "Unauthorized: User not identified" });
         }
 
-        const userId = String(req.user.id); // Ensure user ID is a string
+        const userId = String(req.user.id);
         const username = req.user.username;
 
         const orderId = uuidv4();
@@ -64,32 +64,74 @@ export const createOrder = async (req, res) => {
 
         console.log("🔍 New order to be saved:", newOrder);
 
-        // Save the order to JSON storage
         const orders = loadOrders();
         orders.push(newOrder);
         saveOrders(orders);
 
         console.log("✅ Order saved successfully! Now generating PDF...");
 
-        // ✅ Generate PDF
+        // ✅ Generate PDF with better formatting
         const pdfPath = path.join(pdfDir, `${orderId}.pdf`);
-        const doc = new pdfkit();
-        const stream = fs.createWriteStream(pdfPath);
+        const doc = new pdfkit({
+            size: "A4",
+            margins: { top: 50, bottom: 50, left: 50, right: 50 }
+        });
 
+        const stream = fs.createWriteStream(pdfPath);
         doc.pipe(stream);
-        doc.fontSize(20).text("Pathmskers- recept", { align: "center" });
-        doc.moveDown();
-        doc.fontSize(14).text(`Order ID: ${newOrder.id}`);
+
+        // ✅ Header Section
+        doc.font("Helvetica-Bold").fontSize(24).fillColor("#1F618D").text("PathMakers - Travel Receipt", { align: "center" });
+        doc.moveDown(0.5);
+        doc.fontSize(14).fillColor("black").text(`Order ID: ${newOrder.id}`, { align: "center" });
+        doc.moveDown(1.5);
+
+        // ✅ Customer Info
+        doc.font("Helvetica-Bold").fontSize(16).text("Customer Details", { underline: true });
+        doc.font("Helvetica").fontSize(12);
         doc.text(`Username: ${newOrder.username}`);
         doc.text(`Departure City: ${newOrder.departureCity}`);
         doc.text(`Destination City: ${newOrder.destinationCity}`);
-        doc.text(`Flight: ${newOrder.flight}`);
-        doc.text(`Hotel: ${newOrder.hotel}`);
-        doc.text(`Attractions: ${newOrder.attractions ? newOrder.attractions.join(", ") : "None"}`);
-        doc.text(`Transportation: ${newOrder.transportation}`);
+        doc.moveDown(1);
+
+        // ✅ Flight Details
+        doc.font("Helvetica-Bold").fontSize(16).text("Flight Details", { underline: true });
+        doc.font("Helvetica").fontSize(12);
+        doc.text(`Flight: ${newOrder.flight || "N/A"}`);
+        doc.moveDown(1);
+
+        // ✅ Hotel Details
+        doc.font("Helvetica-Bold").fontSize(16).text("Hotel Details", { underline: true });
+        doc.font("Helvetica").fontSize(12);
+        doc.text(`Hotel: ${newOrder.hotel || "N/A"}`);
+        doc.moveDown(1);
+
+        // ✅ Attractions
+        doc.font("Helvetica-Bold").fontSize(16).text("Attractions", { underline: true });
+        doc.font("Helvetica").fontSize(12);
+        doc.text(`Selected Attractions: ${newOrder.attractions?.join(", ") || "None"}`);
+        doc.moveDown(1);
+
+        // ✅ Transportation
+        doc.font("Helvetica-Bold").fontSize(16).text("Transportation", { underline: true });
+        doc.font("Helvetica").fontSize(12);
+        doc.text(`Mode: ${newOrder.transportation || "N/A"}`);
+        doc.moveDown(1);
+
+        // ✅ Payment
+        doc.font("Helvetica-Bold").fontSize(16).text("Payment Details", { underline: true });
+        doc.font("Helvetica").fontSize(12);
         doc.text(`Payment Method: ${newOrder.paymentMethod}`);
-        doc.text(`Total Price: $${newOrder.totalPrice}`);
-        doc.text(`Created At: ${newOrder.createdAt}`);
+        doc.fontSize(14).fillColor("#E74C3C").text(`Total Price: $${newOrder.totalPrice}`, { align: "right" });
+        doc.fillColor("black");
+        doc.moveDown(1);
+
+        // ✅ Footer
+        doc.moveDown(2);
+        doc.font("Helvetica-Oblique").fontSize(10).fillColor("#555")
+           .text("Thank you for booking with PathMakers!", { align: "center" });
+        doc.fillColor("black");
+
         doc.end();
 
         stream.on("finish", () => {
