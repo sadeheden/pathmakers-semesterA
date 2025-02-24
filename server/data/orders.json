@@ -272,5 +272,133 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 3420,
     "createdAt": "2025-02-23T14:07:54.557Z"
+  },
+  {
+    "id": "585f988f-2665-4ded-9799-7e3946a46af9",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:41:43.113Z"
+  },
+  {
+    "id": "0347ba48-2091-46b1-b28d-3e24c115ffce",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:41:51.132Z"
+  },
+  {
+    "id": "10ed7f68-978a-44d7-89b4-21ee53d09289",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:42:12.849Z"
+  },
+  {
+    "id": "9e7e6450-12ff-444c-a528-7ada277600da",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:42:13.557Z"
+  },
+  {
+    "id": "2c581d54-eecb-4375-b628-95434c0fb65f",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:42:21.739Z"
+  },
+  {
+    "id": "b5d2fbb8-4b6b-4018-bc16-161acf068bf6",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:42:23.448Z"
+  },
+  {
+    "id": "ed623e59-c79b-415c-88b3-75b394af2214",
+    "userId": "d7f70d47-5749-4f32-8ed0-f87d5781e728",
+    "username": "jonathan",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "Aman Tokyo - $2800/night",
+    "attractions": [
+      "Tokyo Tower"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3630,
+    "createdAt": "2025-02-23T15:42:35.413Z"
+  },
+  {
+    "id": "5298bc2f-7ee7-4d7e-a62f-7dcfb1f990f2",
+    "userId": 1,
+    "username": "may",
+    "departureCity": "London",
+    "destinationCity": "Rome",
+    "flight": "Alitalia - $600 (7h 00m)",
+    "hotel": "Hassler Roma - $2700/night",
+    "attractions": [
+      "Roman Forum"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3330,
+    "createdAt": "2025-02-23T16:31:14.526Z"
   }
 ]
