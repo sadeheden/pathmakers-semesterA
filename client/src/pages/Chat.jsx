@@ -100,8 +100,6 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
       }
     }
 
-  
-
     async function fetchAttractions(city) {
       if (!city) return;
       try {
