@@ -2,8 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight, MapPin, Plane, Hotel, Compass, Car, CreditCard, CheckCircle } from "lucide-react";
 import "../assets/styles/chat.css";
-import { jsPDF } from "jspdf"; 
-import html2canvas from "html2canvas";
+
 
 
 const TravelPlannerApp = () => {
@@ -23,19 +22,14 @@ const TravelPlannerApp = () => {
   }, []); 
   const [currentStep, setCurrentStep] = useState(() => {
     const savedStep = localStorage.getItem("currentStep");
-    return savedStep !== null ? parseInt(savedStep) : 0; // Ensure it doesn't return NaN
+    return savedStep ? parseInt(savedStep, 10) : 0;
   });
-  
-  
-  // Save currentStep to localStorage when it changes
-  useEffect(() => {
-    localStorage.setItem("currentStep", currentStep);
-  }, [currentStep]);
   
   const [userResponses, setUserResponses] = useState(() => {
     const savedResponses = localStorage.getItem("userResponses");
     return savedResponses ? JSON.parse(savedResponses) : {};
   });
+  
   
   // Save responses to localStorage whenever they change
   useEffect(() => {
@@ -76,6 +70,7 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
         console.error("Error fetching flights:", error);
       }
     }
+
 
     async function fetchHotels(city) {
       if (!city) return;
@@ -374,6 +369,10 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
       </div>
     );
   };
+  useEffect(() => {
+    const step = localStorage.getItem("currentStep");
+    // Perform actions based on the current step or load related data
+  }, []);
   
   
   
