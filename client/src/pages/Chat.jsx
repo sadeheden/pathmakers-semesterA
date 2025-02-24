@@ -89,17 +89,17 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     async function fetchHotels(city) {
       if (!city) return;
       try {
-          const url = `http://localhost:4000/api/hotels/${encodeURIComponent(city)}`;
-          const response = await fetch(url);
-          if (!response.ok) {
-              throw new Error(`Failed to fetch hotels, status: ${response.status}`);
-          }
-          const data = await response.json();
-          setLoadedHotels(data);
+        const response = await fetch(`http://localhost:4000/api/hotels/${city.toLowerCase()}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch attractions for ${city}, status: ${response.status}`);
+        }
+        const data = await response.json();
+        setLoadedHotels(data.hotels || []);
       } catch (error) {
-          console.error("Error fetching hotels:", error);
+        console.error("Error fetching hotels:", error);
       }
-  }
+    }
+
   
 
     async function fetchAttractions(city) {
