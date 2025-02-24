@@ -2,57 +2,38 @@ import React from 'react';
 import '../assets/styles/DownloadApp.css';
 import appleImg from '../assets/images/apple.png';
 import androidImg from '../assets/images/android.png';
+import mockupImage from '../assets/images/mockup.png';
 
 const DownloadApp = () => {
     const handleDownload = (platform) => {
         if (platform === 'ios') {
-            window.location.href = 'https://www.apple.com/store'; // קישור לדף החנות של אפל
+            window.location.href = 'https://www.apple.com/store';
         } else if (platform === 'android') {
-            window.location.href = 'https://play.google.com/store'; // קישור לחנות של אנדרואיד
+            window.location.href = 'https://play.google.com/store';
         }
     };
 
     return (
-        <div className="outerContainer"> {/* This ensures full centering */}
-            <div className="containerDow">
-                <h1 className="title">Download Our App</h1>
-                <p className="description">
-                    Get the best experience by downloading our app on your iPhone or Android device.
-                    Stay connected and enjoy exclusive features on the go!
-                </p>
-                
-                <div className="buttonsD">
-                    <a 
-                        href="#"
-                        className="button-ios"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleDownload('ios');
-                        }}
-                    >
-                        <img 
-                            src={appleImg} 
-                            alt="iOS Logo" 
-                            className="buttonIcon"
-                        />
+        <div className="phone-landing-container">
+            {/* Mockup (Left Side) */}
+            <div className="phone-mockup">
+                <img src={mockupImage} alt="Captain Credit" className="mockup-image" />
+            </div>
+
+            {/* Content (Right Side) */}
+            <div className="text-content">
+                <h1 className="title">Credit Rating at Captain Credit</h1>
+
+                {/* Download Buttons */}
+                <div className="download-buttons">
+                    <button onClick={() => handleDownload('ios')} className="button-ios">
+                        <img src={appleImg} alt="Download on the App Store" className="button-icon" />
                         Download for iPhone
-                    </a>
-                    
-                    <a 
-                        href="#"
-                        className="button-android"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            handleDownload('android');
-                        }}
-                    >
-                        <img 
-                            src={androidImg} 
-                            alt="Android Logo" 
-                            className="buttonIcon"
-                        />
+                    </button>
+                    <button onClick={() => handleDownload('android')} className="button-android">
+                        <img src={androidImg} alt="Get it on Google Play" className="button-icon" />
                         Download for Android
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
