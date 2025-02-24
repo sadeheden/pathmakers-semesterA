@@ -24,18 +24,18 @@ const VideoExplanation = () => {
                 </video>
             </div>
             <div className="textContainer">
-                <h1 className="title">🎬 How to Use the Website 🌍</h1>
+                <h1 className="title"> How to Use the Website 🌍</h1>
                 <p className="description">
                     Watch the video to explore all the features of our platform! 
                     You'll learn how to navigate through the website efficiently and 
-                    get the most out of your experience. 🌟✨
+                    get the most out of your experience. 
                 </p>
                 <div className="buttonContainer">
                     <button 
                         className="nextButton"
                         onClick={handleContinue}
                     >
-                        Continue 🚀
+                        Continue 
                     </button>
                 </div>
             </div>
