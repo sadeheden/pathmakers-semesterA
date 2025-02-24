@@ -16,7 +16,10 @@ const Header = () => {
         const token = localStorage.getItem("authToken");
     
         if (!token) {
-            console.warn("⚠️ No token found, user is not logged in.");
+            console.warn("⚠️ No token found. Redirecting to login...");
+            sessionStorage.removeItem("hasLoggedIn"); // ✅ Reset session on logout
+            localStorage.removeItem("currentStep"); // ✅ Clear chat state
+            localStorage.removeItem("userResponses"); // ✅ Clear chat state
             setUser(null);
             return;
         }
@@ -31,20 +34,18 @@ const Header = () => {
             });
     
             if (!response.ok) {
-                if (response.status === 401) {
-                    console.warn("⚠️ Unauthorized: Invalid token.");
-                    setUser(null);
-                    localStorage.removeItem("authToken"); // Remove invalid token
-                }
-                return;
+                throw new Error(`⚠️ Failed to fetch user, status: ${response.status}`);
             }
     
             const userData = await response.json();
             console.log("✅ User fetched successfully:", userData);
-            
-            // Store token if login was successful (optional but good practice)
-            if (userData.token) {
-                localStorage.setItem("authToken", userData.token);
+    
+            // ✅ Reset chat when a new user logs in
+            if (sessionStorage.getItem("hasLoggedIn") !== userData.username) {
+                console.log("🔄 Resetting chat for new user session...");
+                sessionStorage.setItem("hasLoggedIn", userData.username);
+                localStorage.removeItem("currentStep");
+                localStorage.removeItem("userResponses");
             }
     
             setUser(userData);
@@ -52,8 +53,37 @@ const Header = () => {
             console.error("⚠️ Error fetching user session:", error);
         }
     };
-          
-
+    
+    const fetchOrders = async () => {
+        const token = localStorage.getItem("authToken");
+        
+        if (!token) {
+            console.warn("⚠️ No token found, user is not logged in.");
+            return;
+        }
+    
+        try {
+            const response = await fetch("http://localhost:4000/api/order", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            if (!response.ok) {
+                console.warn("⚠️ Error fetching orders:", response.status);
+                return;
+            }
+    
+            const orders = await response.json();
+            console.log("✅ User orders:", orders);
+            setOrders(orders);
+        } catch (error) {
+            console.error("⚠️ Error fetching orders:", error);
+        }
+    };
+    
     // Ensure the user is fetched on page load
     useEffect(() => {
         fetchUser();
@@ -62,7 +92,7 @@ const Header = () => {
     // Handle logout
     const handleLogout = async () => {
         const token = localStorage.getItem("authToken");
-
+    
         try {
             const response = await fetch("http://localhost:4000/api/auth/logout", {
                 method: "POST",
@@ -71,17 +101,21 @@ const Header = () => {
                     "Authorization": `Bearer ${token}`
                 }
             });
-
+    
             if (!response.ok) throw new Error(`Logout failed: ${response.statusText}`);
-
+    
             console.log("✅ Successfully logged out.");
             localStorage.removeItem("authToken");
+            sessionStorage.removeItem("hasLoggedIn"); // ✅ Clear session
+            localStorage.removeItem("currentStep"); // ✅ Clear chat history
+            localStorage.removeItem("userResponses"); // ✅ Clear chat history
             setUser(null);
-            navigate("/");
+            navigate("/login"); // Redirect to login
         } catch (error) {
             console.error("⚠️ Logout error:", error);
         }
     };
+    
 
     // Define pages to disable the menu
     const disabledPages = ["/", "/signup", "/login"];

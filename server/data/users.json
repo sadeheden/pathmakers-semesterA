@@ -162,5 +162,12 @@
     "email": "jona@mal.com",
     "password": "$2b$10$z/B92SyHcgnJqtW.MlMiXenqH5UXff/hRzpNt1ARw.AtGoOX4/JQe",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740421803/user_profiles/tnxmu1gliqjdx8yn2kkq.jpg"
+  },
+  {
+    "id": "1a9b90dc-979f-4072-8811-e9e4e732a5ed",
+    "username": "joaF656",
+    "email": "jokna@mal.com",
+    "password": "$2b$10$hA1l2rEApdODu9egdyV5eubj.q.URrUutSshnhEELoTWxq3HXUC8W",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740423996/user_profiles/xg40ebpblosgo1rz8e2a.jpg"
   }
 ]

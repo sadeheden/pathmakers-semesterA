@@ -7,9 +7,9 @@ import "../assets/styles/chat.css";
 
 const TravelPlannerApp = () => {
   useEffect(() => {
-    const hasLoggedIn = sessionStorage.getItem("hasLoggedIn");
-
-    if (!hasLoggedIn) {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+    
       // Reset progress only if it's a new login session
       setCurrentStep(0);
       setUserResponses({});
@@ -398,18 +398,35 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     if (step.label === "Trip Summary") {
       const totalPrice = calculateTotalPrice();
     
-      const handleSaveOrder = async () => {
-        const token = localStorage.getItem("authToken"); // ✅ Use correct token key
-    
-        console.log("🔍 Token before sending request:", token); // ✅ Debugging
-    
-        if (!token) {
-            console.error("❌ No token found. User might not be logged in.");
-            alert("⚠️ You must be logged in to save an order.");
-            return;
+    const handleSaveOrder = async () => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        console.error("❌ No token found. User might not be logged in.");
+        alert("⚠️ You must be logged in to save an order.");
+        return;
+    }
+
+    try {
+        // ✅ Fetch user details first to get userId
+        const userResponse = await fetch("http://localhost:4000/api/auth/user", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!userResponse.ok) {
+            throw new Error("❌ Failed to fetch user details.");
         }
-    
+
+        const userData = await userResponse.json();
+        console.log("✅ Fetched User:", userData);
+
         const orderData = {
+            userId: userData.id, // ✅ Attach the logged-in user's ID
+            username: userData.username,
             departureCity: userResponses["What is your departure city?"],
             destinationCity: userResponses["What is your destination city?"],
             flight: userResponses["Select your flight"],
@@ -418,6 +435,30 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             transportation: userResponses["Select your mode of transportation"],
             paymentMethod: userResponses["Select payment method"],
             totalPrice: calculateTotalPrice(),
+        };
+
+        console.log("🔍 Sending Order Data:", orderData);
+
+        const response = await fetch("http://localhost:4000/api/order", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            console.error("❌ Failed to save order:", response.status, errorMessage);
+            alert(`Error: ${errorMessage}`);
+            return;
+        }
+
+        console.log("✅ Order saved successfully!");
+    } catch (error) {
+        console.error("⚠️ Error saving order:", error);
+    
         };
     
         try {
@@ -534,9 +575,16 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     
             <div className="summary-buttons">
               <button className="download-btn" onClick={handleDownloadSummary}>Download receipt</button>
-              <button className="personal-area-btn" onClick={() => window.location.href = "/personal-area"}>
-                Go to Personal Area
-              </button>
+              <button
+  className="personal-area-btn"
+  onClick={async () => {
+    await handleSaveOrder(); // ✅ Save the order before redirecting
+    window.location.href = "/personal-area"; // ✅ Redirect after saving
+  }}
+>
+  Go to Personal Area
+</button>
+
               <button className="personal-area-btn" onClick={handleRestartTrip}>
                 Plan Another Trip
               </button>
