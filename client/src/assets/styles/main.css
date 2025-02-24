@@ -1,7 +1,4 @@
-/* 
-* Main Homepage Styles
-*/
-
+/* Main Homepage Styles */
 .main-container {
   position: relative;
   width: 100%;
@@ -11,103 +8,126 @@
   justify-content: center;
   overflow: hidden;
 }
-  
-  .main-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
+
+.main-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* ===== Overlay & Content ===== */
+.main-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.534);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  color: white;
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+}
+
+/* ===== Typography ===== */
+.main-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.main-description {
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+/* ===== Buttons ===== */
+.main-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.main-btn{
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, transform 0.2s ease;
+  display: block;
+  width: 40%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #bf281c;
+}
+
+.main-Chat:hover {
+  background-color: #a14545;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .main-container {
+    height: 100vh; /* הגבהתי את הגובה */
   }
   
-  /* ===== Overlay & Content ===== */
   .main-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40%;
-    height: 100%;
-    background: rgba(5, 5, 5, 0.534);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .main-content {
-    color: white;
-    text-align: center;
-    max-width: 500px;
-    padding: 20px;
-  }
-  
-  /* ===== Typography ===== */
-  .main-heading {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: white;
-  }
-  
-  .main-description {
-    font-size: 1.2rem;
-    color: #ddd;
-  }
-  
-  /* ===== Buttons ===== */
-  .main-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-    width: 100%;
-  }
-  
-  .main-btn{
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px; /* Rounded corners */
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out, transform 0.2s ease;
-    display: block;
-    width: 40%;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #bf281c;
+    width: 100%; /* המרתי את הרוחב של ה-overlay ל-100% */
+    height: 100%; /* הגבהתי את הגובה של ה-overlay ל-100% */
   }
 
-  
-  .main-Chat:hover {
-    background-color: #a14545;
-  }
-  
-  /* ===== Responsive Design ===== */
-  @media (max-width: 768px) {
-    .main-btn {
-      width: 100%;
-      font-size: 1.1rem;
-      padding: 14px 25px;
-    }
-  }
-  
-  /* ===== Animations ===== */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
   .main-content {
-    animation: fadeIn 0.8s ease-out;
+    text-align: center;
+    padding: 25px;
+    width: 100%;
+    animation: fadeIn 0.8s ease-out; /* שמתי את האנימציה כאן */
   }
+
+  .main-heading {
+    font-size: 2.5rem; /* הגדלתי את הכותרת */
+  }
+
+  .main-description {
+    font-size: 1.5rem; /* הגדלתי את הגודל של התיאור */
+  }
+
+  .main-btn {
+    width: 80%; /* הגדלתי את רוחב הכפתור */
+    font-size: 1.2rem; /* הגדלתי את גודל הטקסט בכפתור */
+    padding: 15px 20px; /* הגדלתי את הפדינג של הכפתור */
+  }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-content {
+  animation: fadeIn 0.8s ease-out;
+}

@@ -1,3 +1,4 @@
+/* Global Styles */
 .containerVideo {
     display: flex;
     flex-direction: row;
@@ -71,43 +72,59 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-
 /* 📱 Responsive Design */
 @media only screen and (max-width: 768px) {
-    .outerContainer {
-        padding: 20px;
-        gap: 10px;
+    .containerVideo {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 40px 20px; /* Less padding for smaller screens */
+        height: auto; /* Allow the container to adjust height based on content */
+    }
+
+    .videoContainer {
+        margin-right: 0; /* Remove right margin for stacked layout */
+        margin-bottom: 20px; /* Add space between video and text */
+    }
+
+    .video {
+        width: 100%; /* Make video width 100% on smaller screens */
+        margin-bottom: 20px; /* Add space below the video */
+    }
+
+    .textContainer {
+        max-width: 100%; /* Ensure text container takes full width */
     }
 
     .title {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Reduce title size for smaller screens */
     }
 
     .description {
-        font-size: 0.9rem;
+        font-size: 1rem; /* Adjust description size */
     }
 
-    .button {
-        width: 100%;
-        max-width: none;
+    .nextButton {
+        width: 100%; /* Make the button take full width */
+        margin-left: 0; /* Remove left margin */
+        padding: 12px 20px; /* Adjust padding */
+        font-size: 16px; /* Increase font size for easier tap */
     }
 }
 
 @media only screen and (max-width: 375px) {
-    .outerContainer {
-        padding: 15px;
+    .containerVideo {
+        padding: 20px 10px; /* Further reduce padding for very small screens */
     }
 
     .title {
-        font-size: 1.3rem;
+        font-size: 1.5rem; /* Smaller font for very small screens */
     }
 
     .description {
-        font-size: 0.8rem;
+        font-size: 0.9rem; /* Adjust description size */
     }
 
-    .button {
-        padding: 10px 15px;
-        font-size: 0.9rem;
+    .nextButton {
+        padding: 10px 15px; /* Adjust button padding */
+        font-size: 14px; /* Adjust font size */
     }
 }

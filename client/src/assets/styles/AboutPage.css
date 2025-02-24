@@ -22,6 +22,7 @@ h1 {
     justify-content: center;
     gap: 30px;
     margin-bottom: 40px;
+    flex-wrap: wrap; /* Allow items to wrap on small screens */
 }
 
 .card {
@@ -32,6 +33,7 @@ h1 {
     flex: 1;
     max-width: 300px;
     text-align: center;
+    margin: 10px; /* Add margin to ensure spacing on smaller screens */
 }
 
 .icon {
@@ -45,4 +47,47 @@ h1 {
     padding: 20px;
     border-radius: 8px;
     margin-top: 30px;
+}
+
+/* Responsive Styles for iPhone and small screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    h1 {
+        font-size: 24px; /* Adjust heading size */
+        margin-bottom: 30px; /* Less space for smaller screens */
+    }
+
+    .cards-container {
+        gap: 15px; /* Reduce gap between cards */
+    }
+
+    .card {
+        max-width: 100%; /* Cards should take up full width on small screens */
+        margin-bottom: 20px; /* Add bottom margin between cards */
+    }
+
+    .icon {
+        font-size: 30px; /* Smaller icon size for mobile */
+    }
+
+    .cta {
+        padding: 15px; /* Reduce padding in call-to-action box */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* Even smaller heading size for very small screens */
+    }
+
+    .card {
+        padding: 20px; /* Adjust card padding */
+    }
+
+    .cta {
+        padding: 10px; /* Adjust call-to-action padding for small screens */
+    }
 }
