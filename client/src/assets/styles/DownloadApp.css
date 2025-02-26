@@ -19,9 +19,8 @@
 }
 
 .mockup-image {
-    width: 90%; /* Smaller image width for mobile */
     height: auto; /* Preserve image aspect ratio */
-    max-height: 350px; /* Reduced max-height */
+    max-height: 650px; /* Reduced max-height */
 }
 
 /* Text Content (Right) */
