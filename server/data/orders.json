@@ -672,5 +672,37 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 3720,
     "createdAt": "2025-02-24T21:01:01.458Z"
+  },
+  {
+    "id": "a4f56206-0457-4942-abfc-2fe4ce8fa2bd",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "The Ritz-Carlton, Tokyo - $2700/night",
+    "attractions": [
+      "Meiji Shrine"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3570,
+    "createdAt": "2025-02-26T10:08:10.348Z"
+  },
+  {
+    "id": "8612e4f7-0cb2-47c5-beda-308fe34ca14a",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "Tokyo",
+    "flight": "Japan Airlines - $800 (14h 00m)",
+    "hotel": "The Ritz-Carlton, Tokyo - $2700/night",
+    "attractions": [
+      "Meiji Shrine"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3570,
+    "createdAt": "2025-02-26T10:08:27.403Z"
   }
 ]
