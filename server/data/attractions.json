@@ -13,18 +13,6 @@
       ]
     },
     {
-      "city": "Bangkok",
-      "attractions": [
-        "Grand Palace",
-        "Wat Arun",
-        "Wat Phra Kaew",
-        "Chao Phraya River",
-        "Chatuchak Market",
-        "Siam Paragon",
-        "CentralWorld"
-      ]
-    },
-    {
       "city": "Barcelona",
       "attractions": [
         "Sagrada Familia",
@@ -34,18 +22,6 @@
         "Gothic Quarter",
         "La Maquinista",
         "Maremagnum"
-      ]
-    },
-    {
-      "city": "Beijing",
-      "attractions": [
-        "Great Wall of China",
-        "Forbidden City",
-        "Temple of Heaven",
-        "Tiananmen Square",
-        "Summer Palace",
-        "Wangfujing Mall",
-        "The Place Mall"
       ]
     },
     {
@@ -61,66 +37,6 @@
       ]
     },
     {
-      "city": "Buenos Aires",
-      "attractions": [
-        "La Boca",
-        "Recoleta Cemetery",
-        "Plaza de Mayo",
-        "Teatro Colon",
-        "Puerto Madero",
-        "Galerías Pacífico",
-        "Shopping Sur"
-      ]
-    },
-    {
-      "city": "Cairo",
-      "attractions": [
-        "Pyramids of Giza",
-        "Egyptian Museum",
-        "Sphinx",
-        "Khan El Khalili Bazaar",
-        "Coptic Cairo",
-        "Mall of Arabia",
-        "City Stars Mall"
-      ]
-    },
-    {
-      "city": "Cape Town",
-      "attractions": [
-        "Table Mountain",
-        "Robben Island",
-        "V&A Waterfront",
-        "Kirstenbosch National Botanical Garden",
-        "Cape Point",
-        "V&A Waterfront",
-        "Canal Walk"
-      ]
-    },
-    {
-      "city": "Chicago",
-      "attractions": [
-        "Millennium Park",
-        "Willis Tower Skydeck",
-        "Navy Pier",
-        "Art Institute of Chicago",
-        "Lincoln Park Zoo",
-        "Water Tower Place",
-        "North Michigan Avenue"
-      ]
-    },
-    {
-      "city": "Delhi",
-      "attractions": [
-        "Red Fort",
-        "Qutub Minar",
-        "Lotus Temple",
-        "India Gate",
-        "Humayun's Tomb",
-        "Select Citywalk",
-        "DLF Mall of India"
-      ]
-    },
-    {
       "city": "Dubai",
       "attractions": [
         "Burj Khalifa",
@@ -130,66 +46,6 @@
         "Burj Al Arab",
         "Ibn Battuta Mall",
         "Mall of the Emirates"
-      ]
-    },
-    {
-      "city": "Hong Kong",
-      "attractions": [
-        "Victoria Peak",
-        "Hong Kong Disneyland",
-        "Tsim Sha Tsui Promenade",
-        "Temple Street Night Market",
-        "Ngong Ping 360",
-        "Times Square",
-        "Harbour City"
-      ]
-    },
-    {
-      "city": "Istanbul",
-      "attractions": [
-        "Hagia Sophia",
-        "Topkapi Palace",
-        "Blue Mosque",
-        "Basilica Cistern",
-        "Grand Bazaar",
-        "Istinye Park",
-        "Kanyon Shopping Mall"
-      ]
-    },
-    {
-      "city": "Jakarta",
-      "attractions": [
-        "National Monument",
-        "Kota Tua",
-        "Taman Mini Indonesia Indah",
-        "Ragunan Zoo",
-        "Istiqlal Mosque",
-        "Grand Indonesia",
-        "Plaza Indonesia"
-      ]
-    },
-    {
-      "city": "Kuala Lumpur",
-      "attractions": [
-        "Petronas Towers",
-        "Batu Caves",
-        "Merdeka Square",
-        "Kuala Lumpur Tower",
-        "Aquaria KLCC",
-        "Pavilion KL",
-        "Suria KLCC"
-      ]
-    },
-    {
-      "city": "Lagos",
-      "attractions": [
-        "Lekki Conservation Centre",
-        "Nike Art Gallery",
-        "National Museum Lagos",
-        "Tarkwa Bay Beach",
-        "Elegushi Beach",
-        "The Palms Shopping Mall",
-        "Ikeja City Mall"
       ]
     },
     {
@@ -217,15 +73,15 @@
       ]
     },
     {
-      "city": "Madrid",
+      "city": "New York",
       "attractions": [
-        "Royal Palace of Madrid",
-        "Prado Museum",
-        "Retiro Park",
-        "Puerta del Sol",
-        "Santiago Bernabéu Stadium",
-        "El Corte Inglés",
-        "Plaza Norte 2"
+        "Statue of Liberty",
+        "Central Park",
+        "Empire State Building",
+        "Times Square",
+        "Broadway",
+        "Metropolitan Museum of Art",
+        "Brooklyn Bridge"
       ]
     },
     {
@@ -241,63 +97,15 @@
       ]
     },
     {
-      "city": "New York",
-      "attractions": [
-        "Statue of Liberty",
-        "Central Park",
-        "Empire State Building",
-        "Times Square",
-        "Broadway",
-        "Metropolitan Museum of Art",
-        "Brooklyn Bridge"
-      ]
-    },
-    {
-      "city": "Tokyo",
-      "attractions": [
-        "Shibuya Crossing",
-        "Senso-ji Temple",
-        "Tokyo Tower",
-        "Meiji Shrine",
-        "Shinjuku Gyoen National Garden",
-        "Odaiba",
-        "Tokyo Disneyland"
-      ]
-    },
-    {
       "city": "Rome",
       "attractions": [
         "Colosseum",
-        "Roman Forum",
-        "Vatican Museums",
         "Pantheon",
         "Trevi Fountain",
+        "Vatican Museums",
+        "St. Peter's Basilica",
         "Piazza Navona",
-        "St. Peter's Basilica"
-      ]
-    },
-    {
-      "city": "Sydney",
-      "attractions": [
-        "Sydney Opera House",
-        "Sydney Harbour Bridge",
-        "Bondi Beach",
-        "Royal Botanic Garden",
-        "Taronga Zoo",
-        "The Rocks",
-        "Manly Beach"
-      ]
-    },
-    {
-      "city": "Moscow",
-      "attractions": [
-        "Red Square",
-        "Kremlin",
-        "Saint Basil's Cathedral",
-        "Bolshoi Theatre",
-        "Gorky Park",
-        "Arbat Street",
-        "Lenin's Mausoleum"
+        "Spanish Steps"
       ]
     },
     {
@@ -313,189 +121,40 @@
       ]
     },
     {
-      "city": "Toronto",
-      "attractions": [
-        "CN Tower",
-        "Royal Ontario Museum",
-        "Ripley's Aquarium",
-        "Toronto Islands",
-        "High Park",
-        "Art Gallery of Ontario",
-        "St. Lawrence Market"
-      ]
-    },
-    {
-      "city": "Rio de Janeiro",
-      "attractions": [
-        "Christ the Redeemer",
-        "Sugarloaf Mountain",
-        "Copacabana Beach",
-        "Ipanema Beach",
-        "Selarón Steps",
-        "Tijuca National Park",
-        "Maracanã Stadium"
-      ]
-    },
-    {
-      "city": "Singapore",
-      "attractions": [
-        "Marina Bay Sands",
-        "Gardens by the Bay",
-        "Sentosa Island",
-        "Universal Studios Singapore",
-        "Singapore Zoo",
-        "Chinatown",
-        "Clarke Quay"
-      ]
-    },
-    {
       "city": "Seoul",
       "attractions": [
         "Gyeongbokgung Palace",
         "N Seoul Tower",
         "Bukchon Hanok Village",
-        "Myeongdong",
+        "Myeongdong Shopping Street",
         "Dongdaemun Design Plaza",
         "Lotte World",
         "Insadong"
       ]
     },
     {
-      "city": "Lagos",
+      "city": "Madrid",
       "attractions": [
-        "Lekki Conservation Centre",
-        "Nike Art Gallery",
-        "National Museum Lagos",
-        "Tarkwa Bay Beach",
-        "Elegushi Beach",
-        "The Palms Shopping Mall",
-        "Ikeja City Mall"
-      ]
-    },
-    {
-      "city": "Mexico City",
-      "attractions": [
-        "Zócalo",
-        "Chapultepec Park",
-        "Palacio de Bellas Artes",
-        "Frida Kahlo Museum",
-        "Templo Mayor",
-        "Coyoacán",
-        "National Museum of Anthropology"
-      ]
-    },
-    {
-      "city": "Mumbai",
-      "attractions": [
-        "Gateway of India",
-        "Marine Drive",
-        "Chhatrapati Shivaji Maharaj Terminus",
-        "Elephanta Caves",
-        "Bandra-Worli Sea Link",
-        "Colaba Causeway",
-        "Juhu Beach"
-      ]
-    },
-    {
-      "city": "Shanghai",
-      "attractions": [
-        "The Bund",
-        "Yu Garden",
-        "Oriental Pearl Tower",
-        "Shanghai Disneyland",
-        "Jing'an Temple",
-        "Shanghai Museum",
-        "Nanjing Road"
-      ]
-    },
-    {
-      "city": "São Paulo",
-      "attractions": [
-        "Avenida Paulista",
-        "Ibirapuera Park",
-        "São Paulo Museum of Art",
-        "Mercadão",
-        "Pinacoteca do Estado",
-        "Municipal Market",
-        "Liberdade"
-      ]
-    },
-    {
-      "city": "Vancouver",
-      "attractions": [
-        "Stanley Park",
-        "Granville Island",
-        "Capilano Suspension Bridge",
-        "Grouse Mountain",
-        "Vancouver Aquarium",
-        "Canada Place",
-        "Science World"
-      ]
-    },
-    {
-      "city": "Melbourne",
-      "attractions": [
-        "Royal Botanic Gardens",
-        "Federation Square",
-        "Melbourne Zoo",
-        "National Gallery of Victoria",
-        "Eureka Skydeck",
-        "St Kilda Beach",
-        "Queen Victoria Market"
-      ]
-    },
-    {
-      "city": "Lima",
-      "attractions": [
+        "Prado Museum",
+        "Royal Palace of Madrid",
+        "Retiro Park",
+        "Puerta del Sol",
         "Plaza Mayor",
-        "Huaca Pucllana",
-        "Miraflores",
-        "Parque Kennedy",
-        "Museo Larco",
-        "Barranco",
-        "Palacio de Gobierno"
+        "Temple of Debod",
+        "Gran Vía"
       ]
     },
     {
+      "city": "Tokyo",
       "attractions": [
-          {
-              "city": "Rome",
-              "attractions": [
-                  "Colosseum",
-                  "Pantheon",
-                  "Trevi Fountain",
-                  "Vatican Museums",
-                  "St. Peter's Basilica",
-                  "Piazza Navona",
-                  "Spanish Steps"
-              ]
-          },
-          {
-              "city": "San Francisco",
-              "attractions": [
-                  "Golden Gate Bridge",
-                  "Alcatraz Island",
-                  "Fisherman's Wharf",
-                  "Pier 39",
-                  "Lombard Street",
-                  "Chinatown",
-                  "Palace of Fine Arts"
-              ]
-          },
-          {
-              "city": "Seoul",
-              "attractions": [
-                  "Gyeongbokgung Palace",
-                  "N Seoul Tower",
-                  "Bukchon Hanok Village",
-                  "Myeongdong Shopping Street",
-                  "Dongdaemun Design Plaza",
-                  "Lotte World",
-                  "Insadong"
-              ]
-          }
+        "Shibuya Crossing",
+        "Senso-ji Temple",
+        "Tokyo Tower",
+        "Meiji Shrine",
+        "Shinjuku Gyoen National Garden",
+        "Odaiba",
+        "Tokyo Disneyland"
       ]
-  }
-  
+    }
   ]
 }
