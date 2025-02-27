@@ -768,5 +768,37 @@
     "paymentMethod": "PayPal",
     "totalPrice": 3580,
     "createdAt": "2025-02-27T10:44:46.596Z"
+  },
+  {
+    "id": "bc4e4fc0-b4f6-42f0-bfca-3567d42a4c31",
+    "userId": "190ac616-0a63-4ef3-93b5-b4cb1862faf6",
+    "username": "sally12",
+    "departureCity": "London",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "Four Seasons Hotel George V - $3100/night",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3820,
+    "createdAt": "2025-02-27T16:38:42.820Z"
+  },
+  {
+    "id": "caa2a69b-51e0-4934-881b-20c38cca698b",
+    "userId": "190ac616-0a63-4ef3-93b5-b4cb1862faf6",
+    "username": "sally12",
+    "departureCity": "London",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "Four Seasons Hotel George V - $3100/night",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3820,
+    "createdAt": "2025-02-27T16:38:49.837Z"
   }
 ]
