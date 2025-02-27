@@ -704,5 +704,69 @@
     "paymentMethod": "PayPal",
     "totalPrice": 3570,
     "createdAt": "2025-02-26T10:08:27.403Z"
+  },
+  {
+    "id": "79b540ca-6fd0-461e-92de-3df520b0efa8",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Berlin",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "The Savoy - $2900/night",
+    "attractions": [
+      "London Eye"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3580,
+    "createdAt": "2025-02-27T10:41:12.855Z"
+  },
+  {
+    "id": "275a2b7f-1436-4e0d-8fe1-6cc626789089",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Berlin",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "The Savoy - $2900/night",
+    "attractions": [
+      "London Eye"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3580,
+    "createdAt": "2025-02-27T10:41:20.293Z"
+  },
+  {
+    "id": "5ac37d78-9259-4acc-b1a7-ec95f46d8e92",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Berlin",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "The Savoy - $2900/night",
+    "attractions": [
+      "London Eye"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3580,
+    "createdAt": "2025-02-27T10:41:33.877Z"
+  },
+  {
+    "id": "3fb97f11-0810-4bab-b7d3-b3e028631bba",
+    "userId": "bb8769ea-6680-4942-9847-e57dd5467b20",
+    "username": "soso",
+    "departureCity": "San Francisco",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "Shangri-La Hotel Paris - $2900/night",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3580,
+    "createdAt": "2025-02-27T10:44:46.596Z"
   }
 ]

@@ -421,11 +421,6 @@ useEffect(() => {
                                 <p>Please log in to see your details.</p>
                             )}
                         </div>
-    
-                        {/* ✅ Centered Logout Button */}
-                        {user && (
-                            <button onClick={handleLogout} className="button logout-button">Logout</button>
-                        )}
                     </>
                 )}
     
