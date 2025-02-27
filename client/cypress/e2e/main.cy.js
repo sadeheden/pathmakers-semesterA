@@ -1,7 +1,7 @@
 describe('home page loaded', () => {
   // בדיקה קטנה שהדף נטען ויש תמונה, טקסט וכפתור
   it('displays an image, text, and a button', () => {
-    cy.visit('http://localhost:5174/main')
+    cy.visit('http://localhost:5173/main')
     
     // בדיקה אם יש אלמנט <img> (תמונה)
     cy.get('img').should('exist')
