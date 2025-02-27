@@ -800,5 +800,35 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 3820,
     "createdAt": "2025-02-27T16:38:49.837Z"
+  },
+  {
+    "id": "d86ee2ef-9142-4d5e-a612-5134c3b74deb",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "Amsterdam",
+    "hotel": "The Dylan Amsterdam - $1200/night",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 1270,
+    "createdAt": "2025-02-27T17:31:14.953Z"
+  },
+  {
+    "id": "4cea7f5c-6730-4e99-a78c-2d30e74d39b5",
+    "userId": "3bf9b254-5e7f-4331-a105-b9ff23c36875",
+    "username": "eden344",
+    "departureCity": "Paris",
+    "destinationCity": "Amsterdam",
+    "hotel": "The Dylan Amsterdam - $1200/night",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 1270,
+    "createdAt": "2025-02-27T17:31:19.037Z"
   }
 ]
