@@ -27,7 +27,7 @@ body {
 /* 📌 Auth Container (Shared for Login & Signup) */
 .authContainer {
     background: white;
-    margin: 90px auto; /* Centers horizontally */
+    margin: 2px auto; /* Centers horizontally */
     padding: 40px 30px;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
