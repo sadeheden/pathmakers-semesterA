@@ -155,7 +155,14 @@ const AuthForm = ({ isLogin }) => {
                     </div>
                 )}
 
-                <button type="submit" className="authButton">{isLogin ? "Login" : "Sign Up"}</button>
+<button type="submit" className="authButton">{isLogin ? "Login" : "Sign Up"}</button>
+
+{isLogin && (
+    <p className="switchAuth">
+        No account? <span onClick={() => navigate("/signup")} className="switchLink">Register here</span>
+    </p>
+)}
+
             </form>
         </div>
     );
