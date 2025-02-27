@@ -176,5 +176,12 @@
     "email": "joffkna@mal.com",
     "password": "$2b$10$aO81pvR7mVTHt4OM0gK/Ou2OoLAlzQVymg5OkvonsZzAPIKQmfZSq",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740654243/user_profiles/psf3oyvilzgoi41eb1hl.png"
+  },
+  {
+    "id": "190ac616-0a63-4ef3-93b5-b4cb1862faf6",
+    "username": "sally12",
+    "email": "sally2@gmail.com",
+    "password": "$2b$10$27GuFSxjHE7.dzxoewR6feqvZYRUKJTDqfrWSo0EzBhkLrwYRxoXW",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740674232/user_profiles/kdg1hructxrqqzdhkf1x.png"
   }
 ]
