@@ -16,11 +16,12 @@ const AuthForm = ({ isLogin }) => {
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevState) => ({ ...prevState, [id]: value }));
-
+    
         if (errors[id]) {
-            setErrors((prev) => ({ ...prev, [id]: "" }));
+            setErrors((prev) => ({ ...prev, [id]: "" })); // ✅ Remove error message dynamically
         }
     };
+    
 
     // Handle file input
     const handleFileChange = (e) => {
@@ -34,7 +35,6 @@ const AuthForm = ({ isLogin }) => {
         }
     };
 
-    // Validate signup form
     const validateForm = () => {
         if (isLogin) return {};
         const newErrors = {};
@@ -42,9 +42,11 @@ const AuthForm = ({ isLogin }) => {
         if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Valid email is required";
         if (!formData.password || formData.password.length < 6) newErrors.password = "Password must be at least 6 characters";
         if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
+    
+        setErrors(newErrors); // ✅ Update errors state immediately
         return newErrors;
     };
-
+    
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -117,11 +119,11 @@ const AuthForm = ({ isLogin }) => {
             <form className="authForm" onSubmit={handleSubmit}>
                 <h2 className="authTitle">{isLogin ? "Welcome Back" : "Create an Account"}</h2>
 
-                {errors.submit && <p className="errorText">{errors.submit}</p>}
+                {errors.submit && <p className="error">{errors.submit}</p>}
 
                 <div className="formGroup">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" value={formData.username} onChange={handleChange} required />
+                    <input type="text" id="username" placeholder="Enter your username" value={formData.username} className={errors.username ? "inputError" : ""}  onChange={handleChange} required />
                     {errors.username && <p className="error">{errors.username}</p>}
                 </div>
 
@@ -130,7 +132,7 @@ const AuthForm = ({ isLogin }) => {
                         <div className="formGroup">
                             <label htmlFor="email">Email</label>
                             <input type="email" id="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} required />
-                            {errors.email && <p className="error">{errors.email}</p>}
+                            {errors.email && <p className="error">{errors.email}   className={errors.email ? "inputError" : ""}</p>}
                         </div>
 
                         <div className="formGroup">
