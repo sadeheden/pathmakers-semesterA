@@ -27,7 +27,7 @@ body {
 /* 📌 Auth Container (Shared for Login & Signup) */
 .authContainer {
     background: white;
-    margin: 90px auto; /* Centers horizontally */
+    margin: 2px auto; /* Centers horizontally */
     padding: 40px 30px;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -197,4 +197,21 @@ body {
     object-fit: cover;
     margin-top: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.switchAuth {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.switchLink {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.switchLink:hover {
+    text-decoration: underline;
 }
