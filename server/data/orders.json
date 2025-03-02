@@ -878,5 +878,197 @@
     "paymentMethod": "PayPal",
     "totalPrice": 2830,
     "createdAt": "2025-03-02T10:33:06.931Z"
+  },
+  {
+    "id": "4eaa928a-8db0-4555-92e4-a9d2c2294568",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T10:41:22.441Z"
+  },
+  {
+    "id": "1ee75bd8-9de2-4af0-be67-53ec98c0ab48",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T10:41:23.254Z"
+  },
+  {
+    "id": "1a7950dc-9945-41ae-9fca-2cb09e16e8e2",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T10:41:27.441Z"
+  },
+  {
+    "id": "15b209c3-3eda-4574-8faf-cd008ace02d6",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T11:00:05.090Z"
+  },
+  {
+    "id": "0cb8f26b-5655-4926-aaa8-07dcc4f6daf1",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T11:00:24.882Z"
+  },
+  {
+    "id": "25850e5d-51b3-44c7-82c6-d500a3e359a4",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Burj Al Arab Jumeirah - $2500/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3420,
+    "createdAt": "2025-03-02T11:00:32.897Z"
+  },
+  {
+    "id": "c9073191-746d-4a63-ac82-29d1f5998962",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Emirates - $800 (3h 30m)",
+    "hotel": "Jumeirah Beach Hotel - $2200/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-02T11:22:22.879Z"
+  },
+  {
+    "id": "97b1f64b-cbcb-4ad2-81eb-9a7c137edab3",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Emirates - $800 (3h 30m)",
+    "hotel": "Jumeirah Beach Hotel - $2200/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-02T11:28:10.806Z"
+  },
+  {
+    "id": "231b104e-51c1-491a-a2cb-40e074fba5ae",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Emirates - $800 (3h 30m)",
+    "hotel": "Jumeirah Beach Hotel - $2200/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-02T11:28:11.569Z"
+  },
+  {
+    "id": "26fd1316-c06f-4103-b9a8-16a54adfffa9",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "Dubai",
+    "flight": "Emirates - $800 (3h 30m)",
+    "hotel": "Jumeirah Beach Hotel - $2200/night",
+    "attractions": [
+      "Palm Jumeirah"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-02T11:28:14.584Z"
+  },
+  {
+    "id": "be61b41c-42ba-415e-8ecb-af9516485b92",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "Claridge's - $2800/night",
+    "attractions": [
+      "London Eye"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3480,
+    "createdAt": "2025-03-02T11:30:05.510Z"
+  },
+  {
+    "id": "5853087b-7c85-4aed-85ba-e76f0cad17ae",
+    "userId": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "departureCity": "Paris",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "Claridge's - $2800/night",
+    "attractions": [
+      "London Eye"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3480,
+    "createdAt": "2025-03-02T11:30:09.086Z"
   }
 ]
