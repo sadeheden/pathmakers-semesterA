@@ -830,5 +830,53 @@
     "paymentMethod": "PayPal",
     "totalPrice": 1270,
     "createdAt": "2025-02-27T17:31:19.037Z"
+  },
+  {
+    "id": "3e873440-4c05-46e1-808c-cb077ee396eb",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "San Francisco",
+    "destinationCity": "Amsterdam",
+    "flight": "Delta Airlines - $600 (9h 00m)",
+    "hotel": "Conservatorium Hotel - $2200/night",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2830,
+    "createdAt": "2025-03-02T10:32:32.383Z"
+  },
+  {
+    "id": "f11504b3-0931-4162-9976-b9b213b65dec",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "San Francisco",
+    "destinationCity": "Amsterdam",
+    "flight": "Delta Airlines - $600 (9h 00m)",
+    "hotel": "Conservatorium Hotel - $2200/night",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2830,
+    "createdAt": "2025-03-02T10:33:01.442Z"
+  },
+  {
+    "id": "6e55a91a-e91b-4da0-8c30-0021b0b1651f",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "San Francisco",
+    "destinationCity": "Amsterdam",
+    "flight": "Delta Airlines - $600 (9h 00m)",
+    "hotel": "Conservatorium Hotel - $2200/night",
+    "attractions": [
+      "Van Gogh Museum"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2830,
+    "createdAt": "2025-03-02T10:33:06.931Z"
   }
 ]
