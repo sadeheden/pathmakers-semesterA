@@ -11,5 +11,12 @@
     "email": "eden@mail.com",
     "password": "$2b$10$sInwgT3NL8DGVu44mZwnXuOsq5h2aPN2ZZITI1q36jR7BfJWz7Rx6",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740911461/user_profiles/m61ugoem5omlftiitxji.jpg"
+  },
+  {
+    "id": "7f2d1d2c-c142-43e0-a748-fed10679c953",
+    "username": "eden233",
+    "email": "eden333@mail.com",
+    "password": "$2b$10$viM9lOu5AUjyMkkeYX53QuDqJzzyywrD5Z.4Iln2ZQsNZuoOykXPK",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740913277/user_profiles/mirio0hy6kjthxbkt8vv.png"
   }
 ]
