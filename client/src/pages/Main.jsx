@@ -21,7 +21,7 @@ const Main = () => {
       <div className="main-overlay">
         <div className="main-content">
           <h1 className="main-heading">Welcome to Pathmakers</h1>
-          <p className="main-description">Travel agency which you'll love. -Let us turn your dream into the perfect trip – everything you need in one place!</p>
+          <p className="main-description">Travel agency which you'll love</p>
           
           <div className="main-buttons">         
             <button className="main-btn" onClick={handleChatRedirect}>
