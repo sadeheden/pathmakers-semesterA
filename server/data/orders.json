@@ -894,5 +894,117 @@
     "paymentMethod": "Bank Transfer",
     "totalPrice": 4780,
     "createdAt": "2025-03-03T12:25:49.730Z"
+  },
+  {
+    "id": "6645ee19-caa6-43d0-b0aa-f622997de0bd",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "San Francisco",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Four Seasons Hotel New York - $4200/night",
+    "attractions": [
+      "Times Square"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 4980,
+    "createdAt": "2025-03-03T12:34:27.215Z"
+  },
+  {
+    "id": "57e9d9e6-7213-429b-8dd0-908f966756b6",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "San Francisco",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "Four Seasons Hotel New York - $4200/night",
+    "attractions": [
+      "Times Square"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 4980,
+    "createdAt": "2025-03-03T12:34:58.729Z"
+  },
+  {
+    "id": "f0146a30-11d0-4961-a687-6be1eb40faf7",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "San Francisco",
+    "destinationCity": "Tokyo",
+    "flight": "United Airlines - $900 (14h 30m)",
+    "hotel": "Park Hyatt Tokyo - $2400/night",
+    "attractions": [
+      "Shinjuku Gyoen National Garden"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3330,
+    "createdAt": "2025-03-03T12:37:47.858Z"
+  },
+  {
+    "id": "56ca95b2-f1f7-4851-9283-54020e55cb2b",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Seoul",
+    "destinationCity": "Paris",
+    "flight": "Emirates - $700 (11h 00m)",
+    "hotel": "Shangri-La Hotel Paris - $2900/night",
+    "attractions": [
+      "Notre-Dame Cathedral"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3630,
+    "createdAt": "2025-03-03T12:49:20.170Z"
+  },
+  {
+    "id": "cd37ab82-124a-43d1-b94a-41f99d6b98d7",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Amsterdam",
+    "destinationCity": "Dubai",
+    "flight": "Emirates - $800 (3h 30m)",
+    "hotel": "Armani Hotel Dubai - $1800/night",
+    "attractions": [
+      "Burj Al Arab"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2630,
+    "createdAt": "2025-03-03T12:50:36.085Z"
+  },
+  {
+    "id": "d3dc51d5-7050-45e7-9bb8-3da47c10ba56",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "New York",
+    "destinationCity": "Dubai",
+    "flight": "Flydubai - $850 (3h 45m)",
+    "hotel": "Armani Hotel Dubai - $1800/night",
+    "attractions": [
+      "Dubai Fountain"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 2720,
+    "createdAt": "2025-03-03T12:52:27.623Z"
+  },
+  {
+    "id": "53c411f8-c5a3-4486-9757-0067960333c3",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Madrid",
+    "destinationCity": "Amsterdam",
+    "flight": "KLM - $550 (8h 45m)",
+    "hotel": "Conservatorium Hotel - $2200/night",
+    "attractions": [
+      "Vondelpark"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 2780,
+    "createdAt": "2025-03-03T12:53:15.326Z"
   }
 ]
