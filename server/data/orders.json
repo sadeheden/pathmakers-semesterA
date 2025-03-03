@@ -830,5 +830,37 @@
     "paymentMethod": "PayPal",
     "totalPrice": 1270,
     "createdAt": "2025-02-27T17:31:19.037Z"
+  },
+  {
+    "id": "01648ff5-1e1c-4b9d-b78f-b4c02345bf84",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Dubai",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "The Ritz Paris - $3200/night",
+    "attractions": [
+      "Montmartre"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3880,
+    "createdAt": "2025-02-27T21:41:40.856Z"
+  },
+  {
+    "id": "48d850ab-3e67-4541-804f-59cc7d4f323a",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Dubai",
+    "destinationCity": "Paris",
+    "flight": "Delta Airlines - $650 (10h 45m)",
+    "hotel": "The Ritz Paris - $3200/night",
+    "attractions": [
+      "Montmartre"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "Crypto",
+    "totalPrice": 3880,
+    "createdAt": "2025-02-27T21:41:48.820Z"
   }
 ]
