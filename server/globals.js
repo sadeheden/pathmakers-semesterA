@@ -4,6 +4,9 @@ import path from 'path';
 import multer from 'multer';
 import { v2 as cloudinary } from 'cloudinary';
 
+//העלאת קבצים מקומיים ולהעלאת תמונות לשירות Cloudinary.
+
+
 // יצירת השרת Express
 const server = express();
 server.use(express.json());  // מאפשר קריאת JSON בבקשות

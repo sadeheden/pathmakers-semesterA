@@ -13,7 +13,7 @@ import authRouter from './services/auth/auth.router.js';
 import uploadRouter from './services/upload/upload.router.js';
 import sendNewsletter from "./services/newsletter/newsletter.router.js";
 import infoRoutes from "./services/info/info.router.js"; 
-import orderRoutes from "./services/order/order.router.js"; // ✅ Make sure it's imported
+import orderRoutes from "./services/order/order.router.js"; 
 
 const server = express();
 const PORT = process.env.PORT || 4000;
@@ -31,7 +31,7 @@ server.use('/api/attractions', attractionsRouter);
 server.use('/api/auth', authRouter); 
 server.use('/api/upload', uploadRouter);
 server.use('/api/newsletter', sendNewsletter);
-server.use('/api/order', orderRoutes); // ✅ Added this to fix your 404 error
+server.use('/api/order', orderRoutes); 
 
 // ✅ Check if the server is running
 server.use((err, req, res, next) => {

@@ -862,5 +862,37 @@
     "paymentMethod": "Crypto",
     "totalPrice": 3880,
     "createdAt": "2025-02-27T21:41:48.820Z"
+  },
+  {
+    "id": "a9c57d2d-ea6f-4409-8cfa-0bd3b583d7ba",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Seoul",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "The St. Regis New York - $4000/night",
+    "attractions": [
+      "Times Square"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 4780,
+    "createdAt": "2025-03-03T12:24:54.793Z"
+  },
+  {
+    "id": "1c73aff9-f548-40ec-9a62-26df9ae58aaf",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Seoul",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "The St. Regis New York - $4000/night",
+    "attractions": [
+      "Times Square"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 4780,
+    "createdAt": "2025-03-03T12:25:49.730Z"
   }
 ]
