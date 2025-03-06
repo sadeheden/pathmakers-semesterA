@@ -894,5 +894,132 @@
     "paymentMethod": "Bank Transfer",
     "totalPrice": 4780,
     "createdAt": "2025-03-03T12:25:49.730Z"
+  },
+  {
+    "id": "04887d61-38f6-462d-a27b-a06a1cbe541d",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "London",
+    "destinationCity": "Seoul",
+    "flight": "Korean Air - $700 (14h 20m)",
+    "hotel": "Four Seasons Hotel Seoul - $2200/night",
+    "attractions": [
+      "Gyeongbokgung Palace"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2970,
+    "createdAt": "2025-03-03T12:38:09.785Z"
+  },
+  {
+    "id": "1ae6d1b4-a96c-484a-9bfd-93383d7d8232",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "London",
+    "destinationCity": "San Francisco",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Pier 39"
+    ],
+    "transportation": "Walk",
+    "paymentMethod": "PayPal",
+    "totalPrice": 1880,
+    "createdAt": "2025-03-03T12:39:20.639Z"
+  },
+  {
+    "id": "20d07c8a-8ca8-4577-826a-4d98061d9d39",
+    "userId": "1",
+    "username": "may",
+    "departureCity": "Amsterdam",
+    "destinationCity": "Madrid",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Hotel Villa Magna - $2000/night",
+    "attractions": [
+      "Puerta del Sol"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2580,
+    "createdAt": "2025-03-03T12:40:08.477Z"
+  },
+  {
+    "id": "6f1dcfab-5b1f-41b8-bd2e-c6bba52cba6d",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "London",
+    "hotel": "The Langham, London - $2700/night",
+    "attractions": [
+      "Buckingham Palace"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Crypto",
+    "totalPrice": 2730,
+    "createdAt": "2025-03-03T12:42:44.507Z"
+  },
+  {
+    "id": "5fc9fd32-f9a3-468e-bda8-f86fd5433928",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "New York",
+    "destinationCity": "New York",
+    "flight": "American Airlines - $700 (12h 00m)",
+    "hotel": "The Ritz-Carlton New York, Central Park - $3800/night",
+    "attractions": [
+      "Times Square"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 4570,
+    "createdAt": "2025-03-03T12:43:17.389Z"
+  },
+  {
+    "id": "b4a50b65-5b7b-489e-bc87-0e68eca34fcb",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Rome",
+    "destinationCity": "Berlin",
+    "flight": "Air France - $600 (9h 15m)",
+    "hotel": "Hotel de Rome - $2400/night",
+    "attractions": [
+      "Museum Island"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-03T12:43:49.347Z"
+  },
+  {
+    "id": "0f1186d6-d673-4cd8-a834-2aed942d793b",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Rome",
+    "destinationCity": "Berlin",
+    "flight": "Air France - $600 (9h 15m)",
+    "hotel": "Hotel de Rome - $2400/night",
+    "attractions": [
+      "Museum Island"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 3030,
+    "createdAt": "2025-03-03T12:43:49.616Z"
+  },
+  {
+    "id": "7f73dd4e-cf36-4b41-974f-7f62a789e30b",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "London",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Palace Hotel - $1800/night",
+    "attractions": [
+      "Fisherman's Wharf"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Crypto",
+    "totalPrice": 2450,
+    "createdAt": "2025-03-03T12:44:39.362Z"
   }
 ]
