@@ -1,11 +1,22 @@
 {
-  "username": "may",
-  "address": "jaffe",
-  "city": "",
-  "country": "",
-  "phone": "",
-  "gender": "Female",
-  "membership": "No",
-  "birthdate": "",
-  "age": "Not provided"
+  "username": "eden",
+  "address": "herzrrrrrrrrrrrrrrrrrrrrrel 22",
+  "city": "9380478374",
+  "country": "Israel",
+  "phone": "9380478374",
+  "gender": "Other",
+  "membership": "Yes",
+  "birthdate": "2024-11-07",
+  "age": 0,
+  "default-user": {
+    "username": "eden",
+    "address": "hiuuho",
+    "city": "",
+    "country": "",
+    "phone": "89t68786767",
+    "gender": "Female",
+    "membership": "Yes",
+    "birthdate": "2024-01-22",
+    "age": 1
+  }
 }
