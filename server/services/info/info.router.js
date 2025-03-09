@@ -20,7 +20,6 @@ const getUserInfo = () => {
     return {};
 };
 
-
 // Save user info to JSON file
 const saveUserInfo = (data) => {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
@@ -38,7 +37,6 @@ router.get("/user", (req, res) => {
 });
 
 // UPDATE User Info (PUT)
-// UPDATE User Info (PUT) - Allow Partial Updates
 router.put("/user", (req, res) => {
     try {
         const newUserData = req.body;
@@ -58,5 +56,4 @@ router.put("/user", (req, res) => {
     }
 });
 
-
-export default router; // ✅ Use `export default` instead of `module.exports`
+export default router;

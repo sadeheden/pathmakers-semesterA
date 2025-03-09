@@ -101,8 +101,8 @@ const PersonalArea = () => {
                 setTimeout(() => navigate("/login"), 1000);
                 return;
             }
-
-            const response = await fetch("http://localhost:4000/api/auth/user", {
+            const response = await fetch("http://localhost:4000/api/info/user", {
+                method: "GET",
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,
