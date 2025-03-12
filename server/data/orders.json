@@ -291,5 +291,73 @@
     "totalPrice": 3330,
     "pdfUrl": "/api/order/91df5116-1e8c-49ef-9670-3a8542599216/pdf",
     "createdAt": "2025-03-12T11:53:43.144Z"
+  },
+  {
+    "id": "a6b24213-6cf3-4915-babb-c1a689aae696",
+    "userId": "7674affe-e7fd-4962-845a-df9afed7983c",
+    "username": "math88J",
+    "departureCity": "New York",
+    "destinationCity": "Madrid",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Four Seasons Hotel Madrid - $2400/night",
+    "attractions": [
+      "Retiro Park"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 2980,
+    "pdfUrl": "/api/order/a6b24213-6cf3-4915-babb-c1a689aae696/pdf",
+    "createdAt": "2025-03-12T12:02:26.628Z"
+  },
+  {
+    "id": "b82c979e-d9d2-407e-bd72-386ee46a1e2a",
+    "userId": "7674affe-e7fd-4962-845a-df9afed7983c",
+    "username": "math88J",
+    "departureCity": "New York",
+    "destinationCity": "Madrid",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Four Seasons Hotel Madrid - $2400/night",
+    "attractions": [
+      "Retiro Park"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 2980,
+    "pdfUrl": "/api/order/b82c979e-d9d2-407e-bd72-386ee46a1e2a/pdf",
+    "createdAt": "2025-03-12T12:02:30.045Z"
+  },
+  {
+    "id": "5259c8a8-8671-4c1d-a5fb-fb91169196f5",
+    "userId": "1ba1f337-60c9-4ccb-931e-cdb6ea43f19f",
+    "username": "eden4",
+    "departureCity": "New York",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "The Ritz London - $3000/night",
+    "attractions": [
+      "Tower of London"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3680,
+    "pdfUrl": "/api/order/5259c8a8-8671-4c1d-a5fb-fb91169196f5/pdf",
+    "createdAt": "2025-03-12T12:23:02.584Z"
+  },
+  {
+    "id": "50c2459c-dca2-4f16-9391-40fafdc038cd",
+    "userId": "1ba1f337-60c9-4ccb-931e-cdb6ea43f19f",
+    "username": "eden4",
+    "departureCity": "New York",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "The Ritz London - $3000/night",
+    "attractions": [
+      "Tower of London"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 3680,
+    "pdfUrl": "/api/order/50c2459c-dca2-4f16-9391-40fafdc038cd/pdf",
+    "createdAt": "2025-03-12T12:23:06.212Z"
   }
 ]

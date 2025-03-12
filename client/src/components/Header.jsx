@@ -4,6 +4,7 @@ import logo from "../assets/images/Image20250119205452.png";
 import profilePlaceholder from "../assets/images/2151100205.jpg";
 import "../assets/styles/Header.css";
 
+
 const Header = () => {
     const [user, setUser] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,14 +13,16 @@ const Header = () => {
     const location = useLocation();
 
     // Fetch user session from backend using token stored in localStorage
+    const DEFAULT_PROFILE_IMAGE = "https://res.cloudinary.com/YOUR_CLOUDINARY_NAME/image/upload/v1700000000/YOUR_DEFAULT_IMAGE.jpg";
+
     const fetchUser = async () => {
         const token = localStorage.getItem("authToken");
     
         if (!token) {
             console.warn("⚠️ No token found. Redirecting to login...");
-            sessionStorage.removeItem("hasLoggedIn"); // ✅ Reset session on logout
-            localStorage.removeItem("currentStep"); // ✅ Clear chat state
-            localStorage.removeItem("userResponses"); // ✅ Clear chat state
+            sessionStorage.removeItem("hasLoggedIn");
+            localStorage.removeItem("currentStep");
+            localStorage.removeItem("userResponses");
             setUser(null);
             return;
         }
@@ -40,12 +43,9 @@ const Header = () => {
             const userData = await response.json();
             console.log("✅ User fetched successfully:", userData);
     
-            // ✅ Reset chat when a new user logs in
-            if (sessionStorage.getItem("hasLoggedIn") !== userData.username) {
-                console.log("🔄 Resetting chat for new user session...");
-                sessionStorage.setItem("hasLoggedIn", userData.username);
-                localStorage.removeItem("currentStep");
-                localStorage.removeItem("userResponses");
+            // ✅ If no profile image exists, set the default one
+            if (!userData.profileImage || userData.profileImage === "null") {
+                userData.profileImage = DEFAULT_PROFILE_IMAGE;
             }
     
             setUser(userData);
@@ -53,6 +53,7 @@ const Header = () => {
             console.error("⚠️ Error fetching user session:", error);
         }
     };
+    
     
     const fetchOrders = async () => {
         const token = localStorage.getItem("authToken");
@@ -142,12 +143,13 @@ const Header = () => {
             <div className="profile-section">
                 {user ? (
                     <>
-                        <img
-                            src={user?.profileImage || profilePlaceholder}
-                            alt="User"
-                            className="profile-image"
-                            onClick={() => setIsProfileOpen(!isProfileOpen)}
-                        />
+                      <img
+    src={user?.profileImage || profilePlaceholder}
+    alt="User"
+    className="profile-image"
+    onClick={() => setIsProfileOpen(!isProfileOpen)}
+/>
+
                         {isProfileOpen && (
                             <div className="profile-popup">
                                 <p>Hello, {user.username}!</p>
