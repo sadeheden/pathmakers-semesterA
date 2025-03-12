@@ -359,5 +359,39 @@
     "totalPrice": 3680,
     "pdfUrl": "/api/order/50c2459c-dca2-4f16-9391-40fafdc038cd/pdf",
     "createdAt": "2025-03-12T12:23:06.212Z"
+  },
+  {
+    "id": "9413b69f-284a-4413-bc0a-76b9caa735ef",
+    "userId": "9e8a1766-1843-4499-801d-6ce438a95c14",
+    "username": "gvrg5",
+    "departureCity": "Madrid",
+    "destinationCity": "London",
+    "flight": "British Airways - $550 (8h 00m)",
+    "hotel": "Four Seasons Hotel London at Park Lane - $3100/night",
+    "attractions": [
+      "Buckingham Palace"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3720,
+    "pdfUrl": "/api/order/9413b69f-284a-4413-bc0a-76b9caa735ef/pdf",
+    "createdAt": "2025-03-12T13:13:41.630Z"
+  },
+  {
+    "id": "9150336e-2c2e-4c1d-a718-10b030228912",
+    "userId": "9e8a1766-1843-4499-801d-6ce438a95c14",
+    "username": "gvrg5",
+    "departureCity": "Madrid",
+    "destinationCity": "London",
+    "flight": "British Airways - $550 (8h 00m)",
+    "hotel": "Four Seasons Hotel London at Park Lane - $3100/night",
+    "attractions": [
+      "Buckingham Palace"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3720,
+    "pdfUrl": "/api/order/9150336e-2c2e-4c1d-a718-10b030228912/pdf",
+    "createdAt": "2025-03-12T13:13:49.715Z"
   }
 ]

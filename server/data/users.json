@@ -53,5 +53,12 @@
     "email": "m5ayh@email.com",
     "password": "$2b$10$55kCto8sFgxOPyUJWoNxPu/p8XYy94t6M8erIQib5859tvLuZFHeS",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741782272/user_profiles/qdfdnlymuevckqn7hv9c.png"
+  },
+  {
+    "id": "9e8a1766-1843-4499-801d-6ce438a95c14",
+    "username": "gvrg5",
+    "email": "cnnjs@gmail.com",
+    "password": "$2b$10$2coXUZJU0e7uz9cQ2Ul0uOUIUbkbR8iTydLPcRFVzFZTZ6G4lG0FK",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741785093/user_profiles/goxlbv5ongvpmesbuztl.png"
   }
 ]
