@@ -18,18 +18,26 @@ if (!fs.existsSync(pdfDir)) {
 // ✅ Get all orders for a user
 export const getUserOrders = async (req, res) => {
     try {
-        const userId = req.user.id; // Ensure the user ID is extracted
-        console.log("🔍 Fetching orders for user:", userId);
+        console.log("🔍 Checking request user:", req.user); // ✅ Debug user data
 
-        const orders = loadOrders().filter(order => order.userId === userId); // Filter orders for the specific user
+        if (!req.user || !req.user.id) {
+            console.error("❌ User ID is missing in request.");
+            return res.status(401).json({ message: "Unauthorized: User not identified" });
+        }
 
+        const userId = String(req.user.id);
+        console.log("🔍 Fetching orders for user ID:", userId);
+
+        const orders = loadOrders().filter(order => String(order.userId) === userId);
         console.log("✅ Orders found:", orders);
+
         return res.status(200).json(orders);
     } catch (error) {
         console.error("⚠️ Error fetching orders:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 
 
 
@@ -59,8 +67,10 @@ export const createOrder = async (req, res) => {
             transportation,
             paymentMethod,
             totalPrice,
+            pdfUrl: `/api/order/${orderId}/pdf`, // ✅ Include PDF URL in response
             createdAt: new Date().toISOString(),
         };
+        
 
         console.log("🔍 New order to be saved:", newOrder);
 

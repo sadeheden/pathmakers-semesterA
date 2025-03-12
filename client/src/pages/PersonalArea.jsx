@@ -46,17 +46,28 @@ const PersonalArea = () => {
             }
     
             const data = await response.json();
-            console.log("✅ All orders fetched from API:", data);
+            console.log("✅ Orders received from API:", data);
     
-            if (user && user.id) {
-                const userOrders = data.filter(order => String(order.userId) === String(user.id)); 
-                console.log("✅ Filtered Orders for User:", userOrders);
-                setOrders(userOrders);
-            }
+            // Filter unique orders based on Departure & Destination
+            const uniqueOrdersMap = new Map();
+            data.forEach(order => {
+                const key = `${order.departureCity}-${order.destinationCity}`;
+    
+                // Keep only the most recent or highest-priced order
+                if (!uniqueOrdersMap.has(key) || uniqueOrdersMap.get(key).createdAt < order.createdAt) {
+                    uniqueOrdersMap.set(key, order);
+                }
+            });
+    
+            const uniqueOrders = Array.from(uniqueOrdersMap.values());
+            console.log("✅ Unique Orders:", uniqueOrders);
+    
+            setOrders(uniqueOrders);
         } catch (error) {
             console.error("⚠️ Failed to fetch orders:", error.message);
         }
     };
+    
     
     
     // ✅ Fetch orders once user is loaded
@@ -108,13 +119,12 @@ const PersonalArea = () => {
                 setTimeout(() => navigate("/login"), 1000);
                 return;
             }
-            const response = await fetch("http://localhost:4000/api/info/user", {
+            const response = await fetch("http://localhost:4000/api/info/user", { 
                 method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
+                headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }
             });
+            
+
 
             if (!response.ok) {
                 throw new Error(`⚠️ Failed to fetch user, status: ${response.status}`);
@@ -151,10 +161,16 @@ const PersonalArea = () => {
                 navigate("/login");
                 return;
             }
-            await fetchUser(); // ✅ Now fetchUser is properly defined
+    
+            await fetchUser(); // ✅ Fetch user first
+    
+            setTimeout(() => { 
+                fetchOrders(); // ✅ Fetch orders after user is set
+            }, 500); // Small delay to ensure user is loaded first
         };
         fetchData();
     }, []);
+    
 
 
     const handleEditProfile = () => {
@@ -345,24 +361,38 @@ const PersonalArea = () => {
         <div className="order-modal-content">
             <button className="close-modal" onClick={() => setSelectedOrder(null)}>✖</button>
             <h2>Order Details</h2>
+            
             <p><strong>Order ID:</strong> {selectedOrder.id}</p>
             <p><strong>Departure:</strong> {selectedOrder.departureCity}</p>
             <p><strong>Destination:</strong> {selectedOrder.destinationCity}</p>
             <p><strong>Total Price:</strong> ${selectedOrder.totalPrice}</p>
+
+            {/* PDF Download Button */}
+            {selectedOrder.pdfUrl ? (
+    <button 
+        className="download-btn" 
+        onClick={() => window.open(`http://localhost:4000${selectedOrder.pdfUrl}`, "_blank")}
+    >
+        Download Receipt
+    </button>
+) : (
+    <p>PDF is not available.</p>
+)}
+
         </div>
     </div>
 )}
 
+
+
 {activeTab === "orders" && (
     <>
         <h2 className="heading">Your Previous Orders</h2>
-        {orders.length > 0 ? (
+        {orders && orders.length > 0 ? ( // ✅ Make sure orders is not null
             <ul className="orders-list">
-                {orders.map((order) => (
-                    <li key={order.id} className="order-item">
-                        <span>
-                            <strong>Route:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
-                        </span>
+                {orders.map((order, index) => (
+                    <li key={index} className="order-item">
+                        <strong>Route:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
                         <button className="view-details-button" onClick={() => handleViewOrderDetails(order)}>
                             View Details
                         </button>
@@ -370,26 +400,11 @@ const PersonalArea = () => {
                 ))}
             </ul>
         ) : (
-            <p>No previous orders found.</p>
+            <p>No previous orders found.</p> // ✅ Ensure no undefined errors
         )}
     </>
 )}
 
-{/* Order Modal */}
-{selectedOrder && (
-    <div className="order-modal">
-        <div className="order-modal-content">
-            <button className="close-modal" onClick={() => setSelectedOrder(null)}>✖</button>
-            <h2>Order Details</h2>
-            <pre className="order-text">{selectedOrder.orderText}</pre>
-            <button className="download-btn" onClick={() => window.open(selectedOrder.pdfUrl, "_blank")}>
-                Download Receipt
-            </button>
-        </div>
-    </div>
-)}
-
-    
                 {/* Newsletter Subscription */}
                 {activeTab === "newsletter" && (
                     <>
