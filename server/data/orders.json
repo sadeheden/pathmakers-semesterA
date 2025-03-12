@@ -14,5 +14,197 @@
     "paymentMethod": "Credit Card",
     "totalPrice": 4280,
     "createdAt": "2025-03-06T11:13:20.188Z"
+  },
+  {
+    "id": "6f145d3b-c5bd-4a44-965a-db1129b97af0",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T10:46:20.365Z"
+  },
+  {
+    "id": "057d7fa7-4dea-417b-9549-5b23562c8c6b",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T10:57:01.871Z"
+  },
+  {
+    "id": "dbb09287-88da-4a96-9ae4-932aa6f49643",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:02:02.508Z"
+  },
+  {
+    "id": "35063431-0107-42fc-9cfc-e463569eec3b",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:02:07.358Z"
+  },
+  {
+    "id": "0d0309a1-0bcf-4480-be5e-f03209e77a73",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:02:40.666Z"
+  },
+  {
+    "id": "ef35a6c8-45bb-4c8b-8246-04521278c396",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:08:16.831Z"
+  },
+  {
+    "id": "091c43e5-ca56-4ed1-8673-a0b903f4a0ed",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:08:20.412Z"
+  },
+  {
+    "id": "57184389-128d-46d1-bedb-7b75756e4a6a",
+    "userId": "a2ea24bb-96de-41fb-8e48-195708a8b337",
+    "username": "may5",
+    "departureCity": "Paris",
+    "destinationCity": "San Francisco",
+    "flight": "Delta Airlines - $620 (12h 10m)",
+    "hotel": "Hotel Nikko San Francisco - $1300/night",
+    "attractions": [
+      "Alcatraz Island"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 1950,
+    "createdAt": "2025-03-12T11:08:56.353Z"
+  },
+  {
+    "id": "d6a929b3-9956-4808-be9e-55966c00e723",
+    "userId": "52588310-5635-4997-bf18-56d71d032213",
+    "username": "may5",
+    "departureCity": "London",
+    "destinationCity": "Rome",
+    "flight": "Delta Airlines - $650 (7h 15m)",
+    "hotel": "Hassler Roma - $2700/night",
+    "attractions": [
+      "Pantheon"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3380,
+    "createdAt": "2025-03-12T11:11:33.644Z"
+  },
+  {
+    "id": "3764ec35-7302-4711-b166-62a53daa8f1c",
+    "userId": "52588310-5635-4997-bf18-56d71d032213",
+    "username": "may5",
+    "departureCity": "London",
+    "destinationCity": "Rome",
+    "flight": "Delta Airlines - $650 (7h 15m)",
+    "hotel": "Hassler Roma - $2700/night",
+    "attractions": [
+      "Pantheon"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3380,
+    "createdAt": "2025-03-12T11:11:42.488Z"
+  },
+  {
+    "id": "da5e3a51-570a-4e1f-a2e1-76d799951b31",
+    "userId": "52588310-5635-4997-bf18-56d71d032213",
+    "username": "may5",
+    "departureCity": "London",
+    "destinationCity": "Rome",
+    "flight": "Delta Airlines - $650 (7h 15m)",
+    "hotel": "Hassler Roma - $2700/night",
+    "attractions": [
+      "Pantheon"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3380,
+    "createdAt": "2025-03-12T11:12:00.449Z"
+  },
+  {
+    "id": "297cb0dc-ee7a-422a-bcc5-67c60449311e",
+    "userId": "52588310-5635-4997-bf18-56d71d032213",
+    "username": "may5",
+    "departureCity": "London",
+    "destinationCity": "Rome",
+    "flight": "Delta Airlines - $650 (7h 15m)",
+    "hotel": "Hassler Roma - $2700/night",
+    "attractions": [
+      "Pantheon"
+    ],
+    "transportation": "Bike",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3380,
+    "createdAt": "2025-03-12T11:12:03.817Z"
   }
 ]

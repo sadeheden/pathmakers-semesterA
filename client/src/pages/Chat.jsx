@@ -405,15 +405,9 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             return;
         }
     
-        // ✅ Check if order was already saved in this session
-        if (sessionStorage.getItem("orderSaved") === "true") {
-            console.log("🔹 Order already saved in this session. Skipping save.");
-            return;
-        }
-    
         try {
             // ✅ Fetch user details first to get userId
-            const userResponse = await fetch("http://localhost:4000/api/auth/user", {
+            const userResponse = await fetch("http://localhost:4000/api/info/user", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -428,17 +422,39 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
             const userData = await userResponse.json();
             console.log("✅ Fetched User:", userData);
     
+            // ✅ Ensure `userResponses` exist before accessing them
+            if (!userResponses) {
+                console.error("❌ No user responses found!");
+                alert("⚠️ No order details available.");
+                return;
+            }
+    
+            // ✅ Save order as text for display in Personal Area
+            const orderText = `
+            Departure: ${userResponses["What is your departure city?"] || "Unknown"}
+            Destination: ${userResponses["What is your destination city?"] || "Unknown"}
+            Flight: ${userResponses["Select your flight"] || "None"}
+            Hotel: ${userResponses["Select your hotel"] || "None"}
+            Attractions: ${userResponses["Select attractions to visit"] || "None"}
+            Transportation: ${userResponses["Select your mode of transportation"] || "None"}
+            Payment Method: ${userResponses["Select payment method"] || "None"}
+            Total Price: $${calculateTotalPrice()}
+            `;
+    
             const orderData = {
                 userId: userData.id, // ✅ Attach the logged-in user's ID
                 username: userData.username,
-                departureCity: userResponses["What is your departure city?"],
-                destinationCity: userResponses["What is your destination city?"],
-                flight: userResponses["Select your flight"],
-                hotel: userResponses["Select your hotel"],
-                attractions: userResponses["Select attractions to visit"]?.split(", "),
-                transportation: userResponses["Select your mode of transportation"],
-                paymentMethod: userResponses["Select payment method"],
+                departureCity: userResponses["What is your departure city?"] || "Unknown",
+                destinationCity: userResponses["What is your destination city?"] || "Unknown",
+                flight: userResponses["Select your flight"] || "None",
+                hotel: userResponses["Select your hotel"] || "None",
+                attractions: userResponses["Select attractions to visit"]
+                    ? userResponses["Select attractions to visit"].split(", ")
+                    : [],
+                transportation: userResponses["Select your mode of transportation"] || "None",
+                paymentMethod: userResponses["Select payment method"] || "None",
                 totalPrice: calculateTotalPrice(),
+                orderText: orderText.trim() // ✅ Save formatted text
             };
     
             console.log("🔍 Sending Order Data:", orderData);
@@ -461,13 +477,13 @@ const [paymentCompleted, setPaymentCompleted] = useState(false);
     
             console.log("✅ Order saved successfully!");
     
-            // ✅ Mark order as saved in sessionStorage
-            sessionStorage.setItem("orderSaved", "true");
+            // ✅ Store in `localStorage` to persist across sessions
+            localStorage.setItem("orderSaved", "true");
+    
         } catch (error) {
             console.error("⚠️ Error saving order:", error);
         }
     };
-    
     
     
     const handleDownloadSummary = async () => {
