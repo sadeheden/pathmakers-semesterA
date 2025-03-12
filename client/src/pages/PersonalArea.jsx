@@ -367,17 +367,6 @@ const PersonalArea = () => {
             <p><strong>Destination:</strong> {selectedOrder.destinationCity}</p>
             <p><strong>Total Price:</strong> ${selectedOrder.totalPrice}</p>
 
-            {/* PDF Download Button */}
-            {selectedOrder.pdfUrl ? (
-    <button 
-        className="download-btn" 
-        onClick={() => window.open(`http://localhost:4000${selectedOrder.pdfUrl}`, "_blank")}
-    >
-        Download Receipt
-    </button>
-) : (
-    <p>PDF is not available.</p>
-)}
 
         </div>
     </div>
