@@ -51,7 +51,7 @@ const AuthForm = ({ isLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-    
+        
         if (!isLogin) {
             const validationErrors = validateForm();
             if (Object.keys(validationErrors).length > 0) {
@@ -61,12 +61,12 @@ const AuthForm = ({ isLogin }) => {
         }
     
         try {
-            let profileImageUrl = "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"; // Default image
+            let profileImageUrl = formData.profileImageUrl || "https://res.cloudinary.com/dnnmhrsja/image/upload/v1700000000/default_profile.jpg"; // Keep existing image if available
     
-            if (formData.profileImage) {
+            if (formData.profileImage && typeof formData.profileImage !== "string") {
                 const imageData = new FormData();
                 imageData.append("file", formData.profileImage);
-                imageData.append("upload_preset", "your_cloudinary_preset"); // ✅ Ensure you use the correct preset!
+                imageData.append("upload_preset", "your_cloudinary_preset");
     
                 const imageResponse = await fetch("http://localhost:4000/api/upload/single", {
                     method: "POST",
@@ -75,18 +75,23 @@ const AuthForm = ({ isLogin }) => {
     
                 const imageResult = await imageResponse.json();
     
-                if (imageResponse.ok && imageResult.url) {  // ✅ Use `url` instead of `secure_url`
+                if (imageResponse.ok && imageResult.url) {
                     profileImageUrl = imageResult.url;
                 } else {
                     console.warn("🚨 Cloudinary upload response:", imageResult);
                     setErrors({ submit: "⚠️ Profile image upload failed. Try again." });
-                    return; // ✅ Prevent form submission if the upload failed
+                    return;
                 }
             }
     
             const requestBody = isLogin
                 ? { username: formData.username, password: formData.password }
-                : { username: formData.username, email: formData.email, password: formData.password, profileImage: profileImageUrl };
+                : { 
+                    username: formData.username, 
+                    email: formData.email, 
+                    password: formData.password, 
+                    profileImage: profileImageUrl // ✅ Ensure profile image is stored
+                  };
     
             const url = isLogin
                 ? "http://localhost:4000/api/auth/login"

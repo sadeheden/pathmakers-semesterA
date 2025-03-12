@@ -25,5 +25,33 @@
     "email": "may5@email.com",
     "password": "$2b$10$C/RnHx8aniTrS6q/nW9rAuU9pVFU/TK6b9CH4ZB4lUAmUWxDg2zTq",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741777791/user_profiles/njkxwt6ooevwyl5t9mnb.jpg"
+  },
+  {
+    "id": "7674affe-e7fd-4962-845a-df9afed7983c",
+    "username": "math88J",
+    "email": "mayh@email.com",
+    "password": "$2b$10$P.LAfs2uaanfMIHedHpl4eyHT4oklGysOAa4ytTHwMYNPMU7RR4uy",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741780900/user_profiles/zkaxp45eezibx0ol9hq1.jpg"
+  },
+  {
+    "id": "8fd9d31c-546b-473e-a12b-46761b9d6171",
+    "username": "may55",
+    "email": "ma5yh@email.com",
+    "password": "$2b$10$fQCTjdzCIab39WmatdAmv.N2EjUfh51xi.8EwlDxveB67/bgeysbK",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741781489/user_profiles/n6x5wo5p2i6bg6q2yfop.png"
+  },
+  {
+    "id": "1ba1f337-60c9-4ccb-931e-cdb6ea43f19f",
+    "username": "eden4",
+    "email": "sen6@gmail.com",
+    "password": "$2b$10$YWdeEgwZZ.iCt6bDXjfRvenhLUWie/ntlYMiZsNw3gutST/GCmRtG",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741782134/user_profiles/pn4rozt2bmvoxfeywucd.png"
+  },
+  {
+    "id": "6ebfa788-aaf6-4d43-9ac7-5d75c1f5ff6e",
+    "username": "mray55",
+    "email": "m5ayh@email.com",
+    "password": "$2b$10$55kCto8sFgxOPyUJWoNxPu/p8XYy94t6M8erIQib5859tvLuZFHeS",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741782272/user_profiles/qdfdnlymuevckqn7hv9c.png"
   }
 ]
