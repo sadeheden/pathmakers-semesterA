@@ -48,21 +48,27 @@ const PersonalArea = () => {
             const data = await response.json();
             console.log("✅ All orders fetched from API:", data);
     
-            // ✅ Wait for user to be set before filtering
             if (user && user.id) {
                 const userOrders = data.filter(order => String(order.userId) === String(user.id)); 
                 console.log("✅ Filtered Orders for User:", userOrders);
-                
-                // ✅ Filter out duplicate orders (same departure and destination)
-                const uniqueOrders = filterUniqueOrders(userOrders);
-                console.log("✅ Unique Orders after filtering:", uniqueOrders);
-                
-                setOrders(uniqueOrders);
+                setOrders(userOrders);
             }
         } catch (error) {
             console.error("⚠️ Failed to fetch orders:", error.message);
         }
     };
+    
+    
+    // ✅ Fetch orders once user is loaded
+    useEffect(() => {
+        if (user && user.id) {
+            console.log("🔍 Fetching orders for user:", user.id);
+            fetchOrders();
+        }
+    }, [user]);
+    
+    
+    
     
     // ✅ Function to filter out duplicate orders based on departure and destination
     const filterUniqueOrders = (ordersList) => {
@@ -92,6 +98,7 @@ const PersonalArea = () => {
         }
     }, [user]); // ✅ Runs only when `user` is updated
     
+    
     // ✅ Move `fetchUser` outside of useEffect
     const fetchUser = async () => {
         try {
@@ -102,7 +109,6 @@ const PersonalArea = () => {
                 return;
             }
             const response = await fetch("http://localhost:4000/api/info/user", {
-                method: "GET",
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -283,66 +289,8 @@ const PersonalArea = () => {
                                 <>
                                     {isEditing ? (
                                         <>
-                                            <label>Username</label>
-                                            <input type="text" value={user.username} disabled /> {/* ❌ Username is now non-editable */}
-    
-                                            <label>Date of Birth</label>
-<input
-    type="date"
-    value={editedUser.birthdate || ""}
-    max={new Date().toISOString().split("T")[0]} 
-    onChange={(e) => {
-        const birthdate = e.target.value;
-        const age = calculateAge(birthdate); // ✅ Automatically update age
-        setEditedUser({ ...editedUser, birthdate, age });
-    }}
-/>
+                                            
 
-<p><strong>Age:</strong> {editedUser.age || "Not provided"}</p> {/* ✅ Now displays calculated age */}
-
-    
-                                            <label>Address</label>
-                                            <input
-                                                type="text"
-                                                value={editedUser.address || ""}
-                                                onChange={(e) => setEditedUser({ ...editedUser, address: e.target.value })}
-                                            />
-    
-                                            <label>City</label>
-                                            <input
-                                                type="text"
-                                                value={editedUser.city}
-                                                onChange={(e) => setEditedUser({ ...editedUser, city: e.target.value })}
-                                                placeholder="Enter your city"
-                                            />
-    
-                                            <label>Country</label>
-                                            <input
-                                                type="text"
-                                                value={editedUser.country}
-                                                onChange={(e) => setEditedUser({ ...editedUser, country: e.target.value })}
-                                                placeholder="Enter your country"
-                                            />
-    
-                                            <label>Phone Number</label>
-                                            <input
-                                                type="tel"
-                                                value={editedUser.phone}
-                                                onChange={(e) => setEditedUser({ ...editedUser, phone: e.target.value })}
-                                                placeholder="Enter phone number"
-                                            />
-    
-                                            <label>Gender</label>
-                                            <select
-                                                value={editedUser.gender}
-                                                onChange={(e) => setEditedUser({ ...editedUser, gender: e.target.value })}
-                                            >
-                                                <option value="">Select Gender</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-    
                                             <label>Membership</label>
                                             <div className="membership-options">
                                                 <label>
@@ -376,14 +324,7 @@ const PersonalArea = () => {
                                         </>
                                     ) : (
                                         <>
-                                        <p><strong>Username:</strong> {user.username} </p> 
-                                        <p><strong>Date of Birth:</strong> {user.birthdate ? user.birthdate : "Not provided"}</p> 
-                                        <p><strong>Age:</strong> {user.age ? user.age : calculateAge(user.birthdate)}</p> {/* ✅ Always calculate if missing */}
-                                        <p><strong>Address:</strong> {user.address || "Not provided"}</p>
-                                        <p><strong>City:</strong> {user.city || "Not provided"}</p>
-                                        <p><strong>Country:</strong> {user.country || "Not provided"}</p>
-                                        <p><strong>Phone Number:</strong> {user.phone || "Not provided"}</p>
-                                        <p><strong>Gender:</strong> {user.gender || "Not provided"}</p>
+                                    
                                         <p><strong>Membership:</strong> {user.membership === "Yes" ? "✅ Yes" : "❌ No"}</p>
                                     
                                         <button onClick={handleEditProfile} className="button">Edit Profile</button>
@@ -412,31 +353,42 @@ const PersonalArea = () => {
     </div>
 )}
 
-    
-                {activeTab === "orders" && (
-                    <>
-                        <h2 className="heading">Your Previous Orders</h2>
-                        {orders.length > 0 ? (
-                            <>
-                                <p className="info-text">      Your previous orders: </p>
-                                <ul className="orders-list">
-                                    {orders.map((order) => (
-                                        <li key={order.id} className="order-item">
-                                            <span>
-                                                <strong>Route:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
-                                            </span>
-                                            <button className="view-details-button" onClick={() => handleViewOrderDetails(order)}>
-                                                View Details
-                                            </button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </>
-                        ) : (
-                            <p>No previous orders found.</p>
-                        )}
-                    </>
-                )}
+{activeTab === "orders" && (
+    <>
+        <h2 className="heading">Your Previous Orders</h2>
+        {orders.length > 0 ? (
+            <ul className="orders-list">
+                {orders.map((order) => (
+                    <li key={order.id} className="order-item">
+                        <span>
+                            <strong>Route:</strong> {order.departureCity} → {order.destinationCity}, ${order.totalPrice}
+                        </span>
+                        <button className="view-details-button" onClick={() => handleViewOrderDetails(order)}>
+                            View Details
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        ) : (
+            <p>No previous orders found.</p>
+        )}
+    </>
+)}
+
+{/* Order Modal */}
+{selectedOrder && (
+    <div className="order-modal">
+        <div className="order-modal-content">
+            <button className="close-modal" onClick={() => setSelectedOrder(null)}>✖</button>
+            <h2>Order Details</h2>
+            <pre className="order-text">{selectedOrder.orderText}</pre>
+            <button className="download-btn" onClick={() => window.open(selectedOrder.pdfUrl, "_blank")}>
+                Download Receipt
+            </button>
+        </div>
+    </div>
+)}
+
     
                 {/* Newsletter Subscription */}
                 {activeTab === "newsletter" && (

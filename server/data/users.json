@@ -18,5 +18,12 @@
     "email": "eden333@mail.com",
     "password": "$2b$10$viM9lOu5AUjyMkkeYX53QuDqJzzyywrD5Z.4Iln2ZQsNZuoOykXPK",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1740913277/user_profiles/mirio0hy6kjthxbkt8vv.png"
+  },
+  {
+    "id": "52588310-5635-4997-bf18-56d71d032213",
+    "username": "may5",
+    "email": "may5@email.com",
+    "password": "$2b$10$C/RnHx8aniTrS6q/nW9rAuU9pVFU/TK6b9CH4ZB4lUAmUWxDg2zTq",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741777791/user_profiles/njkxwt6ooevwyl5t9mnb.jpg"
   }
 ]
