@@ -361,37 +361,37 @@
     "createdAt": "2025-03-12T12:23:06.212Z"
   },
   {
-    "id": "897738f7-1940-4e8c-be6e-c25d05afab6d",
-    "userId": "09f7564e-e071-4dcf-b1ad-1e6b5b6b1e5b",
-    "username": "jon",
-    "departureCity": "Paris",
+    "id": "9413b69f-284a-4413-bc0a-76b9caa735ef",
+    "userId": "9e8a1766-1843-4499-801d-6ce438a95c14",
+    "username": "gvrg5",
+    "departureCity": "Madrid",
     "destinationCity": "London",
-    "flight": "Lufthansa - $650 (8h 30m)",
-    "hotel": "Mandarin Oriental Hyde Park - $3200/night",
+    "flight": "British Airways - $550 (8h 00m)",
+    "hotel": "Four Seasons Hotel London at Park Lane - $3100/night",
     "attractions": [
-      "Harrods"
+      "Buckingham Palace"
     ],
     "transportation": "Car",
     "paymentMethod": "Credit Card",
-    "totalPrice": 3920,
-    "pdfUrl": "/api/order/897738f7-1940-4e8c-be6e-c25d05afab6d/pdf",
-    "createdAt": "2025-03-12T17:34:37.345Z"
+    "totalPrice": 3720,
+    "pdfUrl": "/api/order/9413b69f-284a-4413-bc0a-76b9caa735ef/pdf",
+    "createdAt": "2025-03-12T13:13:41.630Z"
   },
   {
-    "id": "f3cbbfe6-b1c9-46a6-9aa9-d22e789c8f84",
-    "userId": "09f7564e-e071-4dcf-b1ad-1e6b5b6b1e5b",
-    "username": "jon",
-    "departureCity": "Paris",
+    "id": "9150336e-2c2e-4c1d-a718-10b030228912",
+    "userId": "9e8a1766-1843-4499-801d-6ce438a95c14",
+    "username": "gvrg5",
+    "departureCity": "Madrid",
     "destinationCity": "London",
-    "flight": "Lufthansa - $650 (8h 30m)",
-    "hotel": "Mandarin Oriental Hyde Park - $3200/night",
+    "flight": "British Airways - $550 (8h 00m)",
+    "hotel": "Four Seasons Hotel London at Park Lane - $3100/night",
     "attractions": [
-      "Harrods"
+      "Buckingham Palace"
     ],
     "transportation": "Car",
     "paymentMethod": "Credit Card",
-    "totalPrice": 3920,
-    "pdfUrl": "/api/order/f3cbbfe6-b1c9-46a6-9aa9-d22e789c8f84/pdf",
-    "createdAt": "2025-03-12T17:34:41.506Z"
+    "totalPrice": 3720,
+    "pdfUrl": "/api/order/9150336e-2c2e-4c1d-a718-10b030228912/pdf",
+    "createdAt": "2025-03-12T13:13:49.715Z"
   }
 ]
