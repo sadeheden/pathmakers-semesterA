@@ -359,5 +359,39 @@
     "totalPrice": 3680,
     "pdfUrl": "/api/order/50c2459c-dca2-4f16-9391-40fafdc038cd/pdf",
     "createdAt": "2025-03-12T12:23:06.212Z"
+  },
+  {
+    "id": "897738f7-1940-4e8c-be6e-c25d05afab6d",
+    "userId": "09f7564e-e071-4dcf-b1ad-1e6b5b6b1e5b",
+    "username": "jon",
+    "departureCity": "Paris",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "Mandarin Oriental Hyde Park - $3200/night",
+    "attractions": [
+      "Harrods"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3920,
+    "pdfUrl": "/api/order/897738f7-1940-4e8c-be6e-c25d05afab6d/pdf",
+    "createdAt": "2025-03-12T17:34:37.345Z"
+  },
+  {
+    "id": "f3cbbfe6-b1c9-46a6-9aa9-d22e789c8f84",
+    "userId": "09f7564e-e071-4dcf-b1ad-1e6b5b6b1e5b",
+    "username": "jon",
+    "departureCity": "Paris",
+    "destinationCity": "London",
+    "flight": "Lufthansa - $650 (8h 30m)",
+    "hotel": "Mandarin Oriental Hyde Park - $3200/night",
+    "attractions": [
+      "Harrods"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 3920,
+    "pdfUrl": "/api/order/f3cbbfe6-b1c9-46a6-9aa9-d22e789c8f84/pdf",
+    "createdAt": "2025-03-12T17:34:41.506Z"
   }
 ]
