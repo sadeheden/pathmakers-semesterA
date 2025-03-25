@@ -461,5 +461,90 @@
     "totalPrice": 3570,
     "pdfUrl": "/api/order/eaaecbb8-5898-48d2-aba4-280d693662f4/pdf",
     "createdAt": "2025-03-13T07:58:03.059Z"
+  },
+  {
+    "id": "b4ee2eb7-af40-4a46-a256-5e94e9ca5cf5",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "London",
+    "destinationCity": "Madrid",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Hotel Villa Magna - $2000/night",
+    "attractions": [
+      "Puerta del Sol"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2580,
+    "pdfUrl": "/api/order/b4ee2eb7-af40-4a46-a256-5e94e9ca5cf5/pdf",
+    "createdAt": "2025-03-23T13:59:09.717Z"
+  },
+  {
+    "id": "1a4e8f11-4670-4293-82a2-110837f7ca63",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "London",
+    "destinationCity": "Madrid",
+    "flight": "United Airlines - $550 (11h 30m)",
+    "hotel": "Hotel Villa Magna - $2000/night",
+    "attractions": [
+      "Puerta del Sol"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 2580,
+    "pdfUrl": "/api/order/1a4e8f11-4670-4293-82a2-110837f7ca63/pdf",
+    "createdAt": "2025-03-23T13:59:13.126Z"
+  },
+  {
+    "id": "67997021-f3e6-4bcf-b22a-f7c70c07eaa8",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "The Plaza Hotel - $3500/night",
+    "attractions": [
+      "Central Park"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 4280,
+    "pdfUrl": "/api/order/67997021-f3e6-4bcf-b22a-f7c70c07eaa8/pdf",
+    "createdAt": "2025-03-23T14:08:06.513Z"
+  },
+  {
+    "id": "ae355c77-2b2d-43f4-8eb3-17c4154ce624",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "New York",
+    "flight": "Delta Airlines - $750 (12h 30m)",
+    "hotel": "The Plaza Hotel - $3500/night",
+    "attractions": [
+      "Central Park"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "PayPal",
+    "totalPrice": 4280,
+    "pdfUrl": "/api/order/ae355c77-2b2d-43f4-8eb3-17c4154ce624/pdf",
+    "createdAt": "2025-03-23T14:08:14.027Z"
+  },
+  {
+    "id": "12f61cb1-cc5c-4451-912a-5179241d17e4",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "New York",
+    "destinationCity": "Amsterdam",
+    "flight": "KLM - $550 (8h 45m)",
+    "hotel": "W Amsterdam - $1500/night",
+    "attractions": [
+      "Anne Frank House"
+    ],
+    "transportation": "Public Transport",
+    "paymentMethod": "Credit Card",
+    "totalPrice": 2080,
+    "pdfUrl": "/api/order/12f61cb1-cc5c-4451-912a-5179241d17e4/pdf",
+    "createdAt": "2025-03-23T14:10:33.737Z"
   }
 ]
