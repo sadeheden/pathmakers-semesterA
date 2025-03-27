@@ -60,5 +60,19 @@
     "email": "cnnjs@gmail.com",
     "password": "$2b$10$2coXUZJU0e7uz9cQ2Ul0uOUIUbkbR8iTydLPcRFVzFZTZ6G4lG0FK",
     "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741785093/user_profiles/goxlbv5ongvpmesbuztl.png"
+  },
+  {
+    "id": "7be3e97c-823d-4557-9198-c019cb75239c",
+    "username": "jo0n",
+    "email": "jo0n@gmail.com",
+    "password": "$2b$10$i7B.m.VpEgdbiS3Lc4AMweOCSw4b5J/0sO1gubtS4beibfZbS/HOu",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741849420/user_profiles/n1vp4lz25ks0wrdb3zfg.png"
+  },
+  {
+    "id": "499815bf-8557-4171-babf-55fec6bc2aef",
+    "username": "may99",
+    "email": "may99@email.com",
+    "password": "$2b$10$.mvLFqpWNw460XPhWfxlSeGHfquv/ixbRGPY.6vCfP9q.xTV7goLC",
+    "profileImage": "https://res.cloudinary.com/dnnmhrsja/image/upload/v1741852428/user_profiles/xrr5ngqkernsvpxxxcm9.jpg"
   }
 ]
