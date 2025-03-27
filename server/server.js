@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+
 import router from './router.js';
 import citiesRouter from './services/cities/cities.router.js';
 import flightsRouter from './services/flights/flights.router.js';

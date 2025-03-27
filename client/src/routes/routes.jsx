@@ -12,6 +12,9 @@ import DownloadApp from "../pages/DownloadApp";
 import Signup from "../pages/Signup";
 import Main from "../pages/Main";
 import NotFound from "../pages/NotFound"; // Custom 404 Page
+import Manager from "../pages/Manager";
+import RealChat from "../pages/RealChat";
+
 
 export const Router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -23,5 +26,8 @@ export const Router = createBrowserRouter([
   { path: "/video", element: <Video /> },
   { path: "/downloadApp", element: <DownloadApp /> },
   { path: "/signup", element: <Signup /> },
+  { path: "/manager", element: <Manager /> },
+  { path: "/realChat", element: <RealChat /> },
+
   { path: "*", element: <NotFound /> }, // Handles unmatched routes
 ]);
