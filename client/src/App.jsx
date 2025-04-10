@@ -27,6 +27,7 @@ function App() {
           <Route path="/downloadApp" element={<DownloadApp />} />
           <Route path="/video" element={<Video />} />
           <Route path="/main" element={<Main />} />
+        
         </Routes>
       </div>
 

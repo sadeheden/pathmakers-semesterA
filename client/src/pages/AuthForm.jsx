@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/styles/AuthForm.css";
 
-const AuthForm = ({ isLogin }) => {
+const AuthForm = ({ isLogin, isManager }) => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState(
         isLogin
-            ? { username: "", password: "" }
-            : { username: "", email: "", password: "", confirmPassword: "", profileImage: null }
+        ? { ...(isManager ? { password: "" } : { username: "", password: "" }) }
+        : { username: "", email: "", password: "", confirmPassword: "", profileImage: null }
     );
     const [errors, setErrors] = useState({});
     const [preview, setPreview] = useState(null); // For image preview
@@ -38,11 +38,12 @@ const AuthForm = ({ isLogin }) => {
     const validateForm = () => {
         if (isLogin) return {};
         const newErrors = {};
-        if (!formData.username.trim()) newErrors.username = "Username is required";
+        if (!isManager && !formData.username.trim()) newErrors.username = "Username is required";
+
         if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Valid email is required";
         if (!formData.password || formData.password.length < 6) newErrors.password = "Password must be at least 6 characters";
         if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
-    
+     
         setErrors(newErrors); // ✅ Update errors state immediately
         return newErrors;
     };
@@ -85,13 +86,24 @@ const AuthForm = ({ isLogin }) => {
             }
     
             const requestBody = isLogin
-                ? { username: formData.username, password: formData.password }
-                : { 
-                    username: formData.username, 
-                    email: formData.email, 
-                    password: formData.password, 
-                    profileImage: profileImageUrl // ✅ Ensure profile image is stored
-                  };
+            ? isManager
+                ? { username: "manager", password: formData.password } // Manager Login
+                : { username: formData.username, password: formData.password } // Regular Login
+            : isManager
+            ? { 
+                  username: formData.username, 
+                  email: formData.email, 
+                  password: formData.password, 
+                  profileImage: profileImageUrl, 
+                  role: "manager"  // Ensure backend recognizes manager registration
+              } 
+            : { 
+                  username: formData.username, 
+                  email: formData.email, 
+                  password: formData.password, 
+                  profileImage: profileImageUrl 
+              };
+        
     
             const url = isLogin
                 ? "http://localhost:4000/api/auth/login"
@@ -122,15 +134,31 @@ const AuthForm = ({ isLogin }) => {
     return (
         <div className={`authContainer ${isLogin ? "login" : "signup"}`}>
             <form className="authForm" onSubmit={handleSubmit}>
-                <h2 className="authTitle">{isLogin ? "Welcome Back" : "Create an Account"}</h2>
+            <h2 className="authTitle">
+  {isManager ? "Manager Sign In" : isLogin ? "Welcome Back" : "Create an Account"}
+</h2>
+
 
                 {errors.submit && <p className="error">{errors.submit}</p>}
 
-                <div className="formGroup">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter your username" value={formData.username} className={errors.username ? "inputError" : ""}  onChange={handleChange} required />
-                    {errors.username && <p className="error">{errors.username}</p>}
-                </div>
+             
+
+                {!isManager && (
+  <div className="formGroup">
+    <label htmlFor="username">Username</label>
+    <input
+      type="text"
+      id="username"
+      placeholder="Enter your username"
+      value={formData.username}
+      className={errors.username ? "inputError" : ""}
+      onChange={handleChange}
+      required
+    />
+    {errors.username && <p className="error">{errors.username}</p>}
+  </div>
+)}
+
 
                 {!isLogin && (
                     <>
@@ -165,9 +193,12 @@ const AuthForm = ({ isLogin }) => {
 <button type="submit" className="authButton">{isLogin ? "Login" : "Sign Up"}</button>
 
 {isLogin && (
-    <p className="switchAuth">
-        No account? <span onClick={() => navigate("/signup")} className="switchLink">Register here</span>
-    </p>
+   <p className="switchAuth">
+   No account? <span onClick={() => navigate("/signup")} className="switchLink">Register here</span><br />
+   Manager? <span onClick={() => navigate("/managersignin")} className="switchLink">Sign in here</span>
+
+</p>
+
 )}
 
             </form>
