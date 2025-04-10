@@ -9,8 +9,8 @@ const Main = () => {
     navigate('/chat'); // Redirect to /chat when the button is clicked
   };
 
-  const handleAnotherRedirect = () => {
-    navigate('/another'); // Redirect to /another when the second button is clicked
+  const handleRealChatRedirect = () => {
+    navigate('/realChat'); // Redirect to /another when the second button is clicked
   };
 
   return (
@@ -31,7 +31,7 @@ const Main = () => {
             <button className="main-btn" onClick={handleChatRedirect}>
               Chat with the chat
             </button>
-            <button className="main-btn" onClick={handleAnotherRedirect}>
+            <button className="main-btn" onClick={handleRealChatRedirect}>
               AI consultation
             </button>
           </div>
