@@ -12,12 +12,11 @@ import AuthForm from "./pages/AuthForm"; // ✅ Use AuthForm for both login & si
 import Main from "./pages/Main";
 import Manager from "./pages/Manager";
 import RealChat from "./pages/RealChat";
-
 function App() {
   return (
     <Router>
       <Header />  {/* Header component */}
-      
+     
       <div className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -33,10 +32,10 @@ function App() {
           <Route path="/realChat" element={<RealChat />} />
         </Routes>
       </div>
-
+ 
       <Footer />  {/* Footer component */}
     </Router>
   );
 }
-
+ 
 export default App;

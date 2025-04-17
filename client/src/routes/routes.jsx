@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-
+ 
 // Import all pages directly
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
@@ -28,6 +28,6 @@ export const Router = createBrowserRouter([
   { path: "/signup", element: <Signup /> },
   { path: "/manager", element: <Manager /> },
   { path: "/realChat", element: <RealChat /> },
-
   { path: "*", element: <NotFound /> }, // Handles unmatched routes
 ]);
+ 
