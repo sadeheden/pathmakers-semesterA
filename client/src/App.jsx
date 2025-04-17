@@ -12,6 +12,7 @@ import AuthForm from "./pages/AuthForm"; // ✅ Use AuthForm for both login & si
 import Main from "./pages/Main";
 import Manager from "./pages/Manager";
 import RealChat from "./pages/RealChat";
+ 
 function App() {
   return (
     <Router>

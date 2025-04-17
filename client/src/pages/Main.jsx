@@ -9,10 +9,6 @@ const Main = () => {
     navigate('/chat'); // Redirect to /chat when the button is clicked
   };
 
-  const handleRealChatRedirect = () => {
-    navigate('/realChat'); // Redirect to /another when the second button is clicked
-  };
-
   return (
     <div className="main-container">
       {/* Placeholder for video */}
@@ -27,12 +23,9 @@ const Main = () => {
           <h1 className="main-heading">Welcome to Pathmakers</h1>
           <p className="main-description">Travel agency which you'll love</p>
           
-          <div className="main-buttons">
+          <div className="main-buttons">         
             <button className="main-btn" onClick={handleChatRedirect}>
               Chat with the chat
-            </button>
-            <button className="main-btn" onClick={handleRealChatRedirect}>
-              AI consultation
             </button>
           </div>
         </div>
