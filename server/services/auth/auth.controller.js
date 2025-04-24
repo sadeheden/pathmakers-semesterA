@@ -10,13 +10,11 @@ export async function getCurrentUser(req, res) {
             console.warn("⚠️ No Authorization header received");
             return res.status(401).json({ message: "Unauthorized, no token provided" });
         }
-
         const token = authHeader.split(" ")[1];
         if (!token) {
             console.warn("⚠️ Token missing from Authorization header");
             return res.status(401).json({ message: "Unauthorized, token missing" });
         }
-
         try {
             console.log("🔍 Verifying Token:", token);
             const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
@@ -45,9 +43,6 @@ export async function getCurrentUser(req, res) {
         res.status(500).json({ message: "Server error" });
     }
 }
-
-
-
 // **Register New User**
 
 import { v4 as uuidv4 } from 'uuid';
@@ -113,7 +108,7 @@ export async function register(req, res) {
     }
 }
 
-
+// **Get All Users**
 export async function getAllUsers(req, res) {
     try {
         const users = await getUsers();
@@ -123,7 +118,6 @@ export async function getAllUsers(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
-
 
 // **Login User**
 export async function login(req, res) {
@@ -175,6 +169,7 @@ export async function login(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
 
 
 console.log(process.env.JWT_SECRET_KEY);
