@@ -103,7 +103,7 @@ const AuthForm = ({ isLogin, isManager }) => {
                   password: formData.password, 
                   profileImage: profileImageUrl 
               };
-        
+
     
             const url = isLogin
                 ? "http://localhost:4000/api/auth/login"
@@ -207,3 +207,4 @@ const AuthForm = ({ isLogin, isManager }) => {
 };
 
 export default AuthForm;
+
