@@ -1,4 +1,4 @@
-import { getUsers, addUser, findUserByUsernreceivedameOrEmail } from './auth.model.js';
+import { getUsers, addUser, findUserByUsernameOrEmail } from './auth.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -10,7 +10,6 @@ export async function getCurrentUser(req, res) {
             console.warn("⚠️ No Authorization header received");
             return res.status(401).json({ message: "Unauthorized, no token provided" });
         }
-
         const token = authHeader.split(" ")[1];
         if (!token) {
             console.warn("⚠️ Token missing from Authorization header");
@@ -44,7 +43,6 @@ export async function getCurrentUser(req, res) {
         res.status(500).json({ message: "Server error" });
     }
 }
-
 // **Register New User**
 
 import { v4 as uuidv4 } from 'uuid';
