@@ -1,4 +1,4 @@
-import { getUsers, addUser, findUserByUsernameOrEmail } from './auth.model.js';
+import { getUsers, addUser, findUserByUsernreceivedameOrEmail } from './auth.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -16,7 +16,6 @@ export async function getCurrentUser(req, res) {
             console.warn("⚠️ Token missing from Authorization header");
             return res.status(401).json({ message: "Unauthorized, token missing" });
         }
-
         try {
             console.log("🔍 Verifying Token:", token);
             const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
@@ -45,8 +44,6 @@ export async function getCurrentUser(req, res) {
         res.status(500).json({ message: "Server error" });
     }
 }
-
-
 
 // **Register New User**
 
@@ -113,7 +110,7 @@ export async function register(req, res) {
     }
 }
 
-
+// **Get All Users**
 export async function getAllUsers(req, res) {
     try {
         const users = await getUsers();
@@ -123,7 +120,6 @@ export async function getAllUsers(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
-
 
 // **Login User**
 export async function login(req, res) {
@@ -175,6 +171,7 @@ export async function login(req, res) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
 
 
 console.log(process.env.JWT_SECRET_KEY);
