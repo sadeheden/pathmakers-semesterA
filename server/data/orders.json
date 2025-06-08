@@ -546,5 +546,22 @@
     "totalPrice": 2080,
     "pdfUrl": "/api/order/12f61cb1-cc5c-4451-912a-5179241d17e4/pdf",
     "createdAt": "2025-03-23T14:10:33.737Z"
+  },
+  {
+    "id": "b759b70d-944a-436f-b2df-92b24baf781c",
+    "userId": "7fc4628f-a02a-4a86-ae75-82f11abdf765",
+    "username": "eden",
+    "departureCity": "Paris",
+    "destinationCity": "Berlin",
+    "flight": "Air France - $600 (9h 15m)",
+    "hotel": "Regent Berlin - $2300/night",
+    "attractions": [
+      "Reichstag Building"
+    ],
+    "transportation": "Car",
+    "paymentMethod": "Bank Transfer",
+    "totalPrice": 2970,
+    "pdfUrl": "/api/order/b759b70d-944a-436f-b2df-92b24baf781c/pdf",
+    "createdAt": "2025-06-05T09:52:00.024Z"
   }
 ]

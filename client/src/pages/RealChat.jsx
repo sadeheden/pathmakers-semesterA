@@ -14,7 +14,7 @@ export default function RealChat() {
  
   const askAI = useCallback(async () => {
     let client = new HfInference(token);
- 
+    
     const answer = await client.chatCompletion({
       model: "meta-llama/Llama-3.2-3B-Instruct",
       messages,
