@@ -1,123 +1,420 @@
-/* Main Homepage Styles */
-.main-container {
-  position: relative;
-  width: 100%;
-  height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap');
+
+:root {
+  /* Updated color palette for a more refined feel */
+  --primary: #0070eb; /* A vibrant, professional blue */
+  --primary-hover: #0056b3;
+  --text-primary: #1a202c; /* Darker, more serious text */
+  --text-secondary: #4a5568; /* Slightly lighter for secondary text */
+  --bg-light: #ffffff; /* Clean white for card backgrounds */
+  --bg-gray: #f7fafc; /* A very subtle light gray for backgrounds */
+  --border-color: #e2e8f0; /* Softer border color */
+  --shadow-light: rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+    background: #e6f4ff; /* light blue */
 }
 
-.main-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
+
+/* Base styles */
+* {
+  box-sizing: border-box;
 }
 
-/* ===== Overlay & Content ===== */
-.main-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: rgba(5, 5, 5, 0.534);
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6; /* Improved readability */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-gray);
 }
 
-.main-content {
-  color: white;
-  text-align: center;
-  max-width: 500px;
-  padding: 20px;
-}
-
-/* ===== Typography ===== */
-.main-heading {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: white;
-}
-
-.main-description {
-  font-size: 1.2rem;
-  color: #ddd;
-}
-
-/* ===== Buttons ===== */
-.main-buttons {
+.main-wrapper {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-container {
+  max-width: 1200px; /* Constrain content width */
+  margin: 0 auto;
+  padding: 0 1.5rem; /* Consistent horizontal padding */
+  flex-grow: 1; /* Allows main content to expand */
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  display: flex;
   align-items: center;
-  gap: 15px;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.main-btn{
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px; /* Rounded corners */
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out, transform 0.2s ease;
-  display: block;
-  width: 40%;
+  justify-content: center;
+  min-height: 550px; /* Slightly taller hero */
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1502604085465-b7ed8f1b6727?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzcxMzd8MHwxfHNlYXJjaHwyMHx8cGFzc3BvcnQlMjB0cmF2ZWx8ZW58MHx8fHwxNzE4MDQ2OTAwfDA&ixlib=rb-4.0.3&q=80&w=1080') center/cover no-repeat;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #bf281c;
+  color: #fff;
+  position: relative; /* For potential overlay elements */
+  border-radius: 8px; /* Slightly rounded corners for the hero */
+  overflow: hidden; /* Ensures content stays within bounds */
+  margin-bottom: 3rem; /* Space after hero */
 }
 
-.main-Chat:hover {
-  background-color: #a14545;
+.hero-content {
+  z-index: 1; /* Ensures content is above gradient */
+  animation: fadeInUp 1s ease-out;
 }
 
-/* ===== Responsive Design ===== */
-@media (max-width: 768px) {
-  .main-container {
-    height: 100vh; /* הגבהתי את הגובה */
-  }
-  
-  .main-overlay {
-    width: 100%; /* המרתי את הרוחב של ה-overlay ל-100% */
-    height: 100%; /* הגבהתי את הגובה של ה-overlay ל-100% */
-  }
+.hero-title {
+  font-family: 'Noto Sans', sans-serif; /* Stronger font for titles */
+  font-size: 2.5rem; /* Larger, more impactful title */
+  font-weight: 900; /* Extra bold */
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.301); /* Subtle text shadow */
+  animation: slideInLeft 1s ease-out 0.2s both;
+}
 
-  .main-content {
-    text-align: center;
-    padding: 25px;
-    width: 100%;
-    animation: fadeIn 0.8s ease-out; /* שמתי את האנימציה כאן */
-  }
+.hero-subtitle {
+  font-size: 1.25rem; /* Slightly larger subtitle */
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  animation: slideInLeft 1s ease-out 0.4s both;
+}
 
+.btn-primary {
+  background: var(--primary);
+  color: #fff; /* White text on blue button */
+  padding: 0.9rem 2.2rem; /* More generous padding */
+  border-radius: 9999px;
+  font-weight: 700; /* Bolder text */
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none; /* Remove default button border */
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow-medium); /* Initial shadow */
+  animation: scaleIn 0.8s ease-out 0.6s both;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.2);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-3px); /* More pronounced lift */
+  box-shadow: 0 8px 20px var(--shadow-medium); /* Enhanced shadow on hover */
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* --- Section Titles and Paragraphs --- */
+.section-title {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 2.2rem; /* Larger section titles */
+  font-weight: 700;
+  text-align: center;
+  margin-top: 4rem; /* More spacing above sections */
+  margin-bottom: 2.5rem; /* More spacing below titles */
+  color: var(--text-primary);
+}
+
+.main-heading { /* Used for "Your Perfect Travel Experience..." */
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 2.5rem; /* Make this heading stand out */
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.paragraph {
+  font-size: 1.1rem; /* Slightly larger, more readable body text */
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 700px; /* Constrain paragraph width for readability */
+  margin: 0 auto 2rem auto; /* Center align and add space below */
+  text-align: center;
+}
+
+/* --- How it works --- */
+.how-it-works {
+  padding: 3rem 0; /* More vertical padding */
+  background: var(--bg-light); /* White background for this section */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px var(--shadow-light); /* Subtle shadow */
+  margin-bottom: 4rem; /* Space after this section */
+  position: relative; /* For potential background elements if desired */
+  z-index: 0; /* Ensure it doesn't overlap header content inappropriately */
+}
+
+.how-it-works-content {
+  margin-bottom: 3rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Better sizing for cards */
+  gap: 2rem; /* Increased gap between cards */
+  padding: 0 1.5rem; /* Align with layout container padding */
+}
+
+.feature-card {
+  padding: 1.5rem; /* More padding inside cards */
+  border: 1px solid var(--border-color);
+  border-radius: 12px; /* More rounded corners */
+  background: #fff;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+  box-shadow: 0 2px 8px var(--shadow-light); /* Default card shadow */
+  display: flex; /* Flexbox for icon and text alignment */
+  align-items: flex-start; /* Align content to the top */
+  gap: 1rem; /* Space between icon and text */
+}
+
+.feature-card:hover {
+  transform: translateY(-8px); /* More significant lift */
+  box-shadow: 0 12px 30px var(--shadow-medium); /* Deeper shadow on hover */
+}
+
+.feature-icon {
+  margin-top: 0.2rem; /* Align icon slightly */
+  color: var(--primary); /* Use primary color for icons */
+  min-width: 28px; /* Ensure icon has consistent space */
+  min-height: 28px;
+}
+
+.feature-icon svg {
+  width: 28px; /* Larger icons */
+  height: 28px;
+}
+
+.feature-info {
+  flex: 1; /* Allow text to take remaining space */
+}
+
+.feature-title {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.35rem; /* Larger feature titles */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.feature-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --- Why Choose Pathmakers (Service Grid) --- */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust for service items */
+  gap: 2.5rem; /* Increased gap */
+  padding-bottom: 4rem; /* Padding at the bottom of this section */
+}
+
+.service-item {
+  text-align: left; /* Align text to the left within service item */
+  background: var(--bg-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-light);
+  overflow: hidden; /* Ensures image corners are rounded */
+  transition: all 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.service-image {
+  width: 100%;
+  height: 220px; /* Fixed height for consistent image size */
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Slower, smoother zoom */
+}
+
+.service-item:hover .service-image {
+  transform: scale(1.08); /* More pronounced zoom on hover */
+}
+
+.expert-guidance {
+  background-image: url('https://images.unsplash.com/photo-1542475658-29219412f11c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzcxMzd8MHwxfHNlYXJjaHwxNXx8dHJhdmVsJTIwYWR2aWNlfGVufDB8fHx8fDE3MTgwNDY5MDF8MA&ixlib=rb-4.0.3&q=80&w=1080');
+}
+.personalized-experience {
+  background-image: url('https://images.unsplash.com/photo-1510414930366-0796323604f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzcxMzd8MHwxfHNlYXJjaHwxNnx8cGVyc29uYWxpemVkJTIwdHJpcHxlbnwwfHx8fHwxNzE4MDQ2OTAyfDA&ixlib=rb-4.0.3&q=80&w=1080');
+}
+.flexible-booking { /* New service item example */
+  background-image: url('https://images.unsplash.com/photo-1506786523956-6218d6e320f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzcxMzd8MHwxfHNlYXJjaHwxNnx8ZmxhdGVib29rJTIwdHJhdmVsfGVufDB8fHx8fDE3MTgxMTMwMDV8MA&ixlib=rb-4.0.3&q=80&w=1080');
+}
+.unrivaled-support { /* New service item example */
+  background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c76d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzcxMzd8MHwxfHNlYXJjaHw3fHxjdXN0b21lciUyMHN1cHBvcnR8ZW58MHx8fHwxNzE4MTEzMDA1fDA&ixlib=rb-4.0.3&q=80&w=1080');
+}
+
+
+.service-item > div { /* This targets the text content wrapper */
+  padding: 1.5rem;
+}
+
+.service-title {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.service-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2rem;
+  }
   .main-heading {
-    font-size: 2.5rem; /* הגדלתי את הכותרת */
+    font-size: 2.2rem;
   }
-
-  .main-description {
-    font-size: 1.5rem; /* הגדלתי את הגודל של התיאור */
-  }
-
-  .main-btn {
-    width: 80%; /* הגדלתי את רוחב הכפתור */
-    font-size: 1.2rem; /* הגדלתי את גודל הטקסט בכפתור */
-    padding: 15px 20px; /* הגדלתי את הפדינג של הכפתור */
+  .feature-grid, .service-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
-/* ===== Animations ===== */
-@keyframes fadeIn {
+@media (max-width: 768px) {
+  .layout-container {
+    padding: 0 1rem;
+  }
+  .hero-section {
+    min-height: 450px;
+    margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .btn-primary {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+  }
+  .main-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .how-it-works {
+    padding: 2rem 0;
+    margin-bottom: 3rem;
+  }
+  .feature-grid {
+    gap: 1.5rem;
+  }
+  .feature-card {
+    padding: 1.25rem;
+  }
+  .feature-title {
+    font-size: 1.2rem;
+  }
+  .service-grid {
+    gap: 2rem;
+  }
+  .service-image {
+    height: 180px;
+  }
+  .service-item > div {
+  padding: 1.5rem;
+}
+
+  .service-title {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 380px;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .how-it-works-content {
+    margin-bottom: 2rem;
+  }
+  .main-heading {
+    font-size: 1.5rem;
+  }
+  .paragraph {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-grid, .service-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+}
+/* Inside .hero-section in main.css */
+.hero-section {
+  /* ... existing styles ... */
+  position: relative; /* Ensure hero-content can be positioned relative to this */
+  overflow: hidden; /* Hide any overflow from the video */
+  background: none; /* Remove previous background image/gradient if you're using video */
+    margin-top: 4rem;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video covers the entire container without distortion */
+  transform: translate(-50%, -50%); /* Centers the video */
+  filter: brightness(0.8); /* Adjust brightness to make text more readable, similar to a dark overlay */
+}
+
+/* You might want a subtle overlay on top of the video for better text readability */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  z-index: 0; /* Ensures overlay is above video but below content */
+}
+
+.hero-content {
+  position: relative; /* Make sure content is above the video and overlay */
+  z-index: 1; /* Ensure content is on top */
+  /* ... existing styles ... */
+}
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -128,6 +425,24 @@
   }
 }
 
-.main-content {
-  animation: fadeIn 0.8s ease-out;
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
