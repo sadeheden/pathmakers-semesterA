@@ -19,11 +19,14 @@ const cities = [
   { img: globeImg, name: 'Globetrotter', slug: 'globetrotter' },
   { img: mockupImg, name: 'Mockup Town', slug: 'mockup-town' },
   { img: logoImg, name: 'Logo City', slug: 'logo-city' },
+  { img: globeImg, name: 'Metro World', slug: 'metro-world' },      // NEW
+  { img: fantasyImg, name: 'Sunshine Bay', slug: 'sunshine-bay' },  // NEW
+  { img: airportImg, name: 'Jetsetter Ville', slug: 'jetsetter-ville' } // NEW
 ];
 
 
-const CARDS_PER_PAGE = 4;
-const AUTO_ROTATE_SECONDS = 3;
+const CARDS_PER_PAGE = 6;
+const AUTO_ROTATE_SECONDS = 10;
 
 const Main = () => {
   const navigate = useNavigate();
