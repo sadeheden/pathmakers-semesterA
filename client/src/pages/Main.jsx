@@ -1,143 +1,116 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/styles/main.css';
-import parisVideo from "../assets/images/paris.mp4"; 
-import fantasyImg from '../assets/images/fantasy-3502188_1280.jpg';
-import airportImg from '../assets/images/airport-2373727_1280.jpg';
-import globeImg from '../assets/images/globe-trotter-1828079_1280.jpg';
-import uploadedImg from '../assets/images/Image20250611122425.png';
+
+// React icons
+import { FiCompass, FiHeart, FiMap, FiUsers } from 'react-icons/fi';
+
+// Use your actual images:
+import fantasyImg from '../assets/images/fantasy-3502188_1280.jpg';           
+import airportImg from '../assets/images/airport-2373727_1280.jpg';           
+import globeImg from '../assets/images/globe-trotter-1828079_1280.jpg';       
+import mockupImg from '../assets/images/mockup.png';                          
+import logoImg from '../assets/images/logo.png';
+
+// Destination "cities"
+const cities = [
+  { img: fantasyImg, name: 'Fantasy Land', slug: 'fantasy-land' },
+  { img: airportImg, name: 'Airport City', slug: 'airport-city' },
+  { img: globeImg, name: 'Globetrotter', slug: 'globetrotter' },
+  { img: mockupImg, name: 'Mockup Town', slug: 'mockup-town' },
+  { img: logoImg, name: 'Logo City', slug: 'logo-city' },
+];
 
 
-
-
+const CARDS_PER_PAGE = 4;
+const AUTO_ROTATE_SECONDS = 3;
 
 const Main = () => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
-  const handleChatRedirect = () => {
-    console.log('Navigating to chat...');
-    navigate('/chat'); // Uncommented this line
-  };
+  // Carousel logic
+  const [carouselIdx, setCarouselIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarouselIdx(idx => (idx + CARDS_PER_PAGE) % cities.length);
+    }, AUTO_ROTATE_SECONDS * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Slice, looping if necessary
+  const visibleCities = [
+    ...cities,
+    ...cities.slice(0, CARDS_PER_PAGE)
+  ].slice(carouselIdx, carouselIdx + CARDS_PER_PAGE);
 
   return (
-    <div className="main-wrapper">
-      <div className="layout-container">
-        <div className="main-section">
-          <div className="layout-content-container">
-
-            {/* --- Hero Section --- */}
-            <div className="hero-section">
-              {/* Add the video tag here */}
-             <video autoPlay loop muted playsInline className="hero-video">
-  <source src={parisVideo} type="video/mp4" />
-  <img src="/fallback.jpg" alt="Travel destination" />
-</video>
-
-              <div className="hero-content">
-                <h1 className="hero-title">Your Next Adventure Starts Here</h1>
-                <p className="hero-subtitle">
-                  Personalized travel experiences, crafted just for you.
-                </p>
-                <button onClick={handleChatRedirect} className="btn-primary">
-                  Start Planning Your Trip
-                </button>
-              </div>
-            </div>
-
-            {/* --- How We Help You Travel Section --- */}
-            <h2 className="section-title">How We Help You Travel</h2>
-            <div className="how-it-works">
-              <div className="how-it-works-content">
-                <h1 className="main-heading">
-                  Your Perfect Travel Experience in 3 Steps
-                </h1>
-                <p className="paragraph">
-                  Pathmakers simplifies your travel planning with personalized recommendations and expert guidance.
-                </p>
-              </div>
-              <div className="feature-grid">
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/>
-                    </svg>
-                  </div>
-                  <div className="feature-info">
-                    <h2 className="feature-title">Tell Us Your Dreams</h2>
-                    <p className="feature-description">Share your travel preferences, dates, and budget with our AI assistant.</p>
-                  </div>
-                </div>
-
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M208,80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,160V112a8,8,0,0,1,16,0v48a8,8,0,0,1-16,0Zm48,0V112a8,8,0,0,1,16,0v48a8,8,0,0,1-16,0ZM208,48H48A16,16,0,0,0,32,64V72a8,8,0,0,0,16,0V64H208V72a8,8,0,0,0,16,0V64A16,16,0,0,0,208,48Z"/>
-                    </svg>
-                  </div>
-                  <div className="feature-info">
-                    <h2 className="feature-title">Receive Tailored Plans</h2>
-                    <p className="feature-description">Our AI crafts personalized itineraries based on your input.</p>
-                  </div>
-                </div>
-
-                <div className="feature-card">
-                  <div className="feature-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM188.24,98.24l-56,56a8,8,0,0,1-11.31,0l-24-24a8,8,0,0,1,11.31-11.31L132,138.34l50.34-50.34a8,8,0,0,1,11.31,11.31Z"/>
-                    </svg>
-                  </div>
-                  <div className="feature-info">
-                    <h2 className="feature-title">Enjoy Your Journey</h2>
-                    <p className="feature-description">Book your trip with confidence and embark on an unforgettable adventure.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* --- Why Choose Pathmakers Section --- */}
-            <h2 className="section-title">Why Choose Pathmakers</h2>
-            <div className="service-grid">
-              <div className="service-item">
-                <div className="service-image expert-guidance" />
-                <div>
-                  <p className="service-title">Expert Guidance</p>
-                  <p className="service-description">
-                    Get professional travel advice from our experienced team and AI-powered recommendations.
-                  </p>
-                </div>
-              </div>
-              <div className="service-item">
-                <div className="service-image personalized-experience" />
-                <div>
-                  <p className="service-title">Personalized Experience</p>
-                  <p className="service-description">
-                    Every trip is tailored to your unique preferences, interests, and travel style.
-                  </p>
-                </div>
-              </div>
-              {/* Added two more service items for a richer layout */}
-              <div className="service-item">
-                <div className="service-image flexible-booking" />
-                <div>
-                  <p className="service-title">Flexible Booking</p>
-                  <p className="service-description">
-                    Enjoy peace of mind with flexible booking options and easy modifications.
-                  </p>
-                </div>
-              </div>
-              <div className="service-item">
-                <div className="service-image unrivaled-support" />
-                <div>
-                  <p className="service-title">Unrivaled Support</p>
-                  <p className="service-description">
-                    Our team is available 24/7 to assist you before, during, and after your trip.
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div className="trips-page">
+      {/* --- Hero / Intro --- */}
+      <section className="trip-intro">
+        <h1 className="trip-title">Personalize your travel planning with Trips</h1>
+        <p className="trip-subtitle">
+          With Trips, you get two trip planners in one—use AI to build your trip or build it yourself.
+          Either way, there’s more than 8 million spots to discover, with over one billion traveler
+          reviews and opinions to guide you.
+        </p>
+        <div className="trip-icons">
+          <div className="icon-block">
+            <FiCompass className="icon" />
+            <p>Get personalized recs with AI</p>
+          </div>
+          <div className="icon-block">
+            <FiHeart className="icon" />
+            <p>Save hotels, restaurants, and more</p>
+          </div>
+          <div className="icon-block">
+            <FiMap className="icon" />
+            <p>See your saves on your custom map</p>
+          </div>
+          <div className="icon-block">
+            <FiUsers className="icon" />
+            <p>Share and collab with your travel buds</p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* --- AI vs Manual Cards --- */}
+      <section className="trip-options">
+        <div className="trip-card ai-card">
+          <img src={fantasyImg} alt="AI Trip Builder" />
+          <h3>Start a trip in minutes with AI</h3>
+          <p>
+            Answer four short questions and get personalized recs with AI, guided by traveler opinions.
+          </p>
+          <button onClick={() => navigate('/ai-builder')}>
+            Try AI trip builder
+          </button>
+        </div>
+        <div className="trip-card manual-card">
+          <img src={airportImg} alt="Manual Trip Builder" />
+          <h3>Build your trip from scratch</h3>
+          <p>
+            Browse top destinations, restaurants, and things to do and save your faves as you go.
+          </p>
+          <button onClick={() => navigate('/manual-builder')}>
+            Do it yourself
+          </button>
+        </div>
+      </section>
+
+      {/* --- Popular Destinations Row --- */}
+      <section className="popular-trips">
+        <h2>Traveler-Favorite Destinations</h2>
+        <div className="city-cards">
+          {visibleCities.map((city, i) => (
+  <div className="city-card" key={i}>
+    <img src={city.img} alt={city.name} />
+    <p>{city.name}</p>
+  </div>
+))}
+
+        </div>
+      </section>
     </div>
   );
 };
